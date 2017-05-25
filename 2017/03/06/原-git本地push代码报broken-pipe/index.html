@@ -93,29 +93,17 @@
 <blockquote>
 <p>（不知道怎么写看着配置文件上面的格式来写就行了）</p>
 </blockquote>
-<pre><code>Host *  
-ServerAliveInterval 120  `&lt;/pre&gt;
-
-这个配置的作用就是保证ssh ServerAliveInterval始终连接，我这次出现错误的原因就是在无线局域网环境下，ssh连接到远程主机后如果一段时间内不操作，就会出现掉线的情况，所以最后加上此配置项
-
-**第二， 修改post缓存大小** 
-
-因为如果缓存不够用，有时候也会发生broken pipe的情况，所以最好的对post的缓存大小作设置 
-
-这个很简单，直接在git bash 上输入git config http.postBuffer ，value指的就是设置的缓存大小，如下：
-
-&lt;pre class=&quot;prettyprint&quot;&gt;`git config &lt;span class=&quot;hljs-keyword&quot;&gt;http&lt;/span&gt;.postBuffer &lt;span class=&quot;hljs-number&quot;&gt;52428800&lt;/span&gt;
-</code></pre><p>52428800的单位是字节，git默认的是1MB，我们把它设置成50MB</p>
+<p>Host *<br>ServerAliveInterval 120  `</p>
+<p>这个配置的作用就是保证ssh ServerAliveInterval始终连接，我这次出现错误的原因就是在无线局域网环境下，ssh连接到远程主机后如果一段时间内不操作，就会出现掉线的情况，所以最后加上此配置项</p>
+<p><strong>第二， 修改post缓存大小</strong> </p>
+<p>因为如果缓存不够用，有时候也会发生broken pipe的情况，所以最好的对post的缓存大小作设置 </p>
+<p>这个很简单，直接在git bash 上输入git config http.postBuffer ，value指的就是设置的缓存大小，如下：</p>
+<p><pre class="prettyprint">`git config <span class="hljs-keyword">http</span>.postBuffer <span class="hljs-number">52428800</span></pre></p>
+<p>52428800的单位是字节，git默认的是1MB，我们把它设置成50MB</p>
 <p>以上，就可以在同性网里开心的玩耍了。</p>
 <hr>
 <p>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
-<pre><code>&lt;div&gt;
-    作者：u013707249 发表于2017/3/6 22:42:17 [原文链接](http://blog.csdn.net/u013707249/article/details/60606732)
-&lt;/div&gt;
-&lt;div&gt;
-阅读：88 评论：0 [查看评论](http://blog.csdn.net/u013707249/article/details/60606732#comments)
-&lt;/div&gt;
-</code></pre>
+<div><br>    作者：u013707249 发表于2017/3/6 22:42:17 <a href="http://blog.csdn.net/u013707249/article/details/60606732" target="_blank" rel="external">原文链接</a><br></div><br><div><br>阅读：88 评论：0 <a href="http://blog.csdn.net/u013707249/article/details/60606732#comments" target="_blank" rel="external">查看评论</a><br></div>
 	</div>
 	<div class="meta split">
 		
@@ -194,9 +182,9 @@ var duoshuoQuery = {short_name:"yumemor"};
 						
 							
 							<li>
-				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
 				        			
-										<i class="iconfont icon-zhihu"></i>
+				        				<i class="iconfont icon-twitter"></i>
 				        			
 				        		</a>
 				        	</li>

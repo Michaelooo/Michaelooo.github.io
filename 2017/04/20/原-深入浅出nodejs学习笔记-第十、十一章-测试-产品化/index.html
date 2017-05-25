@@ -88,80 +88,57 @@
 </ul>
 <hr>
 <h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a><strong>断言</strong></h2><p>单元测试的核心应用就是断言，用一个最简单的例子介绍一下什么是断言：</p>
-<pre><code>&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; assert = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;assert&apos;&lt;/span&gt;)
-assert.equal(&lt;span class=&quot;hljs-built_in&quot;&gt;Math&lt;/span&gt;.max(&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;hljs-number&quot;&gt;100&lt;/span&gt;), &lt;span class=&quot;hljs-number&quot;&gt;100&lt;/span&gt;)`&lt;/pre&gt;
+<pre><code>var assert = require(&apos;assert&apos;)
+assert.equal(Math.max(1, 100), 100)
+</code></pre><p>  equal()是断言模块的内置方法，用于判断实际值与期望值是否相等。类似的方法还有ok()、notEqual()等。上句代码的意思是判断 Math.max(1, 100) 的输出结果是不是100，如果不是，就抛出异常。</p>
+<hr>
+<h2 id="测试框架"><a href="#测试框架" class="headerlink" title="测试框架"></a><strong>测试框架</strong></h2><p>  单元测试很简单，下面介绍两个常用的单元测试库，<strong>jasmine 和 mocha</strong></p>
+<p>  <strong>jasmine</strong></p>
+<p>  Jasmine的开发团队来自PivotalLabs，他们一开始开发的JavaScript测试框架是JsUnit，来源于著名的JAVA测试框架JUnit。JsUnit是xUnit的JavaScript实现。但是JsUnit在2009年后就已经停止维护了，他们推出了一个新的BDD框架Jasmine。Jasmine不依赖于任何框架，所以适用于所有的Javascript代码。</p>
+<p>  下面直接放一个官方的使用案例：</p>
+  <pre class="prettyprint">`describe(<span class="hljs-string">"A spec"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">var</span> foo;
 
-equal()是断言模块的内置方法，用于判断实际值与期望值是否相等。类似的方法还有ok()、notEqual()等。上句代码的意思是判断 Math.max(1, 100) 的输出结果是不是100，如果不是，就抛出异常。
-
-* * *
-
-## **测试框架**
-
-单元测试很简单，下面介绍两个常用的单元测试库，**jasmine 和 mocha**
-
-**jasmine**
-
-Jasmine的开发团队来自PivotalLabs，他们一开始开发的JavaScript测试框架是JsUnit，来源于著名的JAVA测试框架JUnit。JsUnit是xUnit的JavaScript实现。但是JsUnit在2009年后就已经停止维护了，他们推出了一个新的BDD框架Jasmine。Jasmine不依赖于任何框架，所以适用于所有的Javascript代码。
-
-下面直接放一个官方的使用案例：
-
-&lt;pre class=&quot;prettyprint&quot;&gt;`describe(&lt;span class=&quot;hljs-string&quot;&gt;&quot;A spec&quot;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-  &lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; foo;
-
-  beforeEach(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    foo = &lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;;
-    foo += &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;;
-  });
-
-  afterEach(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    foo = &lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;;
-  });
-
-  it(&lt;span class=&quot;hljs-string&quot;&gt;&quot;is just a function, so it can contain any code&quot;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    expect(foo).toEqual(&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;);
-  });
-
-  it(&lt;span class=&quot;hljs-string&quot;&gt;&quot;can have more than one expectation&quot;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    expect(foo).toEqual(&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;);
-    expect(&lt;span class=&quot;hljs-literal&quot;&gt;true&lt;/span&gt;).toEqual(&lt;span class=&quot;hljs-literal&quot;&gt;true&lt;/span&gt;);
-  });
-
-  describe(&lt;span class=&quot;hljs-string&quot;&gt;&quot;nested inside a second describe&quot;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; bar;
-
-    beforeEach(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-      bar = &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;;
+    beforeEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      foo = <span class="hljs-number">0</span>;
+      foo += <span class="hljs-number">1</span>;
     });
 
-    it(&lt;span class=&quot;hljs-string&quot;&gt;&quot;can reference both scopes as needed&quot;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-      expect(foo).toEqual(bar);
+    afterEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      foo = <span class="hljs-number">0</span>;
     });
-  });
-});`&lt;/pre&gt;
 
-jasmine单元测试有二个核心的部分：describe 函数块和it函数块
-
-describe和it函数都有二个参数： 
-
-第一个参数：测试描述； 
-
-第二个参数：测试用的具体逻辑
-
-* * *
-
-**mocha**
-
-mocha的使用和jasmine类似，这里也直接放一个例子：
-
-&lt;pre class=&quot;prettyprint&quot;&gt;`var &lt;span class=&quot;hljs-built_in&quot;&gt;assert&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;assert&apos;&lt;/span&gt;);
-describe(&lt;span class=&quot;hljs-string&quot;&gt;&apos;Array&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt;&lt;/span&gt; {
-  describe(&lt;span class=&quot;hljs-string&quot;&gt;&apos;#indexOf()&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt;&lt;/span&gt; {
-    it(&lt;span class=&quot;hljs-string&quot;&gt;&apos;should return -1 when the value is not present&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt;&lt;/span&gt; {
-      &lt;span class=&quot;hljs-built_in&quot;&gt;assert&lt;/span&gt;.equal(-&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;, [&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;hljs-number&quot;&gt;3&lt;/span&gt;].indexOf(&lt;span class=&quot;hljs-number&quot;&gt;4&lt;/span&gt;));
+    it(<span class="hljs-string">"is just a function, so it can contain any code"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      expect(foo).toEqual(<span class="hljs-number">1</span>);
     });
-  });
-});
-</code></pre><p>describe块称为”测试套件”（test suite），表示一组相关的测试。它是一个函数，第一个参数是测试套件的名称（随便起，能让别人看懂就好），第二个参数是一个实际执行的函数。 </p>
+
+    it(<span class="hljs-string">"can have more than one expectation"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      expect(foo).toEqual(<span class="hljs-number">1</span>);
+      expect(<span class="hljs-literal">true</span>).toEqual(<span class="hljs-literal">true</span>);
+    });
+
+    describe(<span class="hljs-string">"nested inside a second describe"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">var</span> bar;
+
+      beforeEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+        bar = <span class="hljs-number">1</span>;
+      });
+
+      it(<span class="hljs-string">"can reference both scopes as needed"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+        expect(foo).toEqual(bar);
+      });
+    });
+  });`</pre>
+
+<p>  jasmine单元测试有二个核心的部分：describe 函数块和it函数块</p>
+<p>  describe和it函数都有二个参数： </p>
+<p>  第一个参数：测试描述； </p>
+<p>  第二个参数：测试用的具体逻辑</p>
+<hr>
+<p>  <strong>mocha</strong></p>
+<p>  mocha的使用和jasmine类似，这里也直接放一个例子：</p>
+<p>  <pre class="prettyprint">`var <span class="hljs-built_in">assert</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">‘assert’</span>);<br>  describe(<span class="hljs-string">‘Array’</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> {<br>    describe(<span class="hljs-string">‘#indexOf()’</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> {<br>      it(<span class="hljs-string">‘should return -1 when the value is not present’</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> {<br>        <span class="hljs-built_in">assert</span>.equal(-<span class="hljs-number">1</span>, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>].indexOf(<span class="hljs-number">4</span>));<br>      });<br>    });<br>  });</pre></p>
+<p>describe块称为”测试套件”（test suite），表示一组相关的测试。它是一个函数，第一个参数是测试套件的名称（随便起，能让别人看懂就好），第二个参数是一个实际执行的函数。 </p>
 <p>it块称为”测试用例”（test case），表示一个单独的测试，是测试的最小单位。它也是一个函数，第一个参数是测试用例的名称（随便起，能让别人看懂就好），第二个参数是一个实际执行的函数。</p>
 <p>这里只简单介绍，具体使用可以看阮一峰的mocha实例教程： <a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html</a></p>
 <hr>
@@ -192,13 +169,7 @@ describe(&lt;span class=&quot;hljs-string&quot;&gt;&apos;Array&apos;&lt;/span&gt
 <h2 id="异构共存"><a href="#异构共存" class="headerlink" title="异构共存"></a><strong>异构共存</strong></h2><p>主要是指与其他语言的兼容性，协同作为。</p>
 <hr>
 <p>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
-<pre><code>&lt;div&gt;
-    作者：u013707249 发表于2017/4/20 14:37:19 [原文链接](http://blog.csdn.net/u013707249/article/details/70258258)
-&lt;/div&gt;
-&lt;div&gt;
-阅读：29 评论：0 [查看评论](http://blog.csdn.net/u013707249/article/details/70258258#comments)
-&lt;/div&gt;
-</code></pre>
+<div><br>    作者：u013707249 发表于2017/4/20 14:37:19 <a href="http://blog.csdn.net/u013707249/article/details/70258258" target="_blank" rel="external">原文链接</a><br></div><br><div><br>阅读：29 评论：0 <a href="http://blog.csdn.net/u013707249/article/details/70258258#comments" target="_blank" rel="external">查看评论</a><br></div>
 	</div>
 	<div class="meta split">
 		
@@ -277,9 +248,9 @@ var duoshuoQuery = {short_name:"yumemor"};
 						
 							
 							<li>
-				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
 				        			
-										<i class="iconfont icon-zhihu"></i>
+				        				<i class="iconfont icon-twitter"></i>
 				        			
 				        		</a>
 				        	</li>

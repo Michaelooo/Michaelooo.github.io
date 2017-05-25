@@ -93,17 +93,18 @@
 <p><strong>偏函数</strong>： 偏函数是指通过部分参数来产生一个新的定制的函数的方式，这种就叫做偏函数</p>
 <p><strong>纯函数</strong>： 书中的定义是这样的，纯函数是这样一种函数，即相同的输入，永远会得到相同的输出，而且没有任何可观察的副作用。其实最重要的就是这句话，相同的输入总会的得到相同的输出，纯函数的纯就在这一点，不过多的对函数之外的环境产生依赖，保证函数本身的纯粹，从而达到纯的目的</p>
 <p><strong>函数柯里化</strong>：curry无法口述，用一个例子来解释</p>
-<pre><code>&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; add = &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;(x)&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;(y)&lt;/span&gt; {&lt;/span&gt;
-        &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt; x + y;
+<pre><code>var add = function(x) {
+    return function(y) {
+        return x + y;
     };
 };
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; increment = add(&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;);
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; addTen = add(&lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;);
-increment(&lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;);
-&lt;span class=&quot;hljs-comment&quot;&gt;// 3&lt;/span&gt;
-addTen(&lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;); 
-</code></pre><p>这里我们定义了一个 add 函数，它接受一个参数并返回一个新的函数。调用add 之后，返回的函数就通过闭包的方式记住了 add 的第一个参数。一次性地调用它实在是有点繁琐，好在我们可以使用一个特殊的 curry 帮助函数（helperfunction）使这类函数的定义和调用更加容易。</p>
+var increment = add(1);
+var addTen = add(10);
+increment(2);
+// 3
+addTen(2);
+</code></pre><p>```</p>
+<p>这里我们定义了一个 add 函数，它接受一个参数并返回一个新的函数。调用add 之后，返回的函数就通过闭包的方式记住了 add 的第一个参数。一次性地调用它实在是有点繁琐，好在我们可以使用一个特殊的 curry 帮助函数（helperfunction）使这类函数的定义和调用更加容易。</p>
 <hr>
 <h2 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a><strong>异步编程</strong></h2><p><strong>异步编程的优势和难点</strong></p>
 <p>node的异步编程所带来的最大优势就是基于事件驱动的<strong>非阻塞IO模型</strong>。非阻塞IO可以是CPU和IO操作并不相互依赖等待，让资源得以更好地利用。对于一些网络应用而言，并行还可以带来的优势是分布式和云。</p>
@@ -131,13 +132,7 @@ addTen(&lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;);
 <p>koa是新一种的前端框架，koa 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。koa低层的实现依赖TJ大神的CO，库很小巧，暂时不深入，具体移步官网，官网：<a href="http://koa.bootcss.com/" target="_blank" rel="external">http://koa.bootcss.com/</a></p>
 <hr>
 <p>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
-<pre><code>&lt;div&gt;
-    作者：u013707249 发表于2017/4/17 16:09:53 [原文链接](http://blog.csdn.net/u013707249/article/details/70212816)
-&lt;/div&gt;
-&lt;div&gt;
-阅读：56 评论：0 [查看评论](http://blog.csdn.net/u013707249/article/details/70212816#comments)
-&lt;/div&gt;
-</code></pre>
+<div><br>    作者：u013707249 发表于2017/4/17 16:09:53 <a href="http://blog.csdn.net/u013707249/article/details/70212816" target="_blank" rel="external">原文链接</a><br></div><br><div><br>阅读：56 评论：0 <a href="http://blog.csdn.net/u013707249/article/details/70212816#comments" target="_blank" rel="external">查看评论</a><br></div>
 	</div>
 	<div class="meta split">
 		
@@ -216,9 +211,9 @@ var duoshuoQuery = {short_name:"yumemor"};
 						
 							
 							<li>
-				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
 				        			
-										<i class="iconfont icon-zhihu"></i>
+				        				<i class="iconfont icon-twitter"></i>
 				        			
 				        		</a>
 				        	</li>

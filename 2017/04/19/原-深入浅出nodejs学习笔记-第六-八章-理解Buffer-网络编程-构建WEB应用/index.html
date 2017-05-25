@@ -95,86 +95,53 @@
 <hr>
 <h2 id="第七章-网络编程"><a href="#第七章-网络编程" class="headerlink" title="第七章 网络编程"></a><strong>第七章 网络编程</strong></h2><p>这一章也比较简单，主要分为四个，构建TCP服务、构建UDP服务、构建HTTP服务、构建WebSocket服务，前两个不是重点，后两个比较常用。不多说，直接看代码。</p>
 <p><strong>构建TCP服务</strong></p>
-<pre><code>&lt;span class=&quot;hljs-comment&quot;&gt;//示例，创建一个TCP服务器端&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; net = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;net&apos;&lt;/span&gt;) &lt;span class=&quot;hljs-comment&quot;&gt;//依赖node自带的net模块&lt;/span&gt;
+<p><span class="hljs-comment">//示例，创建一个TCP服务器端</span><br><span class="hljs-keyword">var</span> net = <span class="hljs-built_in">require</span>(<span class="hljs-string">‘net’</span>) <span class="hljs-comment">//依赖node自带的net模块</span></p>
+<p><span class="hljs-keyword">var</span> server = net.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(socket)</span> {</span><br>    <span class="hljs-comment">//新的连接</span><br>    socket.on(<span class="hljs-string">‘data’</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(data)</span> {</span><br>        console.log(<span class="hljs-string">‘连上了’</span>)<br>    })<br>    <span class="hljs-comment">//断开连接</span><br>    socket.on(<span class="hljs-string">‘end’</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(data)</span> {</span><br>        console.log(<span class="hljs-string">‘连接断开’</span>)<br>    })<br>    socket.write(<span class="hljs-string">‘创建一个TCP服务器端’</span>)<br>})</p>
+<p><span class="hljs-comment">//监听</span><br>server.listen(<span class="hljs-number">1234</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span><br>    console.log(<span class="hljs-string">‘已绑定1234端口号’</span>)<br>})`</p>
+<p><strong>构建一个UDP服务器端和一个UDP客户端</strong></p>
+<pre class="prettyprint">`<span class="hljs-comment">//示例，创建一个UDP服务器端</span>
+<span class="hljs-keyword">var</span> dgram = <span class="hljs-built_in">require</span>(<span class="hljs-string">'dgram'</span>)
 
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; server = net.createServer(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(socket)&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;hljs-comment&quot;&gt;//新的连接&lt;/span&gt;
-    socket.on(&lt;span class=&quot;hljs-string&quot;&gt;&apos;data&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(data)&lt;/span&gt; {&lt;/span&gt;
-        console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;连上了&apos;&lt;/span&gt;)
-    })
-    &lt;span class=&quot;hljs-comment&quot;&gt;//断开连接&lt;/span&gt;
-    socket.on(&lt;span class=&quot;hljs-string&quot;&gt;&apos;end&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(data)&lt;/span&gt; {&lt;/span&gt;
-        console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;连接断开&apos;&lt;/span&gt;)
-    })
-    socket.write(&lt;span class=&quot;hljs-string&quot;&gt;&apos;创建一个TCP服务器端&apos;&lt;/span&gt;)
+<span class="hljs-keyword">var</span> server = dgram.createSocket(<span class="hljs-string">'udp4'</span>)
+
+server.on(<span class="hljs-string">'message'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(msg, rinfo)</span> {</span>
+console.log(<span class="hljs-string">'服务器得到了'</span> + msg + <span class="hljs-string">'来自'</span> + rinfo.address + <span class="hljs-string">':'</span> + rinfo.port)
 })
 
-&lt;span class=&quot;hljs-comment&quot;&gt;//监听&lt;/span&gt;
-server.listen(&lt;span class=&quot;hljs-number&quot;&gt;1234&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;已绑定1234端口号&apos;&lt;/span&gt;)
-})`&lt;/pre&gt;
-
-**构建一个UDP服务器端和一个UDP客户端**
-
-&lt;pre class=&quot;prettyprint&quot;&gt;`&lt;span class=&quot;hljs-comment&quot;&gt;//示例，创建一个UDP服务器端&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; dgram = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;dgram&apos;&lt;/span&gt;)
-
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; server = dgram.createSocket(&lt;span class=&quot;hljs-string&quot;&gt;&apos;udp4&apos;&lt;/span&gt;)
-
-server.on(&lt;span class=&quot;hljs-string&quot;&gt;&apos;message&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(msg, rinfo)&lt;/span&gt; {&lt;/span&gt;
-    console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;服务器得到了&apos;&lt;/span&gt; + msg + &lt;span class=&quot;hljs-string&quot;&gt;&apos;来自&apos;&lt;/span&gt; + rinfo.address + &lt;span class=&quot;hljs-string&quot;&gt;&apos;:&apos;&lt;/span&gt; + rinfo.port)
+server.on(<span class="hljs-string">'listening'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+<span class="hljs-keyword">var</span> address = server.address()
+console.log(<span class="hljs-string">'已绑定'</span> + rinfo.address + <span class="hljs-string">':'</span> + rinfo.port)
 })
 
-server.on(&lt;span class=&quot;hljs-string&quot;&gt;&apos;listening&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
-    &lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; address = server.address()
-    console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;已绑定&apos;&lt;/span&gt; + rinfo.address + &lt;span class=&quot;hljs-string&quot;&gt;&apos;:&apos;&lt;/span&gt; + rinfo.port)
-})
+<span class="hljs-comment">//示例，创建一个UDP客户端，与UDP服务器端对话</span>
+<span class="hljs-keyword">var</span> dgram = <span class="hljs-built_in">require</span>(<span class="hljs-string">'dgram'</span>)
 
-&lt;span class=&quot;hljs-comment&quot;&gt;//示例，创建一个UDP客户端，与UDP服务器端对话&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; dgram = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;dgram&apos;&lt;/span&gt;)
+<span class="hljs-keyword">var</span> message = <span class="hljs-keyword">new</span> Buffer(<span class="hljs-string">'test.txt'</span>)
+<span class="hljs-keyword">var</span> client = dgram.createSocket(<span class="hljs-string">'udp4'</span>)
 
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; message = &lt;span class=&quot;hljs-keyword&quot;&gt;new&lt;/span&gt; Buffer(&lt;span class=&quot;hljs-string&quot;&gt;&apos;test.txt&apos;&lt;/span&gt;)
-&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; client = dgram.createSocket(&lt;span class=&quot;hljs-string&quot;&gt;&apos;udp4&apos;&lt;/span&gt;)
+<span class="hljs-comment">//通过客户端发送给网络，参数分别对应 要发送的Buffer  Buffer的偏移  Buffer的长度  目标端口 目标地址 完成后的回调</span>
+client.send(message, <span class="hljs-number">0</span>, message.length, <span class="hljs-number">1234</span>, <span class="hljs-string">'localhost'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, bytes)</span> {</span> 
+client.close();
+})`</pre>
 
-&lt;span class=&quot;hljs-comment&quot;&gt;//通过客户端发送给网络，参数分别对应 要发送的Buffer  Buffer的偏移  Buffer的长度  目标端口 目标地址 完成后的回调&lt;/span&gt;
-client.send(message, &lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;, message.length, &lt;span class=&quot;hljs-number&quot;&gt;1234&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&apos;localhost&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(err, bytes)&lt;/span&gt; {&lt;/span&gt; 
-    client.close();
-})`&lt;/pre&gt;
+<p><strong>构建一个HTTP服务器</strong></p>
+<p>这个真的好熟悉，如下：</p>
+<pre class="prettyprint">`//示例，创建一个HTTP服务器, <span class="hljs-keyword">http</span>模块继承于TCP中的net模块
+var <span class="hljs-keyword">http</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>)
 
-**构建一个HTTP服务器**
+<span class="hljs-keyword">http</span>.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-title">req</span>, <span class="hljs-title">res</span>) {</span>
+    res.writeHead(<span class="hljs-number">200</span>, {<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/plain'</span>})
+    res.<span class="hljs-keyword">end</span>(<span class="hljs-string">'雷猴\n'</span>)
+}).listen(<span class="hljs-number">1234</span>, <span class="hljs-string">'localhost'</span>)
 
-这个真的好熟悉，如下：
+console.<span class="hljs-built_in">log</span>(<span class="hljs-string">'已绑定 http://localhost:1234'</span>)`</pre>
 
-&lt;pre class=&quot;prettyprint&quot;&gt;`//示例，创建一个HTTP服务器, &lt;span class=&quot;hljs-keyword&quot;&gt;http&lt;/span&gt;模块继承于TCP中的net模块
-var &lt;span class=&quot;hljs-keyword&quot;&gt;http&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;http&apos;&lt;/span&gt;)
-
-&lt;span class=&quot;hljs-keyword&quot;&gt;http&lt;/span&gt;.createServer(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;hljs-title&quot;&gt;req&lt;/span&gt;, &lt;span class=&quot;hljs-title&quot;&gt;res&lt;/span&gt;) {&lt;/span&gt;
-    res.writeHead(&lt;span class=&quot;hljs-number&quot;&gt;200&lt;/span&gt;, {&lt;span class=&quot;hljs-string&quot;&gt;&apos;Content-Type&apos;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&apos;text/plain&apos;&lt;/span&gt;})
-    res.&lt;span class=&quot;hljs-keyword&quot;&gt;end&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;雷猴\n&apos;&lt;/span&gt;)
-}).listen(&lt;span class=&quot;hljs-number&quot;&gt;1234&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&apos;localhost&apos;&lt;/span&gt;)
-
-console.&lt;span class=&quot;hljs-built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;已绑定 http://localhost:1234&apos;&lt;/span&gt;)`&lt;/pre&gt;
-
-**构建WebSocket服务**
-
-WebSocket也是一种基于事件的编程模型，所以和Node结合也是相得益彰，同时WebSocket实现了客户端和服务器端之间的长连接，Node事件驱动的方式十分擅长于大量的客户端保持高并发的连接。
-
-&lt;pre class=&quot;prettyprint&quot;&gt;`//示例，WebSocket在客户端的应用
-var &lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;new&lt;/span&gt; WebSocket(&lt;span class=&quot;hljs-string&quot;&gt;&apos;ws://localhost:1234/update&apos;&lt;/span&gt;)
-
-&lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt;.onopen = &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; () {&lt;/span&gt;
-    setInterval(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; () {&lt;/span&gt;
-        &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt;.bufferedAmount === &lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;) {
-            &lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt;.&lt;span class=&quot;hljs-built_in&quot;&gt;send&lt;/span&gt;(getUpdateData())
-        }
-    }, &lt;span class=&quot;hljs-number&quot;&gt;50&lt;/span&gt;)
-}
-
-&lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt;.onmessage = &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;hljs-title&quot;&gt;event&lt;/span&gt;) {&lt;/span&gt;
-   &lt;span class=&quot;hljs-comment&quot;&gt; //todo: event.data 的处理&lt;/span&gt;
-}
-</code></pre><p><strong>网络服务与安全</strong></p>
+<p><strong>构建WebSocket服务</strong></p>
+<p>WebSocket也是一种基于事件的编程模型，所以和Node结合也是相得益彰，同时WebSocket实现了客户端和服务器端之间的长连接，Node事件驱动的方式十分擅长于大量的客户端保持高并发的连接。</p>
+<p><pre class="prettyprint">`//示例，WebSocket在客户端的应用<br>var <span class="hljs-built_in">socket</span> = <span class="hljs-built_in">new</span> WebSocket(<span class="hljs-string">‘ws://localhost:1234/update’</span>)</pre></p>
+<p><span class="hljs-built_in">socket</span>.onopen = <span class="hljs-function"><span class="hljs-keyword">function</span> () {</span><br>    setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span> () {</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">socket</span>.bufferedAmount === <span class="hljs-number">0</span>) {<br>            <span class="hljs-built_in">socket</span>.<span class="hljs-built_in">send</span>(getUpdateData())<br>        }<br>    }, <span class="hljs-number">50</span>)<br>}</p>
+<p><span class="hljs-built_in">socket</span>.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-title">event</span>) {</span><br>   <span class="hljs-comment"> //todo: event.data 的处理</span><br>}</p>
+<p><strong>网络服务与安全</strong></p>
 <p>还有一个关于网络编程的便是网络安全。node在网络安全上提供了3个模块，<strong>crypto</strong>、<strong>tls</strong>、<strong>https</strong>。其中crypto主要用于加密解密，tls模块提供了与net模块类似的功能，区别在于建立在TSL/SSL加密的TCP连接之上，https与http基本都是一致的，区别在于前者更安全。</p>
 <hr>
 <h2 id="第八章-构建Web应用"><a href="#第八章-构建Web应用" class="headerlink" title="第八章 构建Web应用"></a><strong>第八章 构建Web应用</strong></h2><p>关于构建Web应用这一章，其实现有其他的框架讲的而且运用的已经很详细，比如KOA，比如Express，试着运用这两个做一个web应用更能加深理解，这里就总结一下构建Web应用的组成</p>
@@ -214,13 +181,7 @@ var &lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt; = &lt;span c
 </ul>
 <hr>
 <p>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
-<pre><code>&lt;div&gt;
-    作者：u013707249 发表于2017/4/19 14:34:26 [原文链接](http://blog.csdn.net/u013707249/article/details/70240378)
-&lt;/div&gt;
-&lt;div&gt;
-阅读：43 评论：0 [查看评论](http://blog.csdn.net/u013707249/article/details/70240378#comments)
-&lt;/div&gt;
-</code></pre>
+<div><br>    作者：u013707249 发表于2017/4/19 14:34:26 <a href="http://blog.csdn.net/u013707249/article/details/70240378" target="_blank" rel="external">原文链接</a><br></div><br><div><br>阅读：43 评论：0 <a href="http://blog.csdn.net/u013707249/article/details/70240378#comments" target="_blank" rel="external">查看评论</a><br></div>
 	</div>
 	<div class="meta split">
 		
@@ -299,9 +260,9 @@ var duoshuoQuery = {short_name:"yumemor"};
 						
 							
 							<li>
-				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
 				        			
-										<i class="iconfont icon-zhihu"></i>
+				        				<i class="iconfont icon-twitter"></i>
 				        			
 				        		</a>
 				        	</li>
