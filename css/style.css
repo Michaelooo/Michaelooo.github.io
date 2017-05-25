@@ -1144,7 +1144,7 @@ a[data-tooltip][data-placement="top"]::after {
   color: rgba(2,0,0,0.6);
 }
 .author-contact {
-  width: 20%;
+  width: 30%;
   display: inline-block;
   float: right;
   margin-top: -50px;
