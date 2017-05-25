@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>[原]git本地push代码报broken pipe | 程鹏飞的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+    <link rel="stylesheet" href="/cpf_blog/css/style.css">
+
+    <link rel="stylesheet" href="/cpf_blog/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="程鹏飞的博客">
+	<img src="/favicon.png" alt="程鹏飞的博客"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
+
+
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="找不到，搜一下吧……" type="search">
+		</div>
+	</div>
+</form>
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/422201870" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      [原]git本地push代码报broken pipe
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<p>以下基于windows开发环境</p>
+<hr>
+<p>最近在本地写了一点代码，于是就想把它放到Github上去，前面的步骤什么的不多说，就是最后在push代码的时候总是跑出异常 </p>
+<p>诺，就是下面的这个样子的</p>
+<p><img src="http://img.blog.csdn.net/20170306223640001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzcwNzI0OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>搜索了很多资料，先pull再push，删除远程readme文件，甚至想到用gitosis配置权限（都是些什么鬼，我特么又不是要自己搭服务器……），但是还是没有解决。最后考虑是github配置问题，查阅一些先人的遗迹，终于找到解决办法。perfect</p>
+<blockquote>
+<p>（为了防止以后遇到意想不到的错误，建议小白修改一下配置）</p>
+</blockquote>
+<p><strong>第一，设置长久连接</strong></p>
+<p>在git安装目录下，找到/etc/ssh/ssh_config,然后随便用什么编辑器打开，添加</p>
+<blockquote>
+<p>（不知道怎么写看着配置文件上面的格式来写就行了）</p>
+</blockquote>
+<p>Host *<br>ServerAliveInterval 120  `</p>
+<p>这个配置的作用就是保证ssh ServerAliveInterval始终连接，我这次出现错误的原因就是在无线局域网环境下，ssh连接到远程主机后如果一段时间内不操作，就会出现掉线的情况，所以最后加上此配置项</p>
+<p><strong>第二， 修改post缓存大小</strong> </p>
+<p>因为如果缓存不够用，有时候也会发生broken pipe的情况，所以最好的对post的缓存大小作设置 </p>
+<p>这个很简单，直接在git bash 上输入git config http.postBuffer ，value指的就是设置的缓存大小，如下：</p>
+<p><pre class="prettyprint">`git config <span class="hljs-keyword">http</span>.postBuffer <span class="hljs-number">52428800</span></pre></p>
+<p>52428800的单位是字节，git默认的是1MB，我们把它设置成50MB</p>
+<p>以上，就可以在同性网里开心的玩耍了。</p>
+<hr>
+<p>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
+<div><br>    作者：u013707249 发表于2017/3/6 22:42:17 <a href="http://blog.csdn.net/u013707249/article/details/60606732" target="_blank" rel="external">原文链接</a><br></div><br><div><br>阅读：88 评论：0 <a href="http://blog.csdn.net/u013707249/article/details/60606732#comments" target="_blank" rel="external">查看评论</a><br></div>
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2017-03-06T14:42:17.000Z" itemprop="datePublished">2017-03-06</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="原-git本地push代码报broken-pipe" data-title="[原]git本地push代码报broken pipe" data-url="https://michaelooo.github.io/cpf_blog/cpf_blog/2017/03/06/原-git本地push代码报broken-pipe/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/icon.jpg' alt='Michael Cheng'>
+					<div class="media__body">
+						<h4>程鹏飞的博客</h4>
+						<p class='site-description'>欢迎来到程鹏飞的博客</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/422201870" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/Michaelooo" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+		<span>Theme by <a href="http://github.com/yumemor">Yumemor</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/cpf_blog/js/lib.js"></script>
+	<script src="/cpf_blog/js/google-code-prettify/prettify.js"></script>
+	<script src="/cpf_blog/js/module.js"></script>
+	<script src="/cpf_blog/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>
