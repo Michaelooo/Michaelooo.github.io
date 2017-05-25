@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>[原]深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用 | 程鹏飞的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="程鹏飞的博客">
+	<img src="/favicon.png" alt="程鹏飞的博客"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
+
+
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="找不到，搜一下吧……" type="search">
+		</div>
+	</div>
+</form>
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/422201870" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      [原]深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<hr>
+<h2 id="第六章-理解Buffer"><a href="#第六章-理解Buffer" class="headerlink" title="第六章 理解Buffer"></a><strong>第六章 理解Buffer</strong></h2><p>这一章要理解的不多，都是一些buffer的常见操作，看API就可以熟悉，如果做过后台的就不会陌生，这里需要注意的几个地方就是</p>
+<ul>
+<li><strong>Buffer所占用的内存</strong>不是通过V8分配的，属于堆外内存，所以意思就是其实在V8启动的时候就会有一个Buffer对象一直常驻内存，无需通过require引入。</li>
+<li><strong>Buffer的内存分配</strong>分为小内存分配和大内存分配，小内存分配一般指的是小于 8kb 的 Buffer 的对象，大内存当然就是大于 8kb的Buffer 对象。</li>
+<li><strong>Buffer的转换</strong>主要体现在字符串转Buffer和Buffer转字符串，字符串转Buffer直接通过构造函数来实现。</li>
+</ul>
+<p><code>new Buffer(str, [encording]) //encording值编码类型</code></p>
+<p>Buffer转字符串通过 toString() 可以实现。</p>
+<p><code>buf.toString([encording], [start], [end])</code></p>
+<ul>
+<li><strong>Buffer的性能</strong>，通过预先转换静态内容为Buffer对象，可以有效减少CPU的重复使用，从而节省服务器资源。</li>
+</ul>
+<hr>
+<h2 id="第七章-网络编程"><a href="#第七章-网络编程" class="headerlink" title="第七章 网络编程"></a><strong>第七章 网络编程</strong></h2><p>这一章也比较简单，主要分为四个，构建TCP服务、构建UDP服务、构建HTTP服务、构建WebSocket服务，前两个不是重点，后两个比较常用。不多说，直接看代码。</p>
+<p><strong>构建TCP服务</strong></p>
+<pre><code>&lt;span class=&quot;hljs-comment&quot;&gt;//示例，创建一个TCP服务器端&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; net = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;net&apos;&lt;/span&gt;) &lt;span class=&quot;hljs-comment&quot;&gt;//依赖node自带的net模块&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; server = net.createServer(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(socket)&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;hljs-comment&quot;&gt;//新的连接&lt;/span&gt;
+    socket.on(&lt;span class=&quot;hljs-string&quot;&gt;&apos;data&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(data)&lt;/span&gt; {&lt;/span&gt;
+        console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;连上了&apos;&lt;/span&gt;)
+    })
+    &lt;span class=&quot;hljs-comment&quot;&gt;//断开连接&lt;/span&gt;
+    socket.on(&lt;span class=&quot;hljs-string&quot;&gt;&apos;end&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(data)&lt;/span&gt; {&lt;/span&gt;
+        console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;连接断开&apos;&lt;/span&gt;)
+    })
+    socket.write(&lt;span class=&quot;hljs-string&quot;&gt;&apos;创建一个TCP服务器端&apos;&lt;/span&gt;)
+})
+
+&lt;span class=&quot;hljs-comment&quot;&gt;//监听&lt;/span&gt;
+server.listen(&lt;span class=&quot;hljs-number&quot;&gt;1234&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+    console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;已绑定1234端口号&apos;&lt;/span&gt;)
+})`&lt;/pre&gt;
+
+**构建一个UDP服务器端和一个UDP客户端**
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`&lt;span class=&quot;hljs-comment&quot;&gt;//示例，创建一个UDP服务器端&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; dgram = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;dgram&apos;&lt;/span&gt;)
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; server = dgram.createSocket(&lt;span class=&quot;hljs-string&quot;&gt;&apos;udp4&apos;&lt;/span&gt;)
+
+server.on(&lt;span class=&quot;hljs-string&quot;&gt;&apos;message&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(msg, rinfo)&lt;/span&gt; {&lt;/span&gt;
+    console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;服务器得到了&apos;&lt;/span&gt; + msg + &lt;span class=&quot;hljs-string&quot;&gt;&apos;来自&apos;&lt;/span&gt; + rinfo.address + &lt;span class=&quot;hljs-string&quot;&gt;&apos;:&apos;&lt;/span&gt; + rinfo.port)
+})
+
+server.on(&lt;span class=&quot;hljs-string&quot;&gt;&apos;listening&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt; {&lt;/span&gt;
+    &lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; address = server.address()
+    console.log(&lt;span class=&quot;hljs-string&quot;&gt;&apos;已绑定&apos;&lt;/span&gt; + rinfo.address + &lt;span class=&quot;hljs-string&quot;&gt;&apos;:&apos;&lt;/span&gt; + rinfo.port)
+})
+
+&lt;span class=&quot;hljs-comment&quot;&gt;//示例，创建一个UDP客户端，与UDP服务器端对话&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; dgram = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;dgram&apos;&lt;/span&gt;)
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; message = &lt;span class=&quot;hljs-keyword&quot;&gt;new&lt;/span&gt; Buffer(&lt;span class=&quot;hljs-string&quot;&gt;&apos;test.txt&apos;&lt;/span&gt;)
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; client = dgram.createSocket(&lt;span class=&quot;hljs-string&quot;&gt;&apos;udp4&apos;&lt;/span&gt;)
+
+&lt;span class=&quot;hljs-comment&quot;&gt;//通过客户端发送给网络，参数分别对应 要发送的Buffer  Buffer的偏移  Buffer的长度  目标端口 目标地址 完成后的回调&lt;/span&gt;
+client.send(message, &lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;, message.length, &lt;span class=&quot;hljs-number&quot;&gt;1234&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&apos;localhost&apos;&lt;/span&gt;, &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-params&quot;&gt;(err, bytes)&lt;/span&gt; {&lt;/span&gt; 
+    client.close();
+})`&lt;/pre&gt;
+
+**构建一个HTTP服务器**
+
+这个真的好熟悉，如下：
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`//示例，创建一个HTTP服务器, &lt;span class=&quot;hljs-keyword&quot;&gt;http&lt;/span&gt;模块继承于TCP中的net模块
+var &lt;span class=&quot;hljs-keyword&quot;&gt;http&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;require&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;http&apos;&lt;/span&gt;)
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;http&lt;/span&gt;.createServer(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;hljs-title&quot;&gt;req&lt;/span&gt;, &lt;span class=&quot;hljs-title&quot;&gt;res&lt;/span&gt;) {&lt;/span&gt;
+    res.writeHead(&lt;span class=&quot;hljs-number&quot;&gt;200&lt;/span&gt;, {&lt;span class=&quot;hljs-string&quot;&gt;&apos;Content-Type&apos;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&apos;text/plain&apos;&lt;/span&gt;})
+    res.&lt;span class=&quot;hljs-keyword&quot;&gt;end&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;雷猴\n&apos;&lt;/span&gt;)
+}).listen(&lt;span class=&quot;hljs-number&quot;&gt;1234&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&apos;localhost&apos;&lt;/span&gt;)
+
+console.&lt;span class=&quot;hljs-built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&apos;已绑定 http://localhost:1234&apos;&lt;/span&gt;)`&lt;/pre&gt;
+
+**构建WebSocket服务**
+
+WebSocket也是一种基于事件的编程模型，所以和Node结合也是相得益彰，同时WebSocket实现了客户端和服务器端之间的长连接，Node事件驱动的方式十分擅长于大量的客户端保持高并发的连接。
+
+&lt;pre class=&quot;prettyprint&quot;&gt;`//示例，WebSocket在客户端的应用
+var &lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;new&lt;/span&gt; WebSocket(&lt;span class=&quot;hljs-string&quot;&gt;&apos;ws://localhost:1234/update&apos;&lt;/span&gt;)
+
+&lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt;.onopen = &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; () {&lt;/span&gt;
+    setInterval(&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; () {&lt;/span&gt;
+        &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt;.bufferedAmount === &lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;) {
+            &lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt;.&lt;span class=&quot;hljs-built_in&quot;&gt;send&lt;/span&gt;(getUpdateData())
+        }
+    }, &lt;span class=&quot;hljs-number&quot;&gt;50&lt;/span&gt;)
+}
+
+&lt;span class=&quot;hljs-built_in&quot;&gt;socket&lt;/span&gt;.onmessage = &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;hljs-title&quot;&gt;event&lt;/span&gt;) {&lt;/span&gt;
+   &lt;span class=&quot;hljs-comment&quot;&gt; //todo: event.data 的处理&lt;/span&gt;
+}
+</code></pre><p><strong>网络服务与安全</strong></p>
+<p>还有一个关于网络编程的便是网络安全。node在网络安全上提供了3个模块，<strong>crypto</strong>、<strong>tls</strong>、<strong>https</strong>。其中crypto主要用于加密解密，tls模块提供了与net模块类似的功能，区别在于建立在TSL/SSL加密的TCP连接之上，https与http基本都是一致的，区别在于前者更安全。</p>
+<hr>
+<h2 id="第八章-构建Web应用"><a href="#第八章-构建Web应用" class="headerlink" title="第八章 构建Web应用"></a><strong>第八章 构建Web应用</strong></h2><p>关于构建Web应用这一章，其实现有其他的框架讲的而且运用的已经很详细，比如KOA，比如Express，试着运用这两个做一个web应用更能加深理解，这里就总结一下构建Web应用的组成</p>
+<p><strong>基础功能</strong></p>
+<ul>
+<li><strong>请求方法</strong>：常见的请求方法有GET、POST、PUT、DELETE，存在于请求报文的第一行的第一个单词，通常为大写。</li>
+<li><strong>路径解析</strong>：浏览器将请求解析成报文，位于请求报文的第二行。</li>
+<li><strong>查询字符串</strong>：即请求传递的参数。</li>
+<li><strong>cookie</strong>：记录服务器和客户端之间的状态。服务器端生成向客户端发送 –&gt; 浏览器保存cookie –&gt;<br>每次浏览器发送请求都会携带cookie，cookie会造成带宽浪费，所以可以减少cookie的大小，为静态的组件使用不同的域名，减少DNS的查询来避免。</li>
+<li><strong>session</strong>：与cookie作用类似，但是session只保留在服务器端，并且常驻内存（利用Redis或者Memcached可以统一转移到集中的数据存储中）。session也会有安全问题，但是相对较小，常见的漏洞就是XSS漏洞（跨站脚本攻击）。</li>
+<li><strong>缓存</strong>：利用浏览器来缓存静态资源，目的是提升加载速度从而提升体验。</li>
+<li><strong>Basic认证</strong>：请求报文头部的Authorization，这种方式有缺陷，因为在网络传输中这些验证接近于明文，所以不可取。</li>
+</ul>
+<p><strong>数据上传</strong></p>
+<ul>
+<li><strong>表单数据</strong>：即常见的form表单提交。</li>
+<li><strong>JSON/XML</strong>: 提交的数据是JSON/XML格式的，现在大部分的交互都是用的JSON，XML的也有用，比如微信公众号平台的开发的交互就是用的XML，这个真的贼坑。</li>
+<li><strong>附件上传</strong>：利用form-data来实现附件上传。</li>
+<li><strong>数据上传安全</strong>：数据上传的安全性问题主要体现在内存限制和跨站伪造请求的问题上，所以一要对上传做限制，而是在开发中要加hash值做标识，就是加一个随机数。</li>
+</ul>
+<p><strong>路由解析</strong></p>
+<ul>
+<li><strong>文件路径型</strong>：分为静态文件和动态文件，不需要解释。</li>
+<li><strong>MVC</strong>：前端MVC，之前一篇博客有讲，现在前端都是MV*。</li>
+<li><strong>RESTful</strong>: 表述性状态转移，强调所有的资源都是可以通过URL访问到，对URL做文章，与MVC不冲突。可以看下阮一峰的博客：<a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></li>
+</ul>
+<p><strong>中间件</strong></p>
+<ul>
+<li><strong>异常处理</strong>：中间件的核心就是尾调用next()，所以对于一些异常，需要在next()添加一个参数,并且把捕获到的异常传递过来。</li>
+<li><strong>性能</strong>：中间件的出现时服务于具体业务的，所以要特殊特用，性能问题并不大。</li>
+</ul>
+<p><strong>页面渲染</strong></p>
+<ul>
+<li><strong>内容响应</strong>：内容的响应主要依赖于报文中的Content-*字段，它决定了客户端会以什么样的方式来作出响应，下载、跳转等。</li>
+<li><strong>视图渲染</strong>：一般是通过模板加数据共同生成出来的。</li>
+<li><strong>模板</strong>：比视图渲染更进一步，模板的使用的对前端页面的一种复用，是对html体的复用。比如javaweb中的jsp，或者PHP，当然这些都相对成熟，对于初出茅庐的node来说，现在常用的模板渲染模块有jade,heredoc,ejs等。</li>
+</ul>
+<hr>
+<p>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
+<pre><code>&lt;div&gt;
+    作者：u013707249 发表于2017/4/19 14:34:26 [原文链接](http://blog.csdn.net/u013707249/article/details/70240378)
+&lt;/div&gt;
+&lt;div&gt;
+阅读：43 评论：0 [查看评论](http://blog.csdn.net/u013707249/article/details/70240378#comments)
+&lt;/div&gt;
+</code></pre>
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2017-04-19T06:34:26.000Z" itemprop="datePublished">2017-04-19</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="原-深入浅出nodejs学习笔记-第六-八章-理解Buffer-网络编程-构建WEB应用" data-title="[原]深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用" data-url="http://yoursite.com/2017/04/19/原-深入浅出nodejs学习笔记-第六-八章-理解Buffer-网络编程-构建WEB应用/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/1.jpg' alt='Michael Cheng'>
+					<div class="media__body">
+						<h4>程鹏飞的博客</h4>
+						<p class='site-description'>欢迎来到程鹏飞的测试博客</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/422201870" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/Michaelooo" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+		<span>Theme by <a href="http://github.com/yumemor">Yumemor</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>
