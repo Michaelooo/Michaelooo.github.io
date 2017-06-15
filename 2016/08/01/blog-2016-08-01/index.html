@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>[原]如何用 html+css 实现平行四边形，以及气泡框呢？ | 程鹏飞的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+    <link rel="stylesheet" href="/cpf_blog/css/style.css">
+
+    <link rel="stylesheet" href="/cpf_blog/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="程鹏飞的博客">
+	<img src="https://michaelooo.github.io/cpf_blog/favicon.png" alt="程鹏飞的博客"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
+
+
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="找不到，搜一下吧……" type="search">
+		</div>
+	</div>
+</form>
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/travel-project" target="_blank">旅游项目</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/vue-ele" target="_blank">饿了么移动app</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      [原]如何用 html+css 实现平行四边形，以及气泡框呢？
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<p><strong>【效果图】</strong> </p>
+<p>首先说一下平行四边形，想要做成的效果大致是下面这个样子的 </p>
+<p><img src="http://img.blog.csdn.net/20160801103810284" alt="这里写图片描述"></p>
+<p><strong>【思路】</strong> </p>
+<p>如果考虑用昨天的方法，利用 border 边界值，就可以分解成 一个右三角+矩形+上三角（这里右，上的意思指的是需要加上颜色显示的边界颜色），但这样就挺复杂了，所以要换一种方法来做</p>
+<p><strong>【做法】</strong> </p>
+<p>其实利用上次说的 css3 的属性 transform 属性来设置</p>
+<pre class="prettyprint"><span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">display</span>:<span class="hljs-value"> inline-block</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">5</span>px <span class="hljs-number">20</span>px</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">border</span>:<span class="hljs-value"> <span class="hljs-number">1</span>px solid <span class="hljs-hexcolor">#44a5fc</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#333</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">transform</span>:<span class="hljs-value"> <span class="hljs-function">skew(-<span class="hljs-number">20</span>deg)</span></span></span>; <span class="hljs-comment">/* 定义沿着 X 和 Y 轴的 2D 倾斜转换*/</span>
+<span class="hljs-rule">}</span></span></pre>
+
+<p><strong>【注意】</strong> </p>
+<p>但是这么做，有个注意的地方就是，如果当前盒子里包裹其他内容，这个其他内容也会跟着旋转，所以为了避免这种效果，需要在内部重新加一个盒子，并对这个盒子进行一个逆向的 transform，这样就实现了平行四边形了，也就是一个属性的事情  </p>
+<p><strong>【思考】</strong> </p>
+<p>要是个梯形，该怎么做呢？</p>
+<p>接下来再说一下怎么制作一个类似 tooltip 的气泡提示框呢？ </p>
+<p><strong>【效果图】</strong> </p>
+<p>先看一下大致的效果 </p>
+<p><img src="http://img.blog.csdn.net/20160801104015487" alt="这里写图片描述"> </p>
+<p><strong>【思路】</strong> </p>
+<p>其实做起来也相当的简单，就是用一个盒子加一个三角形就行，然后控制好定位的问题就可以做到</p>
+<p><strong>【做法】</strong> </p>
+<p>在有一个叫做 rectangle 的盒子，然后在这个盒子里面有一个 trangle 的盒子</p>
+<p><pre class="prettyprint">`    <span class="hljs-class">.rectangle</span><span class="hljs-rules">{<br>    <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value">relative</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"><span class="hljs-number">150</span>px</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"><span class="hljs-number">35</span>px</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value">green</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">border-radius</span>:<span class="hljs-value"><span class="hljs-number">5</span>px</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"><span class="hljs-number">30</span>px auto <span class="hljs-number">0</span></span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">10</span>px</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value">white</span></span>;<br><span class="hljs-rule">}</span></span><br><span class="hljs-class">.rectangle</span> <span class="hljs-class">.trangle</span><span class="hljs-rules">{<br>    <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value">absolute</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">top</span>:<span class="hljs-value"><span class="hljs-number">12</span>px</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">right</span>:<span class="hljs-value">-<span class="hljs-number">16</span>px</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"><span class="hljs-number">0</span></span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"><span class="hljs-number">0</span></span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"><span class="hljs-number">0</span></span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">border</span>:<span class="hljs-value">solid <span class="hljs-number">8</span>px</span></span>;<br>    <span class="hljs-rule"><span class="hljs-attribute">border-color</span>:<span class="hljs-value">transparent transparent transparent green</span></span>;<br><span class="hljs-rule">}</span></span></pre></p>
+<p>然后差不多就可以实现了 </p>
+<p><strong>【注意】</strong> </p>
+<p>有一个注意的地方就是 position 的使用，在外部盒子的是一定要使用相对定位的 </p>
+<p><strong>【思考】</strong> </p>
+<p>需要做一个不规则的小三角呢？（其实应该是类似的，就是用不同类型的三角形层层的遮罩，或者利用 css3 的2D变换属性来实现）</p>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2016-08-01T02:55:39.000Z" itemprop="datePublished">2016-08-01</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="blog-2016-08-01" data-title="[原]如何用 html+css 实现平行四边形，以及气泡框呢？" data-url="https://michaelooo.github.io/cpf_blog/cpf_blog/2016/08/01/blog-2016-08-01/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='https://michaelooo.github.io/cpf_blog/icon.jpg' alt='Michael Cheng'>
+					<div class="media__body">
+						<h4>程鹏飞的博客</h4>
+						<p class='site-description'>欢迎来到程鹏飞的博客</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/422201870" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/Michaelooo" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
+				        			
+				        				<i class="iconfont icon-twitter"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+		<span>Theme by <a href="http://github.com/yumemor">Yumemor</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/cpf_blog/js/lib.js"></script>
+	<script src="/cpf_blog/js/google-code-prettify/prettify.js"></script>
+	<script src="/cpf_blog/js/module.js"></script>
+	<script src="/cpf_blog/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

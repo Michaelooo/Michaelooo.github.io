@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>[原]重新认识 MVC 和 三层设计模式 | 程鹏飞的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+    <link rel="stylesheet" href="/cpf_blog/css/style.css">
+
+    <link rel="stylesheet" href="/cpf_blog/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="程鹏飞的博客">
+	<img src="https://michaelooo.github.io/cpf_blog/favicon.png" alt="程鹏飞的博客"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
+
+
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="找不到，搜一下吧……" type="search">
+		</div>
+	</div>
+</form>
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/travel-project" target="_blank">旅游项目</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/vue-ele" target="_blank">饿了么移动app</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      [原]重新认识 MVC 和 三层设计模式
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h1 id="重新认识-MVC-和-三层设计模式"><a href="#重新认识-MVC-和-三层设计模式" class="headerlink" title="重新认识 MVC 和 三层设计模式"></a>重新认识 MVC 和 三层设计模式</h1><h4 id="首先不得不承认，身边有一群8年-工作经验的大牛就是爽，纠正了我一个认知上的错误"><a href="#首先不得不承认，身边有一群8年-工作经验的大牛就是爽，纠正了我一个认知上的错误" class="headerlink" title="首先不得不承认，身边有一群8年+工作经验的大牛就是爽，纠正了我一个认知上的错误"></a>首先不得不承认，身边有一群8年+工作经验的大牛就是爽，纠正了我一个认知上的错误</h4><h4 id="首先来看一下官方的解释："><a href="#首先来看一下官方的解释：" class="headerlink" title="首先来看一下官方的解释："></a>首先来看一下官方的解释：</h4><blockquote>
+<p>MVC： </p>
+<p>  MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑的图形化用户界面的结构中。 </p>
+<p>  <img src="http://img.blog.csdn.net/20160801101537117" alt="MVC图"> </p>
+<p>  三层架构设计模式： </p>
+<p>  表现层（UI）：通俗讲就是展现给用户的界面，即用户在使用一个系统的时候他的所见所得。<br>  业务逻辑层（BLL）：针对具体问题的操作，也可以说是对数据层的操作，对数据业务逻辑处理。<br>  数据访问层（DAL）：该层所做事务直接操作数据库，针对数据的增添、删除、修改、更新、查找等。</p>
+</blockquote>
+<h4 id="我想说的是，因为老师夜以继日对我讲，MVC三层模式，从而导致我将这两个东西搞混了。所以现在我来重新理解下。"><a href="#我想说的是，因为老师夜以继日对我讲，MVC三层模式，从而导致我将这两个东西搞混了。所以现在我来重新理解下。" class="headerlink" title="我想说的是，因为老师夜以继日对我讲，MVC三层模式，从而导致我将这两个东西搞混了。所以现在我来重新理解下。"></a>我想说的是，因为老师夜以继日对我讲，MVC三层模式，从而导致我将这两个东西搞混了。所以现在我来重新理解下。</h4><p>简单的说： </p>
+<ul>
+<li><em>MVC 是应用在三层架构模式中表现层里面的一种软件设计规范，它只存在于表现层，它不是一种架构设计规范！在表现层的设计还有 MVVM，MVP等，在这里的model，应该理解为viewModel,view就是web界面，controller则是页面请求的逻辑处理</em></li>
+</ul>
+<p><em>- 三层架构设计是一种架构设计方案，相对来说理解起来比较简单，但需要注意的是，实体模型并不能算作是一个层</em></p>
+<h4 id="具体的理解画一个图吧"><a href="#具体的理解画一个图吧" class="headerlink" title="具体的理解画一个图吧"></a>具体的理解画一个图吧</h4><p><img src="http://img.blog.csdn.net/20160801101043248" alt="MVC 三层模式图解"></p>
+<h4 id="然后稍微的说一下MVVM和MVP"><a href="#然后稍微的说一下MVVM和MVP" class="headerlink" title="然后稍微的说一下MVVM和MVP"></a>然后稍微的说一下MVVM和MVP</h4><h5 id="MVVM：-主要用来做-WPF"><a href="#MVVM：-主要用来做-WPF" class="headerlink" title="MVVM： 主要用来做 WPF"></a>MVVM： 主要用来做 WPF</h5><h5 id="MVP：-MVP和MVC很像，但是有点区别。在MVP中View并不直接使用Model，它们之间的通信是通过Presenter-MVC中的Controller-来进行的，所有的交互都发生在Presenter内部，而在MVC中View会直接从Model中读取数据而不是通过-Controller。"><a href="#MVP：-MVP和MVC很像，但是有点区别。在MVP中View并不直接使用Model，它们之间的通信是通过Presenter-MVC中的Controller-来进行的，所有的交互都发生在Presenter内部，而在MVC中View会直接从Model中读取数据而不是通过-Controller。" class="headerlink" title="MVP：   MVP和MVC很像，但是有点区别。在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中View会直接从Model中读取数据而不是通过 Controller。"></a>MVP：   MVP和MVC很像，但是有点区别。在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中View会直接从Model中读取数据而不是通过 Controller。</h5><h5 id="在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。-在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，即View。所以，在MVC模型里，Model不依赖于View，但是View是依赖于Model的。不仅如此，因为有一些业务逻辑在View里实现了，导致要更改View也是比较困难的，至少那些业务逻辑是无法重用的。"><a href="#在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。-在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，即View。所以，在MVC模型里，Model不依赖于View，但是View是依赖于Model的。不仅如此，因为有一些业务逻辑在View里实现了，导致要更改View也是比较困难的，至少那些业务逻辑是无法重用的。" class="headerlink" title="在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。 在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，即View。所以，在MVC模型里，Model不依赖于View，但是View是依赖于Model的。不仅如此，因为有一些业务逻辑在View里实现了，导致要更改View也是比较困难的，至少那些业务逻辑是无法重用的。"></a>在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。 在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，即View。所以，在MVC模型里，Model不依赖于View，但是View是依赖于Model的。不仅如此，因为有一些业务逻辑在View里实现了，导致要更改View也是比较困难的，至少那些业务逻辑是无法重用的。</h5><h4 id="其实今天还学了下-依赖注入的一些东西，很深奥，有空再说吧！"><a href="#其实今天还学了下-依赖注入的一些东西，很深奥，有空再说吧！" class="headerlink" title="其实今天还学了下 依赖注入的一些东西，很深奥，有空再说吧！"></a>其实今天还学了下 依赖注入的一些东西，很深奥，有空再说吧！</h4>
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2016-08-01T02:18:51.000Z" itemprop="datePublished">2016-08-01</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="blog-2016-08-01-2" data-title="[原]重新认识 MVC 和 三层设计模式" data-url="https://michaelooo.github.io/cpf_blog/cpf_blog/2016/08/01/blog-2016-08-01-2/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='https://michaelooo.github.io/cpf_blog/icon.jpg' alt='Michael Cheng'>
+					<div class="media__body">
+						<h4>程鹏飞的博客</h4>
+						<p class='site-description'>欢迎来到程鹏飞的博客</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/422201870" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/Michaelooo" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
+				        			
+				        				<i class="iconfont icon-twitter"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+		<span>Theme by <a href="http://github.com/yumemor">Yumemor</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/cpf_blog/js/lib.js"></script>
+	<script src="/cpf_blog/js/google-code-prettify/prettify.js"></script>
+	<script src="/cpf_blog/js/module.js"></script>
+	<script src="/cpf_blog/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>
