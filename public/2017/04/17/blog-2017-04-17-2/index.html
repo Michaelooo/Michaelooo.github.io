@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>[原]深入浅出nodejs学习笔记-前三章 简介、模块机制、异步I/O | 程鹏飞的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="https://michaelooo.github.io/cpf_blog/favicon.png">
+    
+
+    <link rel="stylesheet" href="/cpf_blog/css/style.css">
+
+    <link rel="stylesheet" href="/cpf_blog/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="程鹏飞的博客">
+	<img src="https://michaelooo.github.io/cpf_blog/favicon.png" alt="程鹏飞的博客"></a>
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/travel-project" target="_blank">旅游项目</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/canvas实现五子棋以及机器算法/index.html" target="_blank">canvas画五子棋</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/three.js实现立体电视机/index.html" target="_blank">canvas画3D效果</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/canvas画时钟/" target="_blank">canvas画时钟</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/vue-ele" target="_blank">饿了么移动app</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      [原]深入浅出nodejs学习笔记-前三章 简介、模块机制、异步I/O
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h2 id="第一章-node简介"><a href="#第一章-node简介" class="headerlink" title="第一章 node简介"></a>第一章 node简介</h2><p>在学习这章之前，先提三个问题，node是什么，为什么用node，node可以用来干什么？</p>
+<p><strong>首先是回答第一个问题，node是什么？</strong></p>
+<p>node习惯称为nodejs，听起来类似于js库，但是其实node并不是一个库，node其实是一个可以在后端运行JavaScript的环境。</p>
+<p>js为什么可以在后端运行呢，不是只可以在浏览器运行吗？其实是js之所以可以再浏览器运行是因为在浏览器中集成了js解析引擎，类似Firefox的SpiderMonkey和IE的Chakra，其中最有名的当属于chrome的v8引擎，而node便是利用到了v8引擎，所以才可以在服务器端跑js，当如正如你所想的，因为node并没有渲染引擎，所以node是不处理UI的。</p>
+<p><strong>那为什么要用node？</strong></p>
+<p>作为一个后端js的运行平台，node要好用才会用啊，喏，如下：</p>
+<ol>
+<li><strong>异步IO</strong>：其实就是异步执行的IO操作，不用多说</li>
+<li><strong>单线程</strong>：node是单线程运行的，所以不用考虑多线程地带来的同步啊、死锁之类的问题，但同时会带来一些问题，比如无法充分的利用多核CPU、一旦报错，程序就GG、CPU过载就会出异常等，对于这些问题，node也有一个简单的解决办法就是child_process，这个暂时先不谈</li>
+<li><strong>跨平台</strong>：作为一个后台运行平台，这是JavaScript浩浩荡荡进军后台之势，当然也要像后台爸爸Java一样跨平台才好用哈</li>
+<li><strong>事件与回调函数</strong>：node是基于事件驱动的，基于事件编程有<strong>轻量级、轻耦合、只关注事务点</strong>等优势，其实就是更关注业务逻辑，毕竟是前端</li>
+</ol>
+<p><strong>最后的问题，node可以用来干什么</strong></p>
+<p>如上的node优势所说，一方面，node基于异步IO的特点，node擅长于处理IO密集型业务，另一方面，V8是十分强大的，所以node也很适合CPU密集型业务，而且效率不比java差哈，同时，node也比较适合于做一些游戏开发领域的事情、做分布式应用和一些工具类应用的开发</p>
+<h2 id="第二章-node模块机制"><a href="#第二章-node模块机制" class="headerlink" title="第二章 node模块机制"></a>第二章 node模块机制</h2><p><strong>node模块机制</strong></p>
+<p>关于node的模块机制，首先提一下CommonJS，CommonJS就是为JS的表现来制定规范，因为js没有模块的功能所以CommonJS应运而生，它希望js可以在任何地方运行，不只是浏览器中。CommonJS的模块规范如下</p>
+<pre class="prettyprint"><span class="hljs-comment">//a.js</span>
+exports.yeah = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+    console.log(<span class="hljs-string">'yeah'</span>)
+}
+
+<span class="hljs-comment">//b.js</span>
+<span class="hljs-keyword">var</span> yeah = <span class="hljs-built_in">require</span>(<span class="hljs-string">'yeah'</span>)</pre>
+
+<p>在文件a中通过exports暴露出去一个yeah方法，然后在b.js文件中通过require引用，十分方便,但是CommonJS的缺陷还是很明显的，<strong>没有模块系统，标准库很少，没有标准的接口，缺乏包管理系统</strong>等。</p>
+<p>作为站在巨人肩膀上的node，node在实现中并非完全按照CommonJS的模块规范，而是对模块规范进行了一定的取舍，同事也增加了不少自身需要的特性。</p>
+<p>node的模块分为两类，一种是Node提供的模块，叫做<strong>核心模块</strong>;一种是用户自己编写的模块，叫做<strong>文件模块</strong> </p>
+<p>核心模块被编译成二进制执行文件，在node启动时就被直接加载到内存中，所以执行速度最快，文件模块则是运行时加载，按照路径分析 –&gt; 文件定位 –&gt; 编译执行 的步骤加载执行</p>
+<p>node有自己的包规范NPM，npm是什么，npm是一个包管理的神器，这个真的不能多说，每天都用</p>
+<p><strong>前后端共用模块</strong></p>
+<p>前后端共用模块主要有两种，AMD和CMD</p>
+<p>AMD 即Asynchronous Module Definition，中文名是异步模块定义的意思。它是一个在浏览器端模块化开发的规范，由于不是JavaScript原生支持，使用AMD规范进行页面开发需要用到对应的库函数，也就是大名鼎鼎RequireJS，实际上AMD 是 RequireJS 在推广过程中对模块定义的规范化的产出</p>
+<p>requireJS主要解决两个问题</p>
+<ol>
+<li>多个js文件可能有依赖关系，被依赖的文件需要早于依赖它的文件加载到浏览器</li>
+<li><p>js加载的时候浏览器会停止页面渲染，加载文件越多，页面失去响应时间越长</p>
+<p>看一个使用requireJS的例子</p>
+</li>
+</ol>
+<pre class="prettyprint"><span class="hljs-comment">// 定义模块 myModule.js</span>
+define([<span class="hljs-string">'dependency'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+    <span class="hljs-keyword">var</span> name = <span class="hljs-string">'Byron'</span>;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printName</span><span class="hljs-params">()</span>{</span>
+        console.log(name);
+    }
+
+    <span class="hljs-keyword">return</span> {
+        printName: printName
+    };
+});
+
+<span class="hljs-comment">// 加载模块</span>
+<span class="hljs-built_in">require</span>([<span class="hljs-string">'myModule'</span>], <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(my)</span>{</span>
+　 my.printName();
+});</pre>
+
+<p>CMD由国内的玉伯提出，CMD模块更接近于Node对CommonJS的实现，CMD和AMD有什么区别，看下<a href="https://www.zhihu.com/people/lifesinger/answers" target="_blank" rel="external">玉伯</a>是怎么回答的吧<a href="https://www.zhihu.com/question/20351507/answer/14859415" target="_blank" rel="external">https://www.zhihu.com/question/20351507/answer/14859415</a></p>
+<h2 id="第三章-异步IO"><a href="#第三章-异步IO" class="headerlink" title="第三章 异步IO"></a>第三章 异步IO</h2><p>异步IO真心没啥可提的，需要知道的是异步IO实现的核心是事件循环(过去是轮询技术)，他与浏览器中的执行模型基本保持了一致。</p>
+<hr>
+<p><br><strong>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</strong></p>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2017-04-17T11:47:48.000Z" itemprop="datePublished">2017-04-17</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="blog-2017-04-17-2" data-title="[原]深入浅出nodejs学习笔记-前三章 简介、模块机制、异步I/O" data-url="https://michaelooo.github.io/cpf_blog/cpf_blog/2017/04/17/blog-2017-04-17-2/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='https://michaelooo.github.io/cpf_blog/icon.jpg' alt='Michael Cheng'>
+					<div class="media__body">
+						<h4>程鹏飞的博客</h4>
+						<p class='site-description'>欢迎来到程鹏飞的博客</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/422201870" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/Michaelooo" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
+				        			
+				        				<i class="iconfont icon-twitter"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		<!--
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		-->
+		<span>一篇有内涵的博客 一个有梦想的程序员  <a href="http://github.com/michaelooo">Michael Cheng</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/cpf_blog/js/lib.js"></script>
+	<script src="/cpf_blog/js/google-code-prettify/prettify.js"></script>
+	<script src="/cpf_blog/js/module.js"></script>
+	<script src="/cpf_blog/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

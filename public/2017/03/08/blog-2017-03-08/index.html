@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>[原]简单理解内存中的堆栈与数据结构中的堆栈 | 程鹏飞的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="https://michaelooo.github.io/cpf_blog/favicon.png">
+    
+
+    <link rel="stylesheet" href="/cpf_blog/css/style.css">
+
+    <link rel="stylesheet" href="/cpf_blog/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="程鹏飞的博客">
+	<img src="https://michaelooo.github.io/cpf_blog/favicon.png" alt="程鹏飞的博客"></a>
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/travel-project" target="_blank">旅游项目</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/canvas实现五子棋以及机器算法/index.html" target="_blank">canvas画五子棋</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/three.js实现立体电视机/index.html" target="_blank">canvas画3D效果</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/canvas画时钟/" target="_blank">canvas画时钟</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/vue-ele" target="_blank">饿了么移动app</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      [原]简单理解内存中的堆栈与数据结构中的堆栈
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<p>一日中午，平静的办公室忽然发出这样一个声音：什么是堆栈？ </p>
+<p>于是瞬间，办公室开始闹腾起来 </p>
+<p>A：堆栈就是后进后出 </p>
+<p>B：堆就是时间牺牲空间，栈就是空间牺牲时间 </p>
+<p>C：栈更快，堆就略微慢一点 </p>
+<p>D：…… </p>
+<p>作为刚毕业的码畜，听完之后就有些懵逼了（WTF，堆栈还有这么多东西吗？），于是上网搜寻各种资料，发现了一个在大学知识容易混淆的知识点，那就是——数据结构中的堆栈与内存中的堆栈存储是不同的</p>
+<h2 id="数据结构中的堆栈"><a href="#数据结构中的堆栈" class="headerlink" title="数据结构中的堆栈"></a><strong>数据结构中的堆栈</strong></h2><p>先说数据结构中的堆栈，这个就是我们大学课程《数据结构》中所学到的，通俗上的堆栈的理解，堆和栈是数据存储方式的两种数据结构。关于堆栈，其实还有一个比较容易搞混的地方那就是队列，其实这三种都是数据结构中的一种排序数据结构 </p>
+<ul>
+<li><p><strong>堆</strong>：堆的数据机构其实就是一个完全二叉树，具堆属性的数据结构才可被叫做为堆，堆常见的应用就是堆排序与实现优先队列，为什么用？因为快啊 </p>
+</li>
+<li><p><strong>队列</strong>：就是先进先出的存储方式，类似与超市付款，先买的先走，一般与栈作比较 </p>
+</li>
+<li><p><strong>栈</strong>：与队列相反，栈的顺序是后进先出，只可以在栈顶进行操作，类似与只有一个出入口的公交车，先上车的只能后来下车 </p>
+</li>
+</ul>
+<p><strong>速度</strong> </p>
+<p> 队列与栈速度相对来说，队列的更快些，因为设计增加删除的操作时，队列不需要改变数据结构，而栈需要，所以遍历速度略低些，这些数据结构一般跟算法有点关系，其实平时敲代码用不到的好不</p>
+<p>以上就是数据结构中的堆栈，接下来说下内存中的堆和栈</p>
+<h2 id="内存中的堆和栈"><a href="#内存中的堆和栈" class="headerlink" title="内存中的堆和栈"></a><strong>内存中的堆和栈</strong></h2><p>在内存中的堆栈，一般指的是数据操作的存在位置，一般来说，栈是存放一些常量字面量一类的东西，这些一般有系统自己控制空间的开辟与释放，而堆是存放一些实例的变量，程序员需要自己去控制何时在内存中分配空间和何时释放（当然，这个也跟语言有关系，java就由虚拟机自行控制，c++就不行了） </p>
+<p><strong>速度</strong> </p>
+<p>关于速度，查阅资料，栈的存储一般位于一级缓存，堆的存储位于二级缓存，所以栈的速度是远远大于堆的。（关于一级缓存二级缓存的速度差异请看这个：<a href="http://www.to8to.com/yezhu/v9652.html%20%E2%80%9C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E5%8C%BA%E5%88%AB%E2%80%9D" target="_blank" rel="external">http://www.to8to.com/yezhu/v9652.html</a>） </p>
+<p><strong>什么是堆栈溢出</strong> </p>
+<p>堆栈溢出就是不顾堆栈中分配的局部数据块大小，向该数据块写入了过多的数据，导致数据越界，结果覆盖了别的数据。意思就是，假如你在内存分配了8大小，而传入的值却大于这个长度，那么多余的长度就可能会覆盖内存中的其他元素，所以会得到错误的返回结果。堆栈溢出一般指的是堆溢出，栈溢出的情况比较少。</p>
+<hr>
+<p><br>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2017-03-08T15:13:11.000Z" itemprop="datePublished">2017-03-08</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="blog-2017-03-08" data-title="[原]简单理解内存中的堆栈与数据结构中的堆栈" data-url="https://michaelooo.github.io/cpf_blog/cpf_blog/2017/03/08/blog-2017-03-08/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='https://michaelooo.github.io/cpf_blog/icon.jpg' alt='Michael Cheng'>
+					<div class="media__body">
+						<h4>程鹏飞的博客</h4>
+						<p class='site-description'>欢迎来到程鹏飞的博客</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/422201870" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/Michaelooo" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
+				        			
+				        				<i class="iconfont icon-twitter"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		<!--
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		-->
+		<span>一篇有内涵的博客 一个有梦想的程序员  <a href="http://github.com/michaelooo">Michael Cheng</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/cpf_blog/js/lib.js"></script>
+	<script src="/cpf_blog/js/google-code-prettify/prettify.js"></script>
+	<script src="/cpf_blog/js/module.js"></script>
+	<script src="/cpf_blog/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

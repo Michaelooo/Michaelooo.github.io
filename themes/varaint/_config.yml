@@ -1,0 +1,74 @@
+
+
+# site icon
+favicon: /favicon.png
+
+# author headimg
+headimg: /icon.jpg
+
+# search
+search: 
+    enable: false
+    placeholder: 找不到，搜一下吧……
+
+# sidebar
+sidebar: 
+  enable: true
+  menus:
+    -
+      name: 旅游项目
+      link: https://michaelooo.github.io/travel-project
+      target: _blank
+    -
+      name: canvas画五子棋
+      link: https://michaelooo.github.io/personal_example/canvas实现五子棋以及机器算法/index.html
+      target: _blank
+    -
+      name: canvas画3D效果
+      link: https://michaelooo.github.io/personal_example/three.js实现立体电视机/index.html
+      target: _blank
+    -
+      name: canvas画时钟
+      link: https://michaelooo.github.io/personal_example/canvas画时钟/
+      target: _blank
+    -
+      name: 饿了么移动app
+      link: https://michaelooo.github.io/vue-ele
+      target: _blank
+
+# count(统计)
+count:
+  enable: true
+
+# comments
+comments:
+  duoshuo_username:  yumemor
+  #disqus_username: yumemor
+
+# accounts support weibo/github/zhihu/twitter/douban 
+# display to former three
+social:
+  -
+    name: weibo
+    link: http://weibo.com/422201870
+  -
+    name: github
+    link: https://github.com/Michaelooo
+  -
+    name: zhihu
+    link: https://www.zhihu.com/people/cheng-peng-fei-55
+  -
+    name: twitter
+    link: https://twitter.com/cpflovesr
+
+#  -
+#    name: twitter
+#    link:
+#  -
+#    name: douban
+#    link:
+
+
+
+
+

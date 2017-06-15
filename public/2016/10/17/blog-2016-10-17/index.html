@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>[原]教你如何用命令行装逼，做一个有逼格的程序员 | 程鹏飞的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="https://michaelooo.github.io/cpf_blog/favicon.png">
+    
+
+    <link rel="stylesheet" href="/cpf_blog/css/style.css">
+
+    <link rel="stylesheet" href="/cpf_blog/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="程鹏飞的博客">
+	<img src="https://michaelooo.github.io/cpf_blog/favicon.png" alt="程鹏飞的博客"></a>
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/travel-project" target="_blank">旅游项目</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/canvas实现五子棋以及机器算法/index.html" target="_blank">canvas画五子棋</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/three.js实现立体电视机/index.html" target="_blank">canvas画3D效果</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/personal_example/canvas画时钟/" target="_blank">canvas画时钟</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="https://michaelooo.github.io/vue-ele" target="_blank">饿了么移动app</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      [原]教你如何用命令行装逼，做一个有逼格的程序员
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h2 id="教你如何用命令行装逼，做一个有逼格的程序员"><a href="#教你如何用命令行装逼，做一个有逼格的程序员" class="headerlink" title="教你如何用命令行装逼，做一个有逼格的程序员"></a><strong>教你如何用命令行装逼，做一个有逼格的程序员</strong></h2><p>事先声明，如果你不知道打开windows的命令行工具，我是绝对不会告诉你是用 <strong>windows+R</strong> ，然后键入 <strong>cmd</strong> 打开的</p>
+<p>windows 自带的命令行工具很强大，毕竟计算机一开始都是以键入命令的方式来操作的，但现如今计算机的发展，许多在过去需要去记大量命令才能完成的操作，现如今通过傻瓜式的点选都可以完成。作为一名有逼格的程序员，在计算机如今图形界面点选操作的洪流中漂的越来越远，如何保证程序员识货而不脑残、务实而不闷骚的本性呢，那就不妨用回命令行吧。</p>
+<p>本文将介绍几个关于命令行工具的小技巧，全都是工作之后遇到，看到能装逼，不对，看到对工作有很大的帮助所以就都记下了</p>
+<ul>
+<li><strong>1.外观配置篇</strong></li>
+</ul>
+<p>如果你觉得windows黑底白字的命令行面板很漂亮，对不起，我们分手吧。我相信大部分人不愿意用命令行的原因就是他实在是太丑了，所以，第一步，我们需要把命令行配置的好看舒服一些，虽然肯定比不上<strong>sublime</strong>、<strong>atom</strong>那种神级的编辑界面，但也不能比<strong>notePad</strong>差太多吧，好了我自己配置的界面大致就是下面这个样子吧 </p>
+<p><img src="http://img.blog.csdn.net/20161017131431540" alt="图1"></p>
+<p>其实也就是换成了看起来更舒服的白底黑字，改成了我自己更喜欢的新宋体字体。而你所需要做的就是，右键标题选择属性打开，你看到就是这个样子的了 </p>
+<p><img src="http://img.blog.csdn.net/20161017131721718" alt="图2"></p>
+<p>配置是相当简单的，具体看个人喜欢，具体就不多谈了，但是有两个需要get的点是： </p>
+<p> 如果你受够了命令窗口写着写着就看不到之前的了，那么你需要做的是设置缓冲大小，对于我，200 OK;另外一个是记得打开快速编辑功能，为什么要打开这个，后边再说 </p>
+<p><img src="http://img.blog.csdn.net/20161017131903547" alt="图3"></p>
+<p>做到这儿，就差不多了，但还是差点，对于自己的命令窗口怎么可以用文件目录这么low的标识，当然要有自己的个性,键入命令 title + ‘名字’，剩下的就自己体会去吧 </p>
+<p><em>ps：其实网上还有一些美化命令窗口的工具，比如类似雪豹的透明风格，可以自行钻研</em></p>
+<ul>
+<li><strong>2.能不能快点敲命令篇</strong></li>
+</ul>
+<p>命令行另外一个让人抓狂的地方是它对于复制粘贴偏执的理解，曾经的我深受其害，在我还是个菜鸟的时候，为了达到复制粘贴的效果，我需要右键标记，然后复制，粘贴的时候还要记得右键粘贴，你一直喜欢的 ctrl+V 是不可以的，实在让人抓狂。但现在不一样了，你一定见过别人操作命令工具可以有这样的界面  </p>
+<p><img src="http://img.blog.csdn.net/20161017132157626" alt="图4"></p>
+<p>或许见过大神不用键盘，只点一下鼠标就可以复制大段的命令。这些都是因为其实windows已经提供了一些可以快速编辑命令的小技能，我知道你已经想要听了。</p>
+<p>还记得刚刚说过的打开快速编辑的选项吗？你只有打开了勾选了这个选项，你才真正的解放了命令窗口。如果你想复制一段命令，多行的也OK，你所需要做的就是选中你要复制的命令，然后单击右键，命令就已经被复制在剪贴板上了，如果你想粘贴命令，更简单，选择要插入的位置，右键单击，然后你会发现命令已经被复制上了。</p>
+<p>当然这都是初级的，你还可以通过以下的方式来操作</p>
+<ul>
+<li><strong>F3 快速复制上一次的命令</strong><br><em>按下F3，你可以快速复制上一次执行的命令，你同样的可以通过键入上下键来快速选择命令（反正我觉得还没有用上下键方便）</em></li>
+<li><strong>F1 复制上一次命令，但是一个字符一个字符的复制</strong><br><em>按下F3只能复制一行是不是有点坑，如果你想要一个字符一个字符的复制，那么你的做法就是不停的按F1就行了</em></li>
+<li><strong>F2 输入一个字符，然后复制这个字符之前的命令</strong><br><em>*假如你上一个命令是 ‘net help’ ,按下F2，然后键入 h，你会发现net 已经被复制好了，是不是66的感觉</em></li>
+<li><strong>F7 显示所有使用过的命令，按上上下下，BABA可以选择</strong><br><em>这一次，你所用过的命令都会显示出来，你可以上下左右前前后后进行选择，再也没有比这更直观的方式了</em></li>
+<li><strong>Tab 快速补全存在的文件目录名</strong><br><em>虽然不是特别强大，但是用起Tab键补全的感觉是不是有种敲代码的feeling</em></li>
+</ul>
+<p>知道这五个按键命令，差不多就够了，想当初我也是靠这5个命令，从一个菜鸟变成了现如今的更菜的菜鸟</p>
+<ul>
+<li><strong>3.终极命令</strong></li>
+</ul>
+<p>说好了是做有逼格的程序员呢，怎么说的全是跟程序没多大关系的东西。当然喽，我今天压根没想说一些类似 ‘mkdir’ ‘cd xxoo’之类的命令，这种类似的命令你只有自己去搜索然后自己去敲才会发现它的好玩儿。而我想说的是，对于windows来说，命令好玩的地方真的需要你自己去摸索，如果你是地球上最大的同性恋交友网站git上的一员，如果你是node的忠粉，那么我想你一定要学会玩儿命令行工具。同样的对于电脑小白来说，学会一些‘高大上’的命令操作，同样会让你逼格满满</p>
+<blockquote>
+<p><strong>伟大的程序员布什.沃硕德曾说过：程序员最伟大的地方不是创造，而是一份想要不断摸索的偏执</strong></p>
+</blockquote>
+<p>拜了个拜（下次有空玩win10）</p>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2016-10-17T13:35:56.000Z" itemprop="datePublished">2016-10-17</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="blog-2016-10-17" data-title="[原]教你如何用命令行装逼，做一个有逼格的程序员" data-url="https://michaelooo.github.io/cpf_blog/cpf_blog/2016/10/17/blog-2016-10-17/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='https://michaelooo.github.io/cpf_blog/icon.jpg' alt='Michael Cheng'>
+					<div class="media__body">
+						<h4>程鹏飞的博客</h4>
+						<p class='site-description'>欢迎来到程鹏飞的博客</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/422201870" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/Michaelooo" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/cheng-peng-fei-55" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://twitter.com/cpflovesr" target="_blank">
+				        			
+				        				<i class="iconfont icon-twitter"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		<!--
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		-->
+		<span>一篇有内涵的博客 一个有梦想的程序员  <a href="http://github.com/michaelooo">Michael Cheng</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/cpf_blog/js/lib.js"></script>
+	<script src="/cpf_blog/js/google-code-prettify/prettify.js"></script>
+	<script src="/cpf_blog/js/module.js"></script>
+	<script src="/cpf_blog/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>
