@@ -72,4 +72,4 @@ deploy:
   type: git
   repo: git@github.com:Michaelooo/cpf_blog.git
   branch: master
-  message: "新的博客" + {{ now('YYYY-MM-DD HH:mm:ss') }} :
+  message: 
