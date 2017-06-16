@@ -12,9 +12,9 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-## https://michaelooo.github.io/cpf_blog /cpf_blog/
-url: https://michaelooo.github.io/cpf_blog
-root: /cpf_blog/
+## https://michaelooo.github.io/cpf_blog /cpf_blog/ http://www.chengpengfei.com/blog
+url: http://www.chengpengfei.com/blog
+root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 

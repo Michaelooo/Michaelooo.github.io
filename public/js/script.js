@@ -88,7 +88,7 @@
 
         var bannerNode = $('.top-image');
         // 对于三种环境的处理
-        var rootUrl = 'https://michaelooo.github.io/cpf_blog/' || 'http://localhost:1234/cpf_blog/' || 'http://www.chengpengfei.com/cpf_blog/';
+        var rootUrl = 'https://michaelooo.github.io/cpf_blog/' || 'http://localhost:1234/cpf_blog/' || 'http://www.chengpengfei.com/blog/';
         if(bannerNode.data('enable')){
             var index = parseInt((Math.random() * 4) + 1);
             bannerNode.attr('style','background-image:url('+ rootUrl +'/banner/'+index+'.jpg)');

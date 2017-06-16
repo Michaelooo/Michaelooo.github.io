@@ -2,6 +2,8 @@
 
 # site icon
 favicon: /favicon.png
+favicon_t: /favicon.ico
+githubimg: /github.png
 
 # author headimg
 headimg: /icon.jpg
@@ -29,7 +31,7 @@ sidebar:
       target: _blank
     -
       name: canvas画时钟
-      link: https://michaelooo.github.io/personal_example/canvas画时钟/
+      link: https://michaelooo.github.io/personal_example/canvas画时钟/index.html
       target: _blank
     -
       name: 饿了么移动app
