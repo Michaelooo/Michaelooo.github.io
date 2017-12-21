@@ -69,7 +69,16 @@ theme: cafe
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@github.com:Michaelooo/cpf_blog.git
-  branch: master
-  message: 
+# - type: git
+#   repo: git@github.com:Michaelooo/cpf_blog.git
+#   branch: master
+#   message: 发布到GitHub Page页
+- type: rsync
+  host: 120.79.75.83
+  user: root
+  root: /var/www/blog
+  port: 22
+  delete: true
+  verbose: true
+  ignore_errors: false
+
