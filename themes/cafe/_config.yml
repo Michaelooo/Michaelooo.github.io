@@ -114,10 +114,10 @@ youyan_uid: false
 ## 教程：https://imsun.net/posts/gitment-introduction/ 网站上进行查看
 gitment:
   enable: true #如果不使用则设置false关闭
-  owner: Michaelooo # 你的github名称或者id id的获取方式为https://api.github.com/users/forvoid（你的名称）中的id极为github id
-  repo: http://www.chengpengfei.com/issues # 你的留言存放的位置 我的是放在我的github的github page上面
-  client_id: 53d1b7c7f6491539e617 # Register a new OAuth application https://github.com/settings/applications/new 
-  client_secret: 72df076811d253c6d605c91a9dda294ec5b365cf 
+  owner: 14368281 # 你的github名称或者id id的获取方式为https://api.github.com/users/forvoid（你的名称）中的id极为github id
+  repo: my-comments # 你的留言存放的位置 我的是放在我的github的github page上面
+  client_id: 697fc394d3a0c29caa6a # Register a new OAuth application https://github.com/settings/applications/new 
+  client_secret: 8ee7c801c92e5785965bedf42193dee03678ad67 
 
 ## disqus
 disqus_shortname: false
