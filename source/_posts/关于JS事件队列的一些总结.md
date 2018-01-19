@@ -2,9 +2,10 @@
 title: '关于JS事件队列的一些总结'
 date: 2017-12-08 15:37
 categories:
-  - Javascript
+  - 前端
 tags:
   - JS事件队列
+	- javascript
 ---
 
 # **关于JS事件队列的一些总结**

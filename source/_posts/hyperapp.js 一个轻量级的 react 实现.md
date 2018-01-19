@@ -3,7 +3,6 @@ title: 'hyperapp.js 一个轻量级的 react 实现'
 date: 2018-01-05 14:24
 categories:
   - 前端
-  - 源码学习
 tags:
   - javascript
   - hyperappjs

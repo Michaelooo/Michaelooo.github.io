@@ -2,10 +2,9 @@
 title: '搭建 GIT 服务器教程'
 date: 2017-12-06 10:20
 categories:
-  - gitHub
+  - Github
 tags:
-  - git服务器搭建
-  - 运维知识
+  - github
 ---
 
 # 搭建 GIT 服务器教程

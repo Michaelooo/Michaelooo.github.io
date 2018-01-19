@@ -2,7 +2,7 @@
 title: '没有后端基础，怎么入门学习Nginx？'
 date: 2017-09-02 23:48
 categories:
-  - Nginx
+  - 运维
 tags:
   - Nginx
   - 运维知识

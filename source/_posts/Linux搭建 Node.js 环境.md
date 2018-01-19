@@ -2,7 +2,7 @@
 title: '【转载】Linux搭建 Node.js 环境'
 date: 2017-12-10 23:48
 categories:
-  - 杂谈
+  - 运维
 tags:
   - nodejs
   - Linux

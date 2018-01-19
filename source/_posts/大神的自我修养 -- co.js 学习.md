@@ -2,11 +2,12 @@
 title: '大神的自我修养 co.js 的学习'
 date: 2017-12-09 23:48
 categories:
-  - javascript
+  - 前端
 tags:
   - nodejs
   - promise
   - es6
+  - javascript
 ---
 
 # **大神的自我修养 co.js 的学习**

@@ -6,7 +6,7 @@ categories:
 tags:
   - nodejs
   - webpack
-  - parcel
+  - parcel.js
 ---
 
 # Webpack 对比 Parcel

@@ -2,11 +2,10 @@
 title: 'git本地push代码报broken pipe'
 date: 2017-03-06 22:42:17
 categories:
-  - github
+  - Github
 tags:
-  - windows
-  - git
-  - 拍坑
+  - github
+  - 爬坑之路
 ---
 
 以下基于windows开发环境

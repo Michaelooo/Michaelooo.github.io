@@ -5,7 +5,7 @@ categories:
   - Mac
 tags:
   - mac移植
-  - mac工具总结
+  - mac工具
 ---
 
 一篇文章，从windows10成功移植macOS

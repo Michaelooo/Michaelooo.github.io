@@ -5,8 +5,6 @@ categories:
   - 运维
 tags:
   - docker
-  - Linux
-  - 持续集成
 ---
 
 # **Docker实践，利用DaoCloud来部署应用**
