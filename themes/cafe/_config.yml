@@ -50,6 +50,7 @@ widgets:
 - archive
 - friendly_link 
 - wechat
+- popular_posts
 
 # 提供以下内置组件
 # - post_content      # 文章目录
