@@ -11,7 +11,8 @@
 
 <!--page counter part-->
 <script>
-function addCount (Counter) {
+  function addCount (Counter) {
+    var curpage_count; 
     url=$('.article-date').attr('href').trim();
     title = $('.article-title').text().trim();
     var query=new AV.Query(Counter);
@@ -24,27 +25,32 @@ function addCount (Counter) {
           counter.fetchWhenSave(true); //get recent result
           counter.increment("time");
           counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
       }
       else
       {
-          var newcounter=new Counter();
-          newcounter.set("title",title);
-          newcounter.set("url",url);
-          newcounter.set("time",1);
-          newcounter.save(null,{
-              success: function(newcounter){
-              //alert('New object created');
-              },
-              error: function(newcounter,error){
-              alert('Failed to create');
-              }
-              });
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
       }
   },function(error){
       //find null is not a error
       alert('Error:'+error.code+" "+error.message);
   });
 }
+
 $(function(){
     // init
     var APP_ID = 'Uj7oKQr7kNHukNldNnH4CLEV-gzGzoHsz';
