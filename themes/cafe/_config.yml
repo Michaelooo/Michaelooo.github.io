@@ -109,7 +109,7 @@ changyan_appkey: false  ##appkey
 ## 友言
 ### 使用说明
 ### 填写友言用户ID http://www.uyan.cc/sites
-youyan_uid: 2152325
+youyan_uid: false
 
 # gitment
 ## 教程：https://imsun.net/posts/gitment-introduction/ 网站上进行查看
@@ -121,7 +121,7 @@ gitment:
   client_secret: 8ee7c801c92e5785965bedf42193dee03678ad67 
 
 ## disqus
-disqus_shortname: false
+disqus_shortname: 
 
 google_plus:
 fb_admins:
