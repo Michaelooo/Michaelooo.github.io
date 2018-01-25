@@ -85,7 +85,7 @@ let schema = Joi.object().keys({
 	a: Joi.string().required()
 });
 
-const {error, query} = Joi.validate(data, schema);
+const {error, value} = Joi.validate(data, schema);
 
 if (error) {
 	// 需要人工处理异常
