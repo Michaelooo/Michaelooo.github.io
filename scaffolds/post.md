@@ -2,9 +2,9 @@
 title: {{ title }}
 date: {{ date }}
 categories: 
-- a
-- b
+  - a
+  - b
 tags: 
-- a
-- b
+  - a
+  - b
 ---
