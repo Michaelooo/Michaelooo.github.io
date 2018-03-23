@@ -19,17 +19,14 @@
     //use url as unique idnetfication
     query.equalTo("url",url);
     query.find().then(function(results){
-      if(results.length>0)
-      {
+      if(results.length>0) {
           var counter=results[0];
           counter.fetchWhenSave(true); //get recent result
           counter.increment("time");
           counter.save();
           curpage_count = counter.attributes.time + 1;
           $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
-      }
-      else
-      {
+      } else {
         var newcounter=new Counter();
         newcounter.set("title",title);
         newcounter.set("url",url);
@@ -45,47 +42,47 @@
         curpage_count = 1;
         $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
       }
-  },function(error){
-      //find null is not a error
-      alert('Error:'+error.code+" "+error.message);
-  });
-}
-
-$(function(){
-    // init
-    var APP_ID = 'Uj7oKQr7kNHukNldNnH4CLEV-gzGzoHsz';
-    var APP_KEY = 'nkvt2CPs3IE6iaEgPv25nGsk';
-
-    AV.init({
-      appId: APP_ID,
-      appKey: APP_KEY
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
     });
+  }
 
-    var Counter=AV.Object.extend("Counter");
-    //only increse visit counting when intering a page
-    if ($('.article-title').length == 1)
-       addCount(Counter);
-    var query=new AV.Query(Counter);
-    query.descending("time");
-    // the sum of popular posts
-    query.limit(10); 
-    query.find()
-    .then(
-      function(results){
-        for(var i=0;i<results.length;i++)    
-          {
-              var counter=results[i];
-              title=counter.get("title");
-              url=counter.get("url");
-              time=counter.get("time");
-              // add to the popularlist widget
-              showcontent=title+" ("+time+")";
-              //notice the "" in href
-              $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
-          }
-        },
-        function(error){
-          alert("Error:"+error.code+" "+error.message);
-        });
-});
+  $(function(){
+      // init
+      var APP_ID = 'Uj7oKQr7kNHukNldNnH4CLEV-gzGzoHsz';
+      var APP_KEY = 'nkvt2CPs3IE6iaEgPv25nGsk';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
 </script>
