@@ -1,6 +1,6 @@
 ---
 title: 'Docker实践，利用DaoCloud来部署应用'
-date: 2017-12-14 13：54
+date: 2017-12-14 13:54
 categories:
   - 运维
 tags:

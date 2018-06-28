@@ -1,6 +1,6 @@
 ---
 title: '还在用虚拟机吗，是时候用Docker了'
-date: 2017-12-13 13：54
+date: 2017-12-13 13:54
 categories:
   - 运维
 tags:
