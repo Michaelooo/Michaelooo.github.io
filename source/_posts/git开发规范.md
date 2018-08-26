@@ -2,7 +2,6 @@
 title: git开发规范
 categories:
   - 前端
-  - 后端
 tags:
   - git
 date: 2018-08-15 11:25:48
