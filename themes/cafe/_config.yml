@@ -92,15 +92,11 @@ mathjax:
 
 # 其他参数
 google_analytics:
-favicon: /favicon.png
+favicon: https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg
 
 
 # comments 评论插件
 # 关闭统一为 false
-
-## 网易云跟帖
-### 使用说明 http://cafe.giscafer.com/2017/04/14/gentie-test/
-gentie_productKey: e2fb4051c49842688ce669e634bc983f
 
 ## 畅言 (不使用请将appid和appkey都设空或者false)
 ### 使用说明：http://changyan.kuaizhan.com/static/help/
