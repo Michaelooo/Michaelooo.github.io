@@ -74,7 +74,7 @@ deploy:
 #   branch: master
 #   message: 发布到GitHub Page页
 - type: rsync
-  host: 120.79.75.83
+  host: 47.107.59.169
   user: root
   root: /var/www/blog
   port: 22
