@@ -64,21 +64,20 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: cafe
+theme: geek
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-# - type: git
-#   repo: git@github.com:Michaelooo/cpf_blog.git
-#   branch: master
-#   message: 发布到GitHub Page页
-- type: rsync
-  host: 47.107.59.169
-  user: root
-  root: /var/www/blog
-  port: 22
-  delete: true
-  verbose: true
-  ignore_errors: false
-
+  # - type: git
+  #   repo: git@github.com:Michaelooo/cpf_blog.git
+  #   branch: master
+  #   message: 发布到GitHub Page页
+  - type: rsync
+    host: 47.107.59.169
+    user: root
+    root: /var/www/blog
+    port: 22
+    delete: true
+    verbose: true
+    ignore_errors: false
