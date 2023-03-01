@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>go入门踩坑及环境配置问题相关 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="go 入门踩坑及环境配置问题相关学习网站 Go 入门指南 Go web 编程 官网 深入解析 Go Go 仓库大全 Go 标准库指南（中文） awesome go  1.安装直接去官网下载 go的包，下载后解压安装。 配置 gopathgopath 可以简单理解为你的工作目录，可以自己定义位置。 echo &#39;export GOPATH&#x3D;$HOME&#x2F;go PATH&#x3D;$PATH:$HOME&#x2F;.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go入门踩坑及环境配置问题相关">
+<meta property="og:url" content="https://michaelooo.github.io/2018/08/09/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="go 入门踩坑及环境配置问题相关学习网站 Go 入门指南 Go web 编程 官网 深入解析 Go Go 仓库大全 Go 标准库指南（中文） awesome go  1.安装直接去官网下载 go的包，下载后解压安装。 配置 gopathgopath 可以简单理解为你的工作目录，可以自己定义位置。 echo &#39;export GOPATH&#x3D;$HOME&#x2F;go PATH&#x3D;$PATH:$HOME&#x2F;.">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:published_time" content="2018-08-09T11:19:43.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:50:12.644Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="golang">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-go入门踩坑及环境配置问题相关" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/09/" class="article-date">
+  <time datetime="2018-08-09T11:19:43.000Z" itemprop="datePublished">2018-08-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      go入门踩坑及环境配置问题相关
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="go-入门踩坑及环境配置问题相关"><a href="#go-入门踩坑及环境配置问题相关" class="headerlink" title="go 入门踩坑及环境配置问题相关"></a>go 入门踩坑及环境配置问题相关</h1><h2 id="学习网站"><a href="#学习网站" class="headerlink" title="学习网站"></a>学习网站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.kancloud.cn/kancloud/the-way-to-go/72675"><strong>Go 入门指南</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://www.kancloud.cn/kancloud/web-application-with-golang/44105"><strong>Go web 编程</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://golang.org/doc/"><strong>官网</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://tiancaiamao.gitbooks.io/go-internals/content/zh/04.0.html"><strong>深入解析 Go</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://gowalker.org/search?q=gorepos"><strong>Go 仓库大全</strong></a></li>
+<li><a target="_blank" rel="noopener" href="http://cngolib.com/"><strong>Go 标准库指南（中文）</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/avelino/awesome-go"><strong>awesome go</strong></a></li>
+</ul>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>直接去官网下载 <a target="_blank" rel="noopener" href="https://golang.org/dl/">go的包</a>，下载后解压安装。</p>
+<h3 id="配置-gopath"><a href="#配置-gopath" class="headerlink" title="配置 gopath"></a>配置 gopath</h3><p>gopath 可以简单理解为你的工作目录，可以自己定义位置。</p>
+<pre><code>echo &#39;export GOPATH=$HOME/go
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:$GOPATH/bin&#39; &gt;&gt; ~/.zshrc
+</code></pre>
+<p>使配置生效</p>
+<pre><code>source ~/.zshrc
+</code></pre>
+<h3 id="使用-go-env-查看配置是否生效"><a href="#使用-go-env-查看配置是否生效" class="headerlink" title="使用 go env 查看配置是否生效"></a>使用 <code>go env</code> 查看配置是否生效</h3><p>一般目录是下面的这个样子就是对的，<code>GOPATH=&quot;/Users/xxx/go&quot;</code>，xxx 是当前用户名称。</p>
+<h2 id="2-配置-vscode-开发环境"><a href="#2-配置-vscode-开发环境" class="headerlink" title="2.配置 vscode 开发环境"></a>2.配置 vscode 开发环境</h2><h3 id="配置-debug-环境"><a href="#配置-debug-环境" class="headerlink" title="配置 debug 环境"></a><strong>配置 debug 环境</strong></h3><p>使用 vscode 调试 go 的话，需要安装一个go的第三方依赖：<a target="_blank" rel="noopener" href="https://github.com/derekparker/delve">delve</a>，可以使用下面的命令安装：</p>
+<pre><code>go get github.com/derekparker/delve/cmd/dlv
+</code></pre>
+<p>安装后就可以在 debug 面板添加 debug 配置文件调试了，示例如下：</p>
+<pre><code>&#123;
+  &quot;version&quot;: &quot;0.2.0&quot;,
+  &quot;configurations&quot;: [
+    &#123;
+      &quot;name&quot;: &quot;Launch&quot;,
+      &quot;type&quot;: &quot;go&quot;,
+      &quot;request&quot;: &quot;launch&quot;,
+      &quot;mode&quot;: &quot;debug&quot;,
+      &quot;remotePath&quot;: &quot;&quot;,
+      &quot;port&quot;: 7000,
+      &quot;host&quot;: &quot;0.0.0.0&quot;,
+      &quot;program&quot;: &quot;$&#123;workspaceRoot&#125;&quot;,
+      &quot;env&quot;: &#123;
+        &quot;GOPATH&quot;: &quot;/Users/michael/Documents/go&quot;
+      &#125;,
+      &quot;args&quot;: [],
+      &quot;showLog&quot;: true
+    &#125;
+  ]
+&#125;
+</code></pre>
+<p>如果启动后报下面的错误：</p>
+<pre><code>lldb-server needs to be installed in $PATH
+</code></pre>
+<p>可以采用下面的方法解决：</p>
+<p>执行 <code>xcode-select --install</code> 解决，<a target="_blank" rel="noopener" href="https://github.com/derekparker/delve/issues/986">原因未知</a>。</p>
+<h3 id="配置开发语法提示"><a href="#配置开发语法提示" class="headerlink" title="配置开发语法提示"></a><strong>配置开发语法提示</strong></h3><p>随便建一个 <code>.go</code> 的文件用 vscode 打开，会自动提示安装 go 的相关插件，但是一般会有一些插件安装失败，一般都是下面的几个：</p>
+<pre><code>Installing github.com/nsf/gocode SUCCEEDED
+Installing github.com/uudashr/gopkgs/cmd/gopkgs SUCCEEDED
+Installing github.com/ramya-rao-a/go-outline FAILED
+Installing github.com/acroca/go-symbols FAILED
+Installing golang.org/x/tools/cmd/guru FAILED
+Installing golang.org/x/tools/cmd/gorename FAILED
+Installing github.com/rogpeppe/godef SUCCEEDED
+Installing github.com/sqs/goreturns FAILED
+Installing github.com/golang/lint/golint FAILED
+</code></pre>
+<p>可以参考这个<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1013066">修改办法: 让你成功安装vscode中go的相关插件</a> 修改。</p>
+<h3 id="注意-如果没遇到就忽略"><a href="#注意-如果没遇到就忽略" class="headerlink" title="注意(如果没遇到就忽略)"></a><strong>注意(如果没遇到就忽略)</strong></h3><p>但是在最近的测试过程中，发现 golint 依然会报安装失败，原因是 <a target="_blank" rel="noopener" href="https://github.com/golang/tools.git">https://github.com/golang/tools.git</a> 这个仓库里不包含这个 lint 的工具了，所以我们需要单独的安装这个工具包。</p>
+<p>通过查询此 <a target="_blank" rel="noopener" href="https://github.com/golang/lint/issues/397">issue: Where did golint go?</a> 解决</p>
+<pre><code>mkdir -p $GOPATH/src/golang.org/x \
+  &amp;&amp; git clone https://github.com/golang/lint.git $GOPATH/src/golang.org/x/lint \
+  &amp;&amp; go get -u golang.org/x/lint/golint
+</code></pre>
+<p>上述命令可能会遇到文件夹已存在的问题，可以直接跳过第一步文件夹创建的操作就可以。</p>
+<h2 id="3-使用一些包管理工具来管理第三方包"><a href="#3-使用一些包管理工具来管理第三方包" class="headerlink" title="3.使用一些包管理工具来管理第三方包"></a>3.使用一些包管理工具来管理第三方包</h2><p>因为 go 官方没有提供自己的包管理机制，所以包的管理是个坑。市面上各家提供的包管理都是各玩各的，但也有大家用的多的，关于 go 比较常用的包管理工具，有以下几个推荐的:</p>
+<ul>
+<li>godep : <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/db59b10c8c51">golang 包依赖管理 godep 使用</a></li>
+<li>govendor : <a target="_blank" rel="noopener" href="https://studygolang.com/articles/9785">go 依赖管理-govendor</a></li>
+<li><strong>glide</strong> : <a target="_blank" rel="noopener" href="https://github.com/Masterminds/glide">glide 包依赖管理</a></li>
+</ul>
+<p>目前项目中正在使用 glide， 使用 glide 管理包的话，会生成一个 venndor 的目录，可以理解为一个跟随项目的局部 gopath， 这样子在引入第三方包的时候，实际的读取顺序就是： 局部 vendor -&gt; 全局 gopath 。</p>
+<p>另外，在使用第三方包的时候，有些第三方包会托管在 google 的服务上，因为墙的原因，我们没法方便的拿下来，甚至你搭了梯子还是很蛋疼。所以我们只能自己配置镜像源了，因为我们用的是 glide ，所以就拿 glide 的来做例子。</p>
+<p>我们只需要使用 <code>glide mirror set</code> 命令来设置镜像配置（<a target="_blank" rel="noopener" href="https://github.com/xkeyideal/glide/blob/master/README_CN.md">参考</a>）： </p>
+<pre><code>glide mirror set https://golang.org/x/sys https://github.com/golang/sys
+</code></pre>
+<h2 id="后续待补……"><a href="#后续待补……" class="headerlink" title="后续待补……"></a>后续待补……</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/08/09/" data-id="clepk3zuf000hgtnd9l0e1376" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/golang/" rel="tag">golang</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/15/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          git开发规范
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/18/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">如何用node去搭建一个项目发布系统</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#go-%E5%85%A5%E9%97%A8%E8%B8%A9%E5%9D%91%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E7%9B%B8%E5%85%B3"><span class="toc-number">1.</span> <span class="toc-text">go 入门踩坑及环境配置问题相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99"><span class="toc-number">1.1.</span> <span class="toc-text">学习网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">1.安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-gopath"><span class="toc-number">1.2.1.</span> <span class="toc-text">配置 gopath</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-go-env-%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE%E6%98%AF%E5%90%A6%E7%94%9F%E6%95%88"><span class="toc-number">1.2.2.</span> <span class="toc-text">使用 go env 查看配置是否生效</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE-vscode-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">1.3.</span> <span class="toc-text">2.配置 vscode 开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-debug-%E7%8E%AF%E5%A2%83"><span class="toc-number">1.3.1.</span> <span class="toc-text">配置 debug 环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E8%AF%AD%E6%B3%95%E6%8F%90%E7%A4%BA"><span class="toc-number">1.3.2.</span> <span class="toc-text">配置开发语法提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F-%E5%A6%82%E6%9E%9C%E6%B2%A1%E9%81%87%E5%88%B0%E5%B0%B1%E5%BF%BD%E7%95%A5"><span class="toc-number">1.3.3.</span> <span class="toc-text">注意(如果没遇到就忽略)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8%E4%B8%80%E4%BA%9B%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E6%9D%A5%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85"><span class="toc-number">1.4.</span> <span class="toc-text">3.使用一些包管理工具来管理第三方包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E5%BE%85%E8%A1%A5%E2%80%A6%E2%80%A6"><span class="toc-number">1.5.</span> <span class="toc-text">后续待补……</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>高性能打包工具：Webpack 对比 Parcel | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Webpack 对比 Parcel 最近火的一塌糊涂的打包工具parcel,5天左右就已经达到了8K个star。相对于webpack的蜗牛编译，parcel宣称Parcel 使用 worker 进程去启用多核编译。同时有文件系统缓存，即使在重启构建后也能快速再编译。换句话说就是高性能，这也是它最吸引人的地方。 因为在项目被webpack折磨过，所以今天这里简单用两个小demo来测试一下。  官网地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能打包工具：Webpack 对比 Parcel">
+<meta property="og:url" content="https://michaelooo.github.io/2017/12/12/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="Webpack 对比 Parcel 最近火的一塌糊涂的打包工具parcel,5天左右就已经达到了8K个star。相对于webpack的蜗牛编译，parcel宣称Parcel 使用 worker 进程去启用多核编译。同时有文件系统缓存，即使在重启构建后也能快速再编译。换句话说就是高性能，这也是它最吸引人的地方。 因为在项目被webpack折磨过，所以今天这里简单用两个小demo来测试一下。  官网地">
+<meta property="og:locale" content="zh_ZN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecmt65j20xa05s3zh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecnk99j20xw05yq3w.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecmyj6j20ps060gms.jpg">
+<meta property="article:published_time" content="2017-12-12T13:48:00.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:50:12.644Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="webpack">
+<meta property="article:tag" content="parcel.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecmt65j20xa05s3zh.jpg">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Webpack 对比 Parcel" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/12/" class="article-date">
+  <time datetime="2017-12-12T13:48:00.000Z" itemprop="datePublished">2017-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      高性能打包工具：Webpack 对比 Parcel
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="Webpack-对比-Parcel"><a href="#Webpack-对比-Parcel" class="headerlink" title="Webpack 对比 Parcel"></a>Webpack 对比 Parcel</h1><blockquote>
+<p>最近火的一塌糊涂的打包工具<code>parcel</code>,5天左右就已经达到了<strong>8K</strong>个star。相对于webpack的蜗牛编译，parcel宣称<strong>Parcel 使用 worker 进程去启用多核编译。同时有文件系统缓存，即使在重启构建后也能快速再编译</strong>。换句话说就是高性能，这也是它最吸引人的地方。</p>
+<p>因为在项目被webpack折磨过，所以今天这里简单用两个小demo来测试一下。</p>
+</blockquote>
+<h2 id="官网地址"><a href="#官网地址" class="headerlink" title="官网地址"></a>官网地址</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://parceljs.org/">官方网址</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.parceljs.io/">Parcel中文网</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/parcel-bundler/parcel">Github</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/justjavac/parcel-example">其他同仁的测试</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/5a2b6c0cf265da431523d4e2?utm_source=gold_browser_extension">Parceljs和Webpack在React项目上打包速度对比</a></li>
+</ul>
+<h2 id="初级测试"><a href="#初级测试" class="headerlink" title="初级测试"></a>初级测试</h2><p>这里有两个基于<code>webpack</code>和<code>parcel</code>构建的react小项目。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Michaelooo/webpackToParcel/tree/master/parcel_demo">parcel_demo</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Michaelooo/webpackToParcel/tree/master/webpack_demo">webpack_demo</a></li>
+</ul>
+<p>两个小项目同时引用了 <code>react</code> ,<code>react-demo</code>,以及用于解析的<code>babel-preset-react</code>。对于<code>webapck</code>,还引入了一个解析 es6 的<code>babel-loader</code>。</p>
+<h3 id="速度对比"><a href="#速度对比" class="headerlink" title="速度对比"></a>速度对比</h3><p><strong>parcel初次构建</strong>（2s）</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecmt65j20xa05s3zh.jpg"></p>
+<p><strong>parcel已打包的情况下再次构建</strong> (556ms)<br><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecnk99j20xw05yq3w.jpg"></p>
+<p><strong>webpack初次构建</strong> (4s)<br><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecmyj6j20ps060gms.jpg"></p>
+<p><strong>webpack已打包的情况下再次构建</strong> (4s)</p>
+<p>这里有些问题，因为未对webpack的配置做优化，比如提取公共模块，分开打包等，所以即使加了<code>cache = true </code>测出的结果和初次构建也差不多，都是 <strong>4s</strong>左右。</p>
+<h2 id="进一步测试"><a href="#进一步测试" class="headerlink" title="进一步测试"></a>进一步测试</h2><p>正在进行中。。。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>不负责任版：</strong> 根据以上情况来看，<code>Parcel</code>在速度上来看确实有不小的优势，但是如果在一个已经用了<code>webpack</code>的项目迁移的话，估计还是会有些麻烦。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/12/" data-id="clepk3zub000agtnd4nljdxsm" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/parcel-js/" rel="tag">parcel.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/13/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          还在用虚拟机吗，是时候用Docker了
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/11/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">正则表达式笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Webpack-%E5%AF%B9%E6%AF%94-Parcel"><span class="toc-number">1.</span> <span class="toc-text">Webpack 对比 Parcel</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%98%E7%BD%91%E5%9C%B0%E5%9D%80"><span class="toc-number">1.1.</span> <span class="toc-text">官网地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E7%BA%A7%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.</span> <span class="toc-text">初级测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.1.</span> <span class="toc-text">速度对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.</span> <span class="toc-text">进一步测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

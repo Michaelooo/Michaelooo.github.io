@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git 大小写问题踩坑笔记 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于 git 大小写问题的解决办法写在前面：最近，在项目部署的时候，总是遇到一些很灵异的问题，比如在 merge 没有报错的情况下，文件没有更新， 特殊的文件突然被还原至之前的某个版本……最后发现问题所在，是之前的一次 文件名大小写 引起的问题。解决过程其实还是挺糟心的（自己埋的坑要自己填……），深刻体会到好的规范比好的技术其实更重要。同时也觉得，有必要记录一下，谨防下次掉进去。 问题复现:  新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git 大小写问题踩坑笔记">
+<meta property="og:url" content="https://michaelooo.github.io/2018/01/23/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="关于 git 大小写问题的解决办法写在前面：最近，在项目部署的时候，总是遇到一些很灵异的问题，比如在 merge 没有报错的情况下，文件没有更新， 特殊的文件突然被还原至之前的某个版本……最后发现问题所在，是之前的一次 文件名大小写 引起的问题。解决过程其实还是挺糟心的（自己埋的坑要自己填……），深刻体会到好的规范比好的技术其实更重要。同时也觉得，有必要记录一下，谨防下次掉进去。 问题复现:  新">
+<meta property="og:locale" content="zh_ZN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fnq9h4oitzj21si0rswmo.jpg">
+<meta property="article:published_time" content="2018-01-23T09:11:01.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:50:12.644Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="踩坑笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fnq9h4oitzj21si0rswmo.jpg">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-踩坑笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/23/" class="article-date">
+  <time datetime="2018-01-23T09:11:01.000Z" itemprop="datePublished">2018-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Github/">Github</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git 大小写问题踩坑笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="关于-git-大小写问题的解决办法"><a href="#关于-git-大小写问题的解决办法" class="headerlink" title="关于 git 大小写问题的解决办法"></a><strong>关于 git 大小写问题的解决办法</strong></h2><h3 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a><strong>写在前面：</strong></h3><p>最近，在项目部署的时候，总是遇到一些很灵异的问题，比如在 merge 没有报错的情况下，文件没有更新， 特殊的文件突然被还原至之前的某个版本……最后发现问题所在，是之前的一次 <strong>文件名大小写</strong> 引起的问题。解决过程其实还是挺糟心的（自己埋的坑要自己填……），深刻体会到好的规范比好的技术其实更重要。同时也觉得，有必要记录一下，谨防下次掉进去。</p>
+<h3 id="问题复现"><a href="#问题复现" class="headerlink" title="问题复现:"></a><strong>问题复现:</strong></h3><p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fnq9h4oitzj21si0rswmo.jpg"></p>
+<ol>
+<li>新建一个 <strong>a.js</strong> 文件(大小写不敏感的状态下)，并提交</li>
+<li>修改本地 <strong>a.js</strong> 变为 <strong>A.js</strong>，文件内容无变更，无法提交</li>
+<li>执行<code>git config core.ignorecase false</code>，修改 大小写敏感 规则，然后提交，查看结果，此时会存在 大小写 同时存在的文件</li>
+<li>此时某种机缘下，再次执行 <code>git config core.ignorecase true</code>，大小写不敏感，</li>
+<li>此时执行 <code>git push</code> ， 即把最新的更新都更新到了 <strong>a.js</strong> 中</li>
+<li>此时再修改 大小写敏感规则为敏感， 执行 <code>git pull</code> ，并不会拿到最新的更新。比如自己想要的是第一次修改后的 A.js ，但是服务器有一个没有更新的 <strong>A.js</strong> 和 有更新的 <strong>a.js</strong>,而你只能拿到前者，所以就会遇到各种各样的坑……</li>
+</ol>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a><strong>解决办法：</strong></h3><p>执行<code>git config --global core.ignorecase false</code>，全局设置 <strong>大小写敏感</strong> 。</p>
+<h4 id="1-文件变更比较少的情况"><a href="#1-文件变更比较少的情况" class="headerlink" title="1. 文件变更比较少的情况"></a><strong>1. 文件变更比较少的情况</strong></h4><p>直接使用以下命令重命名文件，在 git 中不要直接修改文件名，最好的办法是使用下面的方式，</p>
+<pre><code>git mv -f [你想要删掉的文件] [你想要留下的文件]
+git mv -f a.js A.js
+
+等同于：
+
+git rm a.js
+git add A.js
+</code></pre>
+<p>这个命令的目的就是删除不需要的大小写同名文件，修改后 <code>git push</code> 提交变更即可。</p>
+<p><strong>tips:</strong> </p>
+<p>因为 git 默认大小写不敏感，所以最好添加项目配置文件,设置 <strong>大小写敏感</strong>。</p>
+<pre><code>touch .gitconfig
+git config core.ignorecase false
+</code></pre>
+<h4 id="2-变更比较多，并且拥有分支较高权限"><a href="#2-变更比较多，并且拥有分支较高权限" class="headerlink" title="2. 变更比较多，并且拥有分支较高权限"></a><strong>2. 变更比较多，并且拥有分支较高权限</strong></h4><ul>
+<li>在 github 删除该分支</li>
+<li>本地执行 <code>git rm -r --cached</code> . (注意后面‘点号’)</li>
+<li>然后重新 <code>git push</code>，就ok了</li>
+</ul>
+<p>此法不太好，有点暴力，容易出问题，但适用于 变更发生于近期的情况。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><p>其实看解决办法的话，只是一个很小的问题，但是出现的 bug 确实是让人很头疼的，因为 mac windows 在不设置大小写敏感规则的时候默认大小写是不敏感，项目部署的机器是 Linux 的，而 Linux 是大小写敏感的。所以这样的问题平时不易发现，本地调试的时候大部分时候并不会出错误，只有在项目部署的时候问题才会显示出来。</p>
+<p>至此，终于填了一个不该踩的坑。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/01/23/" data-id="clepk3zvn003cgtnd5h2yhsau" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" rel="tag">踩坑笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/23/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          关于git：你应该知道的操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/18/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">我生病的一次经历</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-git-%E5%A4%A7%E5%B0%8F%E5%86%99%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">关于 git 大小写问题的解决办法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">写在前面：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E5%A4%8D%E7%8E%B0"><span class="toc-number">1.2.</span> <span class="toc-text">问题复现:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">解决办法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4%E6%AF%94%E8%BE%83%E5%B0%91%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 文件变更比较少的情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8F%98%E6%9B%B4%E6%AF%94%E8%BE%83%E5%A4%9A%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%8B%A5%E6%9C%89%E5%88%86%E6%94%AF%E8%BE%83%E9%AB%98%E6%9D%83%E9%99%90"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 变更比较多，并且拥有分支较高权限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.4.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

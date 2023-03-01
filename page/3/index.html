@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="欢迎来到程鹏飞的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="程鹏飞的博客">
+<meta property="og:url" content="https://michaelooo.github.io/page/3/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="欢迎来到程鹏飞的博客">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:author" content="Michael Cheng">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/11/" class="article-date">
+  <time datetime="2017-12-11T17:29:00.000Z" itemprop="datePublished">2017-12-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/11/">正则表达式笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>在学会使用下面的正则之前应该先了解基本的正则语法。可以从下面的链接进行学习。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://yanhaijing.com/javascript/2017/08/06/regexp-syntax/">正则表达式教程——语法篇</a></li>
+<li><a target="_blank" rel="noopener" href="http://yanhaijing.com/javascript/2017/08/26/regexp-practice/">正则表达式教程——js实践篇</a></li>
+<li><a target="_blank" rel="noopener" href="http://deerchao.net/tutorials/regex/regex.htm">正则表达式30分钟入门教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://regexper.com/#%5Cbis%5Cb">正则表达式可视化工具</a></li>
+</ul>
+<h2 id="常用正则表达式"><a href="#常用正则表达式" class="headerlink" title="常用正则表达式"></a>常用正则表达式</h2><p><strong>参考链接：</strong> <a target="_blank" rel="noopener" href="http://www.jb51.net/article/77687.htm">常用正则表达式</a></p>
+<p><strong>一、校验数字的表达式</strong></p>
+<pre><code>1 数字：^[0-9]*$
+2 n位的数字：^\d&#123;n&#125;$
+3 至少n位的数字：^\d&#123;n,&#125;$
+4 m-n位的数字：^\d&#123;m,n&#125;$
+5 零和非零开头的数字：^(0|[1-9][0-9]*)$
+6 非零开头的最多带两位小数的数字：^([1-9][0-9]*)+(.[0-9]&#123;1,2&#125;)?$
+7 带1-2位小数的正数或负数：^(\-)?\d+(\.\d&#123;1,2&#125;)?$
+8 正数、负数、和小数：^(\-|\+)?\d+(\.\d+)?$
+9 有两位小数的正实数：^[0-9]+(.[0-9]&#123;2&#125;)?$
+10 有1~3位小数的正实数：^[0-9]+(.[0-9]&#123;1,3&#125;)?$
+11 非零的正整数：^[1-9]\d*$ 或 ^([1-9][0-9]*)&#123;1,3&#125;$ 或 ^\+?[1-9][0-9]*$
+12 非零的负整数：^\-[1-9][]0-9&quot;*$ 或 ^-[1-9]\d*$
+13 非负整数：^\d+$ 或 ^[1-9]\d*|0$
+14 非正整数：^-[1-9]\d*|0$ 或 ^((-\d+)|(0+))$
+15 非负浮点数：^\d+(\.\d+)?$ 或 ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$
+16 非正浮点数：^((-\d+(\.\d+)?)|(0+(\.0+)?))$ 或 ^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$
+17 正浮点数：^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$ 或 ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$
+18 负浮点数：^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$ 或 ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$
+19 浮点数：^(-?\d+)(\.\d+)?$ 或 ^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$
+</code></pre>
+<p><strong>二、校验字符的表达式</strong></p>
+<pre><code>1 汉字：^[\u4e00-\u9fa5]&#123;0,&#125;$
+2 英文和数字：^[A-Za-z0-9]+$ 或 ^[A-Za-z0-9]&#123;4,40&#125;$
+3 长度为3-20的所有字符：^.&#123;3,20&#125;$
+4 由26个英文字母组成的字符串：^[A-Za-z]+$
+5 由26个大写英文字母组成的字符串：^[A-Z]+$
+6 由26个小写英文字母组成的字符串：^[a-z]+$
+7 由数字和26个英文字母组成的字符串：^[A-Za-z0-9]+$
+8 由数字、26个英文字母或者下划线组成的字符串：^\w+$ 或 ^\w&#123;3,20&#125;$
+9 中文、英文、数字包括下划线：^[\u4E00-\u9FA5A-Za-z0-9_]+$
+10 中文、英文、数字但不包括下划线等符号：^[\u4E00-\u9FA5A-Za-z0-9]+$ 或 ^[\u4E00-\u9FA5A-Za-z0-9]&#123;2,20&#125;$
+11 可以输入含有^%&amp;&#39;,;=?$\&quot;等字符：[^%&amp;&#39;,;=?$\x22]+
+12 禁止输入含有~的字符：[^~\x22]+
+</code></pre>
+<p><strong>三、特殊需求表达式</strong></p>
+<pre><code>1 Email地址：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+2 域名：[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;(/.[a-zA-Z0-9][-a-zA-Z0-9]&#123;0,62&#125;)+/.?
+3 InternetURL：[a-zA-z]+://[^\s]* 或 ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*)?$
+4 手机号码：^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d&#123;8&#125;$
+5 电话号码(&quot;XXX-XXXXXXX&quot;、&quot;XXXX-XXXXXXXX&quot;、&quot;XXX-XXXXXXX&quot;、&quot;XXX-XXXXXXXX&quot;、&quot;XXXXXXX&quot;和&quot;XXXXXXXX)：^(\(\d&#123;3,4&#125;-)|\d&#123;3.4&#125;-)?\d&#123;7,8&#125;$
+6 国内电话号码(0511-4405222、021-87888822)：\d&#123;3&#125;-\d&#123;8&#125;|\d&#123;4&#125;-\d&#123;7&#125;
+7 身份证号(15位、18位数字)：^\d&#123;15&#125;|\d&#123;18&#125;$
+8 短身份证号码(数字、字母x结尾)：^([0-9])&#123;7,18&#125;(x|X)?$ 或 ^\d&#123;8,18&#125;|[0-9x]&#123;8,18&#125;|[0-9X]&#123;8,18&#125;?$
+9 帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]&#123;4,15&#125;$
+10 密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\w&#123;5,17&#125;$
+11 强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间)：^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).&#123;8,10&#125;$
+12 日期格式：^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;
+13 一年的12个月(01～09和1～12)：^(0?[1-9]|1[0-2])$
+14 一个月的31天(01～09和1～31)：^((0?[1-9])|((1|2)[0-9])|30|31)$
+15 钱的输入格式：
+    *. 有四种钱的表示形式我们可以接受:&quot;10000.00&quot; 和 &quot;10,000.00&quot;, 和没有 &quot;分&quot; 的 &quot;10000&quot; 和 &quot;10,000&quot;：^[1-9][0-9]*$
+    *. 这表示任意一个不以0开头的数字,但是,这也意味着一个字符&quot;0&quot;不通过,所以我们采用下面的形式：^(0|[1-9][0-9]*)$
+    *. 一个0或者一个不以0开头的数字.我们还可以允许开头有一个负号：^(0|-?[1-9][0-9]*)$
+    *. 这表示一个0或者一个可能为负的开头不为0的数字.让用户以0开头好了.把负号的也去掉,因为钱总不能是负的吧.下面我们要加的是说明可能的小数部分：^[0-9]+(.[0-9]+)?$
+    *. 必须说明的是,小数点后面至少应该有1位数,所以&quot;10.&quot;是不通过的,但是 &quot;10&quot; 和 &quot;10.2&quot; 是通过的：^[0-9]+(.[0-9]&#123;2&#125;)?$
+    *. 这样我们规定小数点后面必须有两位,如果你认为太苛刻了,可以这样：^[0-9]+(.[0-9]&#123;1,2&#125;)?$
+    *. 这样就允许用户只写一位小数.下面我们该考虑数字中的逗号了,我们可以这样：^[0-9]&#123;1,3&#125;(,[0-9]&#123;3&#125;)*(.[0-9]&#123;1,2&#125;)?$
+    *. 1到3个数字,后面跟着任意个 逗号+3个数字,逗号成为可选,而不是必须：^([0-9]+|[0-9]&#123;1,3&#125;(,[0-9]&#123;3&#125;)*)(.[0-9]&#123;1,2&#125;)?$
+    *. 备注：这就是最终结果了,别忘了&quot;+&quot;可以用&quot;*&quot;替代如果你觉得空字符串也可以接受的话(奇怪,为什么?)最后,别忘了在用函数时去掉去掉那个反斜杠,一般的错误都在这里
+16 xml文件：^([a-zA-Z]+-?)+[a-zA-Z0-9]+\\.[x|X][m|M][l|L]$
+17 中文字符的正则表达式：[\u4e00-\u9fa5]
+18 双字节字符：[^\x00-\xff] (包括汉字在内，可以用来计算字符串的长度(一个双字节字符长度计2，ASCII字符计1))
+19 空白行的正则表达式：\n\s*\r (可以用来删除空白行)
+20 HTML标记的正则表达式：&lt;(\S*?)[^&gt;]*&gt;.*?&lt;/\1&gt;|&lt;.*? /&gt; (网上流传的版本太糟糕，上面这个也仅仅能部分，对于复杂的嵌套标记依旧无能为力)
+21 首尾空白字符的正则表达式：^\s*|\s*$或(^\s*)|(\s*$) (可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式)
+22 腾讯QQ号：[1-9][0-9]&#123;4,&#125; (腾讯QQ号从10000开始)
+23 中国邮政编码：[1-9]\d&#123;5&#125;(?!\d) (中国邮政编码为6位数字)
+24 IP地址：\d+\.\d+\.\d+\.\d+ (提取IP地址时有用)
+25 IP地址：((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.)&#123;3&#125;(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/11/" data-id="clepk3zvb002ggtnd2qhmavmz" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Linux搭建 Node.js 环境" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/10/" class="article-date">
+  <time datetime="2017-12-10T23:48:00.000Z" itemprop="datePublished">2017-12-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/10/">【转载】Linux搭建 Node.js 环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="Linux搭建-Node-js-环境"><a href="#Linux搭建-Node-js-环境" class="headerlink" title="Linux搭建 Node.js 环境"></a>Linux搭建 Node.js 环境</h1><h2 id="安装-Node-js-环境"><a href="#安装-Node-js-环境" class="headerlink" title="安装 Node.js 环境"></a>安装 Node.js 环境</h2><p>Node.js 是运行在服务端的 JavaScript, 是基于 Chrome JavaScript V8 引擎建立的平台。</p>
+<h3 id="下载并安装-Node-js"><a href="#下载并安装-Node-js" class="headerlink" title="下载并安装 Node.js"></a>下载并安装 Node.js</h3><p>下载最新的稳定版 v6.10.3 到本地</p>
+<pre><code>wget https://nodejs.org/dist/v6.10.3/node-v6.10.3-linux-x64.tar.xz
+</code></pre>
+<p>下载完成后, 将其解压</p>
+<pre><code>tar xvJf node-v6.10.3-linux-x64.tar.xz
+</code></pre>
+<p>将解压的 Node.js 目录移动到 &#x2F;usr&#x2F;local 目录下</p>
+<pre><code>mv node-v6.10.3-linux-x64 /usr/local/node-v6
+</code></pre>
+<p>配置 node 软链接到 &#x2F;bin 目录</p>
+<pre><code>ln -s /usr/local/node-v6/bin/node /bin/node
+</code></pre>
+<h2 id="配置和使用-npm"><a href="#配置和使用-npm" class="headerlink" title="配置和使用 npm"></a>配置和使用 npm</h2><h3 id="配置-npm"><a href="#配置-npm" class="headerlink" title="配置 npm"></a>配置 npm</h3><p>npm 是 Node.js 的包管理和分发工具。它可以让 Node.js 开发者能够更加轻松的共享代码和共用代码片段</p>
+<p>下载 node 的压缩包中已经包含了 npm , 我们只需要将其软链接到 bin 目录下即可</p>
+<pre><code>ln -s /usr/local/node-v6/bin/npm /bin/npm
+</code></pre>
+<p>配置环境变量</p>
+<p>将 <code>/usr/local/node-v6/bin</code> 目录添加到 $PATH 环境变量中可以方便地使用通过 npm 全局安装的第三方工具</p>
+<p><code>echo &#39;export PATH=/usr/local/node-v6/bin:$PATH&#39; &gt;&gt; /etc/profile</code><br>生效环境变量</p>
+<pre><code>source /etc/profile
+</code></pre>
+<h3 id="使用-npm"><a href="#使用-npm" class="headerlink" title="使用 npm"></a>使用 npm</h3><p>通过 npm 安装进程管理模块 forever</p>
+<p>npm install forever -g<br>完成实验</p>
+<p>恭喜！您已经成功完成了搭建 Node.js 环境的实验任务。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/10/" data-id="clepk3zu90006gtnd4duf9z1p" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-大神的自我修养 -- co.js 学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/09/" class="article-date">
+  <time datetime="2017-12-09T23:48:00.000Z" itemprop="datePublished">2017-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/09/">大神的自我修养 co.js 的学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="大神的自我修养-co-js-的学习"><a href="#大神的自我修养-co-js-的学习" class="headerlink" title="大神的自我修养 co.js 的学习"></a><strong>大神的自我修养 co.js 的学习</strong></h1><p>最近在项目过程中涉及大量异步流程处理，其中有使用各种流程控制库，大家用的最多的 <code>async</code>，号称promise性能超原生的 <code>bluebird</code>，还有tj大神的<code>co.js</code>等。可以说是相当多了，于是空暇期间来整理一下promise的学习。</p>
+<p>今天来看的就是TJ大神的非常精炼的 co.js 。</p>
+<p>具体的介绍就不多说了。要注意的一点就是，<a href="mailto:&#x63;&#111;&#x40;&#x34;&#46;&#48;">&#x63;&#111;&#x40;&#x34;&#46;&#48;</a>之前返回的是一个<code>trunk</code>函数，现在<a href="mailto:&#x63;&#x6f;&#64;&#52;&#x2e;&#48;">&#x63;&#x6f;&#64;&#52;&#x2e;&#48;</a>支持promise，现在co()会返回一个promise。<br><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fm8c112bnwj20g205aglz.jpg"></p>
+<h2 id="先看用法"><a href="#先看用法" class="headerlink" title="先看用法"></a><strong>先看用法</strong></h2><h3 id="yield支持"><a href="#yield支持" class="headerlink" title="yield支持"></a><strong>yield支持</strong></h3><p>co最方便的操作也就是yield的支持，现在支持yield的对象有：</p>
+<ul>
+<li>promises</li>
+<li>thunks (functions)</li>
+<li>array (parallel execution)</li>
+<li>objects (parallel execution)</li>
+<li>generators (delegation)</li>
+<li>generator functions (delegation)</li>
+</ul>
+<p>下文在源码里有体现。</p>
+<h3 id="一个官网的小例子🌰"><a href="#一个官网的小例子🌰" class="headerlink" title="一个官网的小例子🌰"></a><strong>一个官网的小例子🌰</strong></h3><pre><code>var co = require(&#39;co&#39;);
+
+co(function *()&#123;
+  // 执行promise
+  var result = yield Promise.resolve(true);
+&#125;).catch(onerror);
+
+co(function *()&#123;
+  // 并行执行多个promise
+  var a = Promise.resolve(1);
+  var b = Promise.resolve(2);
+  var c = Promise.resolve(3);
+  var res = yield [a, b, c];
+  console.log(res);
+  // =&gt; [1, 2, 3]
+&#125;).catch(onerror);
+
+// 错误捕捉
+co(function *()&#123;
+  try &#123;
+    yield Promise.reject(new Error(&#39;boom&#39;));
+  &#125; catch (err) &#123;
+    console.error(err.message); // &quot;boom&quot;
+ &#125;
+&#125;).catch(onerror);
+
+function onerror(err) &#123;
+  console.error(err.stack);
+&#125;
+
+// 将一个generator函数转换成返回一个promise函数的方法
+var fn = co.wrap(function* (val) &#123;
+  return yield Promise.resolve(val);
+&#125;);
+
+fn(true).then(function (val) &#123;
+
+&#125;);
+</code></pre>
+<h2 id="看源码"><a href="#看源码" class="headerlink" title="看源码"></a><strong>看源码</strong></h2><h3 id="wrap-函数的实现"><a href="#wrap-函数的实现" class="headerlink" title="wrap 函数的实现"></a><strong>wrap 函数的实现</strong></h3><p>大神写的代码就是十分的精炼，wrap 函数的实现也只是7行代码而已。</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fm8c92jch2j20cr0460sy.jpg"></p>
+<p>其实有两点需要注意的，就是：</p>
+<ol>
+<li><strong>没有写在原型链上而是作为一个私有方法是为了避免每次执行<code>co()</code>的时候生成一个新的wrap方法，这个方法显然没必要。</strong></li>
+<li><strong>关键在于返回了一个<code>co()</code>,因为<code>co()</code>会 return 一个 promise，即生成一个新的promise。同时利用 call 和 apply 改变了 this 的指向，指向 <code>co</code> 。</strong></li>
+</ol>
+<h3 id="并行多个promise"><a href="#并行多个promise" class="headerlink" title="并行多个promise"></a><strong>并行多个promise</strong></h3><p>其实 co 方法的主体不用细看，基本就是按照 es6 promise 的一种重写。这里需要注意的一点就是并行支持promise。即，当 yield 一个 object 或者 array 的时候，并行执行多个 promise。</p>
+<p>一开始当我听到并行的时候，是有点懵的，但看到源码的时候发现没有想得那么复杂，其实就是 promise 的原生方法的功劳：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">promise.all()</a>,可以往下看。。。</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fm8cz6i569j20h204qdgk.jpg"></p>
+<p>这里的 <code>toPromise()</code> 是在 next 方法的实现中执行的，关键的代码就两句：</p>
+<pre><code>var value = toPromise.call(ctx, ret.value);
+if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
+</code></pre>
+<p>然后，就是 <code>arrayToPromise</code> 和 <code>objectToPromise</code> 两个方法的实现：</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fm8cz6jak7j20dk0dnq49.jpg"></p>
+<p>就是这么简单……</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512702212168&di=9bc459180689c8af63056bc2c0a9ca2e&imgtype=jpg&src=http://img4.imgtn.bdimg.com/it/u=2105664939,4183524365&fm=214&gp=0.jpg"></p>
+<h3 id="庐山真面目，真正的源码"><a href="#庐山真面目，真正的源码" class="headerlink" title="庐山真面目，真正的源码"></a><strong>庐山真面目，真正的源码</strong></h3><pre><code>
+var slice = Array.prototype.slice;
+
+module.exports = co[&#39;default&#39;] = co.co = co;
+
+co.wrap = function (fn) &#123;
+  createPromise.__generatorFunction__ = fn;
+  return createPromise;
+  function createPromise() &#123;
+    return co.call(this, fn.apply(this, arguments));
+  &#125;
+&#125;;
+
+function co(gen) &#123;
+  var ctx = this;
+  var args = slice.call(arguments, 1);
+
+  return new Promise(function(resolve, reject) &#123;
+    if (typeof gen === &#39;function&#39;) gen = gen.apply(ctx, args);
+    if (!gen || typeof gen.next !== &#39;function&#39;) return resolve(gen);
+
+    onFulfilled();
+
+    function onFulfilled(res) &#123;
+      var ret;
+      try &#123;
+        ret = gen.next(res);
+      &#125; catch (e) &#123;
+        return reject(e);
+      &#125;
+      next(ret);
+      return null;
+    &#125;
+
+    function onRejected(err) &#123;
+      var ret;
+      try &#123;
+        ret = gen.throw(err);
+      &#125; catch (e) &#123;
+        return reject(e);
+      &#125;
+      next(ret);
+    &#125;
+
+    function next(ret) &#123;
+      if (ret.done) return resolve(ret.value);
+      var value = toPromise.call(ctx, ret.value);
+      if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
+      return onRejected(new TypeError(&#39;You may only yield a function, promise, generator, array, or object, &#39;
+        + &#39;but the following object was passed: &quot;&#39; + String(ret.value) + &#39;&quot;&#39;));
+    &#125;
+  &#125;);
+&#125;
+
+function toPromise(obj) &#123;
+  if (!obj) return obj;
+  if (isPromise(obj)) return obj;
+  if (isGeneratorFunction(obj) || isGenerator(obj)) return co.call(this, obj);
+  if (&#39;function&#39; == typeof obj) return thunkToPromise.call(this, obj);
+  if (Array.isArray(obj)) return arrayToPromise.call(this, obj);
+  if (isObject(obj)) return objectToPromise.call(this, obj);
+  return obj;
+&#125;
+
+function thunkToPromise(fn) &#123;
+  var ctx = this;
+  return new Promise(function (resolve, reject) &#123;
+    fn.call(ctx, function (err, res) &#123;
+      if (err) return reject(err);
+      if (arguments.length &gt; 2) res = slice.call(arguments, 1);
+      resolve(res);
+    &#125;);
+  &#125;);
+&#125;
+
+
+function arrayToPromise(obj) &#123;
+  return Promise.all(obj.map(toPromise, this));
+&#125;
+
+
+function objectToPromise(obj)&#123;
+  var results = new obj.constructor();
+  var keys = Object.keys(obj);
+  var promises = [];
+  for (var i = 0; i &lt; keys.length; i++) &#123;
+    var key = keys[i];
+    var promise = toPromise.call(this, obj[key]);
+    if (promise &amp;&amp; isPromise(promise)) defer(promise, key);
+    else results[key] = obj[key];
+  &#125;
+  return Promise.all(promises).then(function () &#123;
+    return results;
+  &#125;);
+
+  function defer(promise, key) &#123;
+    // predefine the key in the result
+    results[key] = undefined;
+    promises.push(promise.then(function (res) &#123;
+      results[key] = res;
+    &#125;));
+  &#125;
+&#125;
+
+function isPromise(obj) &#123;
+  return &#39;function&#39; == typeof obj.then;
+&#125;
+
+
+function isGenerator(obj) &#123;
+  return &#39;function&#39; == typeof obj.next &amp;&amp; &#39;function&#39; == typeof obj.throw;
+&#125;
+
+ 
+function isGeneratorFunction(obj) &#123;
+  var constructor = obj.constructor;
+  if (!constructor) return false;
+  if (&#39;GeneratorFunction&#39; === constructor.name || &#39;GeneratorFunction&#39; === constructor.displayName) return true;
+  return isGenerator(constructor.prototype);
+&#125;
+
+
+function isObject(val) &#123;
+  return Object == val.constructor;
+&#125;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/09/" data-id="clepk3zux001ggtnd65ps3tf1" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise/" rel="tag">promise</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-关于JS事件队列的一些总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/08/" class="article-date">
+  <time datetime="2017-12-08T15:37:00.000Z" itemprop="datePublished">2017-12-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/08/">关于JS事件队列的一些总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="关于JS事件队列的一些总结"><a href="#关于JS事件队列的一些总结" class="headerlink" title="关于JS事件队列的一些总结"></a><strong>关于JS事件队列的一些总结</strong></h1><h2 id="关于任务队列"><a href="#关于任务队列" class="headerlink" title="关于任务队列"></a><strong>关于任务队列</strong></h2><p>其实之所以我们要去关心JS的任务队列，主要还是因为JS的单线程的特质决定。</p>
+<h3 id="为什么JavaScript是单线程？"><a href="#为什么JavaScript是单线程？" class="headerlink" title="为什么JavaScript是单线程？"></a><strong>为什么JavaScript是单线程？</strong></h3><p>本段来自阮老师的博客中对JS单线程的介绍。</p>
+<blockquote>
+<p>JavaScript语言的一大特点就是单线程，也就是说，同一个时间只能做一件事。那么，为什么JavaScript不能有多个线程呢？这样能提高效率啊。</p>
+<p>JavaScript的单线程，与它的用途有关。作为浏览器脚本语言，JavaScript的主要用途是与用户互动，以及操作DOM。这决定了它只能是单线程，否则会带来很复杂的同步问题。比如，假定JavaScript同时有两个线程，一个线程在某个DOM节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？</p>
+<p>所以，为了避免复杂性，从一诞生，JavaScript就是单线程，这已经成了这门语言的核心特征，将来也不会改变。</p>
+<p>为了利用多核CPU的计算能力，HTML5提出Web Worker标准，允许JavaScript脚本创建多个线程，但是子线程完全受主线程控制，且不得操作DOM。所以，这个新标准并没有改变JavaScript单线程的本质。</p>
+</blockquote>
+<h3 id="任务队列的本质"><a href="#任务队列的本质" class="headerlink" title="任务队列的本质"></a><strong>任务队列的本质</strong></h3><ul>
+<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。</li>
+<li>主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</li>
+<li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
+<li>主线程不断重复上面的第三步。</li>
+</ul>
+<h2 id="关于-setTimeOut、setImmediate、process-nextTick-的比较"><a href="#关于-setTimeOut、setImmediate、process-nextTick-的比较" class="headerlink" title="关于 setTimeOut、setImmediate、process.nextTick()的比较"></a><strong>关于 setTimeOut、setImmediate、process.nextTick()的比较</strong></h2><h3 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout()"></a><strong>setTimeout()</strong></h3><ul>
+<li>将事件插入到了事件队列，必须等到当前代码（执行栈）执行完，主线程才会去执行它指定的回调函数。</li>
+<li>当主线程时间执行过长，无法保证回调会在事件指定的时间执行。</li>
+<li>浏览器端每次<code>setTimeout </code>会有4ms的延迟，当连续执行多个<code>setTimeout </code>，有可能会阻塞进程，造成性能问题。</li>
+</ul>
+<h3 id="setImmediate"><a href="#setImmediate" class="headerlink" title="setImmediate()"></a><strong>setImmediate()</strong></h3><ul>
+<li>事件插入到事件队列尾部，主线程和事件队列的函数执行完成之后立即执行。和setTimeout(fn,0)的效果差不多。</li>
+<li>服务端node提供的方法。浏览器端最新的api也有类似实现:<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/setImmediate">window.setImmediate</a>,但支持的浏览器很少。</li>
+</ul>
+<h3 id="process-nextTick"><a href="#process-nextTick" class="headerlink" title="process.nextTick()"></a><strong>process.nextTick()</strong></h3><ul>
+<li>插入到事件队列尾部，但在下次事件队列之前会执行。也就是说，它指定的任务总是发生在所有异步任务之前，当前主线程的末尾。</li>
+<li>大致流程：当前”执行栈”的尾部–&gt;下一次Event Loop（主线程读取”任务队列”）之前–&gt;触发process指定的回调函数。</li>
+<li>服务器端node提供的办法。用此方法可以用于处于异步延迟的问题。</li>
+<li>可以理解为：此次不行，预约下次优先执行。</li>
+</ul>
+<h2 id="关于消除-setTimeout-延迟的实践：soon-js"><a href="#关于消除-setTimeout-延迟的实践：soon-js" class="headerlink" title="关于消除 setTimeout 延迟的实践：soon.js"></a><strong>关于消除 setTimeout 延迟的实践：soon.js</strong></h2><h3 id="why"><a href="#why" class="headerlink" title="why?"></a><strong>why?</strong></h3><p>如<code>setTimeout</code> 的介绍所言，浏览器端每次<code>setTimeout </code>会有4ms的延迟，当连续执行多个<code>setTimeout </code>，有可能会阻塞进程，造成性能问题。</p>
+<p><code>soon.js</code>就是关于这个问题的一个好的实践。但其实大多数情况我们不必为这4ms的延迟计较，除非你在一次执行中<code>setTimeout</code>的次数足够多。代码很短，可以用来学习下。</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a><strong>使用方法</strong></h3><p>可以参考<a target="_blank" rel="noopener" href="https://jsfiddle.net/0tscgwe6/2/">示例</a></p>
+<h3 id="源码："><a href="#源码：" class="headerlink" title="源码："></a><strong>源码：</strong></h3><pre><code>// See http://www.bluejava.com/4NS/Speed-up-your-Websites-with-a-Faster-setTimeout-using-soon
+// 使用 soon.js 处理在浏览器端 settimeout（大量调用），4ms * n 的延迟问题
+
+
+var soon = (function() &#123;
+    
+        var fq = []; // 事件队列;
+    
+        function callQueue()
+        &#123;
+            while(fq.length) // 执行队列中事件
+            &#123;
+                var fe = fq[0];
+                fe.f.apply(fe.m,fe.a) // 执行队列中事件
+                fq.shift(); 
+            &#125;
+        &#125;
+    
+        // 异步执行队列事件，最大效率
+        var cqYield = (function() &#123;
+    
+                // 通过 MutationObserver 来监听 Dom 来执行回调，此法最快
+                if(typeof MutationObserver !== &quot;undefined&quot;)
+                &#123;
+                    var dd = document.createElement(&quot;div&quot;);
+                    var mo = new MutationObserver(callQueue);
+                    mo.observe(dd, &#123; attributes: true &#125;);
+    
+                    return function(fn) &#123; dd.setAttribute(&quot;a&quot;,0); &#125; // trigger callback to
+                &#125;
+    
+                // 如果支持 setImmediate ，采取此策略，其实 setImmediate 和 setTimeout(callQueue,0) 差不多
+                if(typeof setImmediate !== &quot;undefined&quot;)
+                    return function() &#123; setImmediate(callQueue) &#125;
+    
+                // 没办法了，就用 setTimeOut 的办法
+                return function() &#123; setTimeout(callQueue,0) &#125;
+            &#125;)();
+    
+        return function(fn) &#123;
+                // 队列事件装载进一个数组
+                fq.push(&#123;f:fn,a:[].slice.apply(arguments).splice(1),m:this&#125;);
+    
+                if(fq.length == 1) // 在添加第一个条目时，启动回调函数
+                    cqYield();
+            &#125;;
+    
+    &#125;)();
+</code></pre>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a><strong>分析</strong></h3><p>其实，值得分析就是一个新的东西–<code>MutationObserver</code>。</p>
+<p><code>MutationObserver</code>给开发者们提供了一种能在某个范围内的DOM树发生变化时作出适当反应的能力.该API设计用来替换掉在DOM3事件规范中引入的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/DOM/Mutation_events">Mutation</a>事件.</p>
+<p>简而言之，就是这个东西比<code>setTimeOut</code>，<code>setImmediate</code>快，浏览器支持就用它就行了。</p>
+<p>关于<code>soon.js</code>的更详细的介绍可以查看这篇文章。<a target="_blank" rel="noopener" href="http://www.bluejava.com/4NS/Speed-up-your-Websites-with-a-Faster-setTimeout-using-soon">Speed up your Websites with a Faster setTimeout using soon()</a></p>
+<p><code>MutationObserver</code>给开发者们提供了一种能在某个范围内的DOM树发生变化时作出适当反应的能力.该API设计用来替换掉在DOM3事件规范中引入的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/DOM/Mutation_events">Mutation</a>事件.</p>
+<h2 id="参考博客："><a href="#参考博客：" class="headerlink" title="参考博客："></a><strong>参考博客：</strong></h2><ul>
+<li><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/cdwp8/p/4065846.html">setTimeout和setImmediate以及process.nextTick的区别</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html">JavaScript 运行机制详解：再谈Event Loop</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/08/" data-id="clepk3zus0018gtnd24mzcnfd" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS%E4%BA%8B%E4%BB%B6%E9%98%9F%E5%88%97/" rel="tag">JS事件队列</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-轮子：一个简单的node爬虫踩坑之路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/07/" class="article-date">
+  <time datetime="2017-12-07T10:20:00.000Z" itemprop="datePublished">2017-12-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/07/">轮子：一个简单的node爬虫踩坑之路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="一个简单的node爬虫踩坑之路"><a href="#一个简单的node爬虫踩坑之路" class="headerlink" title="一个简单的node爬虫踩坑之路"></a>一个简单的node爬虫踩坑之路</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>最近在看爬虫相关的文章，偶然想起来尝试一下用node来实现一个简单的爬虫。但是爬别的多没意思，当然是爬美女图片啊。。。</p>
+<p>这大概 node 里面造的最多的轮子了。</p>
+<p>于是，我选取了下面的地址：<a target="_blank" rel="noopener" href="http://www.zbjuran.com/mei/">美女图片戳我</a>，简单分析后，我的目标是通过爬取首页的轮播图，然后爬取轮播图的直链后面的详情大图，并按照图片名称存到指定的文件夹中。<br>大致流程是下面这个样子的：</p>
+<p><img src="https://t1.picb.cc/uploads/2017/12/06/px1gr.jpg" alt="爬取的大致流程"></p>
+<p>看起来挺简单的，选用的技术方案是：</p>
+<ul>
+<li><code>superagent</code>: 请求库</li>
+<li><code>mkdirp</code>: 创建文件夹</li>
+<li><code>async</code>: 控制并发请求</li>
+<li><code>cheerio</code>: Dom操作库</li>
+<li><code>fs</code>: 内置核心文件读写库</li>
+</ul>
+<h2 id="最终的效果"><a href="#最终的效果" class="headerlink" title="最终的效果"></a>最终的效果</h2><p><img src="https://t1.picb.cc/uploads/2017/12/06/pxHd1.jpg" alt="哈哈"></p>
+<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><pre><code>// 关键在于理清异步流程
+
+&#39;use strict&#39;
+let fs = require(&quot;fs&quot;);
+let cheerio = require(&#39;cheerio&#39;);
+let asyncQuene = require(&quot;async&quot;).queue;
+let request = require(&#39;superagent&#39;);
+require(&#39;superagent-charset&#39;)(request);
+
+const config = &#123;
+    urlPre: &#39;http://www.zbjuran.com&#39;,
+    indexUrl: &#39;http://www.zbjuran.com/mei/&#39;,
+    downloadConcurrent: 2, 
+&#125;;
+
+let getHtmlAsync = (url) =&gt; &#123;
+    return new Promise((resolve,reject) =&gt; &#123;
+        request.get(url).charset(&#39;gbk&#39;).end((err,res) =&gt; &#123;
+            err ? reject(err) : resolve(cheerio.load(res.text));
+        &#125;)
+    &#125;)
+&#125;
+
+let dowloadImg = (albumList) =&gt; &#123;
+    console.log(&#39;开始下载图片&#39;);
+    const folder = &#39;./grils/&#39;;
+    fs.existsSync(folder, status =&gt; &#123;
+        status ? &#39;&#39; : fs.mkdirSync(folder);
+    &#125;)
+    let downloadCount = 0;
+    let queue = asyncQuene( (&#123; url: albumUrl, title: albumTitle&#125;,done) =&gt; &#123;
+        request.get(albumUrl).end(function (err, res) &#123;
+            if (err) &#123;
+                console.log(err);
+                done();
+            &#125; else &#123;
+                fs.writeFile(`./$&#123;folder&#125;/$&#123;albumTitle&#125;-$&#123;++downloadCount&#125;.jpg`, res.body, function (err) &#123;
+                    err ? console.log(err) : console.log(`$&#123;albumTitle&#125;保存一张`);
+                    done();
+                &#125;);
+            &#125;
+        &#125;);
+    &#125;,config.downloadConcurrent);
+
+    queue.drain = () =&gt; &#123;
+        console.log(&#39;所有图片已经下载&#39;);
+    &#125;
+
+    let imgListTemp = [];
+    albumList.forEach(function (&#123; title, imgList &#125;) &#123;
+        console.log(title,imgList);
+        imgList.forEach(function (url) &#123;
+            imgListTemp.push(&#123; title: title, url: url &#125;);
+        &#125;);
+    &#125;);
+    console.log(&#39;sssss&#39;,albumList,imgListTemp);
+    queue.push(imgListTemp);//将所有任务加入队列
+&#125;
+
+let getIndexAsync = () =&gt; &#123;
+    return new Promise((resolve, reject) =&gt;&#123;
+        console.log(&#39;进入主页，开始获取目标url&#39;);
+        let targetUrl = [];
+        let queue = asyncQuene(async (url, done) =&gt; &#123;
+            try &#123;
+                let $ = await getHtmlAsync(url);
+                console.log(`成功获取主页$&#123;url&#125;`);
+                $(&#39;div.changeDiv a&#39;).each( (index,value) =&gt; &#123;
+                    targetUrl.push(&#123;
+                        title: value.attribs.title,
+                        url: `$&#123;config.urlPre&#125;$&#123;value.attribs.href&#125;`,
+                        imgList: []
+                    &#125;)
+                &#125;);
+            &#125; catch (err) &#123;
+                console.log(`在访问$&#123;url&#125;出现以下错误：$&#123;err&#125;`);
+            &#125;
+            finally &#123;
+                done();
+            &#125;
+        &#125;,config.downloadConcurrent);
+        queue.drain = () =&gt; &#123;
+            console.log(&#39;已成功生成目标Url&#39;);
+            resolve(targetUrl);
+        &#125;
+
+        queue.push(config.indexUrl);
+    &#125;)
+&#125;
+
+let getTargetAsync = (targetUrl) =&gt; &#123;
+    return new Promise((resolve, reject) =&gt;&#123;
+        console.log(&#39;进入目标页，开始获取目标url&#39;);
+        let queue = asyncQuene(async (&#123; url: url, title: title, imgList &#125;,done) =&gt; &#123;
+            try &#123;
+                let $ = await getHtmlAsync(url);
+                console.log(`成功获取主页$&#123;url&#125;`);
+                let imgLength = $(&#39;div.page &gt; li&#39;).length - 3;
+                $(&#39;div.picbox img&#39;).each( (index,value) =&gt; &#123;
+                    let imgSrcPath = value.attribs.src;
+                    imgList.push(`$&#123;config.urlPre&#125;$&#123;value.attribs.src&#125;`);
+                    for (let i = 0,length = imgLength; i &lt; length; i++) &#123;
+                        if(i &gt;= 1)&#123;
+                            imgList.push(`$&#123;config.urlPre&#125;$&#123;imgSrcPath.replace(&#39;-0&#39;,&#39;-&#39;+i)&#125;.jpg`);
+                        &#125;
+                    &#125;
+                &#125;);
+            &#125; catch (err) &#123;
+                console.log(`在访问$&#123;url&#125;出现以下错误：$&#123;err&#125;`);
+            &#125;
+            finally &#123;
+                done();
+            &#125;
+        &#125;,config.downloadConcurrent);
+
+        queue.drain = () =&gt; &#123;
+            console.log(&#39;已成功获取到所有图片的Url&#39;);
+            resolve(targetUrl);
+        &#125;
+
+        queue.push(targetUrl);
+    &#125;)
+&#125;
+
+
+let spider = async () =&gt; &#123;
+    // let albumList = await getAlbumsAsync();//获取所有画册URL
+    // albumList = await getImageListAsync(albumList);//根据画册URL获取画册里的所有图片URL
+    // downloadImg(albumList);//下载画册里面的所有图片
+    let targetUrl = await getIndexAsync();
+    targetUrl = await getTargetAsync(targetUrl);
+    dowloadImg(targetUrl);
+&#125;
+
+spider();
+</code></pre>
+<h2 id="划重点"><a href="#划重点" class="headerlink" title="划重点"></a>划重点</h2><h3 id="1-当爬取网页编码为-gb2312的网页的时候，爬到的内容中文显示是乱码"><a href="#1-当爬取网页编码为-gb2312的网页的时候，爬到的内容中文显示是乱码" class="headerlink" title="1.当爬取网页编码为 gb2312的网页的时候，爬到的内容中文显示是乱码"></a>1.当爬取网页编码为 <code>gb2312</code>的网页的时候，爬到的内容中文显示是乱码</h3><p>这个问题的原因其实是挺清晰的，就是网页编码与本地编码不一致或不支持引起的。以为只是个小问题，但是在找解决办法的时候却纠结了我很久，查询了网上相关资料，<strong>有说使用 <code>iconv</code> 解码<code>decode</code>一下就可以，然并卵</strong>，<strong>有说使用encoding的，其实也没用</strong>。其实最后查阅资料得出的原因是，<code>superagent</code>只支持utf-8的编码，如果需要支持其他的需要引用一个官方的库：<code>superagent-charset</code>,使用方法如下：</p>
+<pre><code>const request = require(&#39;superagent&#39;);
+require(&#39;superagent-charset&#39;)(request);
+//请求
+request.get(&#39;xxx&#39;).set(&#39;gbk&#39;).end(xxxxx)
+</code></pre>
+<p>如此，即可正常返回中文</p>
+<h3 id="2-异步操作用-async-来控制"><a href="#2-异步操作用-async-来控制" class="headerlink" title="2. 异步操作用 async 来控制"></a>2. 异步操作用 async 来控制</h3><p>对于下载图片，访问 url 这样存在异步的操作，如果操作对后面程序的执行有影响，最好使用 <a target="_blank" rel="noopener" href="http://caolan.github.io/async/"><code>async</code></a> 库来控制异步流程，类似的还有 <a target="_blank" rel="noopener" href="https://github.com/JacksonTian/eventproxy"><code>eventproxy</code></a>。</p>
+<p>下面是一个使用来<code>async</code>来控制请求队列的官网示例，</p>
+<pre><code>// create a queue object with concurrency 2
+var q = async.queue(function(task, callback) &#123;
+    console.log(&#39;hello &#39; + task.name);
+    callback();
+&#125;, 2);
+
+// assign a callback
+q.drain = function() &#123;
+    console.log(&#39;all items have been processed&#39;);
+&#125;;
+
+// add some items to the queue
+q.push(&#123;name: &#39;foo&#39;&#125;, function(err) &#123;
+    console.log(&#39;finished processing foo&#39;);
+&#125;);
+q.push(&#123;name: &#39;bar&#39;&#125;, function (err) &#123;
+    console.log(&#39;finished processing bar&#39;);
+&#125;);
+
+// add some items to the queue (batch-wise)
+q.push([&#123;name: &#39;baz&#39;&#125;,&#123;name: &#39;bay&#39;&#125;,&#123;name: &#39;bax&#39;&#125;], function(err) &#123;
+    console.log(&#39;finished processing item&#39;);
+&#125;);
+
+// add some items to the front of the queue
+q.unshift(&#123;name: &#39;bar&#39;&#125;, function (err) &#123;
+    console.log(&#39;finished processing bar&#39;);
+&#125;);
+</code></pre>
+<p>其实官网有好多栗子，近期还会抽时间好好研究一下类似异步流程库的具体实现。</p>
+<h3 id="3-404错误。获取不到资源"><a href="#3-404错误。获取不到资源" class="headerlink" title="3. 404错误。获取不到资源"></a>3. 404错误。获取不到资源</h3><p>这个其实还好，主要是网站为了防爬的措施，可以尝试一下方法来试试看：</p>
+<ul>
+<li>设置<code>user-agent</code></li>
+<li>降低请求的并发量</li>
+<li>更换IP</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然只是一个简单的爬虫，但是发现自己对于 <code>promise</code> 这种的异步流程还不是很熟悉，这点需要重点掌握。</p>
+<p>另外，从爬虫的角度来说，node现在的库已经很完善了，还有 <code>phantomjs</code>，<code>node-crawl</code> 这种操作更6的库存在，掌握一门工具很容易，更重要的是要学会制作工具。</p>
+<p>最后，练习爬虫只是出于对技术的热爱，莫要乱爬。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/07/" data-id="clepk3zvo003fgtnd5k2e2911" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-搭建Git服务器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/06/" class="article-date">
+  <time datetime="2017-12-06T10:20:00.000Z" itemprop="datePublished">2017-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Github/">Github</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/06/">搭建 GIT 服务器教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="搭建-GIT-服务器教程"><a href="#搭建-GIT-服务器教程" class="headerlink" title="搭建 GIT 服务器教程"></a>搭建 GIT 服务器教程</h1><h2 id="1-下载安装-git"><a href="#1-下载安装-git" class="headerlink" title="1.下载安装 git"></a>1.下载安装 git</h2><p>Git 是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。<br>此实验以 CentOS 7.2 x64 的系统为环境，搭建 git 服务器。</p>
+<h3 id="安装依赖库和编译工具"><a href="#安装依赖库和编译工具" class="headerlink" title="安装依赖库和编译工具"></a>安装依赖库和编译工具</h3><p>为了后续安装能正常进行，我们先来安装一些相关依赖库和编译工具</p>
+<pre><code>yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel
+</code></pre>
+<p>安装编译工具</p>
+<pre><code>yum install gcc perl-ExtUtils-MakeMaker
+</code></pre>
+<h3 id="下载-git"><a href="#下载-git" class="headerlink" title="下载 git"></a>下载 git</h3><p>选一个目录，用来放下载下来的安装包，这里将安装包放在 &#x2F;usr&#x2F;local&#x2F;src 目录里</p>
+<pre><code>cd /usr/local/src
+</code></pre>
+<p>到官网找一个新版稳定的源码包下载到 &#x2F;usr&#x2F;local&#x2F;src 文件夹里</p>
+<pre><code>wget https://www.kernel.org/pub/software/scm/git/git-2.10.0.tar.gz
+</code></pre>
+<h3 id="解压和编译"><a href="#解压和编译" class="headerlink" title="解压和编译"></a>解压和编译</h3><p>解压下载的源码包</p>
+<pre><code>tar -zvxf git-2.10.0.tar.gz
+</code></pre>
+<p>解压后进入 git-2.10.0 文件夹</p>
+<pre><code>cd git-2.10.0
+</code></pre>
+<p>执行编译</p>
+<pre><code>make all prefix=/usr/local/git
+</code></pre>
+<p>编译完成后, 安装到 &#x2F;usr&#x2F;local&#x2F;git 目录下</p>
+<pre><code>make install prefix=/usr/local/git
+</code></pre>
+<h2 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h2><p>将 git 目录加入 PATH<br>将原来的 PATH 指向目录修改为现在的目录</p>
+<pre><code>echo &#39;export PATH=$PATH:/usr/local/git/bin&#39; &gt;&gt; /etc/bashrc
+</code></pre>
+<p>生效环境变量</p>
+<pre><code>source /etc/bashrc
+</code></pre>
+<p>此时我们能查看 git 版本号，说明我们已经安装成功了。</p>
+<pre><code>git --version
+</code></pre>
+<h2 id="3-创建-git-账号密码"><a href="#3-创建-git-账号密码" class="headerlink" title="3.创建 git 账号密码"></a>3.创建 git 账号密码</h2><p>创建 git 账号<br>为我们刚刚搭建好的 git 创建一个账号</p>
+<pre><code>useradd -m gituser
+</code></pre>
+<p>然后为这个账号设置密码</p>
+<pre><code> passwd gituser
+</code></pre>
+<h2 id="4-初始化-git-仓库并配置用户权限"><a href="#4-初始化-git-仓库并配置用户权限" class="headerlink" title="4.初始化 git 仓库并配置用户权限"></a>4.初始化 git 仓库并配置用户权限</h2><h3 id="创建-git-仓库并初始化"><a href="#创建-git-仓库并初始化" class="headerlink" title="创建 git 仓库并初始化"></a>创建 git 仓库并初始化</h3><p>我们创建 &#x2F;data&#x2F;repositories 目录用于存放 git 仓库</p>
+<pre><code>mkdir -p /data/repositories
+</code></pre>
+<p>创建好后，初始化这个仓库</p>
+<pre><code>cd /data/repositories/ &amp;&amp; git init --bare test.git
+</code></pre>
+<h3 id="配置用户权限"><a href="#配置用户权限" class="headerlink" title="配置用户权限"></a>配置用户权限</h3><p>给 git 仓库目录设置用户和用户组并设置权限</p>
+<pre><code>chown -R gituser:gituser /data/repositories
+chmod 755 /data/repositories
+</code></pre>
+<p>查找 git-shell 所在目录<br> , 编辑 &#x2F;etc&#x2F;passwd 文件，将最后一行关于 gituser 的登录 shell 配置改为 git-shell 的目录<br>如下</p>
+<pre><code>root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:99:99:Nobody:/:/sbin/nologin
+avahi-autoipd:x:170:170:Avahi IPv4LL Stack:/var/lib/avahi-autoipd:/sbin/nologin
+systemd-bus-proxy:x:999:997:systemd Bus Proxy:/:/sbin/nologin
+systemd-network:x:998:996:systemd Network Management:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+polkitd:x:997:995:User for polkitd:/:/sbin/nologin
+abrt:x:173:173::/etc/abrt:/sbin/nologin
+libstoragemgmt:x:996:994:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+tss:x:59:59:Account used by the trousers package to sandbox the tcsd daemon:/dev/null:/sbin/nologin
+ntp:x:38:38::/etc/ntp:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+chrony:x:995:993::/var/lib/chrony:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+tcpdump:x:72:72::/:/sbin/nologin
+gituser:x:500:500::/home/gituser:/usr/local/git/bin/git-shell
+</code></pre>
+<h3 id="使用搭建好的-Git-服务"><a href="#使用搭建好的-Git-服务" class="headerlink" title="使用搭建好的 Git 服务"></a>使用搭建好的 Git 服务</h3><p>克隆 test repo 到本地</p>
+<pre><code>cd ~ &amp;&amp; git clone gituser@139.199.223.159:/data/repositories/test.git
+</code></pre>
+<h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/06/" data-id="clepk3zv50022gtndbtzu2rir" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-网络协议五层与OSI七层协议" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/25/" class="article-date">
+  <time datetime="2017-11-25T09:42:17.000Z" itemprop="datePublished">2017-11-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/25/">网络协议五层与七层协议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="网络协议五层与OSI七层协议"><a href="#网络协议五层与OSI七层协议" class="headerlink" title="网络协议五层与OSI七层协议"></a>网络协议五层与OSI七层协议</h1><blockquote>
+<p>如果大学的计算机基础不错，这应该都是计算机网络教材里面的内容。之前在面试的时候面试官有问过类似的通信知识，瞬间石乐志。于是在自己原有的理解上重新学习一遍，记下此篇。</p>
+</blockquote>
+<blockquote>
+<p>本文知识总结来源为：图灵丛书《图解http》一书，以及无数网络博客资源。</p>
+</blockquote>
+<h2 id="网络五层协议"><a href="#网络五层协议" class="headerlink" title="网络五层协议"></a>网络五层协议</h2><p>Tcp&#x2F;Ip 如果按照协议族来划分可以分为四层结构（或者五层，有的书籍没有把物理层算在其中）。</p>
+<h3 id="应用层："><a href="#应用层：" class="headerlink" title="应用层："></a>应用层：</h3><p>应用层是决定了向用户提供应用程序通讯时的服务。<br>应用层是我们最多接触的一个，常见的http，smtp,FTP都是属于应用层的实现。所谓应用层，意思就是我们可以使用网络就像一件商品一样直接去使用而不用关注他的实现。</p>
+<h3 id="传输层："><a href="#传输层：" class="headerlink" title="传输层："></a>传输层：</h3><p>传输层所能了解的就是数据的传输协议，比如我们知道http的传输是用过数据包的方式来进行的。在传输层有两个我们耳濡目染的协议就是tcp(transimition control protocal)和udp(user data protocal)。</p>
+<h3 id="网络层："><a href="#网络层：" class="headerlink" title="网络层："></a>网络层：</h3><p>网络主要指的是就是IP，全称是Internet Protocal，意为网络协议。其实就是约定了在一个开发的网络环境里面，不同的两个参与方如何进行通信。我们知道无论是访问网站，还是数据传输，我们的交流都是通过IP来进行，当然这其中还会有DNS的作用。所以，通俗的理解下来就是，</p>
+<h3 id="链路层："><a href="#链路层：" class="headerlink" title="链路层："></a>链路层：</h3><p>这个层叫做数据链路层或者网络接口层都可以。链路层就是一个决定以什么样的方式来传输网络上流动的数据包，比如去控制传输介质或者链路的管理。比如网卡设备，路由器。</p>
+<h3 id="物理层："><a href="#物理层：" class="headerlink" title="物理层："></a>物理层：</h3><p>物理层指的主要是在网络通信中支持网络传输的设备，中继器，双绞线。当然里面也有类似的硬件通信协议。</p>
+<h2 id="OSI-open-system-interconnect-七层划分"><a href="#OSI-open-system-interconnect-七层划分" class="headerlink" title="OSI(open system interconnect)七层划分"></a>OSI(open system interconnect)七层划分</h2><p>七层较之于五层模型。共有七层，分别为应用层、表示层、会话层、传输层、网络层、链路层、物理层。对应于五层模式来说，其中应用层、表示层、会话层属于应用层的部分。其他则一致。下面只介绍多出来的两层。</p>
+<h3 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h3><p>表示层提供各种用于应用层数据的编码和转换功能,确保一个系统的应用层发送的数据能被另一个系统的应用层识别。<br>举个例子就是，通信双方约定一种数据格式来接受。比如A和B约定通过火星文来传输，那么加入A发送数据格式如果不是火星文，就会被转换为火星文，然后实现通信。除此之外，还可以对传输的格式作加密处理（一样的意思，换汤不换药）。</p>
+<h3 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h3><p>会话层就是负责建立、管理和终止表示层实体之间的通信会话。该层的通信由不同设备中的应用程序之间的服务请求和响应组成。<br>每次的网络通信都可以称之为一次会话，我们知道http是无状态（stateless）的连接，每次连接不会被记录。但是http1.0出来的规范里，keep-live的出现，可以让每一次的连接不会被过早的中断。这些其实都是在会话层做的处理。</p>
+<hr>
+<p>话不多说，点到即止。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/11/25/" data-id="clepk3zvl0037gtnd505t44yu" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE/" rel="tag">五层协议</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-没有后端基础，怎么入门学习Nginx？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/" class="article-date">
+  <time datetime="2017-09-02T23:48:00.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/02/">没有后端基础，怎么入门学习Nginx？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="nginx知识备忘"><a href="#nginx知识备忘" class="headerlink" title="nginx知识备忘"></a>nginx知识备忘</h1><h2 id="Nginx是什么？"><a href="#Nginx是什么？" class="headerlink" title="Nginx是什么？"></a>Nginx是什么？</h2><p>引用百科的话说，<strong>Nginx</strong> (engine x) 是一个高性能的HTTP和反向代理服务器,也可以作为IMAP&#x2F;POP3&#x2F;SMTP邮件服务器。Nginx很轻（占用内存少）、Nginx支持高并发、Nginx足够稳定，当然还有一点，Nginx开源。</p>
+<h2 id="怎么学习Nginx"><a href="#怎么学习Nginx" class="headerlink" title="怎么学习Nginx"></a>怎么学习Nginx</h2><p>任何编程语言的学习都应当是理论加上实践，特别是对于码农来说，你的真知往往来自于你的实践。Nginx作为服务器的一门技术，更偏向于运维知识，而且其中大部分的知识其实需要具有一定的业务场景你才可以实践的到，所以对于<strong>Nginx</strong>的学习，我的想法是理论学习、引经论述、归纳总结、简单实践，具体到深入的业务场景再深入学习。<br>基于以上的学习需求，并结合我英语水平差的现状我选择下面这两个网站：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.nginx.cn/doc/">Nginx中文网</a><br>Nginx的中文文档，排版和易读性都比官网要好一些，但是要看最新相关还是看英文原版好一些</li>
+<li><a target="_blank" rel="noopener" href="http://tengine.taobao.org/">阿里关于Nginx的实践</a><br><strong>Tengine</strong>,官网给的自我介绍是：Tengine(T-engine)是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。Tengine的性能和稳定性已经在大型的网站如淘宝网，天猫商城等得到了很好的检验。它的最终目标是打造一个高效、稳定、安全、易用的Web平台。因为基于Nginx，所以官网也提供了Nginx的中文文档。</li>
+</ul>
+<p>当然还有一种方法是看视频，个人推荐但不支持看视频。推荐是因为对于大部分人（我的名字叫大部分人）来说，服务器的知识就像海底的冰山，看到就会有种莫名的恐惧。看视频可以让你对服务器的知识做一个大致的梳理，帮助你理清思路。不支持的原因也很简单，现在的学习视频价格不菲，而且讲的知识点都比较基础，特别对于Nginx来说，个人觉得更加没必要。</p>
+<h2 id="关于反向代理服务器的几个疑问？"><a href="#关于反向代理服务器的几个疑问？" class="headerlink" title="关于反向代理服务器的几个疑问？"></a>关于反向代理服务器的几个疑问？</h2><h3 id="1-正向代理和反向代理的区别？"><a href="#1-正向代理和反向代理的区别？" class="headerlink" title="1.正向代理和反向代理的区别？"></a>1.正向代理和反向代理的区别？</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24723688/answer/128105528">知乎：反向代理为何叫反向代理？</a><br>个人理解来说，可以总结为两点：</p>
+<ul>
+<li><strong>反向代理和正向代理都是代理</strong>，看到这儿你可能要问，为什么需要代理服务器呢？其实原因如下：用代理服务器的一个好处是可以使你的IP地址不被暴露出去，比如下面的去访问百度的host时，会发现返回的是 <a target="_blank" rel="noopener" href="http://www.a.shifen.com/">www.a.shifen.com</a> 的结果。同样的，新浪搜狐等一些大型网站都有类似的解决方案。想要了解更多，可以看这里，<a target="_blank" rel="noopener" href="https://www.aliyun.com/zixun/content/3_12_81613.html">为什么要使用代理服务器，代理服务器的优势</a><br>图片<br>另外的一个好处就是你常见的 vpn ，这其实也是一种代理的体现。</li>
+<li><strong>反向代理代理的是服务器响应</strong>，即你得到的响应可能是来自一个服务器集群的结果。<strong>正向代理代理的是客户端请求</strong>，减轻服务端压力，代理请求。<br></li>
+</ul>
+<h3 id="2-适合做反向代理服务器的有哪些？"><a href="#2-适合做反向代理服务器的有哪些？" class="headerlink" title="2.适合做反向代理服务器的有哪些？"></a>2.适合做反向代理服务器的有哪些？</h3><p>传统的服务器比如IIS或者Apache用来做反向代理，其实略显臃肿。Nginx常被用来做反向代理服务器的原因是足够稳定，足够轻量，并且支持高并发。<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhu_tianwei/article/details/19396527">几种反向代理服务器比较。</a></p>
+<h3 id="3-Nginx、Apache和之前用的Tomcat有什么区别？"><a href="#3-Nginx、Apache和之前用的Tomcat有什么区别？" class="headerlink" title="3.Nginx、Apache和之前用的Tomcat有什么区别？"></a>3.Nginx、Apache和之前用的Tomcat有什么区别？</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32212996">知乎：tomcat 与 nginx，apache的区别是什么？</a></p>
+<h3 id="4-Nginx的配置文件怎么看？"><a href="#4-Nginx的配置文件怎么看？" class="headerlink" title="4.Nginx的配置文件怎么看？"></a>4.Nginx的配置文件怎么看？</h3><p>先放一个完整的Nginx配置文件</p>
+<pre><code>#user  nobody; 运行的用户，设置配置文件访问权限
+worker_processes  1; 可以启动的进程，通常设置为与CPU核心数目相同
+
+#日志文件记录
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+# 
+events &#123;
+    #epoll是多路复用IO(I/O Multiplexing)中的一种方式,
+    #仅用于linux2.6以上内核,可以大大提高nginx的性能
+    use   epoll; 
+    worker_connections  1024; # 单个进程的最大并发连接数
+
+    #此处参考： http://www.nginx.cn/76.html
+    # 并发总数是 worker_processes 和 worker_connections 的乘积
+    # 即 max_clients = worker_processes * worker_connections
+    # 在设置了反向代理的情况下，max_clients = worker_processes * worker_connections / 4  为什么
+    # 为什么上面反向代理要除以4，应该说是一个经验值
+    # 根据以上条件，正常情况下的Nginx Server可以应付的最大连接数为：4 * 8000 = 32000
+    # worker_connections 值的设置跟物理内存大小有关
+    # 因为并发受IO约束，max_clients的值须小于系统可以打开的最大文件数
+    # 而系统可以打开的最大文件数和内存大小成正比，一般1GB内存的机器上可以打开的文件数大约是10万左右
+    # 我们来看看360M内存的VPS可以打开的文件句柄数是多少：
+    # $ cat /proc/sys/fs/file-max
+    # 输出 34336
+    # 32000 &lt; 34336，即并发连接总数小于系统可以打开的文件句柄总数，这样就在操作系统可以承受的范围之内
+    # 所以，worker_connections 的值需根据 worker_processes 进程数目和系统可以打开的最大文件总数进行适当地进行设置
+    # 使得并发总数小于操作系统可以打开的最大文件数目
+    # 其实质也就是根据主机的物理CPU和内存进行配置
+    # 当然，理论上的并发总数可能会和实际有所偏差，因为主机还有其他的工作进程需要消耗系统资源。
+    # ulimit -SHn 65535
+&#125;
+
+
+http &#123;
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+    #                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+    #                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server &#123;
+        #侦听80端口
+        listen    80;
+        #定义使用 www.nginx.cn访问
+        server_name  www.nginx.cn;
+ 
+        #定义服务器的默认网站根目录位置
+        root html;
+ 
+        #设定本虚拟主机的访问日志
+        access_log  logs/nginx.access.log  main;
+ 
+        #默认请求
+        location / &#123;
+            
+            #定义首页索引文件的名称
+            index index.php index.html index.htm;   
+ 
+        &#125;
+ 
+        # 定义错误提示页面
+        error_page   500 502 503 504 /50x.html;
+        location = /50x.html &#123;
+        &#125;
+ 
+        #静态文件，nginx自己处理
+        location ~ ^/(images|javascript|js|css|flash|media|static)/ &#123;
+            
+            #过期30天，静态文件不怎么更新，过期可以设大一点，
+            #如果频繁更新，则可以设置得小一点。
+            expires 30d;
+        &#125;
+
+ 
+        #禁止访问 .htxxx 文件
+            location ~ /.ht &#123;
+            deny all;
+        &#125;
+    &#125;
+</code></pre>
+<h3 id="5-怎么用Nginx做负载均衡？"><a href="#5-怎么用Nginx做负载均衡？" class="headerlink" title="5.怎么用Nginx做负载均衡？"></a>5.怎么用Nginx做负载均衡？</h3><p>一个负载均衡的例子，把<a target="_blank" rel="noopener" href="http://www.domain.com均衡到本机不同的端口,也可以改为均衡到不同的地址上/">www.domain.com均衡到本机不同的端口，也可以改为均衡到不同的地址上</a></p>
+<pre><code>http &#123;
+    upstream myproject &#123;
+    server 127.0.0.1:8000 weight=3; #weight 表示权重
+    server 127.0.0.1:8001;
+    server 127.0.0.1:8002;
+    server 127.0.0.1:8003;
+  &#125;
+
+  server &#123;
+    listen 80;
+    server_name www.domain.com;
+    location / &#123;
+        proxy_pass http://myproject; #定向到myproject
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<h3 id="6-Nginx虚拟主机？"><a href="#6-Nginx虚拟主机？" class="headerlink" title="6.Nginx虚拟主机？"></a>6.Nginx虚拟主机？</h3><p>要在Nginx里面配置多个虚拟主机，首先需要新建几个虚拟主机。一个虚拟主机其实就可以理解一个虚拟操作系统。通常的，这个虚拟主机可以存在在虚拟机或者docker里面。对于Linux，你也可以通过命令行来创建虚拟主机。可以参考：<a target="_blank" rel="noopener" href="http://wodemeng.blog.51cto.com/1384120/1538310">Linux 中http中创建虚拟主机实例</a></p>
+<p>Nginx里面配置虚拟主机</p>
+<pre><code>http &#123;
+    server &#123;
+        listen          80;
+        server_name     www.domain1.com;
+        access_log      logs/domain1.access.log main;
+        location / &#123;
+        index index.html;
+            root  /var/www/domain1.com/htdocs;
+        &#125;
+    &#125;
+    server &#123;
+        listen          80;
+        server_name     www.domain2.com;
+        access_log      logs/domain2.access.log main;
+        location / &#123;
+            index index.html;
+            root  /var/www/domain2.com/htdocs;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="7-Nginx缓存处理？"><a href="#7-Nginx缓存处理？" class="headerlink" title="7.Nginx缓存处理？"></a>7.Nginx缓存处理？</h3><p>这一方面理解不是很深入，看看先人的博客来学习一下</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/bokejiayuan/p/4233332.html">如何利用Nginx的缓冲、缓存优化提升性能</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.jb51.net/article/77602.htm">nginx缓存cache的5种方案</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/kevingrace/p/6198287.html">nginx的web缓存服务环境部署记录</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/09/02/" data-id="clepk3zvc002kgtnd1mg85bsq" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4%E7%9F%A5%E8%AF%86/" rel="tag">运维知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-新电脑我需要做什么" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/01/" class="article-date">
+  <time datetime="2017-09-01T18:52:00.000Z" itemprop="datePublished">2017-09-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mac/">Mac</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/">一篇无聊的博客--当我有了我的新电脑，我该怎样去配置？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="当我有了我的新电脑，我该怎样去配置？"><a href="#当我有了我的新电脑，我该怎样去配置？" class="headerlink" title="当我有了我的新电脑，我该怎样去配置？"></a>当我有了我的新电脑，我该怎样去配置？</h1><hr>
+<blockquote>
+<p>这是一篇无聊到让你看了之后会觉得一切索然无味的博客，因为它的目的只有一个，就是帮助我记忆一些的我的个人电脑装机方案。当然，这也是一篇有一点点参考价值的博客，因为或许可以帮助你自定义配置你的电脑，创造不同于别人的freestyle，同时提升你的工作效率。因为平时的工作接触的就只有windows和macOS，所以本文的切入点也就有两个。那么，当我有了我的新电脑，我该怎样去配置的我的新电脑呢？</p>
+</blockquote>
+<blockquote>
+<p>我的职业是一为前端工程师，所以以装X为目的，提升工作效率为情怀。以下软件的配置或者优化均为个人喜好，你要是觉得不喜欢很烂，鄙人也是很无奈啊。</p>
+</blockquote>
+<h2 id="当我有了我的新Windows电脑，我该怎么去配置，优化"><a href="#当我有了我的新Windows电脑，我该怎么去配置，优化" class="headerlink" title="当我有了我的新Windows电脑，我该怎么去配置，优化"></a>当我有了我的新Windows电脑，我该怎么去配置，优化</h2><h3 id="1-系统的选择"><a href="#1-系统的选择" class="headerlink" title="1 系统的选择"></a>1 系统的选择</h3><p>一般我是不喜欢用自带的家庭版系统的，况且我是个想在电脑上跑多个系统的boy。但习惯所致，双系统不是我的选择，所以我选window10专业版或者windows10企业版。Windows10自带的<strong>hyper-v</strong>足够强大，个人感觉比VM好用多了，用来装centos刚刚好。<br>有几点需要注意下：</p>
+<ul>
+<li>win10在<strong>开启hyper服务</strong>之后，若要新建虚拟机，需要开启bios的虚拟化，在BIOS的cpu设置里面启用即可。</li>
+<li>win10有时候会遇到无法进入BIOS的情况，原因有可能是开启了win10的快速启动，所以电脑不会真正的关机。解决办法是将电脑强行断电几分钟，如果是笔记本就拆掉电源，然后按长按开机键清空BIOS的电量。这个时候再重启按命令（F2，ESC等）就可以进入BIOS设置了。</li>
+<li>hyper-v的虚拟机新建设置里面有一个一代或者二代(<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/plan/Should-I-create-a-generation-1-or-2-virtual-machine-in-Hyper-V">WTF is 1 or 2</a>)的设置。开启了虚拟化，当然选择第二代。<br>图片<br>上图是第一代和第二代的区别。</li>
+<li>当你新建虚拟机装centos时有时会出现*** no UEFI system found**的错误，说明你的BIOS没有设置UEFI(<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/UEFI/3556240?fr=aladdin">WTF is UEFI</a>)，或者机器太老不支持。退出到第三步中的第一代就行。</li>
+</ul>
+<h3 id="2-网络环境，驱动配置"><a href="#2-网络环境，驱动配置" class="headerlink" title="2 网络环境，驱动配置"></a>2 网络环境，驱动配置</h3><ul>
+<li><strong>更新驱动，修复漏洞</strong>直接使用鲁大师。如果是组装机，顺便可以跑个分，查看电脑使用情况，看有没有被商家套路。</li>
+<li><em>翻墙</em>去GitHub下载（其他地方出现的都是假的）。安装lantern</li>
+</ul>
+<h3 id="3-作为一名coder，我该装些啥"><a href="#3-作为一名coder，我该装些啥" class="headerlink" title="3 作为一名coder，我该装些啥"></a>3 作为一名coder，我该装些啥</h3><ul>
+<li><strong>visual studio code</strong>，用来写代码</li>
+<li><strong>git for windows</strong>，用来抄代码，必要安装<a target="_blank" rel="noopener" href="https://www.sourcetreeapp.com/">sourcetree</a></li>
+<li><strong>node</strong>，node 环境必须要装</li>
+<li><strong>sublime</strong>，用来代替记事本使用</li>
+<li><strong>beyondCompare</strong>,比较代码用</li>
+<li><strong><a target="_blank" rel="noopener" href="https://babun.github.io/index.html">babun</a></strong>,替换掉原生的命令行工具，与powershell 结合使用</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cockos.com/licecap/">licecap</a></strong>,用来截Gif图，给别人演示用，很方便</li>
+<li><strong>mongodb</strong>,现在应该叫做studio3T,工作主用mongodb</li>
+<li><strong>[teamviewer(<a target="_blank" rel="noopener" href="https://www.teamviewer.com/zhCN/)]">https://www.teamviewer.com/zhCN/)]</a></strong>,远程连接，实际使用强过向日葵太多</li>
+<li>**[markman(<a target="_blank" rel="noopener" href="http://www.getmarkman.com/)]**%E7%94%A8%E6%9D%A5%E5%88%87%E5%9B%BE%E9%87%8F%E5%B0%BA%E5%AF%B8%EF%BC%8C%E5%8D%95%E8%BF%99%E4%B8%AA%E5%8A%9F%E8%83%BD%E4%BF%A9%E8%AF%B4%E6%AF%94PS%E5%AE%9E%E5%9C%A8%E5%A5%BD%E5%A4%AA%E5%A4%9A%EF%BC%8C%E4%BD%86%E6%98%AF%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85Adobe">http://www.getmarkman.com/)]**用来切图量尺寸，单这个功能俩说比PS实在好太多，但是需要安装Adobe</a> air</li>
+<li><strong><a target="_blank" rel="noopener" href="http://www.getwox.com/">Wox</a></strong>,windows下的的spotlight,安装后设置开机自启</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.irolan.com/">rolan</a></strong>,用来做桌面管理，设置开机自启</li>
+<li><strong>cccleaner</strong> 清理电脑垃圾文件和注册表</li>
+<li><strong>FileZila</strong> Ftp连接</li>
+<li><strong>有道云笔记</strong> 用来记笔记，三个终端都有的，很方便。当然印象笔记也是可以的</li>
+</ul>
+<h3 id="4-作为一名文青，我该用些啥"><a href="#4-作为一名文青，我该用些啥" class="headerlink" title="4 作为一名文青，我该用些啥"></a>4 作为一名文青，我该用些啥</h3><p>微信QQ随身装<br><br>知乎B站天天看<br><br>优化电脑鲁大师<br><br>听歌只选网易云</p>
+<h3 id="5-必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多"><a href="#5-必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多" class="headerlink" title="5 必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多"></a>5 必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多</h3><ul>
+<li><strong>Octotree</strong> 以树形菜单的方式查看github上的仓库</li>
+<li><strong>Adblock Plus</strong> 广告，不存在的</li>
+<li><strong>掘金</strong> 程序员一定要看这个，每天学习新知识</li>
+<li><strong>Infinity新标签页</strong> 替换掉丑陋的新标签页，很好用</li>
+<li><strong>Postman</strong>  不解释，测接口</li>
+<li><strong>React Developer Tools</strong> react调试工具</li>
+<li><strong>Redux DevTools</strong> react-redux调试工具</li>
+<li><strong>Vue.js devtools</strong> vue调试工具</li>
+<li><strong>Tampermonkey</strong> 插件之中的插件，超有逼格</li>
+<li><strong>Vimium</strong> 以vim的方式全键盘操控网页</li>
+<li><strong>扩展管理器</strong> 小图标太多，用这个管理</li>
+<li><strong>划词翻译</strong> 对于英文贼差的我来说，真的神器，选中单词就可翻译</li>
+<li><strong>小幺鸡</strong> 写接口文档使用，支持国产</li>
+<li><strong>Listen 1</strong> 听网易云音乐，虾米，QQ音乐的曲库</li>
+</ul>
+<hr>
+<h2 id="当我有了我的新mac，我该怎么去配置，优化"><a href="#当我有了我的新mac，我该怎么去配置，优化" class="headerlink" title="当我有了我的新mac，我该怎么去配置，优化"></a>当我有了我的新mac，我该怎么去配置，优化</h2><p>对于mac来说，学习成本相当低，基本没有一些配置什么的骚操作，收集一下自己的装机列表</p>
+<ul>
+<li><strong>item2</strong> 替代原生的terminal</li>
+<li><strong>homebrew</strong> 安装homebrew</li>
+<li><strong>oh-my-zsh</strong> 配置oh-my-zsh</li>
+<li><strong>CheatSheet</strong> 长按command，显示当前程序的所有快捷键</li>
+</ul>
+<p>以上几个，可以去<a target="_blank" rel="noopener" href="http://blog.csdn.net/u013707249/article/details/76094937">这里</a>查看</p>
+<ul>
+<li><strong>visual studio code</strong>，用来写代码</li>
+<li><strong>node</strong>，node 环境必须要装</li>
+<li><strong>sublime</strong>，用来代替记事本使用</li>
+<li><strong>beyondCompare</strong>,比较代码用</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cockos.com/licecap/">licecap</a></strong>,用来截Gif图，给别人演示用，很方便</li>
+<li><strong>mongodb</strong>,现在应该叫做studio3T,工作主用mongodb</li>
+<li><strong>[teamviewer(<a target="_blank" rel="noopener" href="https://www.teamviewer.com/zhCN/)]">https://www.teamviewer.com/zhCN/)]</a></strong>,远程连接，实际使用强过向日葵太多</li>
+<li><strong>[markman(<a target="_blank" rel="noopener" href="http://www.getmarkman.com/)]">http://www.getmarkman.com/)]</a></strong> 用来切图量尺寸，单这个功能俩说比PS实在好太多，但是需要安装Adobe air</li>
+<li><strong>截图工具</strong>很好用的一个截图工具，<a target="_blank" rel="noopener" href="http://jietu.qq.com/">戳我</a></li>
+<li><strong>Alfred 3</strong> 工作效率神器，另外，可以<a target="_blank" rel="noopener" href="http://www.sdifen.com/alfred3.html">破解哦</a></li>
+<li><strong>FileZila</strong> Ftp连接</li>
+<li><strong>webstorm</strong> mac上不是那么卡</li>
+<li><strong>有道云笔记</strong> 做笔记使用，三个终端都有的，很方便</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/09/01/" data-id="clepk3zv70027gtndgc7e4uib" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/macos/" rel="tag">macos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" rel="tag">软件配置</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-一篇文章，从windows10成功移植macOS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/25/" class="article-date">
+  <time datetime="2017-07-25T19:02:00.000Z" itemprop="datePublished">2017-07-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mac/">Mac</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/25/">一篇文章，从windows10成功移植macOS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>一篇文章，从windows10成功移植macOS</p>
+<p>作为习惯了Windows温暖怀抱的码畜一名，初次使用macOS，总是会有各种的不适应。记不住的快捷键，理不清的bash命令，找不到的文件夹，个个都能让人激动地拔起29米大刀。这篇文章，简单介绍作为一小白从Windows10系统成功移植macOS的过程。在几天的适应时间里，查阅了大量（一点儿）的资料，踩着前人的尸首整理出这篇文章。一方面算作是给自己一个记录，另一方面是最近略忙，无法更新博客，只能写点这些来充数。</p>
+<p>因为我是码农一名，所以对macOS的使用理解可能与大众视角不太一样，所以将就看。</p>
+<p>配置VPN</p>
+<p>首先，刚接触到macOS，我认为应该做的第一件事就是配网络，毕竟在程序界，国外的月亮的确是圆一些。关于vpn，最近国家风头正紧，前阵子，博主一直用的greenvpn已经跑路，所以防止查水表，这里就简单提一下，希望没人看到。</p>
+<p>一般在macOS上使用VPN，会推荐两个，一个是使用shadowsock客户端，然后自己去somewhere找线路，进行配置后访问，这一种略微麻烦下。因为我是小白嘛，所以我用简单的，lantern ，比起使用shadowsock，lantern使用很简单，直接下载打开就可以用。lantern默认会在打开的时候，在你的机器上跑一个服务，免费的也可以用，但是速度稳定性稍微差些，重要的是会限制流量。专业版的就不会做流量限制，而且现在两年套餐才300块左右（我用的就是这个），我不会告诉你在购买的时候填写这个验证码 YY7VYWQ 还可以额外获得是三个月的使用时间。</p>
+<p>对了，最重要的是，下载lantern别去百度搜索下载，搜到的中文官网已经下了，直接去这里下载 下载地址： <a target="_blank" rel="noopener" href="https://github.com/getlantern/lantern/releases/tag/latest%EF%BC%8C%E8%80%8C%E4%B8%94%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E6%98%AFlantern%E6%B2%A1%E6%9C%89ios%E7%89%88%E6%9C%AC%E7%9A%84%EF%BC%8C%E6%89%80%E4%BB%A5ios%E4%B8%8A%E7%9A%84lantern%E9%83%BD%E6%98%AF%E7%9B%97%E7%89%88%E3%80%82">https://github.com/getlantern/lantern/releases/tag/latest，而且需要注意的是lantern没有ios版本的，所以ios上的lantern都是盗版。</a></p>
+<p>记住快捷键</p>
+<p>首先MacBook的键位是和普通的键盘不一样的，更重要的是好多快捷键也是很有自己的freestyle，的确是相当难记（当然也不需要全部记住，只需要在工作熟悉常用的即可）。这里推荐一个软件CheatSheet，没别的，就是当你长按住command键的时候，会显示当前电脑的所有常用快捷键方式，好记性不用带小抄。下载地址点这里，CheatSheet <a target="_blank" rel="noopener" href="https://www.mediaatelier.com/CheatSheet/">https://www.mediaatelier.com/CheatSheet/</a></p>
+<p>bash命令</p>
+<p>讲道理，不看其他的，macOS上的bash命令我可以玩儿一天。这里直接看了前人的教程来配置自己的terminal。结合美观、使用高效的需求，前人给出的解决方案是iterm2+oh-my-zsh+各种配置,思路很清晰，但是安装会有一点麻烦。<br>整理一下思路大致就是， 先安装iterm2 -&gt; iterm2简单配置，配色方案 -&gt; 安装zsh，mac自带的有zsh，但是可以去更新下 -&gt; 安装oh-my-zsh插件 -&gt; 愉快玩耍</p>
+<p>iterm2的安装<br>直接去iterm2的官网下载就行了，<a target="_blank" rel="noopener" href="https://www.iterm2.com/%EF%BC%8C%E5%85%8D%E8%B4%B9%E7%9A%84%E8%BD%AF%E4%BB%B6%E3%80%82">https://www.iterm2.com/，免费的软件。</a></p>
+<p>iterm2简单配置，配色方案<br>网上有很多大神有自己的配色方案，可以 百度 ‘iterm2配色方案’，可以按照教程自己设置。当然我是小白，所以直接用现成的。iterm2有专门的主题网站，可以登录这里<a target="_blank" rel="noopener" href="http://iterm2colorschemes.com/%EF%BC%8C%E4%B8%8B%E8%BD%BD%E7%BD%91%E7%AB%99%E4%B8%8A%E7%9A%84%E5%8C%85%EF%BC%8C%E7%84%B6%E5%90%8E%E7%9F%A5%E5%B7%B1%E5%AF%BC%E5%85%A5%E5%B0%B1%E8%A1%8C%E4%BA%86%EF%BC%8C%E4%BD%A0%E8%A6%81%E9%97%AE%E6%80%8E%E4%B9%88%E5%AF%BC%E5%85%A5%EF%BC%9F%E7%9B%B4%E6%8E%A5%E7%9C%8B%E8%BF%99%E9%87%8C%EF%BC%8Citerm2%E5%AF%BC%E5%85%A5%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88http://jingyan.baidu.com/article/48a42057029f99a92425048e.html">http://iterm2colorschemes.com/，下载网站上的包，然后知己导入就行了，你要问怎么导入？直接看这里，iterm2导入配色方案http://jingyan.baidu.com/article/48a42057029f99a92425048e.html</a></p>
+<p>安装zsh<br>在安装zsh之前，可以先安装一个homebrew，<a target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn.html%EF%BC%8C%E6%9C%89%E4%BA%86%E8%BF%99%E4%B8%AA%E7%8E%A9%E6%84%8F%E5%84%BF%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E4%BD%A0%E6%83%B3%E5%AE%89%E8%A3%85%E7%9A%84%E4%B8%9C%E8%A5%BF%E3%80%82%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E7%9B%B4%E6%8E%A5bash%E8%BE%93%E5%85%A5">https://brew.sh/index_zh-cn.html，有了这个玩意儿，可以一键安装你想安装的东西。安装完成后，直接bash输入</a><br>$brew install zsh<br>安装成功后，需要修改为默认的shell，先去确认一下自己zsh的安装目录<br>$ chsh -s &#x2F;bin&#x2F;zsh</p>
+<p>安装oh-my-zsh插件<br>只剩下最后一步,一行命令搞定<br>$ curl -L <a target="_blank" rel="noopener" href="https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh">https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh</a> | sh</p>
+<p>以上，就稍微有点逼格了，</p>
+<p>一些我记不住的命令：<br>顺便给自己备忘一下老是记不住的命令：<br>显示隐藏文件&#x2F;目录： $ defaults write com.apple.finder AppleShowAllFiles -bool true<br>隐藏隐藏文件&#x2F;目录： $ defaults write com.apple.finder AppleShowAllFiles -bool false </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/07/25/" data-id="clepk3zup0014gtnd4p3s987t" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac%E5%B7%A5%E5%85%B7/" rel="tag">mac工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac%E7%A7%BB%E6%A4%8D/" rel="tag">mac移植</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">下一页&amp;raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/08/">如何将博客升级http2</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/27/">换新电脑不用慌-轻松搞定vscode配置</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/15/">git开发规范</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/09/">go入门踩坑及环境配置问题相关</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/">如何用node去搭建一个项目发布系统</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

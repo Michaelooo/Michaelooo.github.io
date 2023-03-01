@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>没有后端基础，怎么入门学习Nginx？ | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nginx知识备忘Nginx是什么？引用百科的话说，Nginx (engine x) 是一个高性能的HTTP和反向代理服务器,也可以作为IMAP&#x2F;POP3&#x2F;SMTP邮件服务器。Nginx很轻（占用内存少）、Nginx支持高并发、Nginx足够稳定，当然还有一点，Nginx开源。 怎么学习Nginx任何编程语言的学习都应当是理论加上实践，特别是对于码农来说，你的真知往往来自于你">
+<meta property="og:type" content="article">
+<meta property="og:title" content="没有后端基础，怎么入门学习Nginx？">
+<meta property="og:url" content="https://michaelooo.github.io/2017/09/02/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="nginx知识备忘Nginx是什么？引用百科的话说，Nginx (engine x) 是一个高性能的HTTP和反向代理服务器,也可以作为IMAP&#x2F;POP3&#x2F;SMTP邮件服务器。Nginx很轻（占用内存少）、Nginx支持高并发、Nginx足够稳定，当然还有一点，Nginx开源。 怎么学习Nginx任何编程语言的学习都应当是理论加上实践，特别是对于码农来说，你的真知往往来自于你">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:published_time" content="2017-09-02T23:48:00.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:50:12.644Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="运维知识">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-没有后端基础，怎么入门学习Nginx？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/" class="article-date">
+  <time datetime="2017-09-02T23:48:00.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      没有后端基础，怎么入门学习Nginx？
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="nginx知识备忘"><a href="#nginx知识备忘" class="headerlink" title="nginx知识备忘"></a>nginx知识备忘</h1><h2 id="Nginx是什么？"><a href="#Nginx是什么？" class="headerlink" title="Nginx是什么？"></a>Nginx是什么？</h2><p>引用百科的话说，<strong>Nginx</strong> (engine x) 是一个高性能的HTTP和反向代理服务器,也可以作为IMAP&#x2F;POP3&#x2F;SMTP邮件服务器。Nginx很轻（占用内存少）、Nginx支持高并发、Nginx足够稳定，当然还有一点，Nginx开源。</p>
+<h2 id="怎么学习Nginx"><a href="#怎么学习Nginx" class="headerlink" title="怎么学习Nginx"></a>怎么学习Nginx</h2><p>任何编程语言的学习都应当是理论加上实践，特别是对于码农来说，你的真知往往来自于你的实践。Nginx作为服务器的一门技术，更偏向于运维知识，而且其中大部分的知识其实需要具有一定的业务场景你才可以实践的到，所以对于<strong>Nginx</strong>的学习，我的想法是理论学习、引经论述、归纳总结、简单实践，具体到深入的业务场景再深入学习。<br>基于以上的学习需求，并结合我英语水平差的现状我选择下面这两个网站：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.nginx.cn/doc/">Nginx中文网</a><br>Nginx的中文文档，排版和易读性都比官网要好一些，但是要看最新相关还是看英文原版好一些</li>
+<li><a target="_blank" rel="noopener" href="http://tengine.taobao.org/">阿里关于Nginx的实践</a><br><strong>Tengine</strong>,官网给的自我介绍是：Tengine(T-engine)是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。Tengine的性能和稳定性已经在大型的网站如淘宝网，天猫商城等得到了很好的检验。它的最终目标是打造一个高效、稳定、安全、易用的Web平台。因为基于Nginx，所以官网也提供了Nginx的中文文档。</li>
+</ul>
+<p>当然还有一种方法是看视频，个人推荐但不支持看视频。推荐是因为对于大部分人（我的名字叫大部分人）来说，服务器的知识就像海底的冰山，看到就会有种莫名的恐惧。看视频可以让你对服务器的知识做一个大致的梳理，帮助你理清思路。不支持的原因也很简单，现在的学习视频价格不菲，而且讲的知识点都比较基础，特别对于Nginx来说，个人觉得更加没必要。</p>
+<h2 id="关于反向代理服务器的几个疑问？"><a href="#关于反向代理服务器的几个疑问？" class="headerlink" title="关于反向代理服务器的几个疑问？"></a>关于反向代理服务器的几个疑问？</h2><h3 id="1-正向代理和反向代理的区别？"><a href="#1-正向代理和反向代理的区别？" class="headerlink" title="1.正向代理和反向代理的区别？"></a>1.正向代理和反向代理的区别？</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24723688/answer/128105528">知乎：反向代理为何叫反向代理？</a><br>个人理解来说，可以总结为两点：</p>
+<ul>
+<li><strong>反向代理和正向代理都是代理</strong>，看到这儿你可能要问，为什么需要代理服务器呢？其实原因如下：用代理服务器的一个好处是可以使你的IP地址不被暴露出去，比如下面的去访问百度的host时，会发现返回的是 <a target="_blank" rel="noopener" href="http://www.a.shifen.com/">www.a.shifen.com</a> 的结果。同样的，新浪搜狐等一些大型网站都有类似的解决方案。想要了解更多，可以看这里，<a target="_blank" rel="noopener" href="https://www.aliyun.com/zixun/content/3_12_81613.html">为什么要使用代理服务器，代理服务器的优势</a><br>图片<br>另外的一个好处就是你常见的 vpn ，这其实也是一种代理的体现。</li>
+<li><strong>反向代理代理的是服务器响应</strong>，即你得到的响应可能是来自一个服务器集群的结果。<strong>正向代理代理的是客户端请求</strong>，减轻服务端压力，代理请求。<br></li>
+</ul>
+<h3 id="2-适合做反向代理服务器的有哪些？"><a href="#2-适合做反向代理服务器的有哪些？" class="headerlink" title="2.适合做反向代理服务器的有哪些？"></a>2.适合做反向代理服务器的有哪些？</h3><p>传统的服务器比如IIS或者Apache用来做反向代理，其实略显臃肿。Nginx常被用来做反向代理服务器的原因是足够稳定，足够轻量，并且支持高并发。<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhu_tianwei/article/details/19396527">几种反向代理服务器比较。</a></p>
+<h3 id="3-Nginx、Apache和之前用的Tomcat有什么区别？"><a href="#3-Nginx、Apache和之前用的Tomcat有什么区别？" class="headerlink" title="3.Nginx、Apache和之前用的Tomcat有什么区别？"></a>3.Nginx、Apache和之前用的Tomcat有什么区别？</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/32212996">知乎：tomcat 与 nginx，apache的区别是什么？</a></p>
+<h3 id="4-Nginx的配置文件怎么看？"><a href="#4-Nginx的配置文件怎么看？" class="headerlink" title="4.Nginx的配置文件怎么看？"></a>4.Nginx的配置文件怎么看？</h3><p>先放一个完整的Nginx配置文件</p>
+<pre><code>#user  nobody; 运行的用户，设置配置文件访问权限
+worker_processes  1; 可以启动的进程，通常设置为与CPU核心数目相同
+
+#日志文件记录
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+# 
+events &#123;
+    #epoll是多路复用IO(I/O Multiplexing)中的一种方式,
+    #仅用于linux2.6以上内核,可以大大提高nginx的性能
+    use   epoll; 
+    worker_connections  1024; # 单个进程的最大并发连接数
+
+    #此处参考： http://www.nginx.cn/76.html
+    # 并发总数是 worker_processes 和 worker_connections 的乘积
+    # 即 max_clients = worker_processes * worker_connections
+    # 在设置了反向代理的情况下，max_clients = worker_processes * worker_connections / 4  为什么
+    # 为什么上面反向代理要除以4，应该说是一个经验值
+    # 根据以上条件，正常情况下的Nginx Server可以应付的最大连接数为：4 * 8000 = 32000
+    # worker_connections 值的设置跟物理内存大小有关
+    # 因为并发受IO约束，max_clients的值须小于系统可以打开的最大文件数
+    # 而系统可以打开的最大文件数和内存大小成正比，一般1GB内存的机器上可以打开的文件数大约是10万左右
+    # 我们来看看360M内存的VPS可以打开的文件句柄数是多少：
+    # $ cat /proc/sys/fs/file-max
+    # 输出 34336
+    # 32000 &lt; 34336，即并发连接总数小于系统可以打开的文件句柄总数，这样就在操作系统可以承受的范围之内
+    # 所以，worker_connections 的值需根据 worker_processes 进程数目和系统可以打开的最大文件总数进行适当地进行设置
+    # 使得并发总数小于操作系统可以打开的最大文件数目
+    # 其实质也就是根据主机的物理CPU和内存进行配置
+    # 当然，理论上的并发总数可能会和实际有所偏差，因为主机还有其他的工作进程需要消耗系统资源。
+    # ulimit -SHn 65535
+&#125;
+
+
+http &#123;
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+    #                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+    #                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server &#123;
+        #侦听80端口
+        listen    80;
+        #定义使用 www.nginx.cn访问
+        server_name  www.nginx.cn;
+ 
+        #定义服务器的默认网站根目录位置
+        root html;
+ 
+        #设定本虚拟主机的访问日志
+        access_log  logs/nginx.access.log  main;
+ 
+        #默认请求
+        location / &#123;
+            
+            #定义首页索引文件的名称
+            index index.php index.html index.htm;   
+ 
+        &#125;
+ 
+        # 定义错误提示页面
+        error_page   500 502 503 504 /50x.html;
+        location = /50x.html &#123;
+        &#125;
+ 
+        #静态文件，nginx自己处理
+        location ~ ^/(images|javascript|js|css|flash|media|static)/ &#123;
+            
+            #过期30天，静态文件不怎么更新，过期可以设大一点，
+            #如果频繁更新，则可以设置得小一点。
+            expires 30d;
+        &#125;
+
+ 
+        #禁止访问 .htxxx 文件
+            location ~ /.ht &#123;
+            deny all;
+        &#125;
+    &#125;
+</code></pre>
+<h3 id="5-怎么用Nginx做负载均衡？"><a href="#5-怎么用Nginx做负载均衡？" class="headerlink" title="5.怎么用Nginx做负载均衡？"></a>5.怎么用Nginx做负载均衡？</h3><p>一个负载均衡的例子，把<a target="_blank" rel="noopener" href="http://www.domain.com均衡到本机不同的端口,也可以改为均衡到不同的地址上/">www.domain.com均衡到本机不同的端口，也可以改为均衡到不同的地址上</a></p>
+<pre><code>http &#123;
+    upstream myproject &#123;
+    server 127.0.0.1:8000 weight=3; #weight 表示权重
+    server 127.0.0.1:8001;
+    server 127.0.0.1:8002;
+    server 127.0.0.1:8003;
+  &#125;
+
+  server &#123;
+    listen 80;
+    server_name www.domain.com;
+    location / &#123;
+        proxy_pass http://myproject; #定向到myproject
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+<h3 id="6-Nginx虚拟主机？"><a href="#6-Nginx虚拟主机？" class="headerlink" title="6.Nginx虚拟主机？"></a>6.Nginx虚拟主机？</h3><p>要在Nginx里面配置多个虚拟主机，首先需要新建几个虚拟主机。一个虚拟主机其实就可以理解一个虚拟操作系统。通常的，这个虚拟主机可以存在在虚拟机或者docker里面。对于Linux，你也可以通过命令行来创建虚拟主机。可以参考：<a target="_blank" rel="noopener" href="http://wodemeng.blog.51cto.com/1384120/1538310">Linux 中http中创建虚拟主机实例</a></p>
+<p>Nginx里面配置虚拟主机</p>
+<pre><code>http &#123;
+    server &#123;
+        listen          80;
+        server_name     www.domain1.com;
+        access_log      logs/domain1.access.log main;
+        location / &#123;
+        index index.html;
+            root  /var/www/domain1.com/htdocs;
+        &#125;
+    &#125;
+    server &#123;
+        listen          80;
+        server_name     www.domain2.com;
+        access_log      logs/domain2.access.log main;
+        location / &#123;
+            index index.html;
+            root  /var/www/domain2.com/htdocs;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="7-Nginx缓存处理？"><a href="#7-Nginx缓存处理？" class="headerlink" title="7.Nginx缓存处理？"></a>7.Nginx缓存处理？</h3><p>这一方面理解不是很深入，看看先人的博客来学习一下</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/bokejiayuan/p/4233332.html">如何利用Nginx的缓冲、缓存优化提升性能</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.jb51.net/article/77602.htm">nginx缓存cache的5种方案</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/kevingrace/p/6198287.html">nginx的web缓存服务环境部署记录</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/09/02/" data-id="clepk3zvc002kgtnd1mg85bsq" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4%E7%9F%A5%E8%AF%86/" rel="tag">运维知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/25/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          网络协议五层与七层协议
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">一篇无聊的博客--当我有了我的新电脑，我该怎样去配置？</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx%E7%9F%A5%E8%AF%86%E5%A4%87%E5%BF%98"><span class="toc-number">1.</span> <span class="toc-text">nginx知识备忘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">Nginx是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0Nginx"><span class="toc-number">1.2.</span> <span class="toc-text">怎么学习Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E7%96%91%E9%97%AE%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">关于反向代理服务器的几个疑问？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.正向代理和反向代理的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%82%E5%90%88%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.适合做反向代理服务器的有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Nginx%E3%80%81Apache%E5%92%8C%E4%B9%8B%E5%89%8D%E7%94%A8%E7%9A%84Tomcat%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.Nginx、Apache和之前用的Tomcat有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Nginx%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F"><span class="toc-number">1.3.4.</span> <span class="toc-text">4.Nginx的配置文件怎么看？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%80%8E%E4%B9%88%E7%94%A8Nginx%E5%81%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9F"><span class="toc-number">1.3.5.</span> <span class="toc-text">5.怎么用Nginx做负载均衡？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Nginx%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%EF%BC%9F"><span class="toc-number">1.3.6.</span> <span class="toc-text">6.Nginx虚拟主机？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Nginx%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%EF%BC%9F"><span class="toc-number">1.3.7.</span> <span class="toc-text">7.Nginx缓存处理？</span></a></li></ol></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

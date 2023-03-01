@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>tcp三次握手与四次分手 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="理解 HTTP 协议以及 TCP 三次握手与四次分手的过程理解 HTTP 协议超文本传输 ​​ 协议（HTTP）是用于传输诸如 HTML 的超媒体文档的应用层协议，最顶层的协议。HTTP 是无状态协议，意味着服务器不会在两个请求之间保留任何数据（状态）。 关于无状态的理解 可以理解为 HTTP 是没有上下文的，HTTP 无法保存连接双方的状态信息。基于此，知乎上有看到一个很直观的白话例子： 参考：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tcp三次握手与四次分手">
+<meta property="og:url" content="https://michaelooo.github.io/2018/02/28/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="理解 HTTP 协议以及 TCP 三次握手与四次分手的过程理解 HTTP 协议超文本传输 ​​ 协议（HTTP）是用于传输诸如 HTML 的超媒体文档的应用层协议，最顶层的协议。HTTP 是无状态协议，意味着服务器不会在两个请求之间保留任何数据（状态）。 关于无状态的理解 可以理解为 HTTP 是没有上下文的，HTTP 无法保存连接双方的状态信息。基于此，知乎上有看到一个很直观的白话例子： 参考：">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:published_time" content="2018-02-28T14:31:18.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:50:12.644Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="http">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-tcp三次握手与四次分手" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/28/" class="article-date">
+  <time datetime="2018-02-28T14:31:18.000Z" itemprop="datePublished">2018-02-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      tcp三次握手与四次分手
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="理解-HTTP-协议以及-TCP-三次握手与四次分手的过程"><a href="#理解-HTTP-协议以及-TCP-三次握手与四次分手的过程" class="headerlink" title="理解 HTTP 协议以及 TCP 三次握手与四次分手的过程"></a>理解 HTTP 协议以及 TCP 三次握手与四次分手的过程</h1><h2 id="理解-HTTP-协议"><a href="#理解-HTTP-协议" class="headerlink" title="理解 HTTP 协议"></a>理解 HTTP 协议</h2><p>超文本传输 ​​ 协议（HTTP）是用于传输诸如 HTML 的超媒体文档的应用层协议，最顶层的协议。<strong>HTTP 是无状态协议</strong>，意味着服务器不会在两个请求之间保留任何数据（状态）。</p>
+<p><strong>关于无状态的理解</strong></p>
+<p>可以理解为 HTTP 是没有上下文的，HTTP 无法保存连接双方的状态信息。基于此，知乎上有看到一个很直观的白话例子：</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23202402/answer/300614865">HTTP 是一个无状态的协议。这句话里的无状态是什么意思？</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">有状态</th>
+<th align="left">无状态</th>
+<th align="left">使用 cookie</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">A：你今天中午吃的啥？</td>
+<td align="left">A：你今天中午吃的啥</td>
+<td align="left">A：你今天中午吃的啥</td>
+</tr>
+<tr>
+<td align="left">B：吃的大盘鸡</td>
+<td align="left">B：吃的大盘鸡。</td>
+<td align="left">B：吃的大盘鸡。</td>
+</tr>
+<tr>
+<td align="left">A：味道怎么样呀？</td>
+<td align="left">A：味道怎么样呀？</td>
+<td align="left">A：味道怎么样呀？</td>
+</tr>
+<tr>
+<td align="left">B：还不错，挺好吃的。</td>
+<td align="left">B：？？？啊？啥？啥味道怎么样？</td>
+<td align="left">B：还不错，挺好吃的</td>
+</tr>
+</tbody></table>
+<h2 id="TCP-三次握手与四次分手"><a href="#TCP-三次握手与四次分手" class="headerlink" title="TCP 三次握手与四次分手"></a>TCP 三次握手与四次分手</h2><p>TCP 建立连接的时候需要三次握手，断开连接需要四次分手，这个过程是比较抽象的。</p>
+<p>整个过程简单白话一下就是：</p>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a><strong>三次握手</strong></h3><ol>
+<li>客户端写了一封情书： 我中意你啊（建立连接的请求）</li>
+<li>服务端收到了这封情书的回复：哇，我也中意你啊，mua</li>
+<li>客户端收到了服务端的 mua ：好啊，那我们就在一起吧（真正建立连接）</li>
+</ol>
+<p>当然上面这是正常的情况，如果遇到情书发错人（连接出错）的情况，服务端就懒得理了，然后双发就不可能在一起（建立连接）。</p>
+<p><strong>为什么 TCP 连接需要三次握手</strong></p>
+<p>当然其实会有更多的人疑问，为什么 TCP 连接需要三次握手而不是两次，因为按照上面的意思，客户端来一句：在一起， 服务端回一个：好， 就可以了啊，为什么客户端还要多此一举回复一个“我也好”呢。其实原因很简单，跟 TCP 的特性有关，TCP 通道是不可靠的，而三次握手是满足通道安全的最小握手次数。继续用上面的例子来分析下：</p>
+<p>先假设只有两次握手的情况：</p>
+<ol>
+<li>客户端写了一封情书： 我中意你啊（建立连接的请求），但是因为某些原因，邮局放假啦，你的情书被搁置在路上了</li>
+<li>客户端没有收到回复，于是又写了一封情书：我真的好中意你啊（建立连接的请求）</li>
+<li>服务端收到了这封情书的回复：哇，我也中意你啊，mua（建立连接）</li>
+<li>到这时，客户端和服务端已经可以愉快的玩耍了。但是忽然，客户端写的第一封情书也到了，服务端看到了，依然回复了句： 死鬼，我知道了</li>
+<li><strong>因为 HTTP 是无状态的，客户端不知道服务端回复的是啥，就没理。</strong></li>
+<li><strong>服务端就在一直等待中：这个死鬼的情书到底是写给谁，怎么不回复我。于是服务端憔悴至死（资源浪费）</strong></li>
+</ol>
+<p>然后是三次握手的情况：</p>
+<ol>
+<li>客户端写了一封情书： 我中意你啊（建立连接的请求），但是因为某些原因，有句放假啦，你的情书被搁置在路上了</li>
+<li>客户端没有收到回复，于是又写了一封情书：我真的好中意你啊（建立连接的请求）</li>
+<li>服务端收到了这封情书的回复：哇，我也中意你啊，mua</li>
+<li><strong>客户端收到了服务端的 mua ：好啊，那我们就在一起吧（真正建立连接）</strong></li>
+<li>到这时，客户端和服务端已经可以愉快的玩耍了。但是忽然，客户端写的第一封情书也到了，服务端看到了，依然回复了句： 死鬼，我知道了</li>
+<li><strong>客户端一看，这是错了： 这是情书发错了，别再等了</strong></li>
+</ol>
+<p>三次握手的基本情况都老实交代了了，就那样。</p>
+<h3 id="四次分手"><a href="#四次分手" class="headerlink" title="四次分手"></a><strong>四次分手</strong></h3><p>然后是四次分手，这个就简单的多：</p>
+<ol>
+<li>客户端和服务端腻歪了，就说要分手，客户端：分手吧 （关闭连接的请求）</li>
+<li>服务端：分就分，但是还有你的一些破东西，还给你（传递向客户端待发送的数据）</li>
+<li>客户端收到回复了，就原地待命</li>
+<li>服务端数据发送完了：好了，都扔了（数据发送完毕）</li>
+<li>客户端接收到数据，然后给个回复：好的，我知道了，拜拜。</li>
+</ol>
+<p>以上都是抖机灵的理解。其实 TCP 的三次连接和四次分手要复杂的多，可以参考以下正经的博客：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/jawil/blog/issues/14#issuecomment-369106942">通俗大白话来理解 TCP 协议的三次握手和四次分手</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/lamian/p/3983497.html">关于 TCP 的三次握手和四次分手（整理）</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/02/28/" data-id="clepk3zum000ugtndf2u5f5h8" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/22/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          一次有关于逼格的折腾笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/05/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">ng2体验报告</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-HTTP-%E5%8D%8F%E8%AE%AE%E4%BB%A5%E5%8F%8A-TCP-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E5%88%86%E6%89%8B%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">理解 HTTP 协议以及 TCP 三次握手与四次分手的过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-HTTP-%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.1.</span> <span class="toc-text">理解 HTTP 协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E5%88%86%E6%89%8B"><span class="toc-number">1.2.</span> <span class="toc-text">TCP 三次握手与四次分手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E5%88%86%E6%89%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">四次分手</span></a></li></ol></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

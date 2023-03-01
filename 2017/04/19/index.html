@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第六章 理解Buffer这一章要理解的不多，都是一些buffer的常见操作，看API就可以熟悉，如果做过后台的就不会陌生，这里需要注意的几个地方就是  Buffer所占用的内存不是通过V8分配的，属于堆外内存，所以意思就是其实在V8启动的时候就会有一个Buffer对象一直常驻内存，无需通过require引入。 Buffer的内存分配分为小内存分配和大内存分配，小内存分配一般指的是小于 8kb 的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用">
+<meta property="og:url" content="https://michaelooo.github.io/2017/04/19/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="第六章 理解Buffer这一章要理解的不多，都是一些buffer的常见操作，看API就可以熟悉，如果做过后台的就不会陌生，这里需要注意的几个地方就是  Buffer所占用的内存不是通过V8分配的，属于堆外内存，所以意思就是其实在V8启动的时候就会有一个Buffer对象一直常驻内存，无需通过require引入。 Buffer的内存分配分为小内存分配和大内存分配，小内存分配一般指的是小于 8kb 的">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:published_time" content="2017-04-19T14:34:26.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:50:12.644Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/19/" class="article-date">
+  <time datetime="2017-04-19T14:34:26.000Z" itemprop="datePublished">2017-04-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="第六章-理解Buffer"><a href="#第六章-理解Buffer" class="headerlink" title="第六章 理解Buffer"></a><strong>第六章 理解Buffer</strong></h2><p>这一章要理解的不多，都是一些buffer的常见操作，看API就可以熟悉，如果做过后台的就不会陌生，这里需要注意的几个地方就是</p>
+<ul>
+<li><strong>Buffer所占用的内存</strong>不是通过V8分配的，属于堆外内存，所以意思就是其实在V8启动的时候就会有一个Buffer对象一直常驻内存，无需通过require引入。</li>
+<li><strong>Buffer的内存分配</strong>分为小内存分配和大内存分配，小内存分配一般指的是小于 8kb 的 Buffer 的对象，大内存当然就是大于 8kb的Buffer 对象。</li>
+<li><strong>Buffer的转换</strong>主要体现在字符串转Buffer和Buffer转字符串，字符串转Buffer直接通过构造函数来实现。<br>new Buffer(str, [encording]) &#x2F;&#x2F;encording值编码类型</li>
+</ul>
+<p>Buffer转字符串通过 toString() 可以实现。<br>        buf.toString([encording], [start], [end])</p>
+<ul>
+<li><strong>Buffer的性能</strong>，通过预先转换静态内容为Buffer对象，可以有效减少CPU的重复使用，从而节省服务器资源。</li>
+</ul>
+<h2 id="第七章-网络编程"><a href="#第七章-网络编程" class="headerlink" title="第七章 网络编程"></a><strong>第七章 网络编程</strong></h2><p>这一章也比较简单，主要分为四个，构建TCP服务、构建UDP服务、构建HTTP服务、构建WebSocket服务，前两个不是重点，后两个比较常用。不多说，直接看代码。</p>
+<p><strong>构建TCP服务</strong></p>
+<pre class="prettyprint"><span class="hljs-comment">//示例，创建一个TCP服务器端</span>
+<span class="hljs-keyword">var</span> net = <span class="hljs-built_in">require</span>(<span class="hljs-string">'net'</span>) <span class="hljs-comment">//依赖node自带的net模块</span>
+
+<span class="hljs-keyword">var</span> server = net.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(socket)</span> {</span>
+    <span class="hljs-comment">//新的连接</span>
+    socket.on(<span class="hljs-string">'data'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(data)</span> {</span>
+        console.log(<span class="hljs-string">'连上了'</span>)
+    })
+    <span class="hljs-comment">//断开连接</span>
+    socket.on(<span class="hljs-string">'end'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(data)</span> {</span>
+        console.log(<span class="hljs-string">'连接断开'</span>)
+    })
+    socket.write(<span class="hljs-string">'创建一个TCP服务器端'</span>)
+})
+
+<span class="hljs-comment">//监听</span>
+server.listen(<span class="hljs-number">1234</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+    console.log(<span class="hljs-string">'已绑定1234端口号'</span>)
+})</pre>
+
+<p><strong>构建一个UDP服务器端和一个UDP客户端</strong></p>
+<pre class="prettyprint"><span class="hljs-comment">//示例，创建一个UDP服务器端</span>
+<span class="hljs-keyword">var</span> dgram = <span class="hljs-built_in">require</span>(<span class="hljs-string">'dgram'</span>)
+
+<span class="hljs-keyword">var</span> server = dgram.createSocket(<span class="hljs-string">'udp4'</span>)
+
+server.on(<span class="hljs-string">'message'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(msg, rinfo)</span> {</span>
+console.log(<span class="hljs-string">'服务器得到了'</span> + msg + <span class="hljs-string">'来自'</span> + rinfo.address + <span class="hljs-string">':'</span> + rinfo.port)
+})
+
+server.on(<span class="hljs-string">'listening'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+<span class="hljs-keyword">var</span> address = server.address()
+console.log(<span class="hljs-string">'已绑定'</span> + rinfo.address + <span class="hljs-string">':'</span> + rinfo.port)
+})
+
+<span class="hljs-comment">//示例，创建一个UDP客户端，与UDP服务器端对话</span>
+<span class="hljs-keyword">var</span> dgram = <span class="hljs-built_in">require</span>(<span class="hljs-string">'dgram'</span>)
+
+<span class="hljs-keyword">var</span> message = <span class="hljs-keyword">new</span> Buffer(<span class="hljs-string">'test.txt'</span>)
+<span class="hljs-keyword">var</span> client = dgram.createSocket(<span class="hljs-string">'udp4'</span>)
+
+<span class="hljs-comment">//通过客户端发送给网络，参数分别对应 要发送的Buffer  Buffer的偏移  Buffer的长度  目标端口 目标地址 完成后的回调</span>
+client.send(message, <span class="hljs-number">0</span>, message.length, <span class="hljs-number">1234</span>, <span class="hljs-string">'localhost'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, bytes)</span> {</span> 
+client.close();
+})</pre>
+
+<p><strong>构建一个HTTP服务器</strong></p>
+<p>这个真的好熟悉，如下：</p>
+<pre class="prettyprint">//示例，创建一个HTTP服务器, <span class="hljs-keyword">http</span>模块继承于TCP中的net模块
+var <span class="hljs-keyword">http</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>)
+
+<span class="hljs-keyword">http</span>.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-title">req</span>, <span class="hljs-title">res</span>) {</span>
+    res.writeHead(<span class="hljs-number">200</span>, {<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/plain'</span>})
+    res.<span class="hljs-keyword">end</span>(<span class="hljs-string">'雷猴\n'</span>)
+}).listen(<span class="hljs-number">1234</span>, <span class="hljs-string">'localhost'</span>)
+
+console.<span class="hljs-built_in">log</span>(<span class="hljs-string">'已绑定 http://localhost:1234'</span>)</pre>
+
+<p><strong>构建WebSocket服务</strong></p>
+<p>WebSocket也是一种基于事件的编程模型，所以和Node结合也是相得益彰，同时WebSocket实现了客户端和服务器端之间的长连接，Node事件驱动的方式十分擅长于大量的客户端保持高并发的连接。</p>
+<pre class="prettyprint">//示例，WebSocket在客户端的应用
+var <span class="hljs-built_in">socket</span> = <span class="hljs-built_in">new</span> WebSocket(<span class="hljs-string">'ws://localhost:1234/update'</span>)
+
+<span class="hljs-built_in">socket</span>.onopen = <span class="hljs-function"><span class="hljs-keyword">function</span> () {</span>
+    setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span> () {</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">socket</span>.bufferedAmount === <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">socket</span>.<span class="hljs-built_in">send</span>(getUpdateData())
+        }
+    }, <span class="hljs-number">50</span>)
+}
+
+<span class="hljs-built_in">socket</span>.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-title">event</span>) {</span>
+   <span class="hljs-comment"> //todo: event.data 的处理</span>
+}</pre>
+
+<p><strong>网络服务与安全</strong></p>
+<p>还有一个关于网络编程的便是网络安全。node在网络安全上提供了3个模块，<strong>crypto</strong>、<strong>tls</strong>、<strong>https</strong>。其中crypto主要用于加密解密，tls模块提供了与net模块类似的功能，区别在于建立在TSL&#x2F;SSL加密的TCP连接之上，https与http基本都是一致的，区别在于前者更安全。</p>
+<h2 id="第八章-构建Web应用"><a href="#第八章-构建Web应用" class="headerlink" title="第八章 构建Web应用"></a><strong>第八章 构建Web应用</strong></h2><p>关于构建Web应用这一章，其实现有其他的框架讲的而且运用的已经很详细，比如KOA，比如Express，试着运用这两个做一个web应用更能加深理解，这里就总结一下构建Web应用的组成</p>
+<p><strong>基础功能</strong></p>
+<ul>
+<li><strong>请求方法</strong>：常见的请求方法有GET、POST、PUT、DELETE，存在于请求报文的第一行的第一个单词，通常为大写。</li>
+<li><strong>路径解析</strong>：浏览器将请求解析成报文，位于请求报文的第二行。</li>
+<li><strong>查询字符串</strong>：即请求传递的参数。</li>
+<li><strong>cookie</strong>：记录服务器和客户端之间的状态。服务器端生成向客户端发送 –&gt; 浏览器保存cookie –&gt;<br>每次浏览器发送请求都会携带cookie，cookie会造成带宽浪费，所以可以减少cookie的大小，为静态的组件使用不同的域名，减少DNS的查询来避免。</li>
+<li><strong>session</strong>：与cookie作用类似，但是session只保留在服务器端，并且常驻内存（利用Redis或者Memcached可以统一转移到集中的数据存储中）。session也会有安全问题，但是相对较小，常见的漏洞就是XSS漏洞（跨站脚本攻击）。</li>
+<li><strong>缓存</strong>：利用浏览器来缓存静态资源，目的是提升加载速度从而提升体验。</li>
+<li><strong>Basic认证</strong>：请求报文头部的Authorization，这种方式有缺陷，因为在网络传输中这些验证接近于明文，所以不可取。</li>
+</ul>
+<p><strong>数据上传</strong></p>
+<ul>
+<li><strong>表单数据</strong>：即常见的form表单提交。</li>
+<li><strong>JSON&#x2F;XML</strong>: 提交的数据是JSON&#x2F;XML格式的，现在大部分的交互都是用的JSON，XML的也有用，比如微信公众号平台的开发的交互就是用的XML，这个真的贼坑。</li>
+<li><strong>附件上传</strong>：利用form-data来实现附件上传。</li>
+<li><strong>数据上传安全</strong>：数据上传的安全性问题主要体现在内存限制和跨站伪造请求的问题上，所以一要对上传做限制，而是在开发中要加hash值做标识，就是加一个随机数。</li>
+</ul>
+<p><strong>路由解析</strong></p>
+<ul>
+<li><strong>文件路径型</strong>：分为静态文件和动态文件，不需要解释。</li>
+<li><strong>MVC</strong>：前端MVC，之前一篇博客有讲，现在前端都是MV*。</li>
+<li><strong>RESTful</strong>: 表述性状态转移，强调所有的资源都是可以通过URL访问到，对URL做文章，与MVC不冲突。可以看下阮一峰的博客：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></li>
+</ul>
+<p><strong>中间件</strong></p>
+<ul>
+<li><strong>异常处理</strong>：中间件的核心就是尾调用next()，所以对于一些异常，需要在next()添加一个参数,并且把捕获到的异常传递过来。</li>
+<li><strong>性能</strong>：中间件的出现时服务于具体业务的，所以要特殊特用，性能问题并不大。</li>
+</ul>
+<p><strong>页面渲染</strong></p>
+<ul>
+<li><strong>内容响应</strong>：内容的响应主要依赖于报文中的Content-*字段，它决定了客户端会以什么样的方式来作出响应，下载、跳转等。</li>
+<li><strong>视图渲染</strong>：一般是通过模板加数据共同生成出来的。</li>
+<li><strong>模板</strong>：比视图渲染更进一步，模板的使用的对前端页面的一种复用，是对html体的复用。比如javaweb中的jsp，或者PHP，当然这些都相对成熟，对于初出茅庐的node来说，现在常用的模板渲染模块有jade,heredoc,ejs等。</li>
+</ul>
+<hr>
+<p><br/>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/04/19/" data-id="clepk3zvg002sgtndezs581x9" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/20/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          深入浅出nodejs学习笔记--第九章 玩转进程管理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/18/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">深入浅出nodejs学习笔记--第五章 内存控制</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E7%90%86%E8%A7%A3Buffer"><span class="toc-number">1.</span> <span class="toc-text">第六章 理解Buffer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">第七章 网络编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9E%84%E5%BB%BAWeb%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">第八章 构建Web应用</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

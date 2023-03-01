@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git开发规范 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在团队开发中，团队协作是比埋头编程更值得去深入的东西。一套好的开发流程（规范）可以避免很多不必要的麻烦，现在大部分的公司都使用 git 来进行代码管理，这里结合个人工作中的所得以及个人使用中经常遇到的坑，做个简单的总结。 对于 git 的编程规范来说，其实 git-flow  就是一套好的编程规范，它对工作中的 git 事务性的操作做了一个封装，在团队还不具有一定的规模化的情况下，使用 git-f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git开发规范">
+<meta property="og:url" content="https://michaelooo.github.io/2018/08/15/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="在团队开发中，团队协作是比埋头编程更值得去深入的东西。一套好的开发流程（规范）可以避免很多不必要的麻烦，现在大部分的公司都使用 git 来进行代码管理，这里结合个人工作中的所得以及个人使用中经常遇到的坑，做个简单的总结。 对于 git 的编程规范来说，其实 git-flow  就是一套好的编程规范，它对工作中的 git 事务性的操作做了一个封装，在团队还不具有一定的规模化的情况下，使用 git-f">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:published_time" content="2018-08-15T11:25:48.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:50:12.644Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-git开发规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/15/" class="article-date">
+  <time datetime="2018-08-15T11:25:48.000Z" itemprop="datePublished">2018-08-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      git开发规范
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>在团队开发中，团队协作是比埋头编程更值得去深入的东西。一套好的开发流程（规范）可以避免很多不必要的麻烦，现在大部分的公司都使用 git 来进行代码管理，这里结合个人工作中的所得以及个人使用中经常遇到的坑，做个简单的总结。</p>
+<p>对于 git 的编程规范来说，其实 <strong><a target="_blank" rel="noopener" href="https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow">git-flow</a></strong>  就是一套好的编程规范，它对工作中的 git 事务性的操作做了一个封装，在团队还不具有一定的规模化的情况下，使用 <strong>git-flow</strong> 是一个不错的选择。如关于常用分支的定义，就可以参考 <strong>git-flow</strong> 的思想：</p>
+<blockquote>
+<p> <strong>master</strong> 只能用来包括产品代码。你不能直接工作在这个 master 分支上，而是在其他指定的，独立的特性分支中（这方面我们会马上谈到）。不直接提交改动到 master 分支上也是很多工作流程的一个共同的规则。</p>
+</blockquote>
+<blockquote>
+<p><strong>develop</strong> 是你进行任何新的开发的基础分支。当你开始一个新的功能分支时，它将是 开发 的基础。另外，该分支也汇集所有已经完成的功能，并等待被整合到 master 分支中。</p>
+</blockquote>
+<p>但是当团队有了一定的规模化的时候，要求所有成员再去学习 git-flow 的使用，这样的成本也是很高的，所以这时候我们倾向于使用原生的命令来操作。</p>
+<p>下面是我总结的在工作常用的场景下，对 git 的一些操作。</p>
+<h2 id="开发一个新的功能时"><a href="#开发一个新的功能时" class="headerlink" title="开发一个新的功能时"></a>开发一个新的功能时</h2><p>比较好的开发规范就是，当你开发一个新的需求时，应该按照下面的流程进行开发：</p>
+<p><strong>第一步：基于 develop 新建一个人分支</strong> </p>
+<pre><code class="shell">git checkout -b &quot;new-branch&quot;
+</code></pre>
+<p><strong>第二步：同步个人分支至远程仓库</strong></p>
+<pre><code class="shell">git push --set-upstream origin &quot;new-branch&quot;
+</code></pre>
+<p>使用 <code>--set-upstream</code> 的目的是跟踪远程分支。后面执行命令时可以省掉指定源的操作，如：</p>
+<pre><code class="shell">git pull origin test =&gt; git pull 
+git push origin test =&gt; git push
+</code></pre>
+<p><strong>第三步：功能开发完成后，发送 merge 请求</strong></p>
+<p><code>master</code> 分支和 <code>develop</code> 分支应该被保护，只有稳定的版本才可以允许合并操作。合并的方式因团队而异，常规的流程是找到具有<code>develop</code> 分支开发权限的成员，执行：</p>
+<pre><code class="shell">git checkout develop
+git merge &quot;new-branch&quot;
+</code></pre>
+<p>如果你的团队使用 gitlab 进行管理，就可以发送一个由 <code>new-branch</code> 到 <code>develop</code> 分支的 <strong>merge request</strong> 。</p>
+<h2 id="如何写好一个-git-comment"><a href="#如何写好一个-git-comment" class="headerlink" title="如何写好一个 git comment"></a>如何写好一个 git comment</h2><p>不应当出现语义模糊或毫无意义的 comment 描述。每个团队都要有自己的 comment 规范，当然也可以直接用大家都已经接受了的</p>
+<pre><code class="shell">feat：新功能（feature）
+fix：修补bug
+docs：文档（documentation）
+style： 格式（不影响代码运行的变动）
+rebuild：重构（即不是新增功能，也不是修改bug的代码变动）
+test：增加测试
+chore：构建过程或辅助工具的变动
+config: 配置
+
+example: git commit -m &quot;[feat] 新功能&quot;
+</code></pre>
+<p>以上总结自： <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html">阮一峰： Commit message 和 Change log 编写指南</a>]</p>
+<p>如果你很皮，想加个开源库那样 comment 的表情，你可以执行：</p>
+<pre><code class="shell">git commit -m &#39;:apple: i have a apple&#39;
+</code></pre>
+<p>苹果就出来了，更多表情代码可以点 <a target="_blank" rel="noopener" href="https://github.com/Michaelooo/just_write/blob/master/archived/%E5%85%B3%E4%BA%8Egit%2C%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E6%93%8D%E4%BD%9C.md#git-comment-%E6%B7%BB%E5%8A%A0%E8%A1%A8%E6%83%85">这里</a>。</p>
+<h2 id="做一个-hotfix-时"><a href="#做一个-hotfix-时" class="headerlink" title="做一个 hotfix 时"></a>做一个 hotfix 时</h2><p><strong>Hotfix</strong> 是为了应对已上线的产品代码出现的问题出现的紧急修复，所以和开发新功能的流程略有不同。 <strong>Hotfix</strong> 显而易见是基于 <strong>master</strong> 分支的。但实际的操作步骤和上面是一样的，这里不再赘述。</p>
+<h2 id="分支切换遇到问题时"><a href="#分支切换遇到问题时" class="headerlink" title="分支切换遇到问题时"></a>分支切换遇到问题时</h2><p>这里的问题往往是：<strong>使用 checkout 切换分支时遇到的冲突</strong>，或者是 <strong>分支切换的时候遇到尚未添加至暂存区的代码</strong>。对于这两个问题，前者往往很容易解决，解决掉冲突，重新 checkout 就好。后者的话就有些头疼，假如你的源分支已经有了自己大量的神仙逻辑代码，所以你不想使用 <code>git add</code> 将这些文件添加到暂存区，你也不想用 <code>git reset</code> 的方式去处理，这时相对比较好的方式就是使用下面的方式:</p>
+<pre><code class="shell">git stash -u	暂存，区分与 git add 的暂存
+git stash list	列出暂存内容
+git stash pop 取回暂存
+</code></pre>
+<p>这样就可以畅快自如的切换分支了。很显然，使用 <code>git satge</code> 的方式条理也会更加清晰些。</p>
+<h2 id="怎么去处理构建任务时"><a href="#怎么去处理构建任务时" class="headerlink" title="怎么去处理构建任务时"></a>怎么去处理构建任务时</h2><p>这个场景可能与这篇文章不是那么符合。</p>
+<p>如上所说，如果使用了 <a target="_blank" rel="noopener" href="https://about.gitlab.com/">gitlab</a> 来管理团队代码，gitlab 所集成的 CI&#x2F;CD 也是很不错的 devops 的选择，目前的项目团队也在使用，使用工程化的 gitlab.ci 配置文件，来自动化执行测试、编译、构建、部署等一系列的工作，原来部署过程中繁杂的工作变成了 **<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/ci/quick_start/">如何去写好一个 gitlab.ci 文件？</a>**。</p>
+<p>如果没有使用 gitlab， 同样的，使用 github + <a target="_blank" rel="noopener" href="https://travis-ci.org/">travis.ci</a> 也是比较流行的开源库的实现方案。</p>
+<p>另外，在之前的工作中，也有使用过 <a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/tfs/?rr=https://www.google.com.hk/">TFS</a> 的方式，这个是微软提供的服务，国内用的比较少（收费，价格还挺贵），国外很流行。这个的构建配置比起上面两个要复杂些，但是使用过程还是很舒畅的。</p>
+<p><strong>以上。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/08/15/" data-id="clepk3zuc000bgtnd33kz43r2" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/27/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          换新电脑不用慌-轻松搞定vscode配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/09/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">go入门踩坑及环境配置问题相关</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8A%9F%E8%83%BD%E6%97%B6"><span class="toc-number">1.</span> <span class="toc-text">开发一个新的功能时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%86%99%E5%A5%BD%E4%B8%80%E4%B8%AA-git-comment"><span class="toc-number">2.</span> <span class="toc-text">如何写好一个 git comment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%9A%E4%B8%80%E4%B8%AA-hotfix-%E6%97%B6"><span class="toc-number">3.</span> <span class="toc-text">做一个 hotfix 时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E5%88%87%E6%8D%A2%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%97%B6"><span class="toc-number">4.</span> <span class="toc-text">分支切换遇到问题时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%8E%BB%E5%A4%84%E7%90%86%E6%9E%84%E5%BB%BA%E4%BB%BB%E5%8A%A1%E6%97%B6"><span class="toc-number">5.</span> <span class="toc-text">怎么去处理构建任务时</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>
