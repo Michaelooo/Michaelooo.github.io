@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ng2体验报告 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ng2 体验报告、总结 当然，现在 angular 最新的版本已经出到 5.0 了，现在才来说 ng2 有点老套了，只是最近忽然的从 react 的项目组转到了做 angular v2 (ng2) 的项目组，同时对谷歌和微软的”孩子”也比较感兴趣，所以还是有必要好好学习一下的。 上手了一阵子，大概摸清了 ng2 的套路，其实在此之前，对于习惯了 React、 Vue 开发模式的我来说，对于 ng2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ng2体验报告">
+<meta property="og:url" content="https://michaelooo.github.io/2018/02/05/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="ng2 体验报告、总结 当然，现在 angular 最新的版本已经出到 5.0 了，现在才来说 ng2 有点老套了，只是最近忽然的从 react 的项目组转到了做 angular v2 (ng2) 的项目组，同时对谷歌和微软的”孩子”也比较感兴趣，所以还是有必要好好学习一下的。 上手了一阵子，大概摸清了 ng2 的套路，其实在此之前，对于习惯了 React、 Vue 开发模式的我来说，对于 ng2">
+<meta property="og:locale" content="zh_ZN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fo5d5hqq4fj21ic0hstar.jpg">
+<meta property="article:published_time" content="2018-02-05T12:54:58.000Z">
+<meta property="article:modified_time" content="2023-03-01T07:59:35.673Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="angular">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fo5d5hqq4fj21ic0hstar.jpg">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-ng2体验报告" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/02/05/" class="article-date">
+  <time datetime="2018-02-05T12:54:58.000Z" itemprop="datePublished">2018-02-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ng2体验报告
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="ng2-体验报告、总结"><a href="#ng2-体验报告、总结" class="headerlink" title="ng2 体验报告、总结"></a><strong>ng2 体验报告、总结</strong></h1><blockquote>
+<p>当然，现在 angular 最新的版本已经出到 5.0 了，现在才来说 ng2 有点老套了，只是最近忽然的从 react 的项目组转到了做 angular v2 (ng2) 的项目组，同时对谷歌和微软的”孩子”也比较感兴趣，所以还是有必要好好学习一下的。</p>
+<p>上手了一阵子，大概摸清了 ng2 的套路，其实在此之前，对于习惯了 React、 Vue 开发模式的我来说，对于 ng2 是有一定的误解的。过去的我一直以为 ng2 只是简单的视图框架，就是一个简单的模板系统，现在看来我是错了，较之于 React、 Vue 复杂的项目构建来说， ng2 才是真正的框架啊，如果你有一定的后端基础，你一定能很快的理解 ng2 知识体系， 而且你也会明白 ng2 作为一个框架对于开发效率的提升。</p>
+</blockquote>
+<h2 id="关于学习网站"><a href="#关于学习网站" class="headerlink" title="关于学习网站"></a><strong>关于学习网站</strong></h2><p>学习 ng2 最好的就是看官网了，当然所有的语言都是一样的，以下是几个可能需要经常去逛的网站。</p>
+<ol>
+<li><a href="https://github.com/angular/angular-cli/blob/master/README.md" target="_blank" rel="noopener">angular-cli 脚手架工具，快速构建项目；</a></li>
+<li><a href="https://v2.angular.cn/docs/ts/latest/quickstart.html" target="_blank" rel="noopener">angular 官网，最新的已经是 V5 版本了，可以继续深入学习；</a></li>
+<li><a href="http://cn.rx.js.org/" target="_blank" rel="noopener">Rx.js 中文速查手册；</a></li>
+<li><a href="https://www.tslang.cn/docs/home.html" target="_blank" rel="noopener">javascript 的超集 typescript；</a></li>
+<li><a href>待补……</a></li>
+</ol>
+<h2 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a><strong>重要概念</strong></h2><p>有关于 ng2 几个重要的概念如下：</p>
+<ul>
+<li>脚手架 （ scaffold ）</li>
+<li>指令（ directive ）</li>
+<li>管道 （ pipe ）</li>
+<li>路由 （ router ）</li>
+<li>父子组件通信 （ @input &amp; @output ）</li>
+<li>模块 （ model ）</li>
+<li>服务 （ service ）</li>
+<li>Rxjs （ Oberverable ）</li>
+<li>依赖注入 （ injectable ）</li>
+</ul>
+<p>当然，赘述官方的文档不是我想要的，我更希望通过我个人的理解来介绍这几个知识点（或许有错误）</p>
+<h3 id="脚手架-（-scaffold-）"><a href="#脚手架-（-scaffold-）" class="headerlink" title="脚手架 （ scaffold ）"></a><strong>脚手架 （ scaffold ）</strong></h3><p>唠叨一句：一般来说，脚手架这个东西，只有新手小白或者大牛会喜欢用，往往处于中间层的大佬们是比较鄙视的，因为这让程序变得没有技术含量，或者，被一些低级的脚手架给坑到。不过话说回来，使用好的脚手架的确能让让你的开发更加幸福，与其打开另一个文件复制代码，为何不让脚手架来给你生成呢。</p>
+<p>ng2 (angular) 使用的脚手架是官方提供的 angular-cli ，常用的几个操作如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">生成对象</th>
+<th style="text-align:left">命令</th>
+<th style="text-align:left">注意事项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">project</td>
+<td style="text-align:left">ng new PROJECT-NAME</td>
+<td style="text-align:left">生成新项目</td>
+</tr>
+<tr>
+<td style="text-align:left">debug</td>
+<td style="text-align:left">ng serve –host 0.0.0.0 –port 4201</td>
+<td style="text-align:left">启动本地服务</td>
+</tr>
+<tr>
+<td style="text-align:left">Component</td>
+<td style="text-align:left">ng g component my-new-component</td>
+<td style="text-align:left">生成 component</td>
+</tr>
+<tr>
+<td style="text-align:left">Directive</td>
+<td style="text-align:left">ng g directive my-new-directive</td>
+<td style="text-align:left">生成<a href="https://angular.cn/guide/attribute-directives" target="_blank" rel="noopener">自定义指令</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Pipe</td>
+<td style="text-align:left">ng g pipe my-new-pipe</td>
+<td style="text-align:left">生成<a href="https://angular.cn/guide/pipes#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AE%A1%E9%81%93" target="_blank" rel="noopener">自定义管道</a></td>
+</tr>
+<tr>
+<td style="text-align:left">Service</td>
+<td style="text-align:left">ng g service my-new-service</td>
+<td style="text-align:left">生成服务</td>
+</tr>
+<tr>
+<td style="text-align:left">Class</td>
+<td style="text-align:left">ng g class my-new-class</td>
+<td style="text-align:left">生成类，几乎不用</td>
+</tr>
+<tr>
+<td style="text-align:left">Guard</td>
+<td style="text-align:left">ng g guard my-new-guard</td>
+<td style="text-align:left">生成自定义路由向导，通用拦截等</td>
+</tr>
+<tr>
+<td style="text-align:left">Interface</td>
+<td style="text-align:left">ng g interface my-new-interface</td>
+<td style="text-align:left">生成接口</td>
+</tr>
+<tr>
+<td style="text-align:left">Enum</td>
+<td style="text-align:left">ng g enum my-new-enum</td>
+<td style="text-align:left">生成自定义枚举文件</td>
+</tr>
+<tr>
+<td style="text-align:left">Module</td>
+<td style="text-align:left">ng g module my-module</td>
+<td style="text-align:left">生成自定义 module</td>
+</tr>
+</tbody>
+</table>
+<p>以上常用的几个命令参数同样的路径模式，意思就是你使用 <code>ng new ./test</code> 这样的格式也是可以的。</p>
+<h3 id="指令（-directive-）"><a href="#指令（-directive-）" class="headerlink" title="指令（ directive ）"></a><strong>指令（ directive ）</strong></h3><p>指令系统是 angular 的一大特色，当你写 react 你一定特别希望也有自己的指令系统（当然这是玩笑话，因为 angular 是没有用 vdom 的）。 在开发过程中，你一定与遇到过如下的指令：</p>
+<p><strong>常见结构性指令 <code>*ngIf *ngFor *ngSwitch</code> 的用法：</strong></p>
+<pre><code>&lt;!-- 来自官网的英雄榜例子 --&gt;
+
+&lt;div *ngIf=&quot;hero&quot; &gt;xxx&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li *ngFor=&quot;let hero of heroes&quot;&gt;xxx&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div [ngSwitch]=&quot;hero?.emotion&quot;&gt;
+  &lt;app-happy-hero    *ngSwitchCase=&quot;&#39;happy&#39;&quot;    [hero]=&quot;hero&quot;&gt;&lt;/app-happy-hero&gt;
+  &lt;app-sad-hero      *ngSwitchCase=&quot;&#39;sad&#39;&quot;      [hero]=&quot;hero&quot;&gt;&lt;/app-sad-hero&gt;
+  &lt;app-confused-hero *ngSwitchCase=&quot;&#39;app-confused&#39;&quot; [hero]=&quot;hero&quot;&gt;&lt;/app-confused-hero&gt;
+  &lt;app-unknown-hero  *ngSwitchDefault           [hero]=&quot;hero&quot;&gt;&lt;/app-unknown-hero&gt;
+&lt;/div&gt;
+</code></pre><p><strong>ng-template ng-container</strong></p>
+<p>还有一些常用来和结构性指令结合使用的语法，类似 <code>ng-template ng-container</code> 这些。 关于这两个模板语法，其实并不是有必须要使用的必要，但在很多时候，合理的使用可以让你的代码更加语义化，或者说更加优美。关于这两个，我怕我解释不当，官网给了两个比较好的例子：</p>
+<ul>
+<li><a href="https://angular.cn/guide/structural-directives#ng-template%E6%8C%87%E4%BB%A4" target="_blank" rel="noopener">ng-template</a></li>
+<li><a href="https://angular.cn/guide/structural-directives#%E4%BD%BF%E7%94%A8ng-container%E6%8A%8A%E4%B8%80%E4%BA%9B%E5%85%84%E5%BC%9F%E5%85%83%E7%B4%A0%E5%BD%92%E4%B8%BA%E4%B8%80%E7%BB%84" target="_blank" rel="noopener">ng-container，消除 div 带来的副作用。</a></li>
+</ul>
+<p>当然，ng-template 另外的一个用途是 <a href="https://angular.cn/guide/dynamic-component-loader" target="_blank" rel="noopener">作为动态组件加载器</a>。</p>
+<p><strong>自定义指令</strong></p>
+<p>用上面的脚手架生成最方便，也不容易出错。如下，生成一个 名为 check 的指令：</p>
+<pre><code>&lt;!-- 执行 ng g directive --&gt;
+ng g directive
+
+&lt;!-- 自定义生成示例,并已在 当前 model 声明 --&gt;
+import { Directive } from &#39;@angular/core&#39;;
+
+@Directive({
+  selector: &#39;[check]&#39;
+})
+export class CheckDirective {
+
+  constructor() { }
+
+}
+
+&lt;!--在html模板中使用--&gt;
+&lt;input check=&quot;xxx&quot; &gt;
+</code></pre><p><strong>问题： 官文文档会看到一种 属性型指令 和 结构性指令 ，两者有什么区别？</strong></p>
+<p>答： 结构型指令 — 通过添加和移除 DOM 元素改变 DOM 布局的指令，专注于布局，ngIf 这种。属性型指令 — 改变元素、组件或其它指令的外观和行为的指令，专注于内部属性，ngClass 这种。两种都可以自定义。</p>
+<h3 id="管道-（-pipe-）"><a href="#管道-（-pipe-）" class="headerlink" title="管道 （ pipe ）"></a><strong>管道 （ pipe ）</strong></h3><p>如果习惯了 bash 命令的童鞋，一定对 管道 很熟悉， 你可能经常会见到 <code>ls xxx | grep xxx</code> 这种的写法，其实 ng 中的 管道 和这个其实是一个意思，写法都是一样的，通过 “|” 来分割，不过 ng 的明显要弱一些，ng 中管道的常见用法都是用来格式化钱币、数值精度、日期格式化这些操作。</p>
+<p><strong>内置管道</strong></p>
+<p>ng 内置了一些管道，比如 DatePipe、UpperCasePipe、LowerCasePipe、CurrencyPipe 和 PercentPipe。 它们全都可以直接用在任何模板中。</p>
+<p>常见的<a href="https://angular.cn/api?type=pipe" target="_blank" rel="noopener">内置管道</a>。<br><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fo5d5hqq4fj21ic0hstar.jpg" alt></p>
+<p><strong>自定义管道</strong></p>
+<p>当内置的管道不能满足需求的时候，往往我们需要自定义自己的管道。我们可以使用 <code>ng g pipe my-new-pipe</code> 来生成自定义管道，如下是一个简单的 money 格式化的例子,对属于任意的数值，进行金额的精度控制，当然底层其实还是使用了内置的 DecimalPipe 。</p>
+<pre><code>import { Pipe } from &#39;@angular/core&#39;;
+import { DecimalPipe } from &#39;@angular/common&#39;;
+
+@Pipe({
+  name: &#39;money&#39;
+})
+export class MoneyPipe {
+
+  constructor(protected decimalPipe: DecimalPipe) {
+
+  }
+
+  public transform(value: any, digits?: string): string | null {
+    value = parseFloat(value) || 0;
+    return this.decimalPipe.transform(value, digits);
+
+  }
+
+}
+</code></pre><p>在需要格式化金额的地方，比如我们要保留两位小数，我们可以这么用，<code>10.2222 | money:&#39;1.2-2&#39;</code>，具体第二个精度的使用方法可以<a href="https://angular.cn/api/common/DecimalPipe" target="_blank" rel="noopener">参考</a>。</p>
+<h3 id="路由-（-router-）"><a href="#路由-（-router-）" class="headerlink" title="路由 （ router ）"></a><strong>路由 （ router ）</strong></h3><p><strong>路由重定向</strong></p>
+<p>可以这么写：</p>
+<pre><code>export const routes: Routes = [
+  { path: &#39;&#39;, redirectTo: &#39;A&#39;, pathMatch: &#39;full&#39; },
+  { path: &#39;a&#39;, component: A },
+  { path: &#39;b&#39;, component: B, child:{
+      [
+      { path: &#39;&#39;, redirectTo: &#39;b-a&#39;, pathMatch: &#39;full&#39; },
+      { path: &#39;b-a&#39;, component: ba },
+      { path: &#39;b-b&#39;, component: bb }
+    ]
+  } }
+];
+</code></pre><p><strong>路由跳转</strong></p>
+<p>可以这么写：</p>
+<pre><code>&lt;a [routerLink]=&quot;[&#39;/a&#39;]&quot;&gt;a&lt;/a&gt;
+</code></pre><p>也可以这么写：</p>
+<pre><code>this.router.navigate([&#39;/a&#39;]);
+</code></pre><p><strong>路由参数</strong></p>
+<p>比如一个通知列表，点击不同的通知可以链接到不同的通知内容。</p>
+<p>路由配置：</p>
+<pre><code>export const routes: Routes = [
+  { path: &#39;&#39;, redirectTo: &#39;A&#39;, pathMatch: &#39;full&#39; },
+  { path: &#39;notice-list&#39;, component: A },
+  { path: &#39;notice-content/:id&#39;, component: B }
+];
+</code></pre><p>在 notice-list 设置路由跳转：</p>
+<pre><code>this.router.navigate([&#39;/notice-content&#39; ，id]);
+this.router.navigate([&#39;/notice-content&#39;]，params);
+</code></pre><p>读取路由参数</p>
+<pre><code>this.route.params.subscribe(params =&gt; {
+   console.log(params[&#39;id&#39;]);
+});
+
+this.route.queryParams.subscribe(params =&gt; {
+   console.log(params);
+});
+</code></pre><p><strong>路由拦截</strong></p>
+<p>使用 <code>ng g guard login</code> 来快速生成。</p>
+<pre><code>import { CanActivate } from &#39;@angular/router&#39;;
+import { Injectable } from &#39;@angular/core&#39;;
+import { LoginService } from &#39;./login-service&#39;;
+
+@Injectable()
+export class LoginRouteGuard implements CanActivate {
+
+  constructor(private loginService: LoginService) {}
+
+  canActivate() {
+    return this.loginService.isLoggedIn();
+  }
+}
+</code></pre><h3 id="父子组件通信-（-input-amp-output-）"><a href="#父子组件通信-（-input-amp-output-）" class="headerlink" title="父子组件通信 （ @input &amp; @output ）"></a><strong>父子组件通信 （ @input &amp; @output ）</strong></h3><p><strong>父组件向子组件传值</strong></p>
+<p>父组件使用 <code>[data]=&#39;{}&#39;</code> 向子组件接收值，子组件通过 <code>@input() data</code> 来接收。</p>
+<p><strong>子组件向父组件传值</strong></p>
+<p>一般用于封装的组件。</p>
+<p>在子组件中，使用</p>
+<pre><code>@Output() outData = new EventEmitter&lt;string&gt;();
+……
+this.outData.emit(data);
+</code></pre><p>在父组件中获取,定义一个 getData 事件</p>
+<pre><code>&lt;a (outData)=&#39;getData()&#39;&gt;&lt;/a&gt;
+</code></pre><h3 id="模块-model"><a href="#模块-model" class="headerlink" title="模块 ( model )"></a><strong>模块 ( model )</strong></h3><p>其实模块这个东西现在一点都不陌生，主流的编程框架都使用了模块化的编程方式。官方的文档是这么介绍的：</p>
+<blockquote>
+<p>Angular 模块是带有 @NgModule 装饰器函数的类。 @NgModule 接收一个元数据对象，该对象告诉 Angular 如何编译和运行模块代码。 它标记出该模块拥有的组件、指令和管道， 并把它们的一部分公开出去，以便外部组件使用它们。 它可以向应用的依赖注入器中添加服务提供商。</p>
+</blockquote>
+<p>我们理解起来就是，<strong>一个 Angular 模块 = 接收元数据对象（metadata）+ 暴露部分便于外部组件访问。</strong> 如果不清楚什么是 <strong>元数据</strong> 的，可以看下官方的<a href="https://angular.cn/guide/metadata" target="_blank" rel="noopener">介绍</a>。</p>
+<h3 id="服务-service"><a href="#服务-service" class="headerlink" title="服务 ( service )"></a><strong>服务 ( service )</strong></h3><p>在后端编程中经常会用到 服务 ( service ), 我个人的理解是，服务就是可高度抽象且与业务逻辑耦合低的一系列操作。比如所有应用场景下的登录都需要一个公用的验证码，那么生成验证码的这个功能就可以抽象成为一个服务，服务不是必须的，但是适当写服务会让代码耦合度降低，是一种好的编程习惯。</p>
+<p>截止到目前，我用的 ng 中的服务一般是用作某一个模块的请求封装，或者是日期的一些特殊操作，就像是一个工厂方法库一样。</p>
+<h3 id="Rxjs-Oberverable"><a href="#Rxjs-Oberverable" class="headerlink" title="Rxjs ( Oberverable )"></a><strong>Rxjs ( Oberverable )</strong></h3><p>关于异步请求，ng2 自带的 http 模块返回的就是一个 Oberverable ，所以在项目中引入 Rx.js 自然无可厚非。官方评价为 promise 的超集，使用起来的确和 promise 很像，应该说是更加强大。但是正因为强大，导致要记的方法确实不少，直接戳一个<a href="http://cn.rx.js.org/" target="_blank" rel="noopener">中文 api</a>。</p>
+<h3 id="依赖注入-（-injectable-）"><a href="#依赖注入-（-injectable-）" class="headerlink" title="依赖注入 （ injectable ）"></a><strong>依赖注入 （ injectable ）</strong></h3><p>依赖注入其实之前也接触过一些， 依赖注入的目的在我看来有两个，一个是降低程序间的耦合性和复杂度，一个是减少复杂对象实例化带来的扩展问题。</p>
+<p>关于依赖注入，这里有两篇不错的可以用来理解的文章（都是基于 java ）：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/xxzhuang/p/5948902.html" target="_blank" rel="noopener">spring 中的控制反转和依赖注入</a></li>
+<li><a href="http://blog.csdn.net/bestone0213/article/details/47424255" target="_blank" rel="noopener">依赖注入和控制反转</a></li>
+</ul>
+<p>当然 ng 中的依赖出入也差不多，而且实现方式也更优雅，东西挺多，可以看<a href="https://angular.cn/guide/dependency-injection#%E9%85%8D%E7%BD%AE%E6%B3%A8%E5%85%A5%E5%99%A8" target="_blank" rel="noopener">官方文档</a>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>其实也是刚接触 angularv2 不久，自己也只是结合过去的知识对自己认为的 ng2 做了一个总结，认识还是比较粗鄙的，行文也比较乱。</p>
+<p>写博客总结的这个习惯，希望自己可以继续坚持下去，即使只有自己看，hahah……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/02/05/" data-id="clepflm6t000sfbmnyx28flxf" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/02/28/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          tcp三次握手与四次分手
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/24/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">关于git：你应该知道的操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ng2-%E4%BD%93%E9%AA%8C%E6%8A%A5%E5%91%8A%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">1.</span> <span class="toc-text">ng2 体验报告、总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99"><span class="toc-number">1.1.</span> <span class="toc-text">关于学习网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.</span> <span class="toc-text">重要概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%89%8B%E6%9E%B6-%EF%BC%88-scaffold-%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">脚手架 （ scaffold ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%EF%BC%88-directive-%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">指令（ directive ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E9%81%93-%EF%BC%88-pipe-%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">管道 （ pipe ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1-%EF%BC%88-router-%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">路由 （ router ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1-%EF%BC%88-input-amp-output-%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">父子组件通信 （ @input &amp; @output ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97-model"><span class="toc-number">1.2.6.</span> <span class="toc-text">模块 ( model )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1-service"><span class="toc-number">1.2.7.</span> <span class="toc-text">服务 ( service )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rxjs-Oberverable"><span class="toc-number">1.2.8.</span> <span class="toc-text">Rxjs ( Oberverable )</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5-%EF%BC%88-injectable-%EF%BC%89"><span class="toc-number">1.2.9.</span> <span class="toc-text">依赖注入 （ injectable ）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

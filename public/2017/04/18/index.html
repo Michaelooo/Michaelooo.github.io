@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入浅出nodejs学习笔记--第四章 异步编程 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这一章的知识跨度看起来不广，但是知识深度的还是挺深的，异步编程作为nodejs的核心，个人同时需要一定的深度才可以去理解。 在这一章提到了函数式编程和异步编程解决方案的两个知识点，首先来了解一下函数式编程 函数式编程这里先放一本书，https:&#x2F;&#x2F;www.gitbook.com&#x2F;book&#x2F;llh911001&#x2F;mostly-adequate-guide-chinese&#x2F;details 觉得讲得不错，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出nodejs学习笔记--第四章 异步编程">
+<meta property="og:url" content="https://michaelooo.github.io/2017/04/18/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="这一章的知识跨度看起来不广，但是知识深度的还是挺深的，异步编程作为nodejs的核心，个人同时需要一定的深度才可以去理解。 在这一章提到了函数式编程和异步编程解决方案的两个知识点，首先来了解一下函数式编程 函数式编程这里先放一本书，https:&#x2F;&#x2F;www.gitbook.com&#x2F;book&#x2F;llh911001&#x2F;mostly-adequate-guide-chinese&#x2F;details 觉得讲得不错，">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:published_time" content="2017-04-17T16:09:53.000Z">
+<meta property="article:modified_time" content="2023-03-01T07:59:35.680Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-深入浅出nodejs学习笔记--第四章 异步编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/18/" class="article-date">
+  <time datetime="2017-04-17T16:09:53.000Z" itemprop="datePublished">2017-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入浅出nodejs学习笔记--第四章 异步编程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>这一章的知识跨度看起来不广，但是知识深度的还是挺深的，异步编程作为nodejs的核心，个人同时需要一定的深度才可以去理解。</p>
+<p>在这一章提到了函数式编程和异步编程解决方案的两个知识点，首先来了解一下函数式编程</p>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a><strong>函数式编程</strong></h2><p>这里先放一本书，<a href="https://www.gitbook.com/book/llh911001/mostly-adequate-guide-chinese/details" target="_blank" rel="noopener">https://www.gitbook.com/book/llh911001/mostly-adequate-guide-chinese/details</a> 觉得讲得不错，因为越到后面越看不懂</p>
+<p>JavaScript其实之前是一直被误解的，因为它一直被当做是命令式式的编程语言，或许js爸爸<strong>Brendan Eich</strong>一开始设计的时候也是这样想的，但是其实js也是可以做函数式的编程。所谓函数式编程，其实不难，不同于后台强类型语言的面向对象式的编程语言，函数式编程是种编程范式，它将电脑运算视为函数的计算，强调计算。</p>
+<p>函数式编程有以下特点：支持闭包和高阶函数，支持惰性计算（lazy evaluation）。使用递归作为控制流程的机制。加强了引用透明性。没有副作用。（这句话是百度的）</p>
+<p>这本书主要介绍了函数式编程的一些规范，我只拿其中的简单几个概念作为例子</p>
+<p><strong>高阶函数</strong>： 高阶函数是可以把函数作为参数（如传递一个方法作为参数），或者说是可以把函数作为返回值的函数（其实就是return一个函数）</p>
+<p><strong>偏函数</strong>： 偏函数是指通过部分参数来产生一个新的定制的函数的方式，这种就叫做偏函数</p>
+<p><strong>纯函数</strong>： 书中的定义是这样的，纯函数是这样一种函数，即相同的输入，永远会得到相同的输出，而且没有任何可观察的副作用。其实最重要的就是这句话，相同的输入总会的得到相同的输出，纯函数的纯就在这一点，不过多的对函数之外的环境产生依赖，保证函数本身的纯粹，从而达到纯的目的</p>
+<p><strong>函数柯里化</strong>：curry无法口述，用一个例子来解释</p>
+<pre><code>    var add = function(x) {
+        return function(y) {
+            return x + y;
+        };
+    };
+    var increment = add(1);
+    var addTen = add(10);
+    increment(2);
+    // 3
+    addTen(2);
+
+</code></pre><p>这里我们定义了一个 add 函数，它接受一个参数并返回一个新的函数。调用add 之后，返回的函数就通过闭包的方式记住了 add 的第一个参数。一次性地调用它实在是有点繁琐，好在我们可以使用一个特殊的 curry 帮助函数（helperfunction）使这类函数的定义和调用更加容易。</p>
+<h2 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a><strong>异步编程</strong></h2><p><strong>异步编程的优势和难点</strong></p>
+<p>node的异步编程所带来的最大优势就是基于事件驱动的<strong>非阻塞IO模型</strong>。非阻塞IO可以是CPU和IO操作并不相互依赖等待，让资源得以更好地利用。对于一些网络应用而言，并行还可以带来的优势是分布式和云。</p>
+<p>但同时，node所带来的难点还是很困难的：</p>
+<p><strong>难点1</strong>： 异常处理 异步中的异常都是这个尿性，看下jquery的ajax就知道，所以在编写异步方法时，需要将异常正确的返回给用户的回调方法</p>
+<p><strong>难点2</strong>： 函数嵌套过深 回调地狱，不解释，但是现在有Promise,接下来会说</p>
+<p><strong>难点3</strong>： 阻塞代码 单线程的缺点，谨慎处理</p>
+<p><strong>难点4</strong>： 多线程编程 还是单线程所带来的问题，不过node有自己child_process</p>
+<p><strong>难点5</strong>： 异步转同步 </p>
+<p>  这个就是node用惯了异步，但是没有同步操作的API，所以可能在实现同步的时候要去借助第三方库，不过放心，npm上面的插件肯定很多</p>
+<h2 id="异步编程的解决方案"><a href="#异步编程的解决方案" class="headerlink" title="异步编程的解决方案"></a><strong>异步编程的解决方案</strong></h2><p>关于异步编程的解决方案，书中给出了四种，分别是<strong>事件发布/订阅模式、Promise/Deferred、流程控制库、异步并发控制</strong></p>
+<p><strong>事件发布/订阅模式</strong>： 这个就是设计模式中的一个概念，node中的event模块其实是一个很好地实践</p>
+<p><strong>Promise/Deferred</strong>： 强调事件的状态和目标，根据状态来执行，从而避免深度嵌套，这个es6中的Promise也已经有了很好地实现</p>
+<p><strong>流程控制库</strong>：流程控制的一个重要的概念就是尾触发，es6对这个有个比较好的实现，那就是终止函数，在es7的草案中，更是直接使用了await作为流程控制中止函数标识</p>
+<p><strong>异步并发控制</strong>： 考虑到异步操作对内存的影响，为避免cpu挂掉，所以要对异步的并发进行控制</p>
+<p><strong>扩展：</strong></p>
+<p>既然说到了流程控制，就不得不说现在最流行的两个前端框架，<strong>Express</strong>和<strong>koa</strong></p>
+<p>Express是一个老牌的web应用框架了，Express 是一个基于 Node.js 平台的极简、灵活的 web 应用开发框架，它提供一系列强大的特性，帮助你创建各种 Web 和移动设备应用。 </p>
+<p>具体移步官网看，官网：<a href="http://www.expressjs.com.cn/" target="_blank" rel="noopener">http://www.expressjs.com.cn/</a>。</p>
+<p>koa是新一种的前端框架，koa 是由 Express 原班人马打造的，致力于成为一个更小、更富有表现力、更健壮的 Web 框架。使用 koa 编写 web 应用，通过组合不同的 generator，可以免除重复繁琐的回调函数嵌套，并极大地提升错误处理的效率。koa 不在内核方法中绑定任何中间件，它仅仅提供了一个轻量优雅的函数库，使得编写 Web 应用变得得心应手。koa低层的实现依赖TJ大神的CO，库很小巧，暂时不深入，具体移步官网，官网：<a href="http://koa.bootcss.com/" target="_blank" rel="noopener">http://koa.bootcss.com/</a></p>
+<hr>
+<p><br>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/04/18/" data-id="clepflm8b0057fbmnvvfmxxri" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">学习笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/18/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          深入浅出nodejs学习笔记--第五章 内存控制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/16/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">深入浅出nodejs学习笔记-前三章 简介、模块机制、异步I/O</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">函数式编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">异步编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">异步编程的解决方案</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

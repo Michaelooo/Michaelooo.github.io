@@ -29,7 +29,7 @@ wechat_url: http://ww1.sinaimg.cn/large/86c7c947gy1fme62elcrpj2076076wex.jpg ## 
 # Friendly links 友情链接
 links:
   CSDN博客地址: http://blog.csdn.net/u013707249
-  个人简历: http://www.chengpengfei.com
+  个人简历: https://michaelooo.github.io
 
 # 侧边栏 Sidebar，目前仅支持right
 sidebar: right

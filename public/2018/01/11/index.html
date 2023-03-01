@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS 参数校验: Joi 四问 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JS 参数验证： Joi 四问 以下内容均可在Joi官方地址参考（文档略长，英文），本文仅为个人总结的几个小疑问。 1. 定义 schema 时 Joi.object.keys() 和 Joi.object() 有什么区别？答： 并没有什么区别，官方给了三种定义 schema 的方式。如下： &#x2F;&#x2F; 使用 { } 来定义 const schema &#x3D; {     a: Joi.string(),">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 参数校验: Joi 四问">
+<meta property="og:url" content="https://michaelooo.github.io/2018/01/11/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="JS 参数验证： Joi 四问 以下内容均可在Joi官方地址参考（文档略长，英文），本文仅为个人总结的几个小疑问。 1. 定义 schema 时 Joi.object.keys() 和 Joi.object() 有什么区别？答： 并没有什么区别，官方给了三种定义 schema 的方式。如下： &#x2F;&#x2F; 使用 { } 来定义 const schema &#x3D; {     a: Joi.string(),">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:published_time" content="2018-01-11T14:51:00.000Z">
+<meta property="article:modified_time" content="2023-03-01T07:59:35.670Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="nodejs">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-JS 参数校验: Joi 四问" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/11/" class="article-date">
+  <time datetime="2018-01-11T14:51:00.000Z" itemprop="datePublished">2018-01-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS 参数校验: Joi 四问
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="JS-参数验证：-Joi-四问"><a href="#JS-参数验证：-Joi-四问" class="headerlink" title="JS 参数验证： Joi 四问 "></a><strong>JS 参数验证： Joi 四问 </strong></h2><p>以下内容均可在<a href="https://github.com/hapijs/joi/blob/v13.1.0/README.md" target="_blank" rel="noopener">Joi官方地址</a>参考（文档略长，英文），本文仅为个人总结的几个小疑问。</p>
+<h3 id="1-定义-schema-时-Joi-object-keys-和-Joi-object-有什么区别？"><a href="#1-定义-schema-时-Joi-object-keys-和-Joi-object-有什么区别？" class="headerlink" title="1. 定义 schema 时 Joi.object.keys() 和 Joi.object() 有什么区别？"></a>1. 定义 <strong>schema</strong> 时 <strong>Joi.object.keys()</strong> 和 <strong>Joi.object()</strong> 有什么区别？</h3><p>答： 并没有什么区别，官方给了三种定义 <code>schema</code> 的方式。如下：</p>
+<pre><code>// 使用 { } 来定义
+const schema = {
+    a: Joi.string(),
+    b: Joi.number()
+};
+
+// 使用 Joi.object()
+const schema = Joi.object({
+    a: Joi.string(),
+    b: Joi.number()
+});
+
+// 使用 Joi.object.keys()
+const schema = Joi.object().keys({
+    a: Joi.string(),
+    b: Joi.number()
+});
+
+</code></pre><p>三种方式实现的效果其实都是一样的，但是在使用的时候会有一些略微不同，具体如下：</p>
+<ul>
+<li>当使用 {} 时，只是定义了一个普通的js对象，它不是一个完整的 schema 对象。你可以将它传递给验证方法，但不能调用对象的validate（）方法，即类似这种 <code>object.validate()</code>的操作是不可以的，因为它只是一个普通的js对象。此外，每次将{}对象传递给validate（）方法，都将对每个验证执行一个昂贵的模式编译操作。</li>
+<li>当使用 Joi.object() 时，相对于使用 {} ，这是正经的schema 对象，它会在第一次编译，所以你可以多次将它传递给validate（）方法，不会增加开销。另外，你还可以设置 options 来验证。</li>
+<li>当使用 Joi.object.keys() 时，其实和使用 Joi.object() 是类似的，但是当你想添加更多的键（例如多次调用keys（））时，使用joi.object（）.keys（[schema]）会更有用。如果只添加一组键，则可以跳过keys（）方法，直接使用object（）。有些人喜欢用keys（）来使代码看起来更加精确（其实这只是一种编程风格）。</li>
+</ul>
+<h3 id="2-Joi-validate-value-schema-options-callback-中的-options-取值有哪些？"><a href="#2-Joi-validate-value-schema-options-callback-中的-options-取值有哪些？" class="headerlink" title="2. Joi.validate(value, schema, [options], [callback])中的 options 取值有哪些？"></a>2. Joi.validate(value, schema, [options], [callback])中的 options 取值有哪些？</h3><p>答：options可用的值有如下：</p>
+<ul>
+<li><strong>abortEarly：</strong> 设置true，可以在检测到第一个错误时立即返回，默认false（检查全部）。推荐设置true</li>
+<li><strong>convert：</strong>设置true，可以尝试将值转换为所需的类型（例如，将字符串转换为数字）。默认为true。推荐采用默认</li>
+<li><strong>allowunknown：</strong> 设置true，则允许对象包含被忽略的未知键。默认为false。推荐设置true</li>
+<li><strong>skipfunctions：</strong>如果为true，则忽略具有函数值的未知键。默认为false。推荐采用默认</li>
+<li><strong>stripunknown：</strong> 如果为true,从对象和数组中删除未知的元素。默认为false。也可以特殊的设置成 <code>{ objects: true , arrays: true }</code>的形式，可以对象和数组分别处理。推荐采用默认</li>
+<li><strong>presence：</strong> 设置默认的可选需求。支持的模式：’optional’,’required’,和’forbidden’。默认为’optional’。推荐采用默认</li>
+<li><strong>escapehtml：</strong> 当为true时，出于安全目的，错误消息模板将特殊字符转义为html实体。默认为false。推荐采用默认</li>
+<li><strong>nodefaults：</strong>如果为true，则不应用默认值。默认为false。推荐采用默认</li>
+<li><strong>context：</strong> 提供一个外部数据集用于引用。只能设置为外部选项来验证（）而不使用any.options（）。使用方法：</li>
+</ul>
+<pre><code>const schema = Joi.object().keys({
+    a: Joi.ref(&#39;b.c&#39;),
+    b: {
+        c: Joi.any()
+    },
+    c: Joi.ref(&#39;$x&#39;)
+});
+
+Joi.validate({ a: 5, b: { c: 5 } }, schema, { context: { x: 5 } }, (err, value) =&gt; {});
+</code></pre><ul>
+<li>language: 设置默认的错误提示。修改可参考：<a href="https://github.com/hapijs/joi/blob/v13.1.0/lib/language.js" target="_blank" rel="noopener">默认</a> </li>
+</ul>
+<h3 id="3-我需要-promisify-Joi-validate-方法吗？"><a href="#3-我需要-promisify-Joi-validate-方法吗？" class="headerlink" title="3. 我需要 promisify Joi.validate 方法吗？"></a><strong>3. 我需要 promisify Joi.validate 方法吗？</strong></h3><p>答： 其实只是两种写法，promise和非promise的写法。首先，Joi.validate() 的写法很像promise，但是还真不是promise实现的，所以你不用promise的写法就像这种（官网的这种）：</p>
+<pre><code>// 场景： 在一个CGI的入口请求参数验证
+
+const data = { a : &#39;123&#39; };
+
+let schema = Joi.object().keys({
+    a: Joi.string().required()
+});
+
+const {error, value} = Joi.validate(data, schema);
+
+if (error) {
+    // 需要人工处理异常
+    console.log(error);
+}
+</code></pre><p>使用promise的写法，就是下面这种，必须要使用 promisify 的，而且强制建议必须要使用 try-catch。</p>
+<pre><code>// 场景： 在一个CGI的入口请求参数验证
+
+const Promise = require(&#39;bluebird&#39;);
+const JoiValidatePromise = Promise.promisify(Joi.validate);
+
+try {
+
+    const data = { a : &#39;123&#39; };
+
+    let schema = Joi.object().keys({
+        a: Joi.string().required()
+    });
+
+    const query = await JoiValidatePromise(data, schema);   
+
+} catch (error) {
+    // 使用 catch 捕获错误
+    console.log(error);
+}
+
+</code></pre><p>两种写法都可以，没有孰好孰坏，不过更推荐第二种写法，利用try-catch全局捕获错误，另外 Joi 的维护者 <a href="https://github.com/hapijs/joi/issues/1194" target="_blank" rel="noopener">目前在实现 async 的写法</a>， 到时候应该就是直接支持promise了，那就不用promisify了，妙哉。</p>
+<h3 id="4-希望可以有一个包罗万象的例子？"><a href="#4-希望可以有一个包罗万象的例子？" class="headerlink" title="4. 希望可以有一个包罗万象的例子？"></a><strong>4. 希望可以有一个包罗万象的例子？</strong></h3><p>答：如下：</p>
+<pre><code>let testData = { xxx };
+
+let paramSchema = Joi.object().keys({
+    username: Joi.string().alphanum().min(3).max(30).required(),
+    password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+    access_token: [Joi.string(), Joi.number()],
+    birthyear: Joi.number().integer().min(1900).max(2013),
+    email: Joi.string().email(),
+    website: Joi.string().uri({
+        scheme: [
+            &#39;git&#39;,
+            /git\+https?/
+        ]
+    }),
+    search: Joi.string().allow(&#39;&#39;),
+    type: Joi.string().valid(&#39;disabled&#39;, &#39;normal&#39;, &#39;all&#39;).default(&#39;all&#39;),
+    startTime: Joi.date().min(&#39;1-1-1974&#39;).max(&#39;now&#39;),
+    endTime: Joi.when( Joi.ref(&#39;startTime&#39;), { is: Joi.date().required(), then: Joi.date().max(&#39;1-1-2100&#39;) } ),
+    page: Joi.number().integer().min(1).default(1),
+    pageSize: Joi.number().integer().default(8),
+    deleteWhenLtTen: Joi.number().integer().max(10).strip(),
+    arraySelect: Joi.array().items(Joi.string().label(&#39;My string&#39;).required(), Joi.number().required()),
+});
+
+let { error, value } = Joi.validate(testData, paramSchema, { allowUnknown: true, abortEarly: true });
+if (error) {
+    throw error;
+}
+query = value;
+</code></pre><p>简单的使用可以看上面，详细的使用直接看 <a href="https://github.com/hapijs/joi/blob/v13.1.0/API.md" target="_blank" rel="noopener">API</a></p>
+<p>喏，这就是一篇总结文，可能还会继续增加内容，笑纳。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/01/11/" data-id="clepflm6g000afbmnvhgwcuxd" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/18/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          我生病的一次经历
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/05/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">hyperapp.js 一个轻量级的 react 实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS-%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%EF%BC%9A-Joi-%E5%9B%9B%E9%97%AE"><span class="toc-number">1.</span> <span class="toc-text">JS 参数验证： Joi 四问 </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89-schema-%E6%97%B6-Joi-object-keys-%E5%92%8C-Joi-object-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1. 定义 schema 时 Joi.object.keys() 和 Joi.object() 有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Joi-validate-value-schema-options-callback-%E4%B8%AD%E7%9A%84-options-%E5%8F%96%E5%80%BC%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">2. Joi.validate(value, schema, [options], [callback])中的 options 取值有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%88%91%E9%9C%80%E8%A6%81-promisify-Joi-validate-%E6%96%B9%E6%B3%95%E5%90%97%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">3. 我需要 promisify Joi.validate 方法吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B8%8C%E6%9C%9B%E5%8F%AF%E4%BB%A5%E6%9C%89%E4%B8%80%E4%B8%AA%E5%8C%85%E7%BD%97%E4%B8%87%E8%B1%A1%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">4. 希望可以有一个包罗万象的例子？</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一次有关于逼格的折腾笔记 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="iterm2 折腾笔记以下是废话 emmm……，这其实不是一篇技术文，因为没有代码、没有逻辑、没有人气，纯粹是小部分人基于逼格的一些尝试（当然具体有没有还要另说），所以就当我胡说八道，值不值得看自己心里琢磨。  起因是这样的，浏览 v2ex 时看到一篇帖子：看看你们炫酷的命令行界面，回复不多，但是看得我春心荡漾。回复大概是这样子的，  或者是这个样子的，  再或者是这个样子的，  总之，看的我是蠢">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一次有关于逼格的折腾笔记">
+<meta property="og:url" content="https://michaelooo.github.io/2018/03/22/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="iterm2 折腾笔记以下是废话 emmm……，这其实不是一篇技术文，因为没有代码、没有逻辑、没有人气，纯粹是小部分人基于逼格的一些尝试（当然具体有没有还要另说），所以就当我胡说八道，值不值得看自己心里琢磨。  起因是这样的，浏览 v2ex 时看到一篇帖子：看看你们炫酷的命令行界面，回复不多，但是看得我春心荡漾。回复大概是这样子的，  或者是这个样子的，  再或者是这个样子的，  总之，看的我是蠢">
+<meta property="og:locale" content="zh_ZN">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/8849a1a4gy1fpk9383mylj20sl0ixq3r.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/bb4bb99egy1fpku9yt9f8j211x0lbgms.jpg">
+<meta property="og:image" content="https://camo.githubusercontent.com/b5d7eb49a30bfe6bdb5706fa3c9be95fe8e5956e/687474703a2f2f67696679752e636f6d2f696d616765732f70396b6e65772e676966">
+<meta property="og:image" content="http://img.blog.csdn.net/20170725190119447?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzcwNzI0OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/2618447/6316862/70f58fb6-ba03-11e4-82c9-c083bf9a6574.png">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fplepu0f5dj20hs0cmdho.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/86c7c947gy1fplemwhjjqj21xu13216d.jpg">
+<meta property="article:published_time" content="2018-03-22T11:14:48.000Z">
+<meta property="article:modified_time" content="2023-03-01T07:59:35.672Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="iterm2">
+<meta property="article:tag" content="为逼格而生">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/8849a1a4gy1fpk9383mylj20sl0ixq3r.jpg">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-iterm2plus" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/22/" class="article-date">
+  <time datetime="2018-03-22T11:14:48.000Z" itemprop="datePublished">2018-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Mac/">Mac</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一次有关于逼格的折腾笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="iterm2-折腾笔记"><a href="#iterm2-折腾笔记" class="headerlink" title="iterm2 折腾笔记"></a>iterm2 折腾笔记</h1><h2 id="以下是废话"><a href="#以下是废话" class="headerlink" title="以下是废话"></a>以下是废话</h2><blockquote>
+<p>emmm……，这其实不是一篇技术文，因为没有代码、没有逻辑、没有人气，纯粹是小部分人基于逼格的一些尝试（当然具体有没有还要另说），所以就当我胡说八道，值不值得看自己心里琢磨。</p>
+</blockquote>
+<p>起因是这样的，浏览 v2ex 时看到一篇帖子：<a href="https://www.v2ex.com/t/439713?p=2" target="_blank" rel="noopener">看看你们炫酷的命令行界面</a>，回复不多，但是看得我春心荡漾。回复大概是这样子的，</p>
+<p><img src="http://wx1.sinaimg.cn/mw690/8849a1a4gy1fpk9383mylj20sl0ixq3r.jpg" alt></p>
+<p>或者是这个样子的，</p>
+<p><img src="https://ws2.sinaimg.cn/large/bb4bb99egy1fpku9yt9f8j211x0lbgms.jpg" alt></p>
+<p>再或者是这个样子的，</p>
+<p><img src="https://camo.githubusercontent.com/b5d7eb49a30bfe6bdb5706fa3c9be95fe8e5956e/687474703a2f2f67696679752e636f6d2f696d616765732f70396b6e65772e676966" alt></p>
+<p>总之，看的我是蠢蠢欲动。在此之前，我的 terminal 的配色就是简单的 iterm2 + zsh + oh-my-zsh ，设置了简单的颜色主题，其实已经很漂亮了，大致效果是下面这个样子的：</p>
+<p><img src="http://img.blog.csdn.net/20170725190119447?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzcwNzI0OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></p>
+<p>然而，对比之下，就发现了：我为毛没有图标，简直就是高富帅和穷屌的对比啊！！ 加上之前的配色方案已经用了半年之久（相当的审美疲劳），于是决定果断换掉。</p>
+<h2 id="划重点（以上是废话）"><a href="#划重点（以上是废话）" class="headerlink" title="划重点（以上是废话）"></a>划重点（以上是废话）</h2><p>我喜欢对做每一件事情之前进行调研，研究其充分的可能，然后再做行动。同时，加上我实践之后得出的真知，在这里先画个重点：</p>
+<ol>
+<li>只适用于 MacOS。首先 Windows 没有 iterm2(当然也不仅仅是用在 iterm2上面)，其次是因为 macOS 所搭载的平台（MacBook，iMac）都是对高分辨率有强迫症的，所以才会有好的视觉效果，Windows 就暂时先放一放。</li>
+<li>好看确实好看，不一定好用。 不好用体现在两个方面，布局和性能。在布局上，或许只有在全屏下才能看到最佳的视觉效果，因为行内有大量的内容区域被占用，大大压榨了可输入区域的大小，虽然有些主题可以设置另起一行来选择输入，但是体验是相当差的。在性能上，对于一些特殊的主题，因为会实时的显示本地的内存占用、时间时期等信息，每次执行命令都会执行一遍，不卡才怪（反正我在使用过程中发现了绝对能够影响我感官的卡顿感）。</li>
+</ol>
+<p>如果你觉得以上的问题还 OK，那就继续看下去。现在开始折腾……</p>
+<h2 id="开始折腾"><a href="#开始折腾" class="headerlink" title="开始折腾"></a>开始折腾</h2><p>其实配置的方法很简单，比较纠结的地方在于怎么去找适合的主题，于是我开始 深入浅出 GitHub……</p>
+<h3 id="关于主题选择"><a href="#关于主题选择" class="headerlink" title="关于主题选择"></a>关于主题选择</h3><p>其实 iterm 的<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="noopener">主题</a>有很多，我们可以随便选择一种。默认的主题是 robbyrussell ，我们可以通过 <code>vi ~/.zshrc</code> 命令然后找出 ZSH_THEME=”xxx” 的语句，xxx 就是默认主题的配置。</p>
+<p>在官方给出的<a href="https://github.com/agnoster/agnoster-zsh-theme" target="_blank" rel="noopener">主题列表</a>里，有一款主题其实很不错（其他都丑）：agnoster，效果如下：</p>
+<p><img src="https://cloud.githubusercontent.com/assets/2618447/6316862/70f58fb6-ba03-11e4-82c9-c083bf9a6574.png" alt></p>
+<p>配置官方的主题方案很简单，可以参考此篇<a href="https://www.jianshu.com/p/e42c7e7a4253" target="_blank" rel="noopener">博客</a>。</p>
+<p>emmm…… 这看起来和开篇的效果图还不太一样啊。当然，除了官方的主题，还有一些第三方的主题，比如我今天要用的 powerlevel9k，在搭配效果上还会有更多的方案。</p>
+<h3 id="powerlevel9k"><a href="#powerlevel9k" class="headerlink" title="powerlevel9k"></a>powerlevel9k</h3><p>对于 powerlevel9k，其实已经有了一个还不错的生态圈了，毕竟GitHub也是有 4k+ 的存在。在官方的说明中已经有了一份很详细的安装文档。可以戳<a href="https://github.com/bhilburn/powerlevel9k" target="_blank" rel="noopener">这里</a>查看。</p>
+<p>这里就不赘述安装细节做无用功了。文档是英文的，但是也很容易可以看懂，大致意思就是 powerlevel9k 提供了针对不同平台的主题安装方案，对于一些特殊的主题效果，还需要安装一些特殊的字体用作图标展示，在这里都可以选择安装，比如我选择的就是 zsh 的主题安装 和 Nerd-Fonts 的字体安装方案。同时，powerlevel9k 也提供了社区分享的一些不错的<a href="https://github.com/bhilburn/powerlevel9k/wiki/Show-Off-Your-Config" target="_blank" rel="noopener">配色方案</a>，我们可以直接拿来用,嘿嘿……</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fplepu0f5dj20hs0cmdho.jpg" alt></p>
+<p>自己可以选择自己喜欢的主题和字体。安装完成之后，只需要在 zsh 的配置文件中配置一下即可：</p>
+<pre><code>1. 打开 zsh 配置文件
+
+vi ~/.zshrc
+
+2. 写入配置方案， 主题选择你安装的主题，配色方案可以去上面社区分享的列表去找，比如我的
+
+ZSH_THEME=&quot;powerlevel9k/powerlevel9k&quot;
+# ZSH_THEME=&quot;agnoster&quot;
+POWERLEVEL9K_MODE=&#39;nerdfont-complete&#39;
+
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_SHORTEN_STRATEGY=&quot;truncate_middle&quot;
+POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND=&quot;000&quot;
+POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND=&quot;007&quot;
+POWERLEVEL9K_DIR_HOME_BACKGROUND=&quot;001&quot;
+POWERLEVEL9K_DIR_HOME_FOREGROUND=&quot;000&quot;
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=&quot;001&quot;
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND=&quot;000&quot;
+POWERLEVEL9K_NODE_VERSION_BACKGROUND=&quot;black&quot;
+POWERLEVEL9K_NODE_VERSION_FOREGROUND=&quot;007&quot;
+POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_COLOR=&quot;002&quot;
+POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND=&quot;black&quot;
+POWERLEVEL9K_LOAD_WARNING_BACKGROUND=&quot;black&quot;
+POWERLEVEL9K_LOAD_NORMAL_BACKGROUND=&quot;black&quot;
+POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND=&quot;007&quot;
+POWERLEVEL9K_LOAD_WARNING_FOREGROUND=&quot;007&quot;
+POWERLEVEL9K_LOAD_NORMAL_FOREGROUND=&quot;007&quot;
+POWERLEVEL9K_LOAD_CRITICAL_VISUAL_IDENTIFIER_COLOR=&quot;red&quot;
+POWERLEVEL9K_LOAD_WARNING_VISUAL_IDENTIFIER_COLOR=&quot;yellow&quot;
+POWERLEVEL9K_LOAD_NORMAL_VISUAL_IDENTIFIER_COLOR=&quot;green&quot;
+POWERLEVEL9K_RAM_BACKGROUND=&quot;black&quot;
+POWERLEVEL9K_RAM_FOREGROUND=&quot;007&quot;
+POWERLEVEL9K_RAM_VISUAL_IDENTIFIER_COLOR=&quot;001&quot;
+POWERLEVEL9K_RAM_ELEMENTS=(ram_free)
+POWERLEVEL9K_TIME_BACKGROUND=&quot;black&quot;
+POWERLEVEL9K_TIME_FOREGROUND=&quot;007&quot;
+POWERLEVEL9K_TIME_FORMAT=&quot;%D{%H:%M} %F{003}\uF017&quot;
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(&#39;context&#39; &#39;dir&#39; &#39;vcs&#39;)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(&#39;node_version&#39; &#39;load&#39; &#39;ram_joined&#39; &#39;time&#39;)
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$&#39;\uE0B0&#39;
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$&#39;\uE0B2&#39;
+
+3. 使配置文件生效
+
+source ~/.zshrc
+
+</code></pre><p>综上，就可以略微有些逼格了，放个我的</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fplemwhjjqj21xu13216d.jpg" alt></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>喜欢折腾的值得一试哦（内心：真的有点卡啊，不行不行，明天我就卸了）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/03/22/" data-id="clepflm6q000mfbmnac1ru9uk" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iterm2/" rel="tag">iterm2</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%BA%E9%80%BC%E6%A0%BC%E8%80%8C%E7%94%9F/" rel="tag">为逼格而生</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/29/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          微服务 api GateWay 工具： kong
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/02/28/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">tcp三次握手与四次分手</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#iterm2-%E6%8A%98%E8%85%BE%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">iterm2 折腾笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A5%E4%B8%8B%E6%98%AF%E5%BA%9F%E8%AF%9D"><span class="toc-number">1.1.</span> <span class="toc-text">以下是废话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%92%E9%87%8D%E7%82%B9%EF%BC%88%E4%BB%A5%E4%B8%8A%E6%98%AF%E5%BA%9F%E8%AF%9D%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">划重点（以上是废话）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E6%8A%98%E8%85%BE"><span class="toc-number">1.3.</span> <span class="toc-text">开始折腾</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BB%E9%A2%98%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.1.</span> <span class="toc-text">关于主题选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powerlevel9k"><span class="toc-number">1.3.2.</span> <span class="toc-text">powerlevel9k</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">1.4.</span> <span class="toc-text">结语</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

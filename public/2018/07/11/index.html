@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>记一次狗血的修bug经历 | 程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记一次狗血的修 bug 经历 没什么别的目的，写这篇就是为了提醒自己是个傻子  起因是这样的，在一个风和日丽的一天，测试给我出了这么一个 bug ：  hello 啊，这个页面啊，打不开啊，我的 iPad 啊，就是点了不会动了啊，其他的都可以的啊，赶紧看一下啦  在经过漫长的沟通后，我得到了以下信息：  ios10 的设备下某页面的登陆点击之后无法跳转。 安卓和 iOS11 的设备是正常的。 没有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次狗血的修bug经历">
+<meta property="og:url" content="https://michaelooo.github.io/2018/07/11/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="记一次狗血的修 bug 经历 没什么别的目的，写这篇就是为了提醒自己是个傻子  起因是这样的，在一个风和日丽的一天，测试给我出了这么一个 bug ：  hello 啊，这个页面啊，打不开啊，我的 iPad 啊，就是点了不会动了啊，其他的都可以的啊，赶紧看一下啦  在经过漫长的沟通后，我得到了以下信息：  ios10 的设备下某页面的登陆点击之后无法跳转。 安卓和 iOS11 的设备是正常的。 没有">
+<meta property="og:locale" content="zh_ZN">
+<meta property="og:image" content="http://t1.baidu.com/it/u=695851676,4175920205&amp;fm=20">
+<meta property="og:image" content="http://ws3.sinaimg.cn/large/9150e4e5ly1ffxpkw13rlj20hn0jfab8.jpg">
+<meta property="og:image" content="http://ws1.sinaimg.cn/large/9150e4e5ly1fjh9dobqr2j20hs0h140f.jpg">
+<meta property="article:published_time" content="2018-07-11T13:14:13.000Z">
+<meta property="article:modified_time" content="2023-03-01T07:59:35.681Z">
+<meta property="article:author" content="Michael Cheng">
+<meta property="article:tag" content="ios bug">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://t1.baidu.com/it/u=695851676,4175920205&amp;fm=20">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-记一次狗血的修bug经历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/11/" class="article-date">
+  <time datetime="2018-07-11T13:14:13.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      记一次狗血的修bug经历
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="记一次狗血的修-bug-经历"><a href="#记一次狗血的修-bug-经历" class="headerlink" title="记一次狗血的修 bug 经历"></a>记一次狗血的修 bug 经历</h1><blockquote>
+<p>没什么别的目的，写这篇就是为了提醒自己是个傻子</p>
+</blockquote>
+<p>起因是这样的，在一个风和日丽的一天，测试给我出了这么一个 bug ：</p>
+<blockquote>
+<p>hello 啊，这个页面啊，打不开啊，我的 iPad 啊，就是点了不会动了啊，其他的都可以的啊，赶紧看一下啦</p>
+</blockquote>
+<p>在经过漫长的沟通后，我得到了以下信息：</p>
+<ul>
+<li>ios10 的设备下某页面的登陆点击之后无法跳转。</li>
+<li>安卓和 iOS11 的设备是正常的。</li>
+<li><strong>没有足够的设备的调试。</strong></li>
+</ul>
+<p>其实看到这儿，我的内心还是有点窃喜的。自上次自己解决 <code>ios9浏览器无痕模式下浏览器 localStroage 存储失效</code> 的问题后，我发现找这种类似的兼容性问题的过程还是挺爽的，我其实对我自己发现问题和解决问题的能力是很自信的，所以我想，我又可以秀操作了。</p>
+<p><img src="http://t1.baidu.com/it/u=695851676,4175920205&amp;fm=20" alt></p>
+<p>现在我来聊一下我的心路历程：</p>
+<p><strong>Q: 首先呢，我以为是前端页面报错！</strong></p>
+<p>因为正常的页面无法跳转，我怀疑大概率是 js 的某些逻辑出错，这在兼容性的问题上是经常出现的。但，ios 的设备调试是挺坑爹的，况且还是 ipad ，通过数据线来进行 safari 调试是行不通的，于是只能通过无线代理的方式来调试了。一顿操作，装证书、设代理，发请求，但是页面控制台真的是 空 空 空空如也</p>
+<p>并没有 js 报错，看来并不是某些方法兼容性的问题。</p>
+<p>又检查了一下请求，看出了一些端倪，竟然请求没有返回值。</p>
+<p><strong>Q: 那我觉得，应该是后端接口的问题了！</strong></p>
+<p>后端是用 node + koa 写的，我们的接口是这样的，前端发一个登陆请求，然后我们会去验证登陆，如果登陆成功，会在客户端写入唯一登陆的 accesstoken 到cookie中，后续的请求都需要用到这个登陆的 accesstoken。经过我一顿查找，发现了可能是cookie的写入出现了问题：使用 <code>ctx.cookies.set(&#39;ss&#39;,&#39;bb&#39;)</code> 并没有生效。</p>
+<p><strong>Q: 那么是所有的设备都没有生效吗？</strong></p>
+<p>为了不影响测试，我本地起了个服务，然后借用同事的 iOS10 的设备进行测试发现了同样不行（<strong>最后证明就是这一环节出了问题，是网络堵塞引起的不行</strong>）。当然安卓都是正常的。</p>
+<p>于是我自以为是的得出了一个结论：<strong>这应该是 ios10 设备独有的一个 cookie 的 bug。</strong></p>
+<p>我疯狂的在 github issue 和 Stack Overflow 寻找相关的答案，有提到 <code>写入 cookie 时使用中文字符造成写入失败的</code>、也有说 <code>iOS10 的隐私策略的问题</code>。不过好像都与我的关系不大。</p>
+<p><strong>Q: 难道并不是兼容性问题？</strong></p>
+<p>我又重新检查了代码，最后经过一段手动测试，发现是 cookie 过期时间设置的问题。问题描述如下： 当我设置过期时间为几个小时的时间时，就不能正常写入 cookie。如果时间大于一天，就可以正常写入，也算勉强解决了。</p>
+<p>我下意识的瞄了一下手里的iPad，时间显示是正常的（坑在此，时间是正常，但是日期不是）。我又开始怀疑是时区设置的问题，但是也是不求甚解。</p>
+<p><strong>Q: 好吧，估计只能抽空看下源码了……</strong></p>
+<p>折腾了这么个半天时间，发现了确实是 cookie 设置的问题，于是通过重新设置cookie的有效时间解决了。虽然算是勉强解决了，但是这个解决办法很让人不爽，因为我还是在迷惑的状态。就在我心如死灰的时候，我无意中打开了 ipad 的日历，发现竟然比实际多一天，但是时间却是一分一秒不差。</p>
+<p>WTF!!!难道是日期设置的问题？</p>
+<p>最后，测试了几次，果然是日期设置的问题。</p>
+<p><img src="http://ws3.sinaimg.cn/large/9150e4e5ly1ffxpkw13rlj20hn0jfab8.jpg" alt></p>
+<p><strong>最后，bug 终于解决了</strong></p>
+<p>其实问题出现的原因很简单，和什么兼容性一点关系都没有，纯粹是自己的意淫。其实就是当我设置 cookie 为一天之内的过期时间的情况，因为设备的日期时间刚好大于实际的一天，那造成的情况就是 cookie 刚写入了就因为过期被浏览器清除掉了。</p>
+<p><img src="http://ws1.sinaimg.cn/large/9150e4e5ly1fjh9dobqr2j20hs0h140f.jpg" alt></p>
+<p>真是一次令人捉急的经历！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/07/11/" data-id="clepflm8d005dfbmny03cz6bb" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ios-bug/" rel="tag">ios bug</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/18/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          如何用node去搭建一个项目发布系统
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/29/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">微服务 api GateWay 工具： kong</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+<div class="comments" id="comments">
+      
+</div>
+
+
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%8B%97%E8%A1%80%E7%9A%84%E4%BF%AE-bug-%E7%BB%8F%E5%8E%86"><span class="toc-number">1.</span> <span class="toc-text">记一次狗血的修 bug 经历</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>程鹏飞的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="欢迎来到程鹏飞的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="程鹏飞的博客">
+<meta property="og:url" content="https://michaelooo.github.io/page/2/index.html">
+<meta property="og:site_name" content="程鹏飞的博客">
+<meta property="og:description" content="欢迎来到程鹏飞的博客">
+<meta property="og:locale" content="zh_ZN">
+<meta property="article:author" content="Michael Cheng">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+        <a class="main-nav-link" href="/">首页</a>
+        
+        <a class="main-nav-link" href="/archives">归档</a>
+        
+        <a class="main-nav-link" href="/resume/">关于</a>
+        
+      </nav>
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">程鹏飞的博客</a>
+      </h1>
+      
+    </div>
+  </div>
+  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-关于git：你应该知道的操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/24/" class="article-date">
+  <time datetime="2018-01-23T16:59:25.000Z" itemprop="datePublished">2018-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Github/">Github</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/24/">关于git：你应该知道的操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fnqmycqqxhj20xc0hi0tb.jpg" alt></p>
+<h1 id="关于-git-你应该知道的操作"><a href="#关于-git-你应该知道的操作" class="headerlink" title="关于 git 你应该知道的操作"></a><strong>关于 git 你应该知道的操作</strong></h1><h2 id="git-的使用工具"><a href="#git-的使用工具" class="headerlink" title="git 的使用工具"></a><strong>git 的使用工具</strong></h2><p>首先有两个 可视化工具推荐 ：</p>
+<ul>
+<li><a href="https://www.gitkraken.com/features" target="_blank" rel="noopener">gitkraken</a><br>一个新出的广受好评的git 可视化工具。有付费。</li>
+<li><a href="https://www.sourcetreeapp.com/" target="_blank" rel="noopener">sourcetree</a><br>一直在用，就是注册麻烦，需要翻墙。免费。</li>
+</ul>
+<p>个人在用第二个，sourcetree 日常使用可以说是hin方便了。当然，不想额外下软件的还可以使用 vscode 内置的 git 管理工具，同样的也是棒棒的。</p>
+<h3 id="vscode-的git插件"><a href="#vscode-的git插件" class="headerlink" title="vscode 的git插件"></a>v<strong>scode 的git插件</strong></h3><p>当然我也在使用 vscode ，除了 vscode 自带的 git 支持，还可以安装以下的插件来更好的使用git：</p>
+<ul>
+<li><strong>Git Lens</strong> 官推的 git 插件，几乎该有的都有了，最强大的就是可以查看具体代码的具体变更,就像下面的这样：<br><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fnqmw9ig2vj210u062jsa.jpg" alt><br>上一个让我感觉这么厉害的还是 visual studio 的内部集成的版本控制功能，但是 visual studio 实在是太大了。不过这个插件美中不足的就是查看历史实在是太丑了，所以有了下面的这个插件。</li>
+<li><strong>git history</strong> 没毛病，这个插件就是让你的 提交历史 可以很直观的展示出来。</li>
+</ul>
+<p>不过，无论怎么说，git 原生命令还是要了解的，对学习和理解 git 的工作机制会很有帮助，当然对提升逼格也有成效。so,下面的部分主要是针对于 git 命令行的一些快捷操作。</p>
+<h3 id="Mac下不可以使用的问题"><a href="#Mac下不可以使用的问题" class="headerlink" title="Mac下不可以使用的问题"></a><strong>Mac下不可以使用的问题</strong></h3><p><code>error: xcrun:error invalid actiive ... missing xcrun at ...</code></p>
+<p>出现的原因是 git 依赖这个 xcode 的这个工具，所以要更新，一般会在更新系统之后出现。<br>解决办法就是：</p>
+<pre><code>sudo xcode-select --install
+</code></pre><p>等待安装完成之后就可以了。</p>
+<h2 id="git-命令行的一些骚操作"><a href="#git-命令行的一些骚操作" class="headerlink" title="git 命令行的一些骚操作"></a><strong>git 命令行的一些骚操作</strong></h2><p>下面总结一些 git 命令中可以快速提高效率和提升幸福度的操作。</p>
+<h3 id="git配置别名"><a href="#git配置别名" class="headerlink" title="git配置别名"></a><strong>git配置别名</strong></h3><p>可以直接使用命令行修改全局配置，</p>
+<pre><code>git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+git config --global alias.unstage &#39;reset HEAD&#39;
+git config --global alias.last &#39;log -1&#39;
+git config --global alias.lg &quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;
+</code></pre><p>也可以通过 vim 更改配置文件来操作。</p>
+<pre><code>vi ~/.gitconfig
+source ~/.gitconfig
+</code></pre><p>两者的效果是一致的，可以通过 <code>git config --list</code> 查看添加的配置是否存在。 </p>
+<p>该部分总结自 <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000" target="_blank" rel="noopener">廖雪峰：git——配置别名</a>。</p>
+<h3 id="（踩坑）常用的回退（救命）操作"><a href="#（踩坑）常用的回退（救命）操作" class="headerlink" title="（踩坑）常用的回退（救命）操作"></a><strong>（踩坑）常用的回退（救命）操作</strong></h3><p>如果你已经提交到暂存区了，你可以：</p>
+<ul>
+<li>撤销上次提交<br><code>git reset --hard &#39;指定的记录&#39;</code></li>
+</ul>
+<p>如果你想放弃本地修改，你可以：</p>
+<ul>
+<li>检出本地<br><code>git checkout &#39;branch&#39;</code></li>
+</ul>
+<p>如果你想修改上一次的提交信息，你可以：</p>
+<ul>
+<li>修改最后的一次提交<br><code>git commit --amend</code></li>
+</ul>
+<p>如果你在排查问题的时候，你可以</p>
+<ul>
+<li>使用 <code>git fetch</code> 替换 <code>git pull</code>, 因为<code>git pull = git fetch + merge local</code></li>
+</ul>
+<h3 id="（踩坑）git-上传文件忽略大小写"><a href="#（踩坑）git-上传文件忽略大小写" class="headerlink" title="（踩坑）git 上传文件忽略大小写"></a><strong>（踩坑）git 上传文件忽略大小写</strong></h3><p>好的约定其实比技术本身更重要，所以尽可能统一规范大小写，从而避免修改默认的配置。</p>
+<pre><code>git config core.ignorecase false
+git config --global core.ignorecase false // 全局设置
+</code></pre><h3 id="git-comment-添加规范"><a href="#git-comment-添加规范" class="headerlink" title="git comment 添加规范"></a><strong>git comment 添加规范</strong></h3><pre><code>feat：新功能（feature）
+fix：修补bug
+docs：文档（documentation）
+style： 格式（不影响代码运行的变动）
+rebuild：重构（即不是新增功能，也不是修改bug的代码变动）
+test：增加测试
+chore：构建过程或辅助工具的变动
+config: 配置
+
+example: git commit -m &quot;[feat] 新功能&quot;
+
+</code></pre><p>总结自 <a href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html" target="_blank" rel="noopener">阮一峰： Commit message 和 Change log 编写指南</a>。</p>
+<h3 id="git-comment-添加表情"><a href="#git-comment-添加表情" class="headerlink" title="git comment 添加表情"></a><strong>git comment 添加表情</strong></h3><p>看到别人的comment history有那么多的卡哇伊的表情，是不是很羡慕，现在自己也可以做到。只需要在comment加入<code>:apple:</code>这样的代码，测试<code>GitHub</code>和<code>Gitlab</code>是可用的</p>
+<pre><code>git commit -m &#39;:apple: i have a apple&#39;
+</code></pre><p><strong>表情列表如下：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">emoji</th>
+<th style="text-align:left">emoji 代码</th>
+<th style="text-align:left">commit 说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">:art: (调色板)</td>
+<td style="text-align:left"><code>:art:</code></td>
+<td style="text-align:left">改进代码结构/代码格式</td>
+</tr>
+<tr>
+<td style="text-align:left">:zap: (闪电)<br>:racehorse: (赛马)</td>
+<td style="text-align:left"><code>:zap:</code><br><code>:racehorse:</code></td>
+<td style="text-align:left">提升性能</td>
+</tr>
+<tr>
+<td style="text-align:left">:fire: (火焰)</td>
+<td style="text-align:left"><code>:fire:</code></td>
+<td style="text-align:left">移除代码或文件</td>
+</tr>
+<tr>
+<td style="text-align:left">:bug: (bug)</td>
+<td style="text-align:left"><code>:bug:</code></td>
+<td style="text-align:left">修复 bug</td>
+</tr>
+<tr>
+<td style="text-align:left">:ambulance: (急救车)</td>
+<td style="text-align:left"><code>:ambulance:</code></td>
+<td style="text-align:left">重要补丁</td>
+</tr>
+<tr>
+<td style="text-align:left">:sparkles: (火花)</td>
+<td style="text-align:left"><code>:sparkles:</code></td>
+<td style="text-align:left">引入新功能</td>
+</tr>
+<tr>
+<td style="text-align:left">:memo: (备忘录)</td>
+<td style="text-align:left"><code>:memo:</code></td>
+<td style="text-align:left">撰写文档</td>
+</tr>
+<tr>
+<td style="text-align:left">:rocket: (火箭)</td>
+<td style="text-align:left"><code>:rocket:</code></td>
+<td style="text-align:left">部署功能</td>
+</tr>
+<tr>
+<td style="text-align:left">:lipstick: (口红)</td>
+<td style="text-align:left"><code>:lipstick:</code></td>
+<td style="text-align:left">更新 UI 和样式文件</td>
+</tr>
+<tr>
+<td style="text-align:left">:tada: (庆祝)</td>
+<td style="text-align:left"><code>:tada:</code></td>
+<td style="text-align:left">初次提交</td>
+</tr>
+<tr>
+<td style="text-align:left">:white_check_mark: (白色复选框)</td>
+<td style="text-align:left"><code>:white_check_mark:</code></td>
+<td style="text-align:left">增加测试</td>
+</tr>
+<tr>
+<td style="text-align:left">:lock: (锁)</td>
+<td style="text-align:left"><code>:lock:</code></td>
+<td style="text-align:left">修复安全问题</td>
+</tr>
+<tr>
+<td style="text-align:left">:apple: (苹果)</td>
+<td style="text-align:left"><code>:apple:</code></td>
+<td style="text-align:left">修复 macOS 下的问题</td>
+</tr>
+<tr>
+<td style="text-align:left">:penguin: (企鹅)</td>
+<td style="text-align:left"><code>:penguin:</code></td>
+<td style="text-align:left">修复 Linux 下的问题</td>
+</tr>
+<tr>
+<td style="text-align:left">:checkered_flag: (旗帜)</td>
+<td style="text-align:left"><code>:checked_flag:</code></td>
+<td style="text-align:left">修复 Windows 下的问题</td>
+</tr>
+<tr>
+<td style="text-align:left">:bookmark: (书签)</td>
+<td style="text-align:left"><code>:bookmark:</code></td>
+<td style="text-align:left">发行/版本标签</td>
+</tr>
+<tr>
+<td style="text-align:left">:rotating_light: (警车灯)</td>
+<td style="text-align:left"><code>:rotating_light:</code></td>
+<td style="text-align:left">移除 linter 警告</td>
+</tr>
+<tr>
+<td style="text-align:left">:construction: (施工)</td>
+<td style="text-align:left"><code>:construction:</code></td>
+<td style="text-align:left">工作进行中</td>
+</tr>
+<tr>
+<td style="text-align:left">:green_heart: (绿心)</td>
+<td style="text-align:left"><code>:green_heart:</code></td>
+<td style="text-align:left">修复 CI 构建问题</td>
+</tr>
+<tr>
+<td style="text-align:left">:arrow_down: (下降箭头)</td>
+<td style="text-align:left"><code>:arrow_down:</code></td>
+<td style="text-align:left">降级依赖</td>
+</tr>
+<tr>
+<td style="text-align:left">:arrow_up: (上升箭头)</td>
+<td style="text-align:left"><code>:arrow_up:</code></td>
+<td style="text-align:left">升级依赖</td>
+</tr>
+<tr>
+<td style="text-align:left">:construction_worker: (工人)</td>
+<td style="text-align:left"><code>:construction_worker:</code></td>
+<td style="text-align:left">添加 CI 构建系统</td>
+</tr>
+<tr>
+<td style="text-align:left">:chart_with_upwards_trend: (上升趋势图)</td>
+<td style="text-align:left"><code>:chart_with_upwards_trend:</code></td>
+<td style="text-align:left">添加分析或跟踪代码</td>
+</tr>
+<tr>
+<td style="text-align:left">:hammer: (锤子)</td>
+<td style="text-align:left"><code>:hammer:</code></td>
+<td style="text-align:left">重大重构</td>
+</tr>
+<tr>
+<td style="text-align:left">:heavy_minus_sign: (减号)</td>
+<td style="text-align:left"><code>:heavy_minus_sign:</code></td>
+<td style="text-align:left">减少一个依赖</td>
+</tr>
+<tr>
+<td style="text-align:left">:whale: (鲸鱼)</td>
+<td style="text-align:left"><code>:whale:</code></td>
+<td style="text-align:left">Docker 相关工作</td>
+</tr>
+<tr>
+<td style="text-align:left">:heavy_plus_sign: (加号)</td>
+<td style="text-align:left"><code>:heavy_plus_sign:</code></td>
+<td style="text-align:left">增加一个依赖</td>
+</tr>
+<tr>
+<td style="text-align:left">:wrench: (扳手)</td>
+<td style="text-align:left"><code>:wrench:</code></td>
+<td style="text-align:left">修改配置文件</td>
+</tr>
+<tr>
+<td style="text-align:left">:globe_with_meridians: (地球)</td>
+<td style="text-align:left"><code>:globe_with_meridians:</code></td>
+<td style="text-align:left">国际化与本地化</td>
+</tr>
+<tr>
+<td style="text-align:left">:pencil2: (铅笔)</td>
+<td style="text-align:left"><code>:pencil2:</code></td>
+<td style="text-align:left">修复 typo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a><strong>写在最后</strong></h2><p>骚操作那么多，肯定不止上面那些，所以本文还是会持续更新的。</p>
+<p>最后，希望你和 git 过的幸福。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/01/24/" data-id="clepflm6w0010fbmnb47i9wo9" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-踩坑笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/23/" class="article-date">
+  <time datetime="2018-01-23T09:11:01.000Z" itemprop="datePublished">2018-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Github/">Github</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/23/">git 大小写问题踩坑笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="关于-git-大小写问题的解决办法"><a href="#关于-git-大小写问题的解决办法" class="headerlink" title="关于 git 大小写问题的解决办法"></a><strong>关于 git 大小写问题的解决办法</strong></h2><h3 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a><strong>写在前面：</strong></h3><p>最近，在项目部署的时候，总是遇到一些很灵异的问题，比如在 merge 没有报错的情况下，文件没有更新， 特殊的文件突然被还原至之前的某个版本……最后发现问题所在，是之前的一次 <strong>文件名大小写</strong> 引起的问题。解决过程其实还是挺糟心的（自己埋的坑要自己填……），深刻体会到好的规范比好的技术其实更重要。同时也觉得，有必要记录一下，谨防下次掉进去。</p>
+<h3 id="问题复现"><a href="#问题复现" class="headerlink" title="问题复现:"></a><strong>问题复现:</strong></h3><p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fnq9h4oitzj21si0rswmo.jpg" alt></p>
+<ol>
+<li>新建一个 <strong>a.js</strong> 文件(大小写不敏感的状态下)，并提交</li>
+<li>修改本地 <strong>a.js</strong> 变为 <strong>A.js</strong>，文件内容无变更，无法提交</li>
+<li>执行<code>git config core.ignorecase false</code>，修改 大小写敏感 规则，然后提交，查看结果，此时会存在 大小写 同时存在的文件</li>
+<li>此时某种机缘下，再次执行 <code>git config core.ignorecase true</code>，大小写不敏感，</li>
+<li>此时执行 <code>git push</code> ， 即把最新的更新都更新到了 <strong>a.js</strong> 中</li>
+<li>此时再修改 大小写敏感规则为敏感， 执行 <code>git pull</code> ，并不会拿到最新的更新。比如自己想要的是第一次修改后的 A.js ，但是服务器有一个没有更新的 <strong>A.js</strong> 和 有更新的 <strong>a.js</strong>,而你只能拿到前者，所以就会遇到各种各样的坑……</li>
+</ol>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a><strong>解决办法：</strong></h3><p>执行<code>git config --global core.ignorecase false</code>，全局设置 <strong>大小写敏感</strong> 。</p>
+<h4 id="1-文件变更比较少的情况"><a href="#1-文件变更比较少的情况" class="headerlink" title="1. 文件变更比较少的情况"></a><strong>1. 文件变更比较少的情况</strong></h4><p>直接使用以下命令重命名文件，在 git 中不要直接修改文件名，最好的办法是使用下面的方式，</p>
+<pre><code>git mv -f [你想要删掉的文件] [你想要留下的文件]
+git mv -f a.js A.js
+
+等同于：
+
+git rm a.js
+git add A.js
+
+</code></pre><p>这个命令的目的就是删除不需要的大小写同名文件，修改后 <code>git push</code> 提交变更即可。</p>
+<p><strong>tips:</strong> </p>
+<p>因为 git 默认大小写不敏感，所以最好添加项目配置文件,设置 <strong>大小写敏感</strong>。</p>
+<pre><code>touch .gitconfig
+git config core.ignorecase false
+</code></pre><h4 id="2-变更比较多，并且拥有分支较高权限"><a href="#2-变更比较多，并且拥有分支较高权限" class="headerlink" title="2. 变更比较多，并且拥有分支较高权限"></a><strong>2. 变更比较多，并且拥有分支较高权限</strong></h4><ul>
+<li>在 github 删除该分支</li>
+<li>本地执行 <code>git rm -r --cached</code> . (注意后面‘点号’)</li>
+<li>然后重新 <code>git push</code>，就ok了</li>
+</ul>
+<p>此法不太好，有点暴力，容易出问题，但适用于 变更发生于近期的情况。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h3><p>其实看解决办法的话，只是一个很小的问题，但是出现的 bug 确实是让人很头疼的，因为 mac windows 在不设置大小写敏感规则的时候默认大小写是不敏感，项目部署的机器是 Linux 的，而 Linux 是大小写敏感的。所以这样的问题平时不易发现，本地调试的时候大部分时候并不会出错误，只有在项目部署的时候问题才会显示出来。</p>
+<p>至此，终于填了一个不该踩的坑。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/01/23/" data-id="clepflm8g005kfbmnsomzf2xf" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" rel="tag">踩坑笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-我生病的一次经历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/18/" class="article-date">
+  <time datetime="2018-01-18T10:25:00.000Z" itemprop="datePublished">2018-01-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%97%A5%E5%B8%B8%E5%B0%8F%E6%84%9F/">日常小感</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/18/">我生病的一次经历</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>中午刷知乎不经意看到两个推送的问题？</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/22213153" target="_blank" rel="noopener">年轻时得了绝症或者大病是种怎样的体验？</a></li>
+<li><a href="https://www.zhihu.com/question/264229537" target="_blank" rel="noopener">有哪些让你感觉很痛的句子？</a></li>
+</ul>
+<p>事实上，我只看了几个回答，就不敢再看下去了……</p>
+<p>我也正在年轻时，不过我不是得的大病（已痊愈），或者说现在看来根本不算是什么大病，但是答主所经历的种种，我或许也是可以感同身受。</p>
+<p>2016年7月，是我毕业后的第一个暑假。我在深圳的一家公司做着一名程序员小白的工作，对那个时候的唯一印象大概就是：深圳的夏天比我待过的地方都热许多。进入公司会需要一些材料，比如说入职体检。而我的噩梦就是从入职体检开始的。</p>
+<p>我来到了住所附近的一家医院，天气很热，因为是周末，来做体检的人也很多。因为想到做完这个体检就可以成为正式的社会人了，其实心里自然会有点小期许。</p>
+<p>排队，缴费，抽血，测血压一系列流程下来，剩下的就是去做胸透了。</p>
+<p>我像之前一样平静的站到机器旁，当我听到医生指示准备走的时候，医生示意我不要走，让我脱掉衣服再检测一次。</p>
+<p>好呗，脱就脱嘛，反正也是夏天。我这么安慰自己，并没有觉得十分不妥。</p>
+<p>当我再次听到医生示意走出胸透室，医生拦住我：小伙子，你这个我看不清，这个机器不清晰，我给你开张单子，你再去做个CT给我来看看吧。</p>
+<p>我胸这里有什么问题吗？我有些不安的情绪。</p>
+<p>没什么问题，有些小阴影，机器看不清，所以叫你做个清晰的，快去吧。医生叮嘱我。</p>
+<p>其实到这时，虽然我有点不安，但我还是乐观的。我也就屁颠屁颠的去了。做CT不似做胸透，1分钟1个下饺子一样，做CT的话要等待很久，半个小时到1个小时之间。因为是中午，我也顾不上吃饭，就在等待室等待结果。</p>
+<p>程鹏飞，程鹏飞在吗，过来填张单子。一个护士扯着嗓子喊。</p>
+<p>这儿，我回应着跑过去。</p>
+<p>因为之前也有病人拿到自己的检查报告，但是并没有见需要写什么单子。但我看到单子的抬头的时候，脑袋哄的一下。</p>
+<p>肺结核确认单</p>
+<p>我在脑袋里飞速的搜索着这个字眼，但每个回忆都告诉我这个病不简单，甚至，会失去生命。</p>
+<p>医生还在旁边催促着我填单子，随便填写了自己的住址，电话，接过护士递来的转院证明什么的，静静的找到一个椅子坐下。</p>
+<p>我想，那大概是我所经历过的最难熬的时刻。我依旧可以回想起来当时的感受。我记得，我首先想到的是死亡，我没有去百度这个病，但是我先想到了一个人离开。我想到了，如果这个病严重我就自杀，绝对不做别人的累赘。我想到了，这个病是传染病，以后还会与人愿意和我做朋友吗。我想到了，还在异地的女友（现在已经不是了），是时候离开她了。</p>
+<p>当我把所有的可能都想了一遍的时候，我已经坐了半个小时左右了，微信的消息还在提示，我把结果告诉了女友。</p>
+<p>女友的电话打了过来。已经哽咽的我再也忍不住，是的，我想不够坚强，即使再来一次，我应该还是不够坚强。女友告诉我她搜索的答案，不会死的，可以治愈的种种。</p>
+<p>我想，当时的我，大概用了一个小时才让自己接受现实。</p>
+<p>后来的事情就很简单了，转了医院在进行了半个月的炎症治疗发现没有作用的时候，确诊是肺结核。</p>
+<p>的确如女友所说，并不会死，可以治愈，另外，我不具有传染性。</p>
+<p>然后就是长时间的服药治疗了，每天要像为垂暮的老人一样吃各种增强免疫力的药。每个月回医院接受医生的复查。</p>
+<p>幸好，都挺过来了。</p>
+<p>这是我最深刻的一次“大病”，当然后来也有生病，甚至肺结核康复的第二年还去医院住了半个月，但都没有这次的印象深刻。</p>
+<p>我所学习到，或者说是体会到的是生命，健康这东西，我们无法掌握，我们也无法保证坚强。但还好，生命一直继续，无论多苦多难，我们也一直学着坚强。你若对生命保留着敬畏之心，生命自然也会善待你。</p>
+<p>最后</p>
+<p>希望未来没有疾病，希望大家足够坚强。</p>
+<p>–写自 2017年12月25日 ，一个脖子很疼的正午</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/01/18/" data-id="clepflm78001pfbmnlbzvt8sz" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-JS 参数校验: Joi 四问" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/11/" class="article-date">
+  <time datetime="2018-01-11T14:51:00.000Z" itemprop="datePublished">2018-01-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/nodejs/">nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/11/">JS 参数校验: Joi 四问</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="JS-参数验证：-Joi-四问"><a href="#JS-参数验证：-Joi-四问" class="headerlink" title="JS 参数验证： Joi 四问 "></a><strong>JS 参数验证： Joi 四问 </strong></h2><p>以下内容均可在<a href="https://github.com/hapijs/joi/blob/v13.1.0/README.md" target="_blank" rel="noopener">Joi官方地址</a>参考（文档略长，英文），本文仅为个人总结的几个小疑问。</p>
+<h3 id="1-定义-schema-时-Joi-object-keys-和-Joi-object-有什么区别？"><a href="#1-定义-schema-时-Joi-object-keys-和-Joi-object-有什么区别？" class="headerlink" title="1. 定义 schema 时 Joi.object.keys() 和 Joi.object() 有什么区别？"></a>1. 定义 <strong>schema</strong> 时 <strong>Joi.object.keys()</strong> 和 <strong>Joi.object()</strong> 有什么区别？</h3><p>答： 并没有什么区别，官方给了三种定义 <code>schema</code> 的方式。如下：</p>
+<pre><code>// 使用 { } 来定义
+const schema = {
+    a: Joi.string(),
+    b: Joi.number()
+};
+
+// 使用 Joi.object()
+const schema = Joi.object({
+    a: Joi.string(),
+    b: Joi.number()
+});
+
+// 使用 Joi.object.keys()
+const schema = Joi.object().keys({
+    a: Joi.string(),
+    b: Joi.number()
+});
+
+</code></pre><p>三种方式实现的效果其实都是一样的，但是在使用的时候会有一些略微不同，具体如下：</p>
+<ul>
+<li>当使用 {} 时，只是定义了一个普通的js对象，它不是一个完整的 schema 对象。你可以将它传递给验证方法，但不能调用对象的validate（）方法，即类似这种 <code>object.validate()</code>的操作是不可以的，因为它只是一个普通的js对象。此外，每次将{}对象传递给validate（）方法，都将对每个验证执行一个昂贵的模式编译操作。</li>
+<li>当使用 Joi.object() 时，相对于使用 {} ，这是正经的schema 对象，它会在第一次编译，所以你可以多次将它传递给validate（）方法，不会增加开销。另外，你还可以设置 options 来验证。</li>
+<li>当使用 Joi.object.keys() 时，其实和使用 Joi.object() 是类似的，但是当你想添加更多的键（例如多次调用keys（））时，使用joi.object（）.keys（[schema]）会更有用。如果只添加一组键，则可以跳过keys（）方法，直接使用object（）。有些人喜欢用keys（）来使代码看起来更加精确（其实这只是一种编程风格）。</li>
+</ul>
+<h3 id="2-Joi-validate-value-schema-options-callback-中的-options-取值有哪些？"><a href="#2-Joi-validate-value-schema-options-callback-中的-options-取值有哪些？" class="headerlink" title="2. Joi.validate(value, schema, [options], [callback])中的 options 取值有哪些？"></a>2. Joi.validate(value, schema, [options], [callback])中的 options 取值有哪些？</h3><p>答：options可用的值有如下：</p>
+<ul>
+<li><strong>abortEarly：</strong> 设置true，可以在检测到第一个错误时立即返回，默认false（检查全部）。推荐设置true</li>
+<li><strong>convert：</strong>设置true，可以尝试将值转换为所需的类型（例如，将字符串转换为数字）。默认为true。推荐采用默认</li>
+<li><strong>allowunknown：</strong> 设置true，则允许对象包含被忽略的未知键。默认为false。推荐设置true</li>
+<li><strong>skipfunctions：</strong>如果为true，则忽略具有函数值的未知键。默认为false。推荐采用默认</li>
+<li><strong>stripunknown：</strong> 如果为true,从对象和数组中删除未知的元素。默认为false。也可以特殊的设置成 <code>{ objects: true , arrays: true }</code>的形式，可以对象和数组分别处理。推荐采用默认</li>
+<li><strong>presence：</strong> 设置默认的可选需求。支持的模式：’optional’,’required’,和’forbidden’。默认为’optional’。推荐采用默认</li>
+<li><strong>escapehtml：</strong> 当为true时，出于安全目的，错误消息模板将特殊字符转义为html实体。默认为false。推荐采用默认</li>
+<li><strong>nodefaults：</strong>如果为true，则不应用默认值。默认为false。推荐采用默认</li>
+<li><strong>context：</strong> 提供一个外部数据集用于引用。只能设置为外部选项来验证（）而不使用any.options（）。使用方法：</li>
+</ul>
+<pre><code>const schema = Joi.object().keys({
+    a: Joi.ref(&#39;b.c&#39;),
+    b: {
+        c: Joi.any()
+    },
+    c: Joi.ref(&#39;$x&#39;)
+});
+
+Joi.validate({ a: 5, b: { c: 5 } }, schema, { context: { x: 5 } }, (err, value) =&gt; {});
+</code></pre><ul>
+<li>language: 设置默认的错误提示。修改可参考：<a href="https://github.com/hapijs/joi/blob/v13.1.0/lib/language.js" target="_blank" rel="noopener">默认</a> </li>
+</ul>
+<h3 id="3-我需要-promisify-Joi-validate-方法吗？"><a href="#3-我需要-promisify-Joi-validate-方法吗？" class="headerlink" title="3. 我需要 promisify Joi.validate 方法吗？"></a><strong>3. 我需要 promisify Joi.validate 方法吗？</strong></h3><p>答： 其实只是两种写法，promise和非promise的写法。首先，Joi.validate() 的写法很像promise，但是还真不是promise实现的，所以你不用promise的写法就像这种（官网的这种）：</p>
+<pre><code>// 场景： 在一个CGI的入口请求参数验证
+
+const data = { a : &#39;123&#39; };
+
+let schema = Joi.object().keys({
+    a: Joi.string().required()
+});
+
+const {error, value} = Joi.validate(data, schema);
+
+if (error) {
+    // 需要人工处理异常
+    console.log(error);
+}
+</code></pre><p>使用promise的写法，就是下面这种，必须要使用 promisify 的，而且强制建议必须要使用 try-catch。</p>
+<pre><code>// 场景： 在一个CGI的入口请求参数验证
+
+const Promise = require(&#39;bluebird&#39;);
+const JoiValidatePromise = Promise.promisify(Joi.validate);
+
+try {
+
+    const data = { a : &#39;123&#39; };
+
+    let schema = Joi.object().keys({
+        a: Joi.string().required()
+    });
+
+    const query = await JoiValidatePromise(data, schema);   
+
+} catch (error) {
+    // 使用 catch 捕获错误
+    console.log(error);
+}
+
+</code></pre><p>两种写法都可以，没有孰好孰坏，不过更推荐第二种写法，利用try-catch全局捕获错误，另外 Joi 的维护者 <a href="https://github.com/hapijs/joi/issues/1194" target="_blank" rel="noopener">目前在实现 async 的写法</a>， 到时候应该就是直接支持promise了，那就不用promisify了，妙哉。</p>
+<h3 id="4-希望可以有一个包罗万象的例子？"><a href="#4-希望可以有一个包罗万象的例子？" class="headerlink" title="4. 希望可以有一个包罗万象的例子？"></a><strong>4. 希望可以有一个包罗万象的例子？</strong></h3><p>答：如下：</p>
+<pre><code>let testData = { xxx };
+
+let paramSchema = Joi.object().keys({
+    username: Joi.string().alphanum().min(3).max(30).required(),
+    password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+    access_token: [Joi.string(), Joi.number()],
+    birthyear: Joi.number().integer().min(1900).max(2013),
+    email: Joi.string().email(),
+    website: Joi.string().uri({
+        scheme: [
+            &#39;git&#39;,
+            /git\+https?/
+        ]
+    }),
+    search: Joi.string().allow(&#39;&#39;),
+    type: Joi.string().valid(&#39;disabled&#39;, &#39;normal&#39;, &#39;all&#39;).default(&#39;all&#39;),
+    startTime: Joi.date().min(&#39;1-1-1974&#39;).max(&#39;now&#39;),
+    endTime: Joi.when( Joi.ref(&#39;startTime&#39;), { is: Joi.date().required(), then: Joi.date().max(&#39;1-1-2100&#39;) } ),
+    page: Joi.number().integer().min(1).default(1),
+    pageSize: Joi.number().integer().default(8),
+    deleteWhenLtTen: Joi.number().integer().max(10).strip(),
+    arraySelect: Joi.array().items(Joi.string().label(&#39;My string&#39;).required(), Joi.number().required()),
+});
+
+let { error, value } = Joi.validate(testData, paramSchema, { allowUnknown: true, abortEarly: true });
+if (error) {
+    throw error;
+}
+query = value;
+</code></pre><p>简单的使用可以看上面，详细的使用直接看 <a href="https://github.com/hapijs/joi/blob/v13.1.0/API.md" target="_blank" rel="noopener">API</a></p>
+<p>喏，这就是一篇总结文，可能还会继续增加内容，笑纳。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/01/11/" data-id="clepflm6g000afbmnvhgwcuxd" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-hyperapp.js 一个轻量级的 react 实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/05/" class="article-date">
+  <time datetime="2018-01-05T14:24:00.000Z" itemprop="datePublished">2018-01-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/05/">hyperapp.js 一个轻量级的 react 实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="hyperapp-是什么鬼？"><a href="#hyperapp-是什么鬼？" class="headerlink" title="hyperapp 是什么鬼？"></a><strong>hyperapp 是什么鬼？</strong></h2><p>hyperapp 是一个前端的应用构建库。初见写法，很有一种写react的亲切的感觉（其实就是一个套路），不过这肯定不能成为吸引广发gay友从而在短短两个月拿到 8K star的理由。更重要的一个原因是 官方宣称的1kb。是的， hyperapp 的核心代码只有1kb，这对早已习惯react全家桶，同时对当今web应用一个页面动辄3、4M毒害的gay友来说，的确是一个福音。基于此，官方给自己的定位是：</p>
+<ul>
+<li>更小：只要1kb，做到其他框架应该做的；</li>
+<li>更实用：主流的前端应用思想，不会对学习带来额外负担；</li>
+<li>开箱即用：完善的虚拟Dom、key更新、应用生命周期。</li>
+<li>以上个人翻译，有吹嘘成分</li>
+</ul>
+<p>既然听起来这么厉害，今天就来一探究竟了……</p>
+<h2 id="简单的使用"><a href="#简单的使用" class="headerlink" title="简单的使用"></a><strong>简单的使用</strong></h2><p>最简单的使用方法就是看官网给的 <strong>计数器</strong> 示例，可以在 <a href>这里</a> 查看最终效果：</p>
+<pre><code>&lt;body&gt;
+&lt;script src=&quot;https://unpkg.com/hyperapp&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+
+// ******划重点
+
+const { h, app } = hyperapp
+
+const state = {
+  count: 0
+}
+
+const actions = {
+  down: value =&gt; state =&gt; ({ count: state.count - value }),
+  up: value =&gt; state =&gt; ({ count: state.count + value })
+}
+
+const view = (state, actions) =&gt;
+  h(&quot;div&quot;, {}, [
+    h(&quot;h1&quot;, {}, state.count),
+    h(&quot;button&quot;, { onclick: () =&gt; actions.down(1) }, &quot;–&quot;),
+    h(&quot;button&quot;, { onclick: () =&gt; actions.up(1) }, &quot;+&quot;)
+  ])
+
+window.main = app(state, actions, view, document.body)
+
+// *****划重点
+&lt;/script&gt;
+&lt;/body&gt;
+</code></pre><p>显而易见，state 定义了应用的状态， view 定义了应用的视图，通过 h 方法生成一个虚拟Dom,也就是可以被浏览器解释的结点树，action 则定义了应用的一些行为逻辑，最后在通过 app 方法挂载到真实的Dom元素结点上。</p>
+<p>当然这只是很简单的使用。对于已经习惯了react写法的我们来说，我们可能在 view 的部分更习惯写纯函数，或者说一些牵扯到生命周期的操作，当然这些在 hyperapp 中也是可以的。</p>
+<p>具体的操作可以参考 <a href="https://github.com/hyperapp/hyperapp/blob/master/docs/concepts/" target="_blank" rel="noopener"><strong>官方文档</strong></a>。</p>
+<h2 id="看源码吧还是"><a href="#看源码吧还是" class="headerlink" title="看源码吧还是"></a><strong>看源码吧还是</strong></h2><p>当然学习使用不是我们的目的，这些操作其他库中都有实现，真正感兴趣的是他说的1kb，所以还是来看源码吧（讲真，源码写的有点绕）。</p>
+<p>核心的方法只有两个，h 函数 和 app 函数，h函数很简单，只是用来构建 dom 结点的。源码如下：</p>
+<pre><code>/**
+ * 先来看h的用法，作用是生成一个虚拟dom节点
+ * name 可以是 一个标签名字符串，如‘div’, 也可以是一个已经被渲染的component，如‘h(div,&#39;&#39;,)’
+ * props 标签的属性定义，如‘class’，事件等
+ * 不定参数，都会当做当前节点的子节点计算
+ */
+
+export function h(name, props) {
+  var node
+  var stack = []
+  var children = []
+
+  for (var i = arguments.length; i-- &gt; 2; ) {
+    stack.push(arguments[i])
+  }
+
+  while (stack.length) {
+    if (Array.isArray((node = stack.pop()))) {
+      for (i = node.length; i--; ) {
+        stack.push(node[i])
+      }
+    } else if (null == node || true === node || false === node) {
+    } else {
+      children.push(typeof node === &quot;number&quot; ? node + &quot;&quot; : node)
+    }
+  }
+
+  return typeof name === &quot;string&quot;
+    ? {
+        name: name,
+        props: props || {},
+        children: children
+      }
+    : name(props || {}, children)
+}
+</code></pre><p>app 方法则是项目的入口，整个构建的操作其实在这里执行。在app函数里又定义了许多常用的工具方法，比如 createElement（创建元素），getKey（获取元素结点的key），removeElement（移除元素）等等。又很多，这里不在一一分析，重点方法只有两个 init 方法和 patch方法。</p>
+<h4 id="init"><a href="#init" class="headerlink" title="init()"></a><strong>init()</strong></h4><p>init的方法的调用还是挺有意思的，如下：</p>
+<pre><code>repaint(init([], (state = copy(state)), (actions = copy(actions))))
+
+</code></pre><p>可理解成：</p>
+<pre><code>function a() { console.log(&#39;a&#39;); setTimeout(b); }
+function b() { console.log(&#39;b&#39;) }
+function c() { console.log(&#39;c&#39;) };
+
+a(c());
+</code></pre><p>其实就是确保在入口的 repaint 方法每次被调用的时候先执行 init 方法。</p>
+<p>我们来看 init 方法的主体部分：</p>
+<pre><code>// actions 有两种情况，一种是参数只存在state的情况，一种是参数存在state和action的情况,又是讨厌的递归
+  function init(path, slice, actions) {
+    for (var key in actions) {
+      typeof actions[key] === &quot;function&quot;
+        ? (function(key, action) {
+            actions[key] = function(data) {
+
+              // 第一次初始化的时候，path为[]，所以得到的还是初始传入的state
+              slice = get(path, state)  
+
+              // actions参数中存在action的情况，同时执行重新渲染一次
+              if (typeof (data = action(data)) === &quot;function&quot;) {
+                data = data(slice, actions)
+              }
+
+              if (data &amp;&amp; data !== slice &amp;&amp; !data.then) {
+                repaint((state = set(path, copy(slice, data), state, {})))
+              }
+
+              return data
+            }
+          })(key, actions[key])
+        : init(
+            path.concat(key),
+            (slice[key] = slice[key] || {}),
+            (actions[key] = copy(actions[key]))
+          )
+    }
+  }
+
+</code></pre><p>其实 init 方法的目的就是确保了两种执行 repaint 方法的不同情况（有个看源码的小技巧就是去看官方提供的单元测试，来反推某个方法的用法）。init 方法的目的是执行 repaint 方法（真实渲染的方法入口，最终会执行 patch 方法）。</p>
+<h4 id="patch"><a href="#patch" class="headerlink" title="patch()"></a><strong>patch()</strong></h4><pre><code>function patch(parent, element, oldNode, node, isSVG, nextSibling) {
+    if (node === oldNode) {
+    } else if (null == oldNode) {
+      element = parent.insertBefore(createElement(node, isSVG), element)
+    } else if (node.name &amp;&amp; node.name === oldNode.name) {
+      updateElement(element, oldNode.props, node.props)
+
+      var oldElements = []
+      var oldKeyed = {}
+      var newKeyed = {}
+
+      for (var i = 0; i &lt; oldNode.children.length; i++) {
+        oldElements[i] = element.childNodes[i]
+
+        var oldChild = oldNode.children[i]
+        var oldKey = getKey(oldChild)
+
+        if (null != oldKey) {
+          oldKeyed[oldKey] = [oldElements[i], oldChild]
+        }
+      }
+
+      var i = 0
+      var j = 0
+
+      while (j &lt; node.children.length) {
+        var oldChild = oldNode.children[i]
+        var newChild = node.children[j]
+
+        var oldKey = getKey(oldChild)
+        var newKey = getKey(newChild)
+
+        if (newKeyed[oldKey]) {
+          i++
+          continue
+        }
+
+        if (null == newKey) {
+          if (null == oldKey) {
+            patch(element, oldElements[i], oldChild, newChild, isSVG)
+            j++
+          }
+          i++
+        } else {
+          var recyledNode = oldKeyed[newKey] || []
+
+          if (oldKey === newKey) {
+            patch(element, recyledNode[0], recyledNode[1], newChild, isSVG)
+            i++
+          } else if (recyledNode[0]) {
+            patch(
+              element,
+              element.insertBefore(recyledNode[0], oldElements[i]),
+              recyledNode[1],
+              newChild,
+              isSVG
+            )
+          } else {
+            patch(element, oldElements[i], null, newChild, isSVG)
+          }
+
+          j++
+          newKeyed[newKey] = newChild
+        }
+      }
+
+      while (i &lt; oldNode.children.length) {
+        var oldChild = oldNode.children[i]
+        if (null == getKey(oldChild)) {
+          removeElement(element, oldElements[i], oldChild)
+        }
+        i++
+      }
+
+      for (var i in oldKeyed) {
+        if (!newKeyed[oldKeyed[i][1].props.key]) {
+          removeElement(element, oldKeyed[i][0], oldKeyed[i][1])
+        }
+      }
+    } else if (node.name === oldNode.name) {
+      element.nodeValue = node
+    } else {
+      element = parent.insertBefore(
+        createElement(node, isSVG),
+        (nextSibling = element)
+      )
+      removeElement(parent, nextSibling, oldNode)
+    }
+    return element
+  }
+</code></pre><p>具体的方法什么意思就不一一解释了，有一点要注意的是，这个库用了很多小套路，如果想要理解的话，最好先去好好理解下 <a href="http://weizhifeng.net/immediately-invoked-function-expression.html" target="_blank" rel="noopener">JS 中的()是什么意思？</a></p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a><strong>源码</strong></h3><p>太长就不放了，放个链接吧。<a href="https://github.com/hyperapp/hyperapp/blob/master/src/index.js" target="_blank" rel="noopener">戳</a>。</p>
+<h2 id="其他类似的"><a href="#其他类似的" class="headerlink" title="其他类似的"></a><strong>其他类似的</strong></h2><p>其实类似的实现还有 <a href="https://github.com/developit/preact" target="_blank" rel="noopener">preact</a> ，不过 preact 大了一丢丢，但是在知名度和可靠性上肯定是 preact<br>遥遥领先的，本文只是用来学习，真正项目使用的话还是要慎重考虑的，优先考虑 react 和 preact 这些。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>写到这里感觉自己也是似懂非懂的了，一定是源码看的太少了……</p>
+<p>以后继续加油，拜拜</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/01/05/" data-id="clepflm6p000kfbmnfs7vb3c9" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hyperappjs/" rel="tag">hyperappjs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-JS：一个小例子引发的思考" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/03/" class="article-date">
+  <time datetime="2018-01-03T14:57:00.000Z" itemprop="datePublished">2018-01-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/03/">JS: 一个小例子引发的思考</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="一个小例子引发的思考"><a href="#一个小例子引发的思考" class="headerlink" title="一个小例子引发的思考"></a><strong>一个小例子引发的思考</strong></h2><p>emmmm……</p>
+<p>最近在看一个开源库，看其中的栗子中发现了一段很有意思的代码。栗子简化一下是下面的这个样子的:</p>
+<pre><code>function a() { console.log(&#39;a&#39;); setTimeout(b); }
+function b() { console.log(&#39;b&#39;) }
+function c() { console.log(&#39;c&#39;) };
+
+a(c());
+</code></pre><p>可能你觉得这没什么，不就几个简单的方法调用么，有什么复杂的？那么我们先来看一下在Chrome的控制台里面会输出什么？</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fn3en7cjl6j219m04qjrp.jpg" alt></p>
+<p>可能的确如你所料，控制台依次输出了c、a、b（虽然有个不知道什么鬼的undefined，这个等下再说），那说明你对JS中函数的执行顺序有一定的了解。的确，前面声明了三个方法，a,b,c,然后加上括号使a成为语句执行。但是a(c())这种写法怪怪的，内部怎么执行的？还有这个输出怎么会有一个undefined（面试题埋坑啊）？</p>
+<p>我同样也有这样的疑问，那么深究之前，先整理一下我们的疑问。</p>
+<p><strong>这段代码的输出是什么？a(c())这种写法是什么鬼？undefined是什么鬼？setTimeout不写时间参数会咋样？会有浏览器差异么？</strong></p>
+<p>那么我们一个个的来为我们疑问来寻找答案……</p>
+<h3 id="这段代码的输出是什么？为什么会有这样子的输出？"><a href="#这段代码的输出是什么？为什么会有这样子的输出？" class="headerlink" title="这段代码的输出是什么？为什么会有这样子的输出？"></a><strong>这段代码的输出是什么？为什么会有这样子的输出？</strong></h3><p>其实答案已经看到了，就是c、a、b。因为JS是单线程执行的，所以在执行a方法的过程中，先执行了（）中的语句，也就是c（）方法，所以顺序执行也就是c、a、b。</p>
+<p>emmm……说了和没说一样，没关系往下看。</p>
+<h3 id="a-c-这种写法是什么鬼？"><a href="#a-c-这种写法是什么鬼？" class="headerlink" title="a(c())这种写法是什么鬼？"></a><strong>a(c())这种写法是什么鬼？</strong></h3><p>接着上个答案的来说。要明白a(c())这种写法是什么鬼？我们得先了解在JS中（）是个什么作用？对于普通的语句，（）直接执行。对于函数来说，JavaScript解释器会在默认的情况下把遇到的function关键字当作是函数声明语句(statement)来进行解释的。先来看下面的这几个栗子：</p>
+<pre><code>(111)   // 常量，当做语句处理。打印 111
+
+(var a)  // 变量声明。 报错
+
+(a = 1)  // 赋值语句,不要写&#39;;&#39;。打印 1
+
+function(){console.log(&#39;aa&#39;)}()  // 匿名函数，不是标准的函数声明语句。报错
+
+(function(){console.log(&#39;aa&#39;)}())  // 立即执行函数。打印 aa
+
+(function(){console.log(&#39;aa&#39;)})()  // 立即执行函数。打印 aa
+</code></pre><p>所以其实大致的意思已经很明了。 通俗的来讲就是 因为c首先是一个很标准的函数语句，然后（）又可以执行语句，所以a(c())的执行顺序就是先执行了c方法，然后继续执行a方法。如果换成下面的这种方式c就不会执行了：</p>
+<pre><code>a(c());   // c、a、b
+
+a(c);    // a、b
+
+a(function(){console.log(&#39;nini&#39;)});    // a、b
+
+</code></pre><p>好像也没有那么绕……</p>
+<h3 id="undefined是什么鬼？"><a href="#undefined是什么鬼？" class="headerlink" title="undefined是什么鬼？"></a><strong>undefined是什么鬼？</strong></h3><p>基本路子搞明白了，那么这个undefined是什么鬼？其实很简单，这是Chrome控制台的一种默认机制，对于执行语句来说，控制台会默认去拿上一行语句的输出。</p>
+<pre><code>a = 1;    // 打印 1
+
+var a = 1; // 打印 undefined, 因为这是两行语句
+
+(function(){return 1;})() // 打印 1
+
+function a() {} a(); // 打印 undefined
+
+function a() { return 11; } a(); // 打印 1
+
+</code></pre><p>所以打印undefined的问题找到了，那么问题来了，node中会不会打印呢？尝试了一波儿发现，node中并不会打印，所以同样是V8引擎，但是控制台这一块儿还是有差距的。</p>
+<h3 id="setTimeout不写时间参数会咋样？"><a href="#setTimeout不写时间参数会咋样？" class="headerlink" title="setTimeout不写时间参数会咋样？"></a><strong>setTimeout不写时间参数会咋样？</strong></h3><p>终于碰到了最喜欢的setTimeout方法。查阅一堆乱七八糟资料后，setTimeout不写时间参数的话，会由浏览器默认给加上延迟参数，具体多少各家浏览器都不一样。</p>
+<p>emmm……无所谓了，那么 setTimeout(func,0) 和 setTimeout(func) 有什么区别么？</p>
+<p>下面两张图是在控制台进行了4次的对比试验。</p>
+<p><strong>没有时间参数</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fn3en77tpyj20ky0d20u9.jpg" alt></p>
+<p><strong>时间参数为0</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fn3en7dhw1j20n60cs0u7.jpg" alt></p>
+<p>好像加上0的确会快一些。不过我们也知道，即使是0，setTimeout 的作用也只是加到当前执行的事件队列当中，而且在浏览器端每次执行也会有4ms的延迟。具体的可以看一看我的另一篇： <a href="http://blog.csdn.net/u013707249/article/details/78731356" target="_blank" rel="noopener"><strong>看了这么久JS，事件队列你真的懂吗？</strong></a>。</p>
+<p>关于浏览器的4ms的差异延迟，我们暂时不用在意。当我们需要遇到性能瓶颈时可以去研究一下，具体的方案的实现还都挺有意思的。</p>
+<h3 id="会有浏览器差异么？"><a href="#会有浏览器差异么？" class="headerlink" title="会有浏览器差异么？"></a><strong>会有浏览器差异么？</strong></h3><p>有，不过控制台的输出影响不大。不必在意。</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a><strong>结尾</strong></h2><p>以上，基本上该思考的都思考了，不知道你看到这里，还有什么在思考的，倘若有的话，不妨说来听听。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2018/01/03/" data-id="clepflm6e0006fbmn6bkvx9rf" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-ES6黑科技实践--proxy,reflection" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/19/" class="article-date">
+  <time datetime="2017-12-19T14:36:00.000Z" itemprop="datePublished">2017-12-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/19/">ES6黑科技实践--proxy,reflect</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="ES6黑科技实践–proxy-reflect"><a href="#ES6黑科技实践–proxy-reflect" class="headerlink" title="ES6黑科技实践–proxy,reflect"></a><strong>ES6黑科技实践–proxy,reflect</strong></h1><h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a><strong>开始之前</strong></h2><p><a href="https://kangax.github.io/compat-table/es6/#test-Reflect" target="_blank" rel="noopener"><strong> reflect兼容性</strong></a></p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmm18swndlj220c0ttauh.jpg" alt></p>
+<p><a href="https://caniuse.com/#search=proxy" target="_blank" rel="noopener"><strong>proxy兼容性</strong></a></p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmltxsptfxj21yq11710d.jpg" alt></p>
+<p>上面两图分别是截止当前，proxy和reflect的浏览器支持程度。可以看出proxy和reflect的支持已经相当好了，新一点的主流浏览器都支持了（除了IE）。</p>
+<p>所以还是相当有必要玩耍一下的。</p>
+<h2 id="proxy"><a href="#proxy" class="headerlink" title="proxy"></a><strong>proxy</strong></h2><h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a><strong>简单介绍</strong></h3><p>其实es6出来了这么久了，在实际的项目中也都使用es6编程。对于某些特殊的属性，如proxy，虽然用的不多，但我们或多或少也了解到proxy的用法。详细的介绍这里不赘述，可以移步<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank" rel="noopener"><strong>MDN</strong></a>查看es6介绍，当然这里也有一篇大神的<a href="http://pinggod.com/2016/%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90-ES6-Proxy-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" target="_blank" rel="noopener"><strong>es6使用大全</strong></a>，值得深究。</p>
+<p>总之，用一句话总结就是：改变了过去对象监听的复杂操作，使用proxy可以用一种更优雅的方式实现外部对对象的访问。</p>
+<h3 id="es5的实现"><a href="#es5的实现" class="headerlink" title="es5的实现"></a><strong>es5的实现</strong></h3><p>那么或许问题来了，在没有proxy之前，我们是怎么样实现对对象的监听呢？</p>
+<p>其实在es5中，我们可以使用 <code>Object.defineProperty</code>和<code>Object.defineProperty</code>来实现对对象的监听。利用es5对象的getter 和 setter方法，可以实现简单的文件监听，使用方法如下：</p>
+<pre><code>// 如何实现一个自存档对象。 当设置temperature 属性时，archive 数组会获取日志条目。
+function Archiver() {
+  var temperature = null;
+  var archive = [];
+
+  Object.defineProperty(this, &#39;temperature&#39;, {
+    get: function() {
+      console.log(&#39;get!&#39;);
+      return temperature;
+    },
+    set: function(value) {
+      temperature = value;
+      archive.push({ val: temperature });
+    }
+  });
+
+  this.getArchive = function() { return archive; };
+}
+
+var arc = new Archiver();
+arc.temperature; // &#39;get!&#39;
+arc.temperature = 11;
+arc.temperature = 13;
+arc.getArchive(); // [{ val: 11 }, { val: 13 }]
+</code></pre><p>目前支持双向绑定的Vue中的实现就是这种方法。但是这种方法不太好的地方就是对于数组之类的对象，类似修改数组的length，直接用索引设置元素如items[0] = {}，以及数组的push，pop等变异方法是无法触发setter的。针对这些，vue中的实现是在Object和Array的原型添加了定制方法来处理这些特殊操作，可以实现上述要求。</p>
+<h3 id="第三方库的实现"><a href="#第三方库的实现" class="headerlink" title="第三方库的实现"></a><strong>第三方库的实现</strong></h3><p>请移步：</p>
+<ul>
+<li><a href="https://github.com/vuejs/vue" target="_blank" rel="noopener">Vue.js</a></li>
+<li><a href="https://github.com/melanke/Watch.JS/blob/master/src/watch.js" target="_blank" rel="noopener">Watch.js</a></li>
+<li><a href="https://github.com/angular/angular" target="_blank" rel="noopener">Angularjs</a></li>
+<li><a href="https://github.com/knockout/knockout" target="_blank" rel="noopener">Knockout.js</a></li>
+</ul>
+<h2 id="reflect"><a href="#reflect" class="headerlink" title="reflect"></a><strong>reflect</strong></h2><h3 id="怎么理解reflect"><a href="#怎么理解reflect" class="headerlink" title="怎么理解reflect"></a><strong>怎么理解reflect</strong></h3><p>reflect 是es6新增的一个全局对象。顾名思义，<strong>反射</strong>，类似于Java里面的反射机制。在Java里面，反射是个很头疼的概念。简单理解为：<strong>通过反射，我们可以在运行时获得程序或程序集中每一个类型的成员和成员的信息。对于Java来说，程序中一般的对象的类型都是在编译期就确定下来的，而Java反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未知的。</strong></p>
+<p>而对于js来说自然是有些不同了。毕竟<strong>js不需要编译</strong>，同时<strong>万物皆对象</strong>的特性，这些都让理解js的reflect起来相当简单。</p>
+<p>对于JS中的reflect，我们就可以理解为：<strong>有这么一个全局对象，上面直接挂载了对象的某些特殊方法，这些方法可以通过<code>Reflect.apply</code>这种形式来使用，当然所有方法都是可以在 Object 的原型链中找到的。</strong>是不是相当简单。</p>
+<h3 id="使用reflect的好处"><a href="#使用reflect的好处" class="headerlink" title="使用reflect的好处"></a><strong>使用reflect的好处</strong></h3><p>引自<a href="https://zhuanlan.zhihu.com/p/24778807" target="_blank" rel="noopener">知乎专栏：ES6 Reflect</a></p>
+<ol>
+<li>Reflect上面的一些方法并不是专门为对象设计的，比如Reflect.apply方法，它的参数是一个函数，如果使用Object.apply(func)会让人感觉很奇怪。</li>
+<li>用一个单一的全局对象去存储这些方法，能够保持其它的JavaScript代码的整洁、干净。不然的话，这些方法可能是全局的，或者要通过原型来调用。</li>
+<li>将一些命令式的操作如delete，in等使用函数来替代，这样做的目的是为了让代码更加好维护，更容易向下兼容；也避免出现更多的保留字。</li>
+</ol>
+<h3 id="常见的方法"><a href="#常见的方法" class="headerlink" title="常见的方法"></a><strong>常见的方法</strong></h3><pre><code>Reflect.apply
+Reflect.construct
+Reflect.defineProperty
+Reflect.deleteProperty
+Reflect.enumerate // 废弃的
+Reflect.get
+Reflect.getOwnPropertyDescriptor
+Reflect.getPrototypeOf
+Reflect.has
+Reflect.isExtensible
+Reflect.ownKeys
+Reflect.preventExtensions
+Reflect.set
+Reflect.setPrototypeOf
+</code></pre><p>具体用法当然是看：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect" target="_blank" rel="noopener">MDN: reflect介绍</a></p>
+<h2 id="一个使用proxy和reflect实现监听对象的小例子"><a href="#一个使用proxy和reflect实现监听对象的小例子" class="headerlink" title="一个使用proxy和reflect实现监听对象的小例子"></a><strong>一个使用proxy和reflect实现监听对象的小例子</strong></h2><p>栗子来源(非本人):<a href="https://github.com/sindresorhus/on-change" target="_blank" rel="noopener">https://github.com/sindresorhus/on-change</a></p>
+<p>on-change是一个可以监听对象或者<strong>数组</strong>内部变化的小工具，主要使用proxy来实现。以下是核心代码：</p>
+<pre><code>// onChange 即要进行的监听操作
+module.exports = (object, onChange) =&gt; {
+    const handler = {
+        get(target, property, receiver) {
+            try {
+                return new Proxy(target[property], handler);
+            } catch (err) {
+                return Reflect.get(target, property, receiver);
+            }
+        },
+        defineProperty(target, property, descriptor) {
+            onChange();
+            return Reflect.defineProperty(target, property, descriptor);
+        },
+        deleteProperty(target, property) {
+            onChange();
+            return Reflect.deleteProperty(target, property);
+        }
+    };
+
+    return new Proxy(object, handler);
+};
+</code></pre><p>代码很精简，但是也是有必要研究下，是一位大大牛 <strong><a href="https://sindresorhus.com/" target="_blank" rel="noopener">sindresorhus</a></strong> 的作品。</p>
+<p>其实一共有三个方法，<code>get</code> <code>defineProperty</code> <a href>defineProperty</a>,上面代码可以对数组进行操作就是因为用了proxy，具体的实现在<code>get</code>方法，每一层返回一个proxy，需要注意的是在监听操作这里依然使用的是 es5的 defineProperty 方法。具体的可以自己研究下，还是很有可玩性的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><ul>
+<li><a href="https://segmentfault.com/a/1190000010471230" target="_blank" rel="noopener">《深入理解ES6》笔记——代理（Proxy）和反射（Reflection）API</a></li>
+<li><a href="http://www.jianshu.com/p/34f0e6abe312" target="_blank" rel="noopener">ES6 之 Proxy 介绍</a></li>
+<li><a href="http://pinggod.com/2016/%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90-ES6-Proxy-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" target="_blank" rel="noopener">实例解析 ES6 Proxy 使用场景</a></li>
+<li><a href="https://www.zhihu.com/question/44724640?sort=created" target="_blank" rel="noopener">知乎回答：如何监听 js 中变量的变化?</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/24778807" target="_blank" rel="noopener">知乎专栏：ES6 Reflect</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/19/" data-id="clepflm680001fbmn9xmpd8wk" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/" rel="tag">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/" rel="tag">proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reflect/" rel="tag">reflect</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Docker实践，利用DaoCloud来部署应用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/14/" class="article-date">
+  <time datetime="2017-12-14T13:54:00.000Z" itemprop="datePublished">2017-12-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/14/">Docker实践，利用DaoCloud来部署应用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="Docker实践，利用DaoCloud来部署应用"><a href="#Docker实践，利用DaoCloud来部署应用" class="headerlink" title="Docker实践，利用DaoCloud来部署应用"></a><strong>Docker实践，利用DaoCloud来部署应用</strong></h1><h2 id="准备工作要做好"><a href="#准备工作要做好" class="headerlink" title="准备工作要做好"></a><strong>准备工作要做好</strong></h2><p>在学习了<strong>Docker</strong>的基操之后，一定很想找台机子练练手，本机其实也可以，但是如果有一台服务器并且还是线上的当然最好啦。</p>
+<p>这里推荐两个福利，之所以说是福利，是因为这简直是科技大老板给我们这些穷逼开发的学习福利啊，话不多说。</p>
+<p><strong>腾讯开发者实验室</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg43jt7bqj227s14gk0t.jpg" alt></p>
+<p><a href="https://cloud.tencent.com/developer/labs/gallery" target="_blank" rel="noopener"><strong>腾讯开发者实验室</strong></a>是腾讯提供的开发者专属在线实验平台。在这里，你可以像大学里计算机上机课程一样，跟着教程来体验服务器运维的快乐，体验时长可以说是相当长了。</p>
+<p><strong>Daocloud</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg43jz19ij227013iqe1.jpg" alt></p>
+<p><a href="http://www.daocloud.io/" target="_blank" rel="noopener"><strong>Daocloud</strong></a>是国内的一个企业级容器云平台。虽说是企业的，但是注册了之后可以有很多的免费体验。特别是每次可以免费试用两小时的胶囊主机，更重要的是使用完了还可以续杯重新使用。对于我们学习来说绝对够用了。</p>
+<p>本文基于Daocloud来做这一次实践，想使用腾讯开发实验室的可以自己去体验哈。</p>
+<h2 id="开始上手"><a href="#开始上手" class="headerlink" title="开始上手"></a><strong>开始上手</strong></h2><h3 id="找一个可以上手的玩儿的项目"><a href="#找一个可以上手的玩儿的项目" class="headerlink" title="找一个可以上手的玩儿的项目"></a><strong>找一个可以上手的玩儿的项目</strong></h3><p>这点，任何一个需要部署且确保编译成功的项目都可以。因为是简单实践，我们就直接使用<strong>Daocloud</strong>镜像仓库里面别人提供的一个镜像<strong>WordPress</strong>。</p>
+<p>可以在 <code>发现镜像</code> –&gt; <code>精选镜像</code> –&gt; <code>内容管理系统</code> –&gt; <code>WordPress</code> 找到</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg43j0j3dj227s0yw44s.jpg" alt></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a><strong>部署</strong></h3><p>之后直接进入镜像，然后点击右上角 <code>部署</code> ，进去</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg4lr1rrvj21s70uujud.jpg" alt></p>
+<p>应用名称随便起，主机那里可以点击试用2小时的胶囊主机，然后点击 下一步 进入到配置页</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg4lquq6gj21vy144aeo.jpg" alt></p>
+<p>在配置页，会有一些参数配置，<strong>Volumes</strong> 直接默认值，<strong>YAML</strong> 是用于复杂多节点部署的配置文件，不理，直接使用默认值，当然还有一些 <strong>高级配置</strong>，什么启动权限，启动命令的，巴拉巴拉，当然如果你不懂，直接默认，<strong>立即部署</strong>。</p>
+<p>然后就会跳转日志页，等候一下下，点击 <strong>应用</strong> 菜单，如果你刚创建的应用显示的是 <strong>运行中</strong>，那就证明你部署成功了。</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg4lq5llij21t6081dha.jpg" alt></p>
+<p>这时，点击 <code>集群管理</code> –&gt; <code>管理主机</code> 即可看到下面的容器列表</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg4lr0y0nj221c10sjy7.jpg" alt></p>
+<p>浏览器，输入你当前主机的公网IP和端口就可以正常访问到 <strong>WordPress</strong> 的主页了</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg4lr1p9nj214w13jgph.jpg" alt></p>
+<p>以上，部署大功告成。</p>
+<h3 id="继续把玩"><a href="#继续把玩" class="headerlink" title="继续把玩"></a><strong>继续把玩</strong></h3><p>是不是感觉太简单了，完全没有技术含量。事实上就是这么简单。只是一个简单的部署任务，目的地不一样而已，当然速度上也比正常的部署快了一个档次。</p>
+<p>当然不会这么简单了。</p>
+<p><strong>部署配置</strong></p>
+<p>在部署时全部选择默认的地方都值得你去研究一下，好的配置方案，让你的应用更轻更快更稳定。</p>
+<p><strong>CI CD</strong></p>
+<p>如果你还要深入，你也可以去试用 利用来docker来做持续集成（CI）和持续交付（CD）。这个功能貌似有使用限度（因为当我想要去截图的时候，我发现我已经没有使用权限了），需要你拉取你自己的私人项目，然后会有一系列的流程定义，可以按键操作，也可以自己写YAML，总之就是很简单的操作啦。</p>
+<p><strong>远程连接主机来玩喽</strong></p>
+<p>同样的点击 点击 <code>集群管理</code> –&gt; <code>管理主机</code> ，进入主机容器列表</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmg85won3aj213a0hcwgk.jpg" alt></p>
+<p>通过主机提供的用户名密码来远程登录，练习你的Linux技能。</p>
+<p>如果你不知道怎么连接，可以参考下面这篇文章。</p>
+<p><a href="https://help.aliyun.com/document_detail/51798.html?spm=5176.doc25429.2.13.s1A6X1" target="_blank" rel="noopener">ssh连接远程主机办法</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>以上，相信你可以愉快的玩耍了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/14/" data-id="clepflm640000fbmn8apf1wc2" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-是时候开始用Docker了" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/13/" class="article-date">
+  <time datetime="2017-12-13T13:54:00.000Z" itemprop="datePublished">2017-12-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/13/">还在用虚拟机吗，是时候用Docker了</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="Docker是啥？"><a href="#Docker是啥？" class="headerlink" title="Docker是啥？"></a><strong>Docker是啥？</strong></h2><p>如果有人问起了你这个问题，你可以这样回答他：<strong>Docker就是一个轻量型的虚拟机，可以充分利用服务器性能。</strong></p>
+<p>如果你的这个回答被怼了？</p>
+<ul>
+<li><p>爱怼怼用户A：什么轻量型的虚拟机，跟虚拟机本质上是有区别的好吧？虚拟机多了一层guest OS，同时Hypervisor会对硬件资源进行虚拟化，运行在虚拟机上的应用程序在进行数值计算时是运行在Hypervisor虚拟的CPU上的（如果你使用过win10的hyper-v虚拟机工具，你就会发现如果要开启虚拟机就要在bios开启cpu的虚拟化）。而docker直接使用硬件资源虚拟机增加了一层虚拟硬件层，所以资源利用率相对docker低。</p>
+</li>
+<li><p>爱怼怼用户B： Docker其实也是类似于虚拟机的。至少在作用目的上是一致的。用一个“经典”的例子来作对比就是：将部署应用比作鸣人来搓螺旋丸，虚拟机类似于鸣人的影分身之术，每个分身（虚拟机）都拥有同样的身体（OS，环境）,但是在查克拉（CPU）的使用上，每个分身的查克拉会均分自真身（真正的主机），这个行为也可以称之为CPU虚拟化，但是这里浪费了分身，用分身来搓一个小螺旋丸，太浪费了……而对于docker来说，就像是九尾模式的鸣人，我直接利用我体内的九尾查克拉（硬件资源），分成九只爪子，每只爪子相互独立，也可以搓小螺旋丸……</p>
+</li>
+<li><p>爱怼怼用户C： 楼上菜鸡，直接看官方介绍不就行了，<a href="https://www.docker.com/what-docker" target="_blank" rel="noopener">Docker官方介绍</a>，<a href="https://www.zhihu.com/question/22871084/answer/88293837" target="_blank" rel="noopener">Docker集装箱</a></p>
+</li>
+<li>……</li>
+</ul>
+<p>对于这些，你只需回答：看来你不是都知道么……</p>
+<p>那么使用Docker有哪些好处呢?</p>
+<h2 id="用Docker有啥好处？"><a href="#用Docker有啥好处？" class="headerlink" title="用Docker有啥好处？"></a><strong>用Docker有啥好处？</strong></h2><ul>
+<li>速度飞快以及优雅的隔离框架： 每个Docker之间互相隔离。</li>
+<li>物美价廉： 服务器一台多贵晓得不，省了不少经费了。</li>
+<li>CPU/内存的低消耗：少了大部分虚拟机的没太大作用的硬件资源占用，自然消耗少了。  </li>
+<li>快速开/关机： 相对于虚拟机肉鸡开机速度而言。</li>
+<li>跨云计算基础构架： 就是云计算喽。</li>
+</ul>
+<h2 id="简单操作：搭建-Docker-环境"><a href="#简单操作：搭建-Docker-环境" class="headerlink" title="简单操作：搭建 Docker 环境"></a><strong>简单操作：搭建 Docker 环境</strong></h2><p>以下上手基于 <strong>CentOS</strong> ，所以你首先需要一个Linux的系统主机。</p>
+<h4 id="安装与配置-Docker"><a href="#安装与配置-Docker" class="headerlink" title="安装与配置 Docker"></a><strong>安装与配置 Docker</strong></h4><p><strong>安装 Docker</strong></p>
+<p>Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令：</p>
+<pre><code>yum install docker-io -y
+直接yum安装，安装成功后查看版本
+
+docker -v
+启动docker
+
+service docker start
+设置开机启动
+
+chkconfig docker on
+配置 Docker
+</code></pre><p>因为国内访问 Docker Hub 较慢, 可以使用腾讯云提供的国内镜像源, 加速访问 Docker Hub</p>
+<p>依次执行以下命令</p>
+<pre><code>echo &quot;OPTIONS=&#39;--registry-mirror=https://mirror.ccs.tencentyun.com&#39;&quot; &gt;&gt; /etc/sysconfig/docker
+
+systemctl daemon-reload
+
+service docker restart
+</code></pre><h4 id="Docker-上手"><a href="#Docker-上手" class="headerlink" title="Docker 上手"></a><strong>Docker 上手</strong></h4><p><strong>下载镜像</strong></p>
+<pre><code>下载一个官方的 CentOS 镜像到本地
+
+docker pull centos
+下载好的镜像就会出现在镜像列表里
+
+docker images
+运行容器
+</code></pre><p>这时我们可以在刚才下载的 <strong>CentOS</strong> 镜像生成的容器内操作了。</p>
+<p>生成一个 centos 镜像为模板的容器并使用 bash shell</p>
+<pre><code>docker run -it centos /bin/bash
+</code></pre><p>这个时候可以看到命令行的前端已经变成了 <code>[root@(一串 hash Id)]</code> 的形式, 这说明我们已经成功进入了 CentOS 容器。</p>
+<p>在容器内执行任意命令, 不会影响到宿主机, 如下</p>
+<pre><code>mkdir -p /data/simple_docker
+可以看到 /data 目录下已经创建成功了 simple_docker 文件夹
+
+ls /data
+退出容器
+
+exit
+查看宿主机的 /data 目录, 并没有 simple_docker 文件夹, 说明容器内的操作不会影响到宿主机
+
+ls /data
+保存容器
+
+查看所有的容器信息， 能获取容器的id
+
+docker ps -a
+然后执行如下命令[?]，保存镜像：
+
+docker commit -m=&quot;备注&quot; 你的CONTAINER_ID 你的IMAGE
+
+请自行将 -m 后面的信息改成自己的容器的信息
+</code></pre><p><strong>Docker容器的基本操作</strong></p>
+<pre><code>docker [命令名] --help 查看命令介绍
+docker run 创建并启动一个容器，在run后面加上-d参数，则会创建一个守护式容器在后台运行。
+docker ps -a 查看已经创建的容器
+docker ps -s 查看已经启动的容器
+docker start con_name 启动容器名为con_name的容器
+docker stop con_name 停止容器名为con_name的容器
+docker rm con_name 删除容器名为con_name的容器
+docker rename old_name new_name 重命名一个容器
+docker attach con_name 将终端附着到正在运行的容器名为con_name的容器的终端上面去，前提是创建该容器时指定了相应的sh
+执行这个命令后，按下回车键，会进入容器的命令行Shell中。
+docker logs con_name 获取容器名为con_name的容器日志
+docker inspect 查看容器的详细信息
+docker top con_name 查看容器名为con_name的容器内部的进程
+docker exec 可以用来在容器中运行一个进程
+</code></pre><p><strong>Docker的详细操作</strong></p>
+<p>不造轮子，<a href="http://www.runoob.com/docker/docker-container-usage.html" target="_blank" rel="noopener">请戳菜鸟教程。</a></p>
+<p><strong>shell脚本部署到Docker的一个小栗子</strong></p>
+<blockquote>
+<p>参考链接：</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000004491286" target="_blank" rel="noopener">docker清理镜像</a></li>
+<li><a href="http://blog.51cto.com/onlyzq/546459" target="_blank" rel="noopener">在Linux中让echo命令显示带颜色的字。</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><code>echo -e &quot;\033[40;37m 黑底白字 \033[0m&quot;</code> 此方法是输入带上颜色</li>
+<li>清理镜像的操作是一系列的。具体情况具体分析。例如另一个例子：</li>
+<li><code>$ docker ps --filter &quot;status=exited&quot; | grep &#39;weeks ago&#39; | awk &#39;{print $1}&#39; | xargs --no-run-if-empty docker rm</code>，来自<a href="https://stackoverflow.com/questions/17236796/how-to-remove-old-docker-containers" target="_blank" rel="noopener">How to remove old Docker containers</a> </li>
+<li><code>awk</code>是一个文本分析工具，找出文本指定位置的内容并print出来（解释不当）</li>
+</ul>
+<pre><code># 声明变量
+SERVER_HOST=&quot;root@xx.x.xxx.xx&quot;
+SERVER_PATH=&quot;/home/test/src&quot;
+BUILD_TIME=`date &quot;+%Y%m%d%H%M&quot;`
+IMAGE_NAME=&quot;xxxx(docker镜像)&quot;
+
+# 传输之后特殊文件的修改
+rsync -cavzP --delete-after ./ --exclude-from=&#39;.rsync-exclude&#39; $SERVER_HOST:$SERVER_PATH
+rsync -cavzP --delete-after ./node_modules/ftp-client $SERVER_HOST:$SERVER_PATH/node_modules
+
+
+ssh $SERVER_HOST &quot;\
+  cd $SERVER_PATH; \
+  echo &quot;安装依赖&quot;; \
+  npm install; \
+  echo &quot;清理过时的测试镜像&quot;; \
+  docker images | awk &#39;{ print \$3 }&#39; | xargs docker rmi ; \
+  echo &quot;构建docker镜像 $IMAGE_NAME&quot;; \
+  docker build -t $MAGE_NAME . ;\
+  echo &quot;发布docker镜像&quot;; \
+  docker push $IMAGE_NAME ;\
+  exit; \
+  &quot;
+
+echo &quot;\033[40;32m\n&quot;
+echo &quot;Sync to Server: $MARKET_SERVER_HOST&quot;
+echo &quot;Build source code path: $MARKET_SERVER_PATH&quot;
+echo &quot;Image: $MARKET_IMAGE_NAME&quot;
+echo &quot;Image deploy success&quot;
+echo &quot;\033[0m&quot;
+</code></pre><h2 id="Docker实践，利用DaoCloud来部署应用"><a href="#Docker实践，利用DaoCloud来部署应用" class="headerlink" title="Docker实践，利用DaoCloud来部署应用"></a><strong>Docker实践，利用DaoCloud来部署应用</strong></h2><p>该部分内容过多，请直接参考我的另一篇博客：<a href="http://blog.csdn.net/u013707249/article/details/78801575" target="_blank" rel="noopener">Docker实践，利用DaoCloud来部署应用</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/13/" data-id="clepflm7g002afbmnhcde69l7" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/" rel="tag">持续集成</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+    <article id="post-Webpack 对比 Parcel" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/12/" class="article-date">
+  <time datetime="2017-12-12T13:48:00.000Z" itemprop="datePublished">2017-12-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/12/">高性能打包工具：Webpack 对比 Parcel</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="Webpack-对比-Parcel"><a href="#Webpack-对比-Parcel" class="headerlink" title="Webpack 对比 Parcel"></a>Webpack 对比 Parcel</h1><blockquote>
+<p>最近火的一塌糊涂的打包工具<code>parcel</code>,5天左右就已经达到了<strong>8K</strong>个star。相对于webpack的蜗牛编译，parcel宣称<strong>Parcel 使用 worker 进程去启用多核编译。同时有文件系统缓存，即使在重启构建后也能快速再编译</strong>。换句话说就是高性能，这也是它最吸引人的地方。</p>
+<p>因为在项目被webpack折磨过，所以今天这里简单用两个小demo来测试一下。</p>
+</blockquote>
+<h2 id="官网地址"><a href="#官网地址" class="headerlink" title="官网地址"></a>官网地址</h2><ul>
+<li><a href="https://parceljs.org/" target="_blank" rel="noopener">官方网址</a></li>
+<li><a href="http://www.parceljs.io/" target="_blank" rel="noopener">Parcel中文网</a></li>
+<li><a href="https://github.com/parcel-bundler/parcel" target="_blank" rel="noopener">Github</a></li>
+<li><a href="https://github.com/justjavac/parcel-example" target="_blank" rel="noopener">其他同仁的测试</a></li>
+<li><a href="https://juejin.im/post/5a2b6c0cf265da431523d4e2?utm_source=gold_browser_extension" target="_blank" rel="noopener">Parceljs和Webpack在React项目上打包速度对比</a></li>
+</ul>
+<h2 id="初级测试"><a href="#初级测试" class="headerlink" title="初级测试"></a>初级测试</h2><p>这里有两个基于<code>webpack</code>和<code>parcel</code>构建的react小项目。</p>
+<ul>
+<li><a href="https://github.com/Michaelooo/webpackToParcel/tree/master/parcel_demo" target="_blank" rel="noopener">parcel_demo</a></li>
+<li><a href="https://github.com/Michaelooo/webpackToParcel/tree/master/webpack_demo" target="_blank" rel="noopener">webpack_demo</a></li>
+</ul>
+<p>两个小项目同时引用了 <code>react</code> ,<code>react-demo</code>,以及用于解析的<code>babel-preset-react</code>。对于<code>webapck</code>,还引入了一个解析 es6 的<code>babel-loader</code>。</p>
+<h3 id="速度对比"><a href="#速度对比" class="headerlink" title="速度对比"></a>速度对比</h3><p><strong>parcel初次构建</strong>（2s）</p>
+<p><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecmt65j20xa05s3zh.jpg" alt></p>
+<p><strong>parcel已打包的情况下再次构建</strong> (556ms)<br><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecnk99j20xw05yq3w.jpg" alt></p>
+<p><strong>webpack初次构建</strong> (4s)<br><img src="http://ww1.sinaimg.cn/large/86c7c947gy1fmcnecmyj6j20ps060gms.jpg" alt></p>
+<p><strong>webpack已打包的情况下再次构建</strong> (4s)</p>
+<p>这里有些问题，因为未对webpack的配置做优化，比如提取公共模块，分开打包等，所以即使加了<code>cache = true</code>测出的结果和初次构建也差不多，都是 <strong>4s</strong>左右。</p>
+<h2 id="进一步测试"><a href="#进一步测试" class="headerlink" title="进一步测试"></a>进一步测试</h2><p>正在进行中。。。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>不负责任版：</strong> 根据以上情况来看，<code>Parcel</code>在速度上来看确实有不小的优势，但是如果在一个已经用了<code>webpack</code>的项目迁移的话，估计还是会有些麻烦。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://michaelooo.github.io/2017/12/12/" data-id="clepflm6d0005fbmni864q3en" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/parcel-js/" rel="tag">parcel.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">下一页&amp;raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/09/">如何将博客升级http2</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/27/">换新电脑不用慌-轻松搞定vscode配置</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/15/">git开发规范</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/09/">go入门踩坑及环境配置问题相关</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/">如何用node去搭建一个项目发布系统</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+    <!-- 去掉浏览量统计 -->
+<!-- 
+    <div class="widget-wrap">
+    <h3 class="widget-title">浏览数目</h3>
+    <div class="widget">
+      <ul class="popularlist">
+      </ul>
+    </div>
+  </div>
+ -->
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
+      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
+          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
+          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
+      </a>
+    </div>
+     <div id="footer-right">
+      联系方式&nbsp;|&nbsp;422208170@qq.com
+    </div>
+  </div>
+</footer>
+ 
+<script src="/jquery/jquery.min.js"></script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/resume/" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+     
+<script src="/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/elevator.js"></script>
+
+
+<script src="/js/fundebug.1.9.0.min.js"></script>
+
+
+<!--page counter part-->
+<script>
+  function addCount (Counter) {
+    var curpage_count; 
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query=new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find().then(function(results){
+      if(results.length>0) {
+          var counter=results[0];
+          counter.fetchWhenSave(true); //get recent result
+          counter.increment("time");
+          counter.save();
+          curpage_count = counter.attributes.time + 1;
+          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      } else {
+        var newcounter=new Counter();
+        newcounter.set("title",title);
+        newcounter.set("url",url);
+        newcounter.set("time",1);
+        newcounter.save(null,{
+            success: function(newcounter){
+            //alert('New object created');
+            },
+            error: function(newcounter,error){
+            alert('Failed to create');
+            }
+            });
+        curpage_count = 1;
+        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+      }
+    },function(error){
+        //find null is not a error
+        alert('Error:'+error.code+" "+error.message);
+    });
+  }
+
+  $(function(){
+      // fundebug INIT
+      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+
+      // init
+      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
+      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+
+      AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+      });
+
+      var Counter=AV.Object.extend("Counter");
+      //only increse visit counting when intering a page
+      if ($('.article-title').length == 1)
+        addCount(Counter);
+      var query=new AV.Query(Counter);
+      query.descending("time");
+      // the sum of popular posts
+      query.limit(10); 
+      query.find()
+      .then(
+        function(results){
+          for(var i=0;i<results.length;i++)    
+            {
+                var counter=results[i];
+                title=counter.get("title");
+                url=counter.get("url");
+                time=counter.get("time");
+                // add to the popularlist widget
+                showcontent=title+" ("+time+")";
+                //notice the "" in href
+                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+            }
+          },
+          function(error){
+            alert("Error:"+error.code+" "+error.message);
+          });
+  });
+</script>
+
+  </div>
+</body>
+</html>
