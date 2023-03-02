@@ -8,10 +8,13 @@
   <meta name="author" content="Michael Cheng" />
   <meta name="description" content="Welcom Michael Cheng&#39;s Blog" />
   
-    <meta name="robots" content="noindex" />
-  
   
   <title>
+    
+      一行代码为项目的 commit 带上 jira number 
+      
+      
+      |
     
      Michael&#39;s Blog
   </title>
@@ -112,151 +115,186 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="JS: 一个小例子引发的思考">
-        <div class="time-m-d">2018-01-03</div>
-        <div class="title">
-          <a href="/2018/01/03/">
-            
-              
-                <span>JS: 一个小例子引发的思考</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">一行代码为项目的 commit 带上 jira number</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-01-11 18:46:01
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/git/" title="git">
+                    #git
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="ES6黑科技实践--proxy,reflect">
-        <div class="time-m-d">2017-12-19</div>
-        <div class="title">
-          <a href="/2017/12/19/">
-            
-              
-                <span>ES6黑科技实践--proxy,reflect</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h2 id="常规使用方式"><a href="#常规使用方式" class="headerlink" title="常规使用方式"></a>常规使用方式</h2><pre><code class="sh">echo &#39;# add jira number
+# $1 and $2 defined by Git
+COMMIT_MSG_FILE=$1
+COMMIT_TYPE=$2
+
+# You can update this variable to your JIRA projects in REGEXP format.
+JIRA_PROJECT=&quot;(SPXFM|SPSERP)&quot;
+
+CURRENT_BRANCH=$(git symbolic-ref --short -q HEAD)                     # Get current branch name
+JIRA_TAG=$(echo $&#123;CURRENT_BRANCH&#125; | egrep -o &quot;$&#123;JIRA_PROJECT&#125;-[0-9]+&quot;) # Parse JIRA ID from branch name
+
+# Write JIRA ID as the prefix of the first line of commit message.
+if [ -n &quot;$&#123;JIRA_TAG&#125;&quot; ]; then
+  if ! head -1 $&#123;COMMIT_MSG_FILE&#125; | egrep -i &quot;$&#123;JIRA_TAG&#125;&quot; &gt;/dev/null; then # Not write JIRA ID if already has.
+    sed -in-place -e &quot;1s/^/[$&#123;JIRA_TAG&#125;] /1&quot; &quot;$&#123;COMMIT_MSG_FILE&#125;&quot;
+  fi
+fi&#39; &gt;&gt; ./.git/hooks/prepare-commit-msg
+</code></pre>
+<p>直接复制上面的命令在项目根目录执行。将为项目中的每个 commit 自动带上 jira 号。</p>
+<p>commit 的效果如下：<br><img src="/images/loading.gif" data-original="/../images/git-hooks-jira-screenshot.png" alt="image"></p>
+<h2 id="使用-submodules-的方式"><a href="#使用-submodules-的方式" class="headerlink" title="使用 submodules 的方式"></a>使用 submodules 的方式</h2><pre><code class="sh">echo &#39;# add jira number
+# $1 and $2 defined by Git
+COMMIT_MSG_FILE=$1
+COMMIT_TYPE=$2
+
+# You can update this variable to your JIRA projects in REGEXP format.
+JIRA_PROJECT=&quot;(SPXFM|SPSERP)&quot;
+
+CURRENT_BRANCH=$(git symbolic-ref --short -q HEAD)                     # Get current branch name
+JIRA_TAG=$(echo $&#123;CURRENT_BRANCH&#125; | egrep -o &quot;$&#123;JIRA_PROJECT&#125;-[0-9]+&quot;) # Parse JIRA ID from branch name
+
+# Write JIRA ID as the prefix of the first line of commit message.
+if [ -n &quot;$&#123;JIRA_TAG&#125;&quot; ]; then
+  if ! head -1 $&#123;COMMIT_MSG_FILE&#125; | egrep -i &quot;$&#123;JIRA_TAG&#125;&quot; &gt;/dev/null; then # Not write JIRA ID if already has.
+    sed -in-place -e &quot;1s/^/[$&#123;JIRA_TAG&#125;] /1&quot; &quot;$&#123;COMMIT_MSG_FILE&#125;&quot;
+  fi
+fi&#39; &gt;&gt; ./.git/modules/line-haul/hooks/prepare-commit-msg
+</code></pre>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>某些项目可能本身不存在 prepare-commit-msg 文件，这时使用上述命令会新增一个 prepare-commit-msg 文件，你需要修改该文件的执行权限。</p>
+<p><img src="/images/loading.gif" data-original="/../images/git-hooks-error.png" alt="image"></p>
+<blockquote>
+<p>hint: The ‘.git&#x2F;hooks&#x2F;prepare-commit-msg’ hook was ignored because it’s not set as executable.<br>hint: You can disable this warning with <code>git config advice.ignoredHook false</code>.</p>
+</blockquote>
+<p>使用下面的命令修改权限</p>
+<pre><code class="bash">chmod +x ./.git/hooks/prepare-commit-msg
+</code></pre>
+
       </div>
-    
-      <div class="post-item" title="Docker实践，利用DaoCloud来部署应用">
-        <div class="time-m-d">2017-12-14</div>
-        <div class="title">
-          <a href="/2017/12/14/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>Docker实践，利用DaoCloud来部署应用</span>
-              
+              <a href="/2023/01/09/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-01-11 18:46:01
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/git/" title="git">
+                        #git
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="还在用虚拟机吗，是时候用Docker了">
-        <div class="time-m-d">2017-12-13</div>
-        <div class="title">
-          <a href="/2017/12/13/">
-            
-              
-                <span>还在用虚拟机吗，是时候用Docker了</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-text">常规使用方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-submodules-%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">使用 submodules 的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="高性能打包工具：Webpack 对比 Parcel">
-        <div class="time-m-d">2017-12-12</div>
-        <div class="title">
-          <a href="/2017/12/12/">
-            
-              
-                <span>高性能打包工具：Webpack 对比 Parcel</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="正则表达式笔记">
-        <div class="time-m-d">2017-12-11</div>
-        <div class="title">
-          <a href="/2017/12/11/">
-            
-              
-                <span>正则表达式笔记</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="【转载】Linux搭建 Node.js 环境">
-        <div class="time-m-d">2017-12-10</div>
-        <div class="title">
-          <a href="/2017/12/10/">
-            
-              
-                <span>【转载】Linux搭建 Node.js 环境</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="大神的自我修养 co.js 的学习">
-        <div class="time-m-d">2017-12-09</div>
-        <div class="title">
-          <a href="/2017/12/09/">
-            
-              
-                <span>大神的自我修养 co.js 的学习</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="关于JS事件队列的一些总结">
-        <div class="time-m-d">2017-12-08</div>
-        <div class="title">
-          <a href="/2017/12/08/">
-            
-              
-                <span>关于JS事件队列的一些总结</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="轮子：一个简单的node爬虫踩坑之路">
-        <div class="time-m-d">2017-12-07</div>
-        <div class="title">
-          <a href="/2017/12/07/">
-            
-              
-                <span>轮子：一个简单的node爬虫踩坑之路</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-      <a href="/page/2/"><i class="iconfont icon-angleleft"></i></a>
-    
-    <span class="page-num">3 / 5</span>
-    
-      <a href="/page/4/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         
 <div class="footer">
@@ -530,6 +568,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%E4%B8%BA%E9%A1%B9%E7%9B%AE%E7%9A%84%20commit%20%E5%B8%A6%E4%B8%8A%20jira%20number + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2023%2F01%2F11%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2023/01/11/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
