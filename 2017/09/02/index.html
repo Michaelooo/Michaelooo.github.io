@@ -1,97 +1,179 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
   <meta charset="utf-8">
-  
-  <title>没有后端基础，怎么入门学习Nginx？ | 程鹏飞的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nginx知识备忘Nginx是什么？引用百科的话说，Nginx (engine x) 是一个高性能的HTTP和反向代理服务器,也可以作为IMAP&#x2F;POP3&#x2F;SMTP邮件服务器。Nginx很轻（占用内存少）、Nginx支持高并发、Nginx足够稳定，当然还有一点，Nginx开源。 怎么学习Nginx任何编程语言的学习都应当是理论加上实践，特别是对于码农来说，你的真知往往来自于你">
-<meta property="og:type" content="article">
-<meta property="og:title" content="没有后端基础，怎么入门学习Nginx？">
-<meta property="og:url" content="https://michaelooo.github.io/2017/09/02/index.html">
-<meta property="og:site_name" content="程鹏飞的博客">
-<meta property="og:description" content="nginx知识备忘Nginx是什么？引用百科的话说，Nginx (engine x) 是一个高性能的HTTP和反向代理服务器,也可以作为IMAP&#x2F;POP3&#x2F;SMTP邮件服务器。Nginx很轻（占用内存少）、Nginx支持高并发、Nginx足够稳定，当然还有一点，Nginx开源。 怎么学习Nginx任何编程语言的学习都应当是理论加上实践，特别是对于码农来说，你的真知往往来自于你">
-<meta property="og:locale" content="zh_ZN">
-<meta property="article:published_time" content="2017-09-02T23:48:00.000Z">
-<meta property="article:modified_time" content="2023-03-01T10:50:12.644Z">
-<meta property="article:author" content="Michael Cheng">
-<meta property="article:tag" content="Nginx">
-<meta property="article:tag" content="运维知识">
-<meta name="twitter:card" content="summary">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="欢迎来到程鹏飞的博客" />
   
   
-    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <nav id="sub-nav">
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-        <a class="main-nav-link" href="/">首页</a>
-        
-        <a class="main-nav-link" href="/archives">归档</a>
-        
-        <a class="main-nav-link" href="/resume/">关于</a>
-        
-      </nav>
-    </div>
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">程鹏飞的博客</a>
-      </h1>
+  <title>
+    
+      没有后端基础，怎么入门学习Nginx？ 
       
-    </div>
-  </div>
-  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-没有后端基础，怎么入门学习Nginx？" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/02/" class="article-date">
-  <time datetime="2017-09-02T23:48:00.000Z" itemprop="datePublished">2017-09-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      没有后端基础，怎么入门学习Nginx？
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <!-- Table of Contents -->
+      |
+    
+     程鹏飞的博客
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.jpeg">
+    <link rel="icon" href="/images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="程鹏飞的博客" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">没有后端基础，怎么入门学习Nginx？</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2017-09-02 23:48:00
+        </span>
         
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/Nginx/" title="Nginx">
+                    #Nginx
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%BF%90%E7%BB%B4%E7%9F%A5%E8%AF%86/" title="运维知识">
+                    #运维知识
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
         <h1 id="nginx知识备忘"><a href="#nginx知识备忘" class="headerlink" title="nginx知识备忘"></a>nginx知识备忘</h1><h2 id="Nginx是什么？"><a href="#Nginx是什么？" class="headerlink" title="Nginx是什么？"></a>Nginx是什么？</h2><p>引用百科的话说，<strong>Nginx</strong> (engine x) 是一个高性能的HTTP和反向代理服务器,也可以作为IMAP&#x2F;POP3&#x2F;SMTP邮件服务器。Nginx很轻（占用内存少）、Nginx支持高并发、Nginx足够稳定，当然还有一点，Nginx开源。</p>
 <h2 id="怎么学习Nginx"><a href="#怎么学习Nginx" class="headerlink" title="怎么学习Nginx"></a>怎么学习Nginx</h2><p>任何编程语言的学习都应当是理论加上实践，特别是对于码农来说，你的真知往往来自于你的实践。Nginx作为服务器的一门技术，更偏向于运维知识，而且其中大部分的知识其实需要具有一定的业务场景你才可以实践的到，所以对于<strong>Nginx</strong>的学习，我的想法是理论学习、引经论述、归纳总结、简单实践，具体到深入的业务场景再深入学习。<br>基于以上的学习需求，并结合我英语水平差的现状我选择下面这两个网站：</p>
 <ul>
@@ -251,287 +333,395 @@ http &#123;
 <li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/kevingrace/p/6198287.html">nginx的web缓存服务环境部署记录</a></li>
 </ul>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://michaelooo.github.io/2017/09/02/" data-id="clepk3zvc002kgtnd1mg85bsq" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4%E7%9F%A5%E8%AF%86/" rel="tag">运维知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
- 
-<script src="/jquery/jquery.min.js"></script>
-
-  <div id="random_posts">
-    <h2>推荐文章</h2>
-    <div class="random_posts_ul">
-      <script>
-          var random_count =4
-          var site = {BASE_URI:'/'};
-          function load_random_posts(obj) {
-              var arr=site.posts;
-              if (!obj) return;
-              // var count = $(obj).attr('data-count') || 6;
-              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
-              arr = arr.slice(0, random_count);
-              var html = '<ul>';
-            
-              for(var j=0;j<arr.length;j++){
-                var item=arr[j];
-                html += '<li><strong>' + 
-                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
-                (item.title || item.uri) + '</a></strong>';
-                if(item.excerpt){
-                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
-                }
-                html +='</li>';
-                
-              }
-              $(obj).html(html + '</ul>');
-          }
-          $('.random_posts_ul').each(function () {
-              var c = this;
-              if (!site.posts || !site.posts.length){
-                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
-              } 
-               else{
-                load_random_posts(c);
-              }
-          });
-      </script>
-    </div>
-  </div>
-
-    
-<nav id="article-nav">
-  
-    <a href="/2017/11/25/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          网络协议五层与七层协议
-        
       </div>
-    </a>
-  
-  
-    <a href="/2017/09/01/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">一篇无聊的博客--当我有了我的新电脑，我该怎样去配置？</div>
-    </a>
-  
-</nav>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2017/09/01/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2017-09-02 23:48:00
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/Nginx/" title="Nginx">
+                        #Nginx
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%BF%90%E7%BB%B4%E7%9F%A5%E8%AF%86/" title="运维知识">
+                        #运维知识
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2017/11/25/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx%E7%9F%A5%E8%AF%86%E5%A4%87%E5%BF%98"><span class="toc-text">nginx知识备忘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">Nginx是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0Nginx"><span class="toc-text">怎么学习Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E7%96%91%E9%97%AE%EF%BC%9F"><span class="toc-text">关于反向代理服务器的几个疑问？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">1.正向代理和反向代理的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%82%E5%90%88%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">2.适合做反向代理服务器的有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Nginx%E3%80%81Apache%E5%92%8C%E4%B9%8B%E5%89%8D%E7%94%A8%E7%9A%84Tomcat%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">3.Nginx、Apache和之前用的Tomcat有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Nginx%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F"><span class="toc-text">4.Nginx的配置文件怎么看？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%80%8E%E4%B9%88%E7%94%A8Nginx%E5%81%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9F"><span class="toc-text">5.怎么用Nginx做负载均衡？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Nginx%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%EF%BC%9F"><span class="toc-text">6.Nginx虚拟主机？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Nginx%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%EF%BC%9F"><span class="toc-text">7.Nginx缓存处理？</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
 
   
-</article>
- 
-     
-<div class="comments" id="comments">
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
       
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="422201870@qq.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="MichaelChengooo">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
 </div>
 
 
-  
+<script src="/js/backtotop.js"></script>
 
-</section>
-           
-    <aside id="sidebar">
-  
-    
 
-  
-    
-    <div class="widget-wrap">
-    
-      <div class="widget" id="toc-widget-fixed">
-      
-        <strong class="toc-title">文章目录</strong>
-        <div class="toc-widget-list">
-              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx%E7%9F%A5%E8%AF%86%E5%A4%87%E5%BF%98"><span class="toc-number">1.</span> <span class="toc-text">nginx知识备忘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">Nginx是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%AD%A6%E4%B9%A0Nginx"><span class="toc-number">1.2.</span> <span class="toc-text">怎么学习Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E7%96%91%E9%97%AE%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">关于反向代理服务器的几个疑问？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.正向代理和反向代理的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%82%E5%90%88%E5%81%9A%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.适合做反向代理服务器的有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Nginx%E3%80%81Apache%E5%92%8C%E4%B9%8B%E5%89%8D%E7%94%A8%E7%9A%84Tomcat%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.Nginx、Apache和之前用的Tomcat有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Nginx%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F"><span class="toc-number">1.3.4.</span> <span class="toc-text">4.Nginx的配置文件怎么看？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%80%8E%E4%B9%88%E7%94%A8Nginx%E5%81%9A%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%9F"><span class="toc-number">1.3.5.</span> <span class="toc-text">5.怎么用Nginx做负载均衡？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Nginx%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%EF%BC%9F"><span class="toc-number">1.3.6.</span> <span class="toc-text">6.Nginx虚拟主机？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Nginx%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%EF%BC%9F"><span class="toc-number">1.3.7.</span> <span class="toc-text">7.Nginx缓存处理？</span></a></li></ol></li></ol></li></ol>
-          </div>
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
       </div>
-    </div>
-
-  
-    
-
-  
-    
-  
-    
-  
-    
-
-  
-    
-  
-    <!--微信公众号二维码-->
-
-
-  
-    <!-- 去掉浏览量统计 -->
-<!-- 
-    <div class="widget-wrap">
-    <h3 class="widget-title">浏览数目</h3>
-    <div class="widget">
-      <ul class="popularlist">
-      </ul>
+      <div class="search-result" id="search-result"></div>
     </div>
   </div>
- -->
-  
-</aside>
 
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-left">
-      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
-      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
-      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
-          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
-          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
-      </a>
-    </div>
-     <div id="footer-right">
-      联系方式&nbsp;|&nbsp;422208170@qq.com
-    </div>
-  </div>
-</footer>
- 
-<script src="/jquery/jquery.min.js"></script>
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">首页</a>
-  
-    <a href="/archives" class="mobile-nav-link">归档</a>
-  
-    <a href="/resume/" class="mobile-nav-link">关于</a>
-  
-</nav>
-    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
-<script>
-// Elevator script included on the page, already.
-window.onload = function() {
-  var elevator = new Elevator({
-    selector:'.back-to-top-btn',
-    element: document.querySelector('.back-to-top-btn'),
-    duration: 1000 // milliseconds
-  });
-}
-</script>
-     
-<script src="/js/is.js"></script>
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
 
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
 
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-<script src="/js/elevator.js"></script>
-
-
-<script src="/js/fundebug.1.9.0.min.js"></script>
-
-
-<!--page counter part-->
-<script>
-  function addCount (Counter) {
-    var curpage_count; 
-    url=$('.article-date').attr('href').trim();
-    title = $('.article-title').text().trim();
-    var query=new AV.Query(Counter);
-    //use url as unique idnetfication
-    query.equalTo("url",url);
-    query.find().then(function(results){
-      if(results.length>0) {
-          var counter=results[0];
-          counter.fetchWhenSave(true); //get recent result
-          counter.increment("time");
-          counter.save();
-          curpage_count = counter.attributes.time + 1;
-          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
       } else {
-        var newcounter=new Counter();
-        newcounter.set("title",title);
-        newcounter.set("url",url);
-        newcounter.set("time",1);
-        newcounter.save(null,{
-            success: function(newcounter){
-            //alert('New object created');
-            },
-            error: function(newcounter,error){
-            alert('Failed to create');
-            }
-            });
-        curpage_count = 1;
-        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
       }
-    },function(error){
-        //find null is not a error
-        alert('Error:'+error.code+" "+error.message);
-    });
-  }
+    }
 
-  $(function(){
-      // fundebug INIT
-      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
 
-      // init
-      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
-      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
 
-      AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-      });
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
 
-      var Counter=AV.Object.extend("Counter");
-      //only increse visit counting when intering a page
-      if ($('.article-title').length == 1)
-        addCount(Counter);
-      var query=new AV.Query(Counter);
-      query.descending("time");
-      // the sum of popular posts
-      query.limit(10); 
-      query.find()
-      .then(
-        function(results){
-          for(var i=0;i<results.length;i++)    
-            {
-                var counter=results[i];
-                title=counter.get("title");
-                url=counter.get("url");
-                time=counter.get("time");
-                // add to the popularlist widget
-                showcontent=title+" ("+time+")";
-                //notice the "" in href
-                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
             }
-          },
-          function(error){
-            alert("Error:"+error.code+" "+error.message);
-          });
-  });
-</script>
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
 
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-</body>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%B2%A1%E6%9C%89%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80%EF%BC%8C%E6%80%8E%E4%B9%88%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0Nginx%EF%BC%9F + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2017%2F09%2F02%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2017/09/02/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
 </html>

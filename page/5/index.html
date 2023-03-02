@@ -1,621 +1,462 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="欢迎来到程鹏飞的博客" />
   
-  <title>程鹏飞的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎来到程鹏飞的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="程鹏飞的博客">
-<meta property="og:url" content="https://michaelooo.github.io/page/5/index.html">
-<meta property="og:site_name" content="程鹏飞的博客">
-<meta property="og:description" content="欢迎来到程鹏飞的博客">
-<meta property="og:locale" content="zh_ZN">
-<meta property="article:author" content="Michael Cheng">
-<meta name="twitter:card" content="summary">
+    <meta name="robots" content="noindex" />
   
   
-    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
+  <title>
+    
+     程鹏飞的博客
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.jpeg">
+    <link rel="icon" href="/images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
   
   
-  
-<link rel="stylesheet" href="/css/style.css">
+<script src="/js/fancybox.js"></script>
+
 
   
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+  
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <nav id="sub-nav">
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-        <a class="main-nav-link" href="/">首页</a>
-        
-        <a class="main-nav-link" href="/archives">归档</a>
-        
-        <a class="main-nav-link" href="/resume/">关于</a>
-        
-      </nav>
-    </div>
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">程鹏飞的博客</a>
-      </h1>
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="程鹏飞的博客" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
       
-    </div>
+        <img no-lazy src="/images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
   </div>
-  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-git本地push代码报broken pipe" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/06/" class="article-date">
-  <time datetime="2017-03-06T22:42:17.000Z" itemprop="datePublished">2017-03-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Github/">Github</a>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
   </div>
+</div>
 
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <div class="container index">
+  <div class="post-list">
+    <!-- 遍历渲染文章 -->
+    
+      <div class="post-item" title="git本地push代码报broken pipe">
+        <div class="time-m-d">2017-03-06</div>
+        <div class="title">
+          <a href="/2017/03/06/">
+            
+              
+                <span>git本地push代码报broken pipe</span>
+              
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="[原]教你如何用命令行装逼，做一个有逼格的程序员">
+        <div class="time-m-d">2016-10-17</div>
+        <div class="title">
+          <a href="/2016/10/17/">
+            
+              
+                <span>[原]教你如何用命令行装逼，做一个有逼格的程序员</span>
+              
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="[原]如何用 html+css 实现平行四边形，以及气泡框呢？">
+        <div class="time-m-d">2016-08-02</div>
+        <div class="title">
+          <a href="/2016/08/02/">
+            
+              
+                <span>[原]如何用 html+css 实现平行四边形，以及气泡框呢？</span>
+              
+            
+          </a>
+        </div>
+      </div>
+    
+      <div class="post-item" title="重新认识 MVC 和 三层设计模式">
+        <div class="time-m-d">2016-08-01</div>
+        <div class="title">
+          <a href="/2016/08/01/">
+            
+              
+                <span>重新认识 MVC 和 三层设计模式</span>
+              
+            
+          </a>
+        </div>
+      </div>
+    
   </div>
-  <div class="article-inner">
+  <nav class="post-navigation">
     
+      <a href="/page/4/"><i class="iconfont icon-angleleft"></i></a>
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/06/">git本地push代码报broken pipe</a>
-    </h1>
-  
-
-      </header>
+    <span class="page-num">5 / 5</span>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p>以下基于windows开发环境</p>
-<p>最近在本地写了一点代码，于是就想把它放到Github上去，前面的步骤什么的不多说，就是最后在push代码的时候总是跑出异常 </p>
-<p>诺，就是下面的这个样子的</p>
-<p><img src="http://img.blog.csdn.net/20170306223640001?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzcwNzI0OQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>搜索了很多资料，先pull再push，删除远程readme文件，甚至想到用gitosis配置权限（都是些什么鬼，我特么又不是要自己搭服务器……），但是还是没有解决。最后考虑是github配置问题，查阅一些先人的遗迹，终于找到解决办法。perfect</p>
-<p>为了防止以后遇到意想不到的错误，建议小白修改一下配置</p>
-<p><strong>第一，设置长久连接</strong></p>
-<p>在git安装目录下，找到&#x2F;etc&#x2F;ssh&#x2F;ssh_config,然后随便用什么编辑器打开，添加</p>
-<p>不知道怎么写看着配置文件上面的格式来写就行了</p>
-<pre><code>Host *  
-ServerAliveInterval 120 
-</code></pre>
-<p>这个配置的作用就是保证ssh ServerAliveInterval始终连接，我这次出现错误的原因就是在无线局域网环境下，ssh连接到远程主机后如果一段时间内不操作，就会出现掉线的情况，所以最后加上此配置项</p>
-<p><strong>第二， 修改post缓存大小</strong> </p>
-<p>因为如果缓存不够用，有时候也会发生broken pipe的情况，所以最好的对post的缓存大小作设置 </p>
-<p>这个很简单，直接在git bash 上输入git config http.postBuffer ，value指的就是设置的缓存大小，如下：</p>
-<pre class="prettyprint">git config <span class="hljs-keyword">http</span>.postBuffer <span class="hljs-number">52428800</span>
-
-52428800的单位是字节，git默认的是1MB，我们把它设置成50MB
-
-以上，就可以在同性网里开心的玩耍了。
-
-* * *
-
-<br/>前端新手，弱鸡一枚，如有错误，请指正，谢谢！
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://michaelooo.github.io/2017/03/06/" data-id="clepk3zue000fgtnd01qj5a6c" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E5%9D%91%E4%B9%8B%E8%B7%AF/" rel="tag">爬坑之路</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-教你如何用命令行装逼，做一个有逼格的程序员" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/17/" class="article-date">
-  <time datetime="2016-10-17T13:35:56.000Z" itemprop="datePublished">2016-10-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/17/">[原]教你如何用命令行装逼，做一个有逼格的程序员</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <h2 id="教你如何用命令行装逼，做一个有逼格的程序员"><a href="#教你如何用命令行装逼，做一个有逼格的程序员" class="headerlink" title="教你如何用命令行装逼，做一个有逼格的程序员"></a><strong>教你如何用命令行装逼，做一个有逼格的程序员</strong></h2><p>事先声明，如果你不知道打开windows的命令行工具，我是绝对不会告诉你是用 <strong>windows+R</strong> ，然后键入 <strong>cmd</strong> 打开的</p>
-<p>windows 自带的命令行工具很强大，毕竟计算机一开始都是以键入命令的方式来操作的，但现如今计算机的发展，许多在过去需要去记大量命令才能完成的操作，现如今通过傻瓜式的点选都可以完成。作为一名有逼格的程序员，在计算机如今图形界面点选操作的洪流中漂的越来越远，如何保证程序员识货而不脑残、务实而不闷骚的本性呢，那就不妨用回命令行吧。</p>
-<p>本文将介绍几个关于命令行工具的小技巧，全都是工作之后遇到，看到能装逼，不对，看到对工作有很大的帮助所以就都记下了</p>
-<ul>
-<li><strong>1.外观配置篇</strong></li>
-</ul>
-<p>如果你觉得windows黑底白字的命令行面板很漂亮，对不起，我们分手吧。我相信大部分人不愿意用命令行的原因就是他实在是太丑了，所以，第一步，我们需要把命令行配置的好看舒服一些，虽然肯定比不上<strong>sublime</strong>、<strong>atom</strong>那种神级的编辑界面，但也不能比<strong>notePad</strong>差太多吧，好了我自己配置的界面大致就是下面这个样子吧 </p>
-<p><img src="http://img.blog.csdn.net/20161017131431540" alt="图1"></p>
-<p>其实也就是换成了看起来更舒服的白底黑字，改成了我自己更喜欢的新宋体字体。而你所需要做的就是，右键标题选择属性打开，你看到就是这个样子的了 </p>
-<p><img src="http://img.blog.csdn.net/20161017131721718" alt="图2"></p>
-<p>配置是相当简单的，具体看个人喜欢，具体就不多谈了，但是有两个需要get的点是： </p>
-<p> 如果你受够了命令窗口写着写着就看不到之前的了，那么你需要做的是设置缓冲大小，对于我，200 OK;另外一个是记得打开快速编辑功能，为什么要打开这个，后边再说 </p>
-<p><img src="http://img.blog.csdn.net/20161017131903547" alt="图3"></p>
-<p>做到这儿，就差不多了，但还是差点，对于自己的命令窗口怎么可以用文件目录这么low的标识，当然要有自己的个性,键入命令 title + ‘名字’，剩下的就自己体会去吧 </p>
-<p><em>ps：其实网上还有一些美化命令窗口的工具，比如类似雪豹的透明风格，可以自行钻研</em></p>
-<ul>
-<li><strong>2.能不能快点敲命令篇</strong></li>
-</ul>
-<p>命令行另外一个让人抓狂的地方是它对于复制粘贴偏执的理解，曾经的我深受其害，在我还是个菜鸟的时候，为了达到复制粘贴的效果，我需要右键标记，然后复制，粘贴的时候还要记得右键粘贴，你一直喜欢的 ctrl+V 是不可以的，实在让人抓狂。但现在不一样了，你一定见过别人操作命令工具可以有这样的界面  </p>
-<p><img src="http://img.blog.csdn.net/20161017132157626" alt="图4"></p>
-<p>或许见过大神不用键盘，只点一下鼠标就可以复制大段的命令。这些都是因为其实windows已经提供了一些可以快速编辑命令的小技能，我知道你已经想要听了。</p>
-<p>还记得刚刚说过的打开快速编辑的选项吗？你只有打开了勾选了这个选项，你才真正的解放了命令窗口。如果你想复制一段命令，多行的也OK，你所需要做的就是选中你要复制的命令，然后单击右键，命令就已经被复制在剪贴板上了，如果你想粘贴命令，更简单，选择要插入的位置，右键单击，然后你会发现命令已经被复制上了。</p>
-<p>当然这都是初级的，你还可以通过以下的方式来操作</p>
-<ul>
-<li><strong>F3 快速复制上一次的命令</strong><br><em>按下F3，你可以快速复制上一次执行的命令，你同样的可以通过键入上下键来快速选择命令（反正我觉得还没有用上下键方便）</em></li>
-<li><strong>F1 复制上一次命令，但是一个字符一个字符的复制</strong><br><em>按下F3只能复制一行是不是有点坑，如果你想要一个字符一个字符的复制，那么你的做法就是不停的按F1就行了</em></li>
-<li><strong>F2 输入一个字符，然后复制这个字符之前的命令</strong><br><em>*假如你上一个命令是 ‘net help’ ,按下F2，然后键入 h，你会发现net 已经被复制好了，是不是66的感觉</em></li>
-<li><strong>F7 显示所有使用过的命令，按上上下下，BABA可以选择</strong><br><em>这一次，你所用过的命令都会显示出来，你可以上下左右前前后后进行选择，再也没有比这更直观的方式了</em></li>
-<li><strong>Tab 快速补全存在的文件目录名</strong><br><em>虽然不是特别强大，但是用起Tab键补全的感觉是不是有种敲代码的feeling</em></li>
-</ul>
-<p>知道这五个按键命令，差不多就够了，想当初我也是靠这5个命令，从一个菜鸟变成了现如今的更菜的菜鸟</p>
-<ul>
-<li><strong>3.终极命令</strong></li>
-</ul>
-<p>说好了是做有逼格的程序员呢，怎么说的全是跟程序没多大关系的东西。当然喽，我今天压根没想说一些类似 ‘mkdir’ ‘cd xxoo’之类的命令，这种类似的命令你只有自己去搜索然后自己去敲才会发现它的好玩儿。而我想说的是，对于windows来说，命令好玩的地方真的需要你自己去摸索，如果你是地球上最大的同性恋交友网站git上的一员，如果你是node的忠粉，那么我想你一定要学会玩儿命令行工具。同样的对于电脑小白来说，学会一些‘高大上’的命令操作，同样会让你逼格满满</p>
-<blockquote>
-<p><strong>伟大的程序员布什.沃硕德曾说过：程序员最伟大的地方不是创造，而是一份想要不断摸索的偏执</strong></p>
-</blockquote>
-<p>拜了个拜（下次有空玩win10）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://michaelooo.github.io/2016/10/17/" data-id="clepk3zv60025gtnd9jei9uie" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="tag">命令行</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A3%85%E9%80%BC%E5%BF%85%E5%A4%87/" rel="tag">装逼必备</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-如何用html-css实现平行四边形-以及气泡框呢？" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/02/" class="article-date">
-  <time datetime="2016-08-02T10:55:39.000Z" itemprop="datePublished">2016-08-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/02/">[原]如何用 html+css 实现平行四边形，以及气泡框呢？</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <p><strong>【效果图】</strong> </p>
-<p>首先说一下平行四边形，想要做成的效果大致是下面这个样子的 </p>
-<p><img src="http://img.blog.csdn.net/20160801103810284" alt="这里写图片描述"></p>
-<p><strong>【思路】</strong> </p>
-<p>如果考虑用昨天的方法，利用 border 边界值，就可以分解成 一个右三角+矩形+上三角（这里右，上的意思指的是需要加上颜色显示的边界颜色），但这样就挺复杂了，所以要换一种方法来做</p>
-<p><strong>【做法】</strong> </p>
-<p>其实利用上次说的 css3 的属性 transform 属性来设置</p>
-<pre class="prettyprint"><span class="hljs-rules">{
-    <span class="hljs-rule"><span class="hljs-attribute">display</span>:<span class="hljs-value"> inline-block</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">5</span>px <span class="hljs-number">20</span>px</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">border</span>:<span class="hljs-value"> <span class="hljs-number">1</span>px solid <span class="hljs-hexcolor">#44a5fc</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#333</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">transform</span>:<span class="hljs-value"> <span class="hljs-function">skew(-<span class="hljs-number">20</span>deg)</span></span></span>; <span class="hljs-comment">/* 定义沿着 X 和 Y 轴的 2D 倾斜转换*/</span>
-<span class="hljs-rule">}</span></span></pre>
-
-<p><strong>【注意】</strong> </p>
-<p>但是这么做，有个注意的地方就是，如果当前盒子里包裹其他内容，这个其他内容也会跟着旋转，所以为了避免这种效果，需要在内部重新加一个盒子，并对这个盒子进行一个逆向的 transform，这样就实现了平行四边形了，也就是一个属性的事情  </p>
-<p><strong>【思考】</strong> </p>
-<p>要是个梯形，该怎么做呢？</p>
-<p>接下来再说一下怎么制作一个类似 tooltip 的气泡提示框呢？ </p>
-<p><strong>【效果图】</strong> </p>
-<p>先看一下大致的效果 </p>
-<p><img src="http://img.blog.csdn.net/20160801104015487" alt="这里写图片描述"> </p>
-<p><strong>【思路】</strong> </p>
-<p>其实做起来也相当的简单，就是用一个盒子加一个三角形就行，然后控制好定位的问题就可以做到</p>
-<p><strong>【做法】</strong> </p>
-<p>在有一个叫做 rectangle 的盒子，然后在这个盒子里面有一个 trangle 的盒子</p>
-<pre class="prettyprint"><span class="hljs-class">.rectangle</span><span class="hljs-rules">{
-    <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value">relative</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"><span class="hljs-number">150</span>px</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"><span class="hljs-number">35</span>px</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">background</span>:<span class="hljs-value">green</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">border-radius</span>:<span class="hljs-value"><span class="hljs-number">5</span>px</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value"><span class="hljs-number">30</span>px auto <span class="hljs-number">0</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">padding</span>:<span class="hljs-value"> <span class="hljs-number">10</span>px</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value">white</span></span>; 
-<span class="hljs-rule">}</span></span>
-<span class="hljs-class">.rectangle</span> <span class="hljs-class">.trangle</span><span class="hljs-rules">{
-    <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value">absolute</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">top</span>:<span class="hljs-value"><span class="hljs-number">12</span>px</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">right</span>:<span class="hljs-value">-<span class="hljs-number">16</span>px</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"><span class="hljs-number">0</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">height</span>:<span class="hljs-value"><span class="hljs-number">0</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"><span class="hljs-number">0</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">border</span>:<span class="hljs-value">solid <span class="hljs-number">8</span>px</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">border-color</span>:<span class="hljs-value">transparent transparent transparent green</span></span>;
-<span class="hljs-rule">}</span></span>
-
-
-然后差不多就可以实现了 
-
-**【注意】** 
-
-有一个注意的地方就是 position 的使用，在外部盒子的是一定要使用相对定位的 
-
-**【思考】** 
-
-需要做一个不规则的小三角呢？（其实应该是类似的，就是用不同类型的三角形层层的遮罩，或者利用 css3 的2D变换属性来实现）
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://michaelooo.github.io/2016/08/02/" data-id="clepk3zv0001mgtnd2qkqfx0j" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/" rel="tag">css</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-    <article id="post-重新认识MVC和三层设计模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/01/" class="article-date">
-  <time datetime="2016-08-01T10:18:51.000Z" itemprop="datePublished">2016-08-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/01/">重新认识 MVC 和 三层设计模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!-- Table of Contents -->
-        
-        <h1 id="重新认识-MVC-和-三层设计模式"><a href="#重新认识-MVC-和-三层设计模式" class="headerlink" title="重新认识 MVC 和 三层设计模式"></a>重新认识 MVC 和 三层设计模式</h1><p>首先不得不承认，身边有一群8年+工作经验的大牛就是爽，纠正了我一个认知上的错误</p>
-<p>首先来看一下官方的解释：</p>
-<blockquote>
-<p><strong>MVC</strong>： </p>
-<p>  MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑的图形化用户界面的结构中。 </p>
-<p>  <img src="http://img.blog.csdn.net/20160801101537117" alt="MVC图"> </p>
-<p>  <strong>三层架构设计模式</strong>： </p>
-<ul>
-<li>表现层（UI）：通俗讲就是展现给用户的界面，即用户在使用一个系统的时候他的所见所得。</li>
-<li>业务逻辑层（BLL）：针对具体问题的操作，也可以说是对数据层的操作，对数据业务逻辑处理。</li>
-<li>数据访问层（DAL）：该层所做事务直接操作数据库，针对数据的增添、删除、修改、更新、查找等。</li>
-</ul>
-</blockquote>
-<p>我想说的是，因为老师夜以继日对我讲，MVC三层模式，从而导致我将这两个东西搞混了。所以现在我来重新理解下。</p>
-<p>简单的说： </p>
-<ul>
-<li><p>MVC 是应用在三层架构模式中表现层里面的一种软件设计规范，它只存在于表现层，它不是一种架构设计规范！在表现层的设计还有 MVVM，MVP等，在这里的model，应该理解为viewModel,view就是web界面，controller则是页面请求的逻辑处理</p>
-</li>
-<li><p>三层架构设计是一种架构设计方案，相对来说理解起来比较简单，但需要注意的是，实体模型并不能算作是一个层</p>
-</li>
-</ul>
-<p>具体的理解画一个图吧</p>
-<p><img src="http://img.blog.csdn.net/20160801101043248" alt="MVC 三层模式图解"></p>
-<p>然后稍微的说一下MVVM和MVP</p>
-<ul>
-<li><p>MVVM： 主要用来做 WPF</p>
-</li>
-<li><p>MVP：   MVP和MVC很像，但是有点区别。在MVP中View并不直接使用Model，它们之间的通信是通过Presenter (MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中View会直接从Model中读取数据而不是通过 Controller。</p>
-</li>
-<li><p>MVC: 在MVC里，View是可以直接访问Model的！从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。 在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，即View。所以，在MVC模型里，Model不依赖于View，但是View是依赖于Model的。不仅如此，因为有一些业务逻辑在View里实现了，导致要更改View也是比较困难的，至少那些业务逻辑是无法重用的。</p>
-</li>
-</ul>
-<p>其实今天还学了下 依赖注入的一些东西，很深奥，有空再说吧！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://michaelooo.github.io/2016/08/01/" data-id="clepk3zvp003igtnd0n8lhrkx" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" rel="tag">架构设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
- 
-
-
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
   </nav>
-</section>
-           
-    <aside id="sidebar">
-  
-    
+</div>
 
-  
-    
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title recent-posts">最新文章</h3>
-    <div class="widget">
-      <ul>
         
-          <li>
-            <a href="/2018/09/08/">如何将博客升级http2</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/27/">换新电脑不用慌-轻松搞定vscode配置</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/15/">git开发规范</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/09/">go入门踩坑及环境配置问题相关</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/18/">如何用node去搭建一个项目发布系统</a>
-          </li>
-        
-      </ul>
-    </div>
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="422201870@qq.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="MichaelChengooo">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
   </div>
-
   
     
-
-  
-    
-  
-    <!--微信公众号二维码-->
-
-
-  
-    <!-- 去掉浏览量统计 -->
-<!-- 
-    <div class="widget-wrap">
-    <h3 class="widget-title">浏览数目</h3>
-    <div class="widget">
-      <ul class="popularlist">
-      </ul>
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 Oranges</a>
+        
     </div>
-  </div>
- -->
   
-</aside>
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
 
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-left">
-      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
-      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
-      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
-          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
-          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
-      </a>
-    </div>
-     <div id="footer-right">
-      联系方式&nbsp;|&nbsp;422208170@qq.com
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
     </div>
   </div>
-</footer>
- 
-<script src="/jquery/jquery.min.js"></script>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">首页</a>
-  
-    <a href="/archives" class="mobile-nav-link">归档</a>
-  
-    <a href="/resume/" class="mobile-nav-link">关于</a>
-  
-</nav>
-    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
-<script>
-// Elevator script included on the page, already.
-window.onload = function() {
-  var elevator = new Elevator({
-    selector:'.back-to-top-btn',
-    element: document.querySelector('.back-to-top-btn'),
-    duration: 1000 // milliseconds
-  });
-}
-</script>
-     
-<script src="/js/is.js"></script>
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
 
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
 
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
 
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-<script src="/js/elevator.js"></script>
-
-
-<script src="/js/fundebug.1.9.0.min.js"></script>
-
-
-<!--page counter part-->
-<script>
-  function addCount (Counter) {
-    var curpage_count; 
-    url=$('.article-date').attr('href').trim();
-    title = $('.article-title').text().trim();
-    var query=new AV.Query(Counter);
-    //use url as unique idnetfication
-    query.equalTo("url",url);
-    query.find().then(function(results){
-      if(results.length>0) {
-          var counter=results[0];
-          counter.fetchWhenSave(true); //get recent result
-          counter.increment("time");
-          counter.save();
-          curpage_count = counter.attributes.time + 1;
-          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
       } else {
-        var newcounter=new Counter();
-        newcounter.set("title",title);
-        newcounter.set("url",url);
-        newcounter.set("time",1);
-        newcounter.save(null,{
-            success: function(newcounter){
-            //alert('New object created');
-            },
-            error: function(newcounter,error){
-            alert('Failed to create');
-            }
-            });
-        curpage_count = 1;
-        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
       }
-    },function(error){
-        //find null is not a error
-        alert('Error:'+error.code+" "+error.message);
-    });
-  }
+    }
 
-  $(function(){
-      // fundebug INIT
-      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
 
-      // init
-      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
-      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
 
-      AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-      });
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
 
-      var Counter=AV.Object.extend("Counter");
-      //only increse visit counting when intering a page
-      if ($('.article-title').length == 1)
-        addCount(Counter);
-      var query=new AV.Query(Counter);
-      query.descending("time");
-      // the sum of popular posts
-      query.limit(10); 
-      query.find()
-      .then(
-        function(results){
-          for(var i=0;i<results.length;i++)    
-            {
-                var counter=results[i];
-                title=counter.get("title");
-                url=counter.get("url");
-                time=counter.get("time");
-                // add to the popularlist widget
-                showcontent=title+" ("+time+")";
-                //notice the "" in href
-                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
             }
-          },
-          function(error){
-            alert("Error:"+error.code+" "+error.message);
-          });
-  });
-</script>
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
 
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-</body>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
 </html>
