@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="Welcom Michael Cheng&#39;s Blog" />
+  
+  
+  <title>
+    
+      使用 cz-git 为你的提交带上 jira 号 
+      
+      
+      |
+    
+     Michael&#39;s Blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.jpeg">
+    <link rel="icon" href="/images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJRMKRW3P1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NJRMKRW3P1');
+    </script>
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Michael Cheng</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">使用 cz-git 为你的提交带上 jira 号</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2022-07-21 23:58:53
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/git/" title="git">
+                    #git
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<li>在开发规范里其实是有要求带上 jira 号的，但是目前大部分 commit 都没有带，因为输入起来比较麻烦</li>
+<li>如果可以在 commit 信息中带上一些业务模块的信息，也比较方便排查问题</li>
+</ol>
+<h2 id="cz-git-介绍"><a href="#cz-git-介绍" class="headerlink" title="cz-git 介绍"></a>cz-git 介绍</h2><p>一句话，可以帮助你规范 commit 提交。</p>
+<p>详细介绍可以参考 <a target="_blank" rel="noopener" href="https://cz-git.qbb.sh/zh/guide/introduction.html#%E4%BB%8B%E7%BB%8D">cz-git 介绍</a></p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><h3 id="全局安装（推荐）"><a href="#全局安装（推荐）" class="headerlink" title="全局安装（推荐）"></a>全局安装（推荐）</h3><p>推荐全局安装此命令，好处是：</p>
+<ul>
+<li>不侵入业务仓库，业务仓库更干净</li>
+<li>不会影响其他人的提交，如果后续作为强制 commit 规范，可在工程内部安装</li>
+</ul>
+<h4 id="step-1-下载全局依赖"><a href="#step-1-下载全局依赖" class="headerlink" title="step 1: 下载全局依赖"></a>step 1: 下载全局依赖</h4><pre><code class="sh">npm install -g cz-git commitizen
+</code></pre>
+<h4 id="step-2-全局配置适配器类型"><a href="#step-2-全局配置适配器类型" class="headerlink" title="step 2: 全局配置适配器类型"></a>step 2: 全局配置适配器类型</h4><pre><code>echo &#39;&#123; &quot;path&quot;: &quot;cz-git&quot;, &quot;useEmoji&quot;: true &#125;&#39; &gt; ~/.czrc
+</code></pre>
+<h4 id="step-3-自定义配置，支持-jira-号"><a href="#step-3-自定义配置，支持-jira-号" class="headerlink" title="step 3: 自定义配置，支持 jira 号"></a>step 3: 自定义配置，支持 jira 号</h4><p>step 3: 添加自定义配置(可选，使用默认配置)</p>
+<pre><code class="js">// .commitlintrc.js
+/** @type &#123;import(&#39;cz-git&#39;).UserConfig&#125; */
+const &#123; execSync &#125; = require(&#39;child_process&#39;);
+
+// @tip: git branch name = feature/SPXFM-12345   =&gt;    auto get feature = #SPXFM-12345
+const branch = execSync(&#39;git rev-parse --abbrev-ref HEAD&#39;).toString().trim();
+let feature = &#39;&#39;;
+if (branch.startsWith(&#39;feature/SPXFM&#39;)) &#123;
+  const content = branch.split(&#39;/&#39;)[1];
+  const splitArr = content.split(&#39;-&#39;);
+  feature = ` $&#123;splitArr[0]&#125;-$&#123;splitArr[1]&#125; `
+&#125;
+
+module.exports = &#123;
+  rules: &#123;
+    // @see: https://commitlint.js.org/#/reference-rules
+  &#125;,
+  prompt: &#123;
+    messages: &#123;
+      type: &quot;Select the type of change that you&#39;re committing:&quot;,
+      scope: &quot;Denote the SCOPE of this change (optional):&quot;,
+      customScope: &quot;Denote the SCOPE of this change:&quot;,
+      subject: &quot;Write a SHORT, IMPERATIVE tense description of the change:\n&quot;,
+      body: &#39;Provide a LONGER description of the change (optional). Use &quot;|&quot; to break new line:\n&#39;,
+      breaking: &#39;List any BREAKING CHANGES (optional). Use &quot;|&quot; to break new line:\n&#39;,
+      footerPrefixsSelect: &quot;Select the ISSUES type of changeList by this change (optional):&quot;,
+      customFooterPrefixs: &quot;Input ISSUES Prefix:&quot;,
+      footer: &quot;List any ISSUES by this change. E.g.: #31, #34, #I972S:\n&quot;,
+      confirmCommit: &quot;Are you sure you want to proceed with the commit above ?&quot;
+    &#125;,
+    types: [
+      &#123; value: &quot;feat&quot;, name: &quot;feat:     ✨  A new feature&quot;, emoji: &quot;:sparkles:&quot; &#125;,
+      &#123; value: &quot;fix&quot;, name: &quot;fix:      🐛  A bug fix&quot;, emoji: &quot;:bug:&quot; &#125;,
+      &#123; value: &quot;docs&quot;, name: &quot;docs:     📝  Documentation only changes&quot;, emoji: &quot;:memo:&quot; &#125;,
+      &#123; value: &quot;style&quot;, name: &quot;style:    💄  Changes that do not affect the meaning of the code&quot;, emoji: &quot;:lipstick:&quot; &#125;,
+      &#123; value: &quot;refactor&quot;, name: &quot;refactor: ♻️   A code change that neither fixes a bug nor adds a feature&quot;, emoji: &quot;:recycle:&quot; &#125;,
+      &#123; value: &quot;perf&quot;, name: &quot;perf:     ⚡️  A code change that improves performance&quot;, emoji: &quot;:zap:&quot; &#125;,
+      &#123; value: &quot;test&quot;, name: &quot;test:     ✅  Adding missing tests or correcting existing tests&quot;, emoji: &quot;:white_check_mark:&quot; &#125;,
+      &#123; value: &quot;build&quot;, name: &quot;build:    🏗️   Changes that affect the build system or external dependencies&quot;, emoji: &quot;:building_construction:&quot; &#125;,
+      &#123; value: &quot;ci&quot;, name: &quot;ci:       💚  Changes to our CI configuration files and scripts&quot;, emoji: &quot;:green_heart:&quot; &#125;,
+      &#123; value: &quot;chore&quot;, name: &quot;chore:    🔨  Other changes that don&#39;t modify src or test files&quot;, emoji: &quot;:hammer:&quot; &#125;,
+      &#123; value: &quot;revert&quot;, name: &quot;revert:   ⏪️  Reverts a previous commit&quot;, emoji: &quot;:rewind:&quot; &#125;
+    ],
+    useEmoji: true,
+    scopes: [],
+    allowCustomScopes: true,
+    allowEmptyScopes: true,
+    customScopesAlign: &quot;bottom&quot;,
+    customScopesAlias: &quot;custom&quot;,
+    emptyScopesAlias: &quot;empty&quot;,
+    upperCaseSubject: false,
+    allowBreakingChanges: [&#39;feat&#39;, &#39;fix&#39;],
+    breaklineNumber: 100,
+    breaklineChar: &quot;|&quot;,
+    skipQuestions: [&#39;scope&#39;, &#39;body&#39;, &#39;breaking&#39;, &#39;footer&#39;, &#39;footerPrefix&#39;],
+    issuePrefixs: [&#123; value: &quot;closed&quot;, name: &quot;closed:   ISSUES has been processed&quot; &#125;],
+    customIssuePrefixsAlign: &quot;top&quot;,
+    emptyIssuePrefixsAlias: &quot;skip&quot;,
+    customIssuePrefixsAlias: &quot;custom&quot;,
+    confirmColorize: true,
+    maxHeaderLength: Infinity,
+    maxSubjectLength: Infinity,
+    minSubjectLength: 0,
+    scopeOverrides: undefined,
+    defaultBody: &quot;&quot;,
+    defaultIssues: &quot;&quot;,
+    defaultScope: &quot;&quot;,
+    defaultSubject: feature
+  &#125;
+&#125;;
+</code></pre>
+<h4 id="step4-使用-cz-替代-git-commit"><a href="#step4-使用-cz-替代-git-commit" class="headerlink" title="step4 : 使用 cz 替代 git commit"></a>step4 : 使用 cz 替代 git commit</h4><p>只需要将过去的 <code>git commit -m &#39;aaaa&#39;</code> 替换为 <code>cz</code>即可， 其他人使用正常的 <code>git commit</code> 也不会受影响。</p>
+<h3 id="项目内安装"><a href="#项目内安装" class="headerlink" title="项目内安装"></a>项目内安装</h3><p>如果需要在某个项目内安装，只需要把  <code>.commitlintrc.js</code> 复制到执行项目根目录即可。 详细的步骤可以参考 <a target="_blank" rel="noopener" href="https://cz-git.qbb.sh/zh/guide/#%E5%85%A8%E5%B1%80%E4%BD%BF%E7%94%A8">快速开始</a> ，这里不再单独介绍。</p>
+<h2 id="已知问题"><a href="#已知问题" class="headerlink" title="已知问题"></a>已知问题</h2><p>一个已知的问题：提交历史不能被 <code>zsh-autosuggestions</code> 工具检测到，所以存在下面的问题：<br>在 commit 时遇到 eslint error, 无法提示到上一次的 commit 信息。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/01/20/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2022-07-21 23:58:53
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/git/" title="git">
+                        #git
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2023/01/09/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cz-git-%E4%BB%8B%E7%BB%8D"><span class="toc-text">cz-git 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-text">如何使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-text">全局安装（推荐）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#step-1-%E4%B8%8B%E8%BD%BD%E5%85%A8%E5%B1%80%E4%BE%9D%E8%B5%96"><span class="toc-text">step 1: 下载全局依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step-2-%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E9%80%82%E9%85%8D%E5%99%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">step 2: 全局配置适配器类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step-3-%E8%87%AA%E5%AE%9A%E4%B9%89%E9%85%8D%E7%BD%AE%EF%BC%8C%E6%94%AF%E6%8C%81-jira-%E5%8F%B7"><span class="toc-text">step 3: 自定义配置，支持 jira 号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step4-%E4%BD%BF%E7%94%A8-cz-%E6%9B%BF%E4%BB%A3-git-commit"><span class="toc-text">step4 : 使用 cz 替代 git commit</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%86%85%E5%AE%89%E8%A3%85"><span class="toc-text">项目内安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98"><span class="toc-text">已知问题</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 MichaelChengooo</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E4%BD%BF%E7%94%A8%20cz-git%20%E4%B8%BA%E4%BD%A0%E7%9A%84%E6%8F%90%E4%BA%A4%E5%B8%A6%E4%B8%8A%20jira%20%E5%8F%B7 + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2022%2F07%2F21%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2022/07/21/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

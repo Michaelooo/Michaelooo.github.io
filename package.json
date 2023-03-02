@@ -1,15 +1,16 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
+  "name": "michaelcheng_blog",
+  "version": "1.0.0",
   "private": true,
   "hexo": {
     "version": "6.3.0"
   },
   "scripts": {
-    "start": "hexo server && open http://127.0.0.1:4000",
+    "start": "hexo server",
     "start:local": "hexo clean && hexo generate && http-server -p 4000 ./public",
     "clean": "hexo clean",
-    "build": "hexo clean && hexo generate"
+    "build": "hexo clean && hexo generate",
+    "tiny": "node ./tinyPng.mjs"
   },
   "dependencies": {
     "hexo": "^6.3.0",
@@ -32,7 +33,10 @@
     "simple-git-commit": "0.0.2"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.1.0"
+    "cz-conventional-changelog": "^3.1.0",
+    "imagemin": "^8.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2"
   },
   "config": {
     "commitizen": {
