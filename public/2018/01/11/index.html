@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="欢迎来到程鹏飞的博客" />
+  
+  
+  <title>
+    
+      JS 参数校验: Joi 四问 
+      
+      
+      |
+    
+     程鹏飞的博客
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="./images/favicon.jpeg">
+    <link rel="icon" href="./images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="程鹏飞的博客" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="./images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">JS 参数校验: Joi 四问</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2018-01-11 22:51:00
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/javascript/" title="javascript">
+                    #javascript
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/nodejs/" title="nodejs">
+                    #nodejs
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="JS-参数验证：-Joi-四问"><a href="#JS-参数验证：-Joi-四问" class="headerlink" title="**JS 参数验证： Joi 四问 **"></a>**JS 参数验证： Joi 四问 **</h2><p>以下内容均可在<a target="_blank" rel="noopener" href="https://github.com/hapijs/joi/blob/v13.1.0/README.md">Joi官方地址</a>参考（文档略长，英文），本文仅为个人总结的几个小疑问。</p>
+<h3 id="1-定义-schema-时-Joi-object-keys-和-Joi-object-有什么区别？"><a href="#1-定义-schema-时-Joi-object-keys-和-Joi-object-有什么区别？" class="headerlink" title="1. 定义 schema 时 Joi.object.keys() 和 Joi.object() 有什么区别？"></a>1. 定义 <strong>schema</strong> 时 <strong>Joi.object.keys()</strong> 和 <strong>Joi.object()</strong> 有什么区别？</h3><p>答： 并没有什么区别，官方给了三种定义 <code>schema</code> 的方式。如下：</p>
+<pre><code>// 使用 &#123; &#125; 来定义
+const schema = &#123;
+    a: Joi.string(),
+    b: Joi.number()
+&#125;;
+
+// 使用 Joi.object()
+const schema = Joi.object(&#123;
+    a: Joi.string(),
+    b: Joi.number()
+&#125;);
+
+// 使用 Joi.object.keys()
+const schema = Joi.object().keys(&#123;
+    a: Joi.string(),
+    b: Joi.number()
+&#125;);
+</code></pre>
+<p>三种方式实现的效果其实都是一样的，但是在使用的时候会有一些略微不同，具体如下：</p>
+<ul>
+<li>当使用 {} 时，只是定义了一个普通的js对象，它不是一个完整的 schema 对象。你可以将它传递给验证方法，但不能调用对象的validate（）方法，即类似这种 <code>object.validate()</code>的操作是不可以的，因为它只是一个普通的js对象。此外，每次将{}对象传递给validate（）方法，都将对每个验证执行一个昂贵的模式编译操作。</li>
+<li>当使用 Joi.object() 时，相对于使用 {} ，这是正经的schema 对象，它会在第一次编译，所以你可以多次将它传递给validate（）方法，不会增加开销。另外，你还可以设置 options 来验证。</li>
+<li>当使用 Joi.object.keys() 时，其实和使用 Joi.object() 是类似的，但是当你想添加更多的键（例如多次调用keys（））时，使用joi.object（）.keys（[schema]）会更有用。如果只添加一组键，则可以跳过keys（）方法，直接使用object（）。有些人喜欢用keys（）来使代码看起来更加精确（其实这只是一种编程风格）。</li>
+</ul>
+<h3 id="2-Joi-validate-value-schema-options-callback-中的-options-取值有哪些？"><a href="#2-Joi-validate-value-schema-options-callback-中的-options-取值有哪些？" class="headerlink" title="2. Joi.validate(value, schema, [options], [callback])中的 options 取值有哪些？"></a>2. Joi.validate(value, schema, [options], [callback])中的 options 取值有哪些？</h3><p>答：options可用的值有如下：</p>
+<ul>
+<li><strong>abortEarly：</strong> 设置true，可以在检测到第一个错误时立即返回，默认false（检查全部）。推荐设置true</li>
+<li><strong>convert：</strong>设置true，可以尝试将值转换为所需的类型（例如，将字符串转换为数字）。默认为true。推荐采用默认</li>
+<li><strong>allowunknown：</strong> 设置true，则允许对象包含被忽略的未知键。默认为false。推荐设置true</li>
+<li><strong>skipfunctions：</strong>如果为true，则忽略具有函数值的未知键。默认为false。推荐采用默认</li>
+<li><strong>stripunknown：</strong> 如果为true,从对象和数组中删除未知的元素。默认为false。也可以特殊的设置成 <code>&#123; objects: true , arrays: true &#125;</code>的形式，可以对象和数组分别处理。推荐采用默认</li>
+<li><strong>presence：</strong> 设置默认的可选需求。支持的模式：’optional’,’required’,和’forbidden’。默认为’optional’。推荐采用默认</li>
+<li><strong>escapehtml：</strong> 当为true时，出于安全目的，错误消息模板将特殊字符转义为html实体。默认为false。推荐采用默认</li>
+<li><strong>nodefaults：</strong>如果为true，则不应用默认值。默认为false。推荐采用默认</li>
+<li><strong>context：</strong> 提供一个外部数据集用于引用。只能设置为外部选项来验证（）而不使用any.options（）。使用方法：</li>
+</ul>
+<pre><code>const schema = Joi.object().keys(&#123;
+    a: Joi.ref(&#39;b.c&#39;),
+    b: &#123;
+        c: Joi.any()
+    &#125;,
+    c: Joi.ref(&#39;$x&#39;)
+&#125;);
+
+Joi.validate(&#123; a: 5, b: &#123; c: 5 &#125; &#125;, schema, &#123; context: &#123; x: 5 &#125; &#125;, (err, value) =&gt; &#123;&#125;);
+</code></pre>
+<ul>
+<li>language: 设置默认的错误提示。修改可参考：<a target="_blank" rel="noopener" href="https://github.com/hapijs/joi/blob/v13.1.0/lib/language.js">默认</a></li>
+</ul>
+<h3 id="3-我需要-promisify-Joi-validate-方法吗？"><a href="#3-我需要-promisify-Joi-validate-方法吗？" class="headerlink" title="3. 我需要 promisify Joi.validate 方法吗？"></a><strong>3. 我需要 promisify Joi.validate 方法吗？</strong></h3><p>答： 其实只是两种写法，promise和非promise的写法。首先，Joi.validate() 的写法很像promise，但是还真不是promise实现的，所以你不用promise的写法就像这种（官网的这种）：</p>
+<pre><code>// 场景： 在一个CGI的入口请求参数验证
+
+const data = &#123; a : &#39;123&#39; &#125;;
+
+let schema = Joi.object().keys(&#123;
+    a: Joi.string().required()
+&#125;);
+
+const &#123;error, value&#125; = Joi.validate(data, schema);
+
+if (error) &#123;
+    // 需要人工处理异常
+    console.log(error);
+&#125;
+</code></pre>
+<p>使用promise的写法，就是下面这种，必须要使用 promisify 的，而且强制建议必须要使用 try-catch。</p>
+<pre><code>// 场景： 在一个CGI的入口请求参数验证
+
+const Promise = require(&#39;bluebird&#39;);
+const JoiValidatePromise = Promise.promisify(Joi.validate);
+
+try &#123;
+
+    const data = &#123; a : &#39;123&#39; &#125;;
+
+    let schema = Joi.object().keys(&#123;
+        a: Joi.string().required()
+    &#125;);
+    
+    const query = await JoiValidatePromise(data, schema);   
+      
+&#125; catch (error) &#123;
+    // 使用 catch 捕获错误
+    console.log(error);
+&#125;
+</code></pre>
+<p>两种写法都可以，没有孰好孰坏，不过更推荐第二种写法，利用try-catch全局捕获错误，另外 Joi 的维护者 <a target="_blank" rel="noopener" href="https://github.com/hapijs/joi/issues/1194">目前在实现 async 的写法</a>， 到时候应该就是直接支持promise了，那就不用promisify了，妙哉。</p>
+<h3 id="4-希望可以有一个包罗万象的例子？"><a href="#4-希望可以有一个包罗万象的例子？" class="headerlink" title="4. 希望可以有一个包罗万象的例子？"></a><strong>4. 希望可以有一个包罗万象的例子？</strong></h3><p>答：如下：</p>
+<pre><code>let testData = &#123; xxx &#125;;
+
+let paramSchema = Joi.object().keys(&#123;
+    username: Joi.string().alphanum().min(3).max(30).required(),
+    password: Joi.string().regex(/^[a-zA-Z0-9]&#123;3,30&#125;$/),
+    access_token: [Joi.string(), Joi.number()],
+    birthyear: Joi.number().integer().min(1900).max(2013),
+    email: Joi.string().email(),
+    website: Joi.string().uri(&#123;
+        scheme: [
+            &#39;git&#39;,
+            /git\+https?/
+        ]
+    &#125;),
+    search: Joi.string().allow(&#39;&#39;),
+    type: Joi.string().valid(&#39;disabled&#39;, &#39;normal&#39;, &#39;all&#39;).default(&#39;all&#39;),
+    startTime: Joi.date().min(&#39;1-1-1974&#39;).max(&#39;now&#39;),
+    endTime: Joi.when( Joi.ref(&#39;startTime&#39;), &#123; is: Joi.date().required(), then: Joi.date().max(&#39;1-1-2100&#39;) &#125; ),
+    page: Joi.number().integer().min(1).default(1),
+    pageSize: Joi.number().integer().default(8),
+    deleteWhenLtTen: Joi.number().integer().max(10).strip(),
+    arraySelect: Joi.array().items(Joi.string().label(&#39;My string&#39;).required(), Joi.number().required()),
+&#125;);
+
+let &#123; error, value &#125; = Joi.validate(testData, paramSchema, &#123; allowUnknown: true, abortEarly: true &#125;);
+if (error) &#123;
+    throw error;
+&#125;
+query = value;
+</code></pre>
+<p>简单的使用可以看上面，详细的使用直接看 <a target="_blank" rel="noopener" href="https://github.com/hapijs/joi/blob/v13.1.0/API.md">API</a></p>
+<p>喏，这就是一篇总结文，可能还会继续增加内容，笑纳。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2018/01/05/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2018-01-11 22:51:00
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/javascript/" title="javascript">
+                        #javascript
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/nodejs/" title="nodejs">
+                        #nodejs
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/01/18/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JS-%E5%8F%82%E6%95%B0%E9%AA%8C%E8%AF%81%EF%BC%9A-Joi-%E5%9B%9B%E9%97%AE"><span class="toc-text">**JS 参数验证： Joi 四问 **</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89-schema-%E6%97%B6-Joi-object-keys-%E5%92%8C-Joi-object-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">1. 定义 schema 时 Joi.object.keys() 和 Joi.object() 有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Joi-validate-value-schema-options-callback-%E4%B8%AD%E7%9A%84-options-%E5%8F%96%E5%80%BC%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">2. Joi.validate(value, schema, [options], [callback])中的 options 取值有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%88%91%E9%9C%80%E8%A6%81-promisify-Joi-validate-%E6%96%B9%E6%B3%95%E5%90%97%EF%BC%9F"><span class="toc-text">3. 我需要 promisify Joi.validate 方法吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B8%8C%E6%9C%9B%E5%8F%AF%E4%BB%A5%E6%9C%89%E4%B8%80%E4%B8%AA%E5%8C%85%E7%BD%97%E4%B8%87%E8%B1%A1%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%9F"><span class="toc-text">4. 希望可以有一个包罗万象的例子？</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="422201870@qq.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="MichaelChengooo">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + JS%20%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%3A%20Joi%20%E5%9B%9B%E9%97%AE + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2018%2F01%2F11%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2018/01/11/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

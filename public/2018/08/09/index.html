@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="欢迎来到程鹏飞的博客" />
+  
+  
+  <title>
+    
+      go入门踩坑及环境配置问题相关 
+      
+      
+      |
+    
+     程鹏飞的博客
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="./images/favicon.jpeg">
+    <link rel="icon" href="./images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="程鹏飞的博客" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="./images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">go入门踩坑及环境配置问题相关</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2018-08-09 19:19:43
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/golang/" title="golang">
+                    #golang
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="go-入门踩坑及环境配置问题相关"><a href="#go-入门踩坑及环境配置问题相关" class="headerlink" title="go 入门踩坑及环境配置问题相关"></a>go 入门踩坑及环境配置问题相关</h1><h2 id="学习网站"><a href="#学习网站" class="headerlink" title="学习网站"></a>学习网站</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.kancloud.cn/kancloud/the-way-to-go/72675"><strong>Go 入门指南</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://www.kancloud.cn/kancloud/web-application-with-golang/44105"><strong>Go web 编程</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://golang.org/doc/"><strong>官网</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://tiancaiamao.gitbooks.io/go-internals/content/zh/04.0.html"><strong>深入解析 Go</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://gowalker.org/search?q=gorepos"><strong>Go 仓库大全</strong></a></li>
+<li><a target="_blank" rel="noopener" href="http://cngolib.com/"><strong>Go 标准库指南（中文）</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/avelino/awesome-go"><strong>awesome go</strong></a></li>
+</ul>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>直接去官网下载 <a target="_blank" rel="noopener" href="https://golang.org/dl/">go的包</a>，下载后解压安装。</p>
+<h3 id="配置-gopath"><a href="#配置-gopath" class="headerlink" title="配置 gopath"></a>配置 gopath</h3><p>gopath 可以简单理解为你的工作目录，可以自己定义位置。</p>
+<pre><code>echo &#39;export GOPATH=$HOME/go
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:$GOPATH/bin&#39; &gt;&gt; ~/.zshrc
+</code></pre>
+<p>使配置生效</p>
+<pre><code>source ~/.zshrc
+</code></pre>
+<h3 id="使用-go-env-查看配置是否生效"><a href="#使用-go-env-查看配置是否生效" class="headerlink" title="使用 go env 查看配置是否生效"></a>使用 <code>go env</code> 查看配置是否生效</h3><p>一般目录是下面的这个样子就是对的，<code>GOPATH=&quot;/Users/xxx/go&quot;</code>，xxx 是当前用户名称。</p>
+<h2 id="2-配置-vscode-开发环境"><a href="#2-配置-vscode-开发环境" class="headerlink" title="2.配置 vscode 开发环境"></a>2.配置 vscode 开发环境</h2><h3 id="配置-debug-环境"><a href="#配置-debug-环境" class="headerlink" title="配置 debug 环境"></a><strong>配置 debug 环境</strong></h3><p>使用 vscode 调试 go 的话，需要安装一个go的第三方依赖：<a target="_blank" rel="noopener" href="https://github.com/derekparker/delve">delve</a>，可以使用下面的命令安装：</p>
+<pre><code>go get github.com/derekparker/delve/cmd/dlv
+</code></pre>
+<p>安装后就可以在 debug 面板添加 debug 配置文件调试了，示例如下：</p>
+<pre><code>&#123;
+  &quot;version&quot;: &quot;0.2.0&quot;,
+  &quot;configurations&quot;: [
+    &#123;
+      &quot;name&quot;: &quot;Launch&quot;,
+      &quot;type&quot;: &quot;go&quot;,
+      &quot;request&quot;: &quot;launch&quot;,
+      &quot;mode&quot;: &quot;debug&quot;,
+      &quot;remotePath&quot;: &quot;&quot;,
+      &quot;port&quot;: 7000,
+      &quot;host&quot;: &quot;0.0.0.0&quot;,
+      &quot;program&quot;: &quot;$&#123;workspaceRoot&#125;&quot;,
+      &quot;env&quot;: &#123;
+        &quot;GOPATH&quot;: &quot;/Users/michael/Documents/go&quot;
+      &#125;,
+      &quot;args&quot;: [],
+      &quot;showLog&quot;: true
+    &#125;
+  ]
+&#125;
+</code></pre>
+<p>如果启动后报下面的错误：</p>
+<pre><code>lldb-server needs to be installed in $PATH
+</code></pre>
+<p>可以采用下面的方法解决：</p>
+<p>执行 <code>xcode-select --install</code> 解决，<a target="_blank" rel="noopener" href="https://github.com/derekparker/delve/issues/986">原因未知</a>。</p>
+<h3 id="配置开发语法提示"><a href="#配置开发语法提示" class="headerlink" title="配置开发语法提示"></a><strong>配置开发语法提示</strong></h3><p>随便建一个 <code>.go</code> 的文件用 vscode 打开，会自动提示安装 go 的相关插件，但是一般会有一些插件安装失败，一般都是下面的几个：</p>
+<pre><code>Installing github.com/nsf/gocode SUCCEEDED
+Installing github.com/uudashr/gopkgs/cmd/gopkgs SUCCEEDED
+Installing github.com/ramya-rao-a/go-outline FAILED
+Installing github.com/acroca/go-symbols FAILED
+Installing golang.org/x/tools/cmd/guru FAILED
+Installing golang.org/x/tools/cmd/gorename FAILED
+Installing github.com/rogpeppe/godef SUCCEEDED
+Installing github.com/sqs/goreturns FAILED
+Installing github.com/golang/lint/golint FAILED
+</code></pre>
+<p>可以参考这个<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1013066">修改办法: 让你成功安装vscode中go的相关插件</a> 修改。</p>
+<h3 id="注意-如果没遇到就忽略"><a href="#注意-如果没遇到就忽略" class="headerlink" title="注意(如果没遇到就忽略)"></a><strong>注意(如果没遇到就忽略)</strong></h3><p>但是在最近的测试过程中，发现 golint 依然会报安装失败，原因是 <a target="_blank" rel="noopener" href="https://github.com/golang/tools.git">https://github.com/golang/tools.git</a> 这个仓库里不包含这个 lint 的工具了，所以我们需要单独的安装这个工具包。</p>
+<p>通过查询此 <a target="_blank" rel="noopener" href="https://github.com/golang/lint/issues/397">issue: Where did golint go?</a> 解决</p>
+<pre><code>mkdir -p $GOPATH/src/golang.org/x \
+  &amp;&amp; git clone https://github.com/golang/lint.git $GOPATH/src/golang.org/x/lint \
+  &amp;&amp; go get -u golang.org/x/lint/golint
+</code></pre>
+<p>上述命令可能会遇到文件夹已存在的问题，可以直接跳过第一步文件夹创建的操作就可以。</p>
+<h2 id="3-使用一些包管理工具来管理第三方包"><a href="#3-使用一些包管理工具来管理第三方包" class="headerlink" title="3.使用一些包管理工具来管理第三方包"></a>3.使用一些包管理工具来管理第三方包</h2><p>因为 go 官方没有提供自己的包管理机制，所以包的管理是个坑。市面上各家提供的包管理都是各玩各的，但也有大家用的多的，关于 go 比较常用的包管理工具，有以下几个推荐的:</p>
+<ul>
+<li>godep : <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/db59b10c8c51">golang 包依赖管理 godep 使用</a></li>
+<li>govendor : <a target="_blank" rel="noopener" href="https://studygolang.com/articles/9785">go 依赖管理-govendor</a></li>
+<li><strong>glide</strong> : <a target="_blank" rel="noopener" href="https://github.com/Masterminds/glide">glide 包依赖管理</a></li>
+</ul>
+<p>目前项目中正在使用 glide， 使用 glide 管理包的话，会生成一个 venndor 的目录，可以理解为一个跟随项目的局部 gopath， 这样子在引入第三方包的时候，实际的读取顺序就是： 局部 vendor -&gt; 全局 gopath 。</p>
+<p>另外，在使用第三方包的时候，有些第三方包会托管在 google 的服务上，因为墙的原因，我们没法方便的拿下来，甚至你搭了梯子还是很蛋疼。所以我们只能自己配置镜像源了，因为我们用的是 glide ，所以就拿 glide 的来做例子。</p>
+<p>我们只需要使用 <code>glide mirror set</code> 命令来设置镜像配置（<a target="_blank" rel="noopener" href="https://github.com/xkeyideal/glide/blob/master/README_CN.md">参考</a>）： </p>
+<pre><code>glide mirror set https://golang.org/x/sys https://github.com/golang/sys
+</code></pre>
+<h2 id="后续待补……"><a href="#后续待补……" class="headerlink" title="后续待补……"></a>后续待补……</h2>
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2018/07/18/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2018-08-09 19:19:43
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/golang/" title="golang">
+                        #golang
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/08/15/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#go-%E5%85%A5%E9%97%A8%E8%B8%A9%E5%9D%91%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E7%9B%B8%E5%85%B3"><span class="toc-text">go 入门踩坑及环境配置问题相关</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99"><span class="toc-text">学习网站</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85"><span class="toc-text">1.安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-gopath"><span class="toc-text">配置 gopath</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-go-env-%E6%9F%A5%E7%9C%8B%E9%85%8D%E7%BD%AE%E6%98%AF%E5%90%A6%E7%94%9F%E6%95%88"><span class="toc-text">使用 go env 查看配置是否生效</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE-vscode-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-text">2.配置 vscode 开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-debug-%E7%8E%AF%E5%A2%83"><span class="toc-text">配置 debug 环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E8%AF%AD%E6%B3%95%E6%8F%90%E7%A4%BA"><span class="toc-text">配置开发语法提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F-%E5%A6%82%E6%9E%9C%E6%B2%A1%E9%81%87%E5%88%B0%E5%B0%B1%E5%BF%BD%E7%95%A5"><span class="toc-text">注意(如果没遇到就忽略)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8%E4%B8%80%E4%BA%9B%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E6%9D%A5%E7%AE%A1%E7%90%86%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85"><span class="toc-text">3.使用一些包管理工具来管理第三方包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E5%BE%85%E8%A1%A5%E2%80%A6%E2%80%A6"><span class="toc-text">后续待补……</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="422201870@qq.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="MichaelChengooo">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + go%E5%85%A5%E9%97%A8%E8%B8%A9%E5%9D%91%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%E7%9B%B8%E5%85%B3 + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2018%2F08%2F09%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2018/08/09/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="欢迎来到程鹏飞的博客" />
+  
+  
+  <title>
+    
+      深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用 
+      
+      
+      |
+    
+     程鹏飞的博客
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="./images/favicon.jpeg">
+    <link rel="icon" href="./images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="程鹏飞的博客" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="./images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">深入浅出nodejs学习笔记--第六~八章 理解Buffer 网络编程 构建WEB应用</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2017-04-19 22:34:26
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/nodejs/" title="nodejs">
+                    #nodejs
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="学习笔记">
+                    #学习笔记
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h2 id="第六章-理解Buffer"><a href="#第六章-理解Buffer" class="headerlink" title="第六章 理解Buffer"></a><strong>第六章 理解Buffer</strong></h2><p>这一章要理解的不多，都是一些buffer的常见操作，看API就可以熟悉，如果做过后台的就不会陌生，这里需要注意的几个地方就是</p>
+<ul>
+<li><strong>Buffer所占用的内存</strong>不是通过V8分配的，属于堆外内存，所以意思就是其实在V8启动的时候就会有一个Buffer对象一直常驻内存，无需通过require引入。</li>
+<li><strong>Buffer的内存分配</strong>分为小内存分配和大内存分配，小内存分配一般指的是小于 8kb 的 Buffer 的对象，大内存当然就是大于 8kb的Buffer 对象。</li>
+<li><strong>Buffer的转换</strong>主要体现在字符串转Buffer和Buffer转字符串，字符串转Buffer直接通过构造函数来实现。<br>new Buffer(str, [encording]) &#x2F;&#x2F;encording值编码类型</li>
+</ul>
+<p>Buffer转字符串通过 toString() 可以实现。<br>        buf.toString([encording], [start], [end])</p>
+<ul>
+<li><strong>Buffer的性能</strong>，通过预先转换静态内容为Buffer对象，可以有效减少CPU的重复使用，从而节省服务器资源。</li>
+</ul>
+<h2 id="第七章-网络编程"><a href="#第七章-网络编程" class="headerlink" title="第七章 网络编程"></a><strong>第七章 网络编程</strong></h2><p>这一章也比较简单，主要分为四个，构建TCP服务、构建UDP服务、构建HTTP服务、构建WebSocket服务，前两个不是重点，后两个比较常用。不多说，直接看代码。</p>
+<p><strong>构建TCP服务</strong></p>
+<pre class="prettyprint"><span class="hljs-comment">//示例，创建一个TCP服务器端</span>
+<span class="hljs-keyword">var</span> net = <span class="hljs-built_in">require</span>(<span class="hljs-string">'net'</span>) <span class="hljs-comment">//依赖node自带的net模块</span>
+
+<span class="hljs-keyword">var</span> server = net.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(socket)</span> {</span>
+    <span class="hljs-comment">//新的连接</span>
+    socket.on(<span class="hljs-string">'data'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(data)</span> {</span>
+        console.log(<span class="hljs-string">'连上了'</span>)
+    })
+    <span class="hljs-comment">//断开连接</span>
+    socket.on(<span class="hljs-string">'end'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(data)</span> {</span>
+        console.log(<span class="hljs-string">'连接断开'</span>)
+    })
+    socket.write(<span class="hljs-string">'创建一个TCP服务器端'</span>)
+})
+
+<span class="hljs-comment">//监听</span>
+server.listen(<span class="hljs-number">1234</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+    console.log(<span class="hljs-string">'已绑定1234端口号'</span>)
+})</pre>
+
+<p><strong>构建一个UDP服务器端和一个UDP客户端</strong></p>
+<pre class="prettyprint"><span class="hljs-comment">//示例，创建一个UDP服务器端</span>
+<span class="hljs-keyword">var</span> dgram = <span class="hljs-built_in">require</span>(<span class="hljs-string">'dgram'</span>)
+
+<span class="hljs-keyword">var</span> server = dgram.createSocket(<span class="hljs-string">'udp4'</span>)
+
+server.on(<span class="hljs-string">'message'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(msg, rinfo)</span> {</span>
+console.log(<span class="hljs-string">'服务器得到了'</span> + msg + <span class="hljs-string">'来自'</span> + rinfo.address + <span class="hljs-string">':'</span> + rinfo.port)
+})
+
+server.on(<span class="hljs-string">'listening'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
+<span class="hljs-keyword">var</span> address = server.address()
+console.log(<span class="hljs-string">'已绑定'</span> + rinfo.address + <span class="hljs-string">':'</span> + rinfo.port)
+})
+
+<span class="hljs-comment">//示例，创建一个UDP客户端，与UDP服务器端对话</span>
+<span class="hljs-keyword">var</span> dgram = <span class="hljs-built_in">require</span>(<span class="hljs-string">'dgram'</span>)
+
+<span class="hljs-keyword">var</span> message = <span class="hljs-keyword">new</span> Buffer(<span class="hljs-string">'test.txt'</span>)
+<span class="hljs-keyword">var</span> client = dgram.createSocket(<span class="hljs-string">'udp4'</span>)
+
+<span class="hljs-comment">//通过客户端发送给网络，参数分别对应 要发送的Buffer  Buffer的偏移  Buffer的长度  目标端口 目标地址 完成后的回调</span>
+client.send(message, <span class="hljs-number">0</span>, message.length, <span class="hljs-number">1234</span>, <span class="hljs-string">'localhost'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, bytes)</span> {</span> 
+client.close();
+})</pre>
+
+<p><strong>构建一个HTTP服务器</strong></p>
+<p>这个真的好熟悉，如下：</p>
+<pre class="prettyprint">//示例，创建一个HTTP服务器, <span class="hljs-keyword">http</span>模块继承于TCP中的net模块
+var <span class="hljs-keyword">http</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>)
+
+<span class="hljs-keyword">http</span>.createServer(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-title">req</span>, <span class="hljs-title">res</span>) {</span>
+    res.writeHead(<span class="hljs-number">200</span>, {<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'text/plain'</span>})
+    res.<span class="hljs-keyword">end</span>(<span class="hljs-string">'雷猴\n'</span>)
+}).listen(<span class="hljs-number">1234</span>, <span class="hljs-string">'localhost'</span>)
+
+console.<span class="hljs-built_in">log</span>(<span class="hljs-string">'已绑定 http://localhost:1234'</span>)</pre>
+
+<p><strong>构建WebSocket服务</strong></p>
+<p>WebSocket也是一种基于事件的编程模型，所以和Node结合也是相得益彰，同时WebSocket实现了客户端和服务器端之间的长连接，Node事件驱动的方式十分擅长于大量的客户端保持高并发的连接。</p>
+<pre class="prettyprint">//示例，WebSocket在客户端的应用
+var <span class="hljs-built_in">socket</span> = <span class="hljs-built_in">new</span> WebSocket(<span class="hljs-string">'ws://localhost:1234/update'</span>)
+
+<span class="hljs-built_in">socket</span>.onopen = <span class="hljs-function"><span class="hljs-keyword">function</span> () {</span>
+    setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span> () {</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">socket</span>.bufferedAmount === <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">socket</span>.<span class="hljs-built_in">send</span>(getUpdateData())
+        }
+    }, <span class="hljs-number">50</span>)
+}
+
+<span class="hljs-built_in">socket</span>.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-title">event</span>) {</span>
+   <span class="hljs-comment"> //todo: event.data 的处理</span>
+}</pre>
+
+<p><strong>网络服务与安全</strong></p>
+<p>还有一个关于网络编程的便是网络安全。node在网络安全上提供了3个模块，<strong>crypto</strong>、<strong>tls</strong>、<strong>https</strong>。其中crypto主要用于加密解密，tls模块提供了与net模块类似的功能，区别在于建立在TSL&#x2F;SSL加密的TCP连接之上，https与http基本都是一致的，区别在于前者更安全。</p>
+<h2 id="第八章-构建Web应用"><a href="#第八章-构建Web应用" class="headerlink" title="第八章 构建Web应用"></a><strong>第八章 构建Web应用</strong></h2><p>关于构建Web应用这一章，其实现有其他的框架讲的而且运用的已经很详细，比如KOA，比如Express，试着运用这两个做一个web应用更能加深理解，这里就总结一下构建Web应用的组成</p>
+<p><strong>基础功能</strong></p>
+<ul>
+<li><strong>请求方法</strong>：常见的请求方法有GET、POST、PUT、DELETE，存在于请求报文的第一行的第一个单词，通常为大写。</li>
+<li><strong>路径解析</strong>：浏览器将请求解析成报文，位于请求报文的第二行。</li>
+<li><strong>查询字符串</strong>：即请求传递的参数。</li>
+<li><strong>cookie</strong>：记录服务器和客户端之间的状态。服务器端生成向客户端发送 –&gt; 浏览器保存cookie –&gt;<br>每次浏览器发送请求都会携带cookie，cookie会造成带宽浪费，所以可以减少cookie的大小，为静态的组件使用不同的域名，减少DNS的查询来避免。</li>
+<li><strong>session</strong>：与cookie作用类似，但是session只保留在服务器端，并且常驻内存（利用Redis或者Memcached可以统一转移到集中的数据存储中）。session也会有安全问题，但是相对较小，常见的漏洞就是XSS漏洞（跨站脚本攻击）。</li>
+<li><strong>缓存</strong>：利用浏览器来缓存静态资源，目的是提升加载速度从而提升体验。</li>
+<li><strong>Basic认证</strong>：请求报文头部的Authorization，这种方式有缺陷，因为在网络传输中这些验证接近于明文，所以不可取。</li>
+</ul>
+<p><strong>数据上传</strong></p>
+<ul>
+<li><strong>表单数据</strong>：即常见的form表单提交。</li>
+<li><strong>JSON&#x2F;XML</strong>: 提交的数据是JSON&#x2F;XML格式的，现在大部分的交互都是用的JSON，XML的也有用，比如微信公众号平台的开发的交互就是用的XML，这个真的贼坑。</li>
+<li><strong>附件上传</strong>：利用form-data来实现附件上传。</li>
+<li><strong>数据上传安全</strong>：数据上传的安全性问题主要体现在内存限制和跨站伪造请求的问题上，所以一要对上传做限制，而是在开发中要加hash值做标识，就是加一个随机数。</li>
+</ul>
+<p><strong>路由解析</strong></p>
+<ul>
+<li><strong>文件路径型</strong>：分为静态文件和动态文件，不需要解释。</li>
+<li><strong>MVC</strong>：前端MVC，之前一篇博客有讲，现在前端都是MV*。</li>
+<li><strong>RESTful</strong>: 表述性状态转移，强调所有的资源都是可以通过URL访问到，对URL做文章，与MVC不冲突。可以看下阮一峰的博客：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></li>
+</ul>
+<p><strong>中间件</strong></p>
+<ul>
+<li><strong>异常处理</strong>：中间件的核心就是尾调用next()，所以对于一些异常，需要在next()添加一个参数,并且把捕获到的异常传递过来。</li>
+<li><strong>性能</strong>：中间件的出现时服务于具体业务的，所以要特殊特用，性能问题并不大。</li>
+</ul>
+<p><strong>页面渲染</strong></p>
+<ul>
+<li><strong>内容响应</strong>：内容的响应主要依赖于报文中的Content-*字段，它决定了客户端会以什么样的方式来作出响应，下载、跳转等。</li>
+<li><strong>视图渲染</strong>：一般是通过模板加数据共同生成出来的。</li>
+<li><strong>模板</strong>：比视图渲染更进一步，模板的使用的对前端页面的一种复用，是对html体的复用。比如javaweb中的jsp，或者PHP，当然这些都相对成熟，对于初出茅庐的node来说，现在常用的模板渲染模块有jade,heredoc,ejs等。</li>
+</ul>
+<hr>
+<p><br/>前端新手，弱鸡一枚，如有错误，请指正，谢谢！</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2017/04/18/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2017-04-19 22:34:26
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/nodejs/" title="nodejs">
+                        #nodejs
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="学习笔记">
+                        #学习笔记
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2017/04/20/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E7%90%86%E8%A7%A3Buffer"><span class="toc-text">第六章 理解Buffer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text">第七章 网络编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-%E6%9E%84%E5%BB%BAWeb%E5%BA%94%E7%94%A8"><span class="toc-text">第八章 构建Web应用</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="422201870@qq.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="MichaelChengooo">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAnodejs%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--%E7%AC%AC%E5%85%AD~%E5%85%AB%E7%AB%A0%20%E7%90%86%E8%A7%A3Buffer%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%20%E6%9E%84%E5%BB%BAWEB%E5%BA%94%E7%94%A8 + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2017%2F04%2F19%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2017/04/19/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

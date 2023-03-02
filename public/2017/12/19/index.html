@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="欢迎来到程鹏飞的博客" />
+  
+  
+  <title>
+    
+      ES6黑科技实践--proxy,reflect 
+      
+      
+      |
+    
+     程鹏飞的博客
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="./images/favicon.jpeg">
+    <link rel="icon" href="./images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="程鹏飞的博客" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="./images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">ES6黑科技实践--proxy,reflect</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2017-12-19 22:36:00
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/ES6/" title="ES6">
+                    #ES6
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/proxy/" title="proxy">
+                    #proxy
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/reflect/" title="reflect">
+                    #reflect
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="ES6黑科技实践–proxy-reflect"><a href="#ES6黑科技实践–proxy-reflect" class="headerlink" title="ES6黑科技实践–proxy,reflect"></a><strong>ES6黑科技实践–proxy,reflect</strong></h1><h2 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a><strong>开始之前</strong></h2><p><a target="_blank" rel="noopener" href="https://kangax.github.io/compat-table/es6/#test-Reflect">** reflect兼容性**</a></p>
+<p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fmm18swndlj220c0ttauh.jpg"></p>
+<p><a target="_blank" rel="noopener" href="https://caniuse.com/#search=proxy"><strong>proxy兼容性</strong></a></p>
+<p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fmltxsptfxj21yq11710d.jpg"></p>
+<p>上面两图分别是截止当前，proxy和reflect的浏览器支持程度。可以看出proxy和reflect的支持已经相当好了，新一点的主流浏览器都支持了（除了IE）。</p>
+<p>所以还是相当有必要玩耍一下的。</p>
+<h2 id="proxy"><a href="#proxy" class="headerlink" title="proxy"></a><strong>proxy</strong></h2><h3 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a><strong>简单介绍</strong></h3><p>其实es6出来了这么久了，在实际的项目中也都使用es6编程。对于某些特殊的属性，如proxy，虽然用的不多，但我们或多或少也了解到proxy的用法。详细的介绍这里不赘述，可以移步<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy"><strong>MDN</strong></a>查看es6介绍，当然这里也有一篇大神的<a target="_blank" rel="noopener" href="http://pinggod.com/2016/%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90-ES6-Proxy-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"><strong>es6使用大全</strong></a>，值得深究。</p>
+<p>总之，用一句话总结就是：改变了过去对象监听的复杂操作，使用proxy可以用一种更优雅的方式实现外部对对象的访问。</p>
+<h3 id="es5的实现"><a href="#es5的实现" class="headerlink" title="es5的实现"></a><strong>es5的实现</strong></h3><p>那么或许问题来了，在没有proxy之前，我们是怎么样实现对对象的监听呢？</p>
+<p>其实在es5中，我们可以使用 <code>Object.defineProperty</code>和<code>Object.defineProperty</code>来实现对对象的监听。利用es5对象的getter 和 setter方法，可以实现简单的文件监听，使用方法如下：</p>
+<pre><code>// 如何实现一个自存档对象。 当设置temperature 属性时，archive 数组会获取日志条目。
+function Archiver() &#123;
+  var temperature = null;
+  var archive = [];
+
+  Object.defineProperty(this, &#39;temperature&#39;, &#123;
+    get: function() &#123;
+      console.log(&#39;get!&#39;);
+      return temperature;
+    &#125;,
+    set: function(value) &#123;
+      temperature = value;
+      archive.push(&#123; val: temperature &#125;);
+    &#125;
+  &#125;);
+
+  this.getArchive = function() &#123; return archive; &#125;;
+&#125;
+
+var arc = new Archiver();
+arc.temperature; // &#39;get!&#39;
+arc.temperature = 11;
+arc.temperature = 13;
+arc.getArchive(); // [&#123; val: 11 &#125;, &#123; val: 13 &#125;]
+</code></pre>
+<p>目前支持双向绑定的Vue中的实现就是这种方法。但是这种方法不太好的地方就是对于数组之类的对象，类似修改数组的length，直接用索引设置元素如items[0] &#x3D; {}，以及数组的push，pop等变异方法是无法触发setter的。针对这些，vue中的实现是在Object和Array的原型添加了定制方法来处理这些特殊操作，可以实现上述要求。</p>
+<h3 id="第三方库的实现"><a href="#第三方库的实现" class="headerlink" title="第三方库的实现"></a><strong>第三方库的实现</strong></h3><p>请移步：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/vuejs/vue">Vue.js</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/melanke/Watch.JS/blob/master/src/watch.js">Watch.js</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/angular/angular">Angularjs</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/knockout/knockout">Knockout.js</a></li>
+</ul>
+<h2 id="reflect"><a href="#reflect" class="headerlink" title="reflect"></a><strong>reflect</strong></h2><h3 id="怎么理解reflect"><a href="#怎么理解reflect" class="headerlink" title="怎么理解reflect"></a><strong>怎么理解reflect</strong></h3><p>reflect 是es6新增的一个全局对象。顾名思义，<strong>反射</strong>，类似于Java里面的反射机制。在Java里面，反射是个很头疼的概念。简单理解为：<strong>通过反射，我们可以在运行时获得程序或程序集中每一个类型的成员和成员的信息。对于Java来说，程序中一般的对象的类型都是在编译期就确定下来的，而Java反射机制可以动态地创建对象并调用其属性，这样的对象的类型在编译期是未知的。所以我们可以通过反射机制直接创建对象，即使这个对象的类型在编译期是未知的。</strong></p>
+<p>而对于js来说自然是有些不同了。毕竟<strong>js不需要编译</strong>，同时<strong>万物皆对象</strong>的特性，这些都让理解js的reflect起来相当简单。</p>
+<p>对于JS中的reflect，我们就可以理解为：<strong>有这么一个全局对象，上面直接挂载了对象的某些特殊方法，这些方法可以通过<code>Reflect.apply</code>这种形式来使用，当然所有方法都是可以在 Object 的原型链中找到的。</strong>是不是相当简单。</p>
+<h3 id="使用reflect的好处"><a href="#使用reflect的好处" class="headerlink" title="使用reflect的好处"></a><strong>使用reflect的好处</strong></h3><p>引自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/24778807">知乎专栏：ES6 Reflect</a></p>
+<ol>
+<li>Reflect上面的一些方法并不是专门为对象设计的，比如Reflect.apply方法，它的参数是一个函数，如果使用Object.apply(func)会让人感觉很奇怪。</li>
+<li>用一个单一的全局对象去存储这些方法，能够保持其它的JavaScript代码的整洁、干净。不然的话，这些方法可能是全局的，或者要通过原型来调用。</li>
+<li>将一些命令式的操作如delete，in等使用函数来替代，这样做的目的是为了让代码更加好维护，更容易向下兼容；也避免出现更多的保留字。</li>
+</ol>
+<h3 id="常见的方法"><a href="#常见的方法" class="headerlink" title="常见的方法"></a><strong>常见的方法</strong></h3><pre><code>Reflect.apply
+Reflect.construct
+Reflect.defineProperty
+Reflect.deleteProperty
+Reflect.enumerate // 废弃的
+Reflect.get
+Reflect.getOwnPropertyDescriptor
+Reflect.getPrototypeOf
+Reflect.has
+Reflect.isExtensible
+Reflect.ownKeys
+Reflect.preventExtensions
+Reflect.set
+Reflect.setPrototypeOf
+</code></pre>
+<p>具体用法当然是看：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect">MDN: reflect介绍</a></p>
+<h2 id="一个使用proxy和reflect实现监听对象的小例子"><a href="#一个使用proxy和reflect实现监听对象的小例子" class="headerlink" title="一个使用proxy和reflect实现监听对象的小例子"></a><strong>一个使用proxy和reflect实现监听对象的小例子</strong></h2><p>栗子来源(非本人):<a target="_blank" rel="noopener" href="https://github.com/sindresorhus/on-change">https://github.com/sindresorhus/on-change</a></p>
+<p>on-change是一个可以监听对象或者<strong>数组</strong>内部变化的小工具，主要使用proxy来实现。以下是核心代码：</p>
+<pre><code>// onChange 即要进行的监听操作
+module.exports = (object, onChange) =&gt; &#123;
+    const handler = &#123;
+        get(target, property, receiver) &#123;
+            try &#123;
+                return new Proxy(target[property], handler);
+            &#125; catch (err) &#123;
+                return Reflect.get(target, property, receiver);
+            &#125;
+        &#125;,
+        defineProperty(target, property, descriptor) &#123;
+            onChange();
+            return Reflect.defineProperty(target, property, descriptor);
+        &#125;,
+        deleteProperty(target, property) &#123;
+            onChange();
+            return Reflect.deleteProperty(target, property);
+        &#125;
+    &#125;;
+
+    return new Proxy(object, handler);
+&#125;;
+</code></pre>
+<p>代码很精简，但是也是有必要研究下，是一位大大牛 <strong><a target="_blank" rel="noopener" href="https://sindresorhus.com/">sindresorhus</a></strong> 的作品。</p>
+<p>其实一共有三个方法，<code>get</code> <code>defineProperty</code> <a href="">defineProperty</a>,上面代码可以对数组进行操作就是因为用了proxy，具体的实现在<code>get</code>方法，每一层返回一个proxy，需要注意的是在监听操作这里依然使用的是 es5的 defineProperty 方法。具体的可以自己研究下，还是很有可玩性的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h2><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000010471230">《深入理解ES6》笔记——代理（Proxy）和反射（Reflection）API</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/34f0e6abe312">ES6 之 Proxy 介绍</a></li>
+<li><a target="_blank" rel="noopener" href="http://pinggod.com/2016/%E5%AE%9E%E4%BE%8B%E8%A7%A3%E6%9E%90-ES6-Proxy-%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/">实例解析 ES6 Proxy 使用场景</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/44724640?sort=created">知乎回答：如何监听 js 中变量的变化?</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/24778807">知乎专栏：ES6 Reflect</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2017/12/14/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2017-12-19 22:36:00
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/ES6/" title="ES6">
+                        #ES6
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/proxy/" title="proxy">
+                        #proxy
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/reflect/" title="reflect">
+                        #reflect
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/01/03/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ES6%E9%BB%91%E7%A7%91%E6%8A%80%E5%AE%9E%E8%B7%B5%E2%80%93proxy-reflect"><span class="toc-text">ES6黑科技实践–proxy,reflect</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E4%B9%8B%E5%89%8D"><span class="toc-text">开始之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#proxy"><span class="toc-text">proxy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="toc-text">简单介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#es5%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">es5的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">第三方库的实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reflect"><span class="toc-text">reflect</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3reflect"><span class="toc-text">怎么理解reflect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8reflect%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-text">使用reflect的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">常见的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BD%BF%E7%94%A8proxy%E5%92%8Creflect%E5%AE%9E%E7%8E%B0%E7%9B%91%E5%90%AC%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B0%8F%E4%BE%8B%E5%AD%90"><span class="toc-text">一个使用proxy和reflect实现监听对象的小例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="422201870@qq.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="MichaelChengooo">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + ES6%E9%BB%91%E7%A7%91%E6%8A%80%E5%AE%9E%E8%B7%B5--proxy%2Creflect + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2017%2F12%2F19%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2017/12/19/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

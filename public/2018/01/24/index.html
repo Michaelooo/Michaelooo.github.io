@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="欢迎来到程鹏飞的博客" />
+  
+  
+  <title>
+    
+      关于git：你应该知道的操作 
+      
+      
+      |
+    
+     程鹏飞的博客
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="./images/favicon.jpeg">
+    <link rel="icon" href="./images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="程鹏飞的博客" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="./images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">关于git：你应该知道的操作</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2018-01-24 00:59:25
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/github/" title="github">
+                    #github
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fnqmycqqxhj20xc0hi0tb.jpg"></p>
+<h1 id="关于-git-你应该知道的操作"><a href="#关于-git-你应该知道的操作" class="headerlink" title="关于 git 你应该知道的操作"></a><strong>关于 git 你应该知道的操作</strong></h1><h2 id="git-的使用工具"><a href="#git-的使用工具" class="headerlink" title="git 的使用工具"></a><strong>git 的使用工具</strong></h2><p>首先有两个 可视化工具推荐 ：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.gitkraken.com/features">gitkraken</a><br>一个新出的广受好评的git 可视化工具。有付费。</li>
+<li><a target="_blank" rel="noopener" href="https://www.sourcetreeapp.com/">sourcetree</a><br>一直在用，就是注册麻烦，需要翻墙。免费。</li>
+</ul>
+<p>个人在用第二个，sourcetree 日常使用可以说是hin方便了。当然，不想额外下软件的还可以使用 vscode 内置的 git 管理工具，同样的也是棒棒的。</p>
+<h3 id="vscode-的git插件"><a href="#vscode-的git插件" class="headerlink" title="vscode 的git插件"></a>v<strong>scode 的git插件</strong></h3><p>当然我也在使用 vscode ，除了 vscode 自带的 git 支持，还可以安装以下的插件来更好的使用git：</p>
+<ul>
+<li><strong>Git Lens</strong> 官推的 git 插件，几乎该有的都有了，最强大的就是可以查看具体代码的具体变更,就像下面的这样：<br><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fnqmw9ig2vj210u062jsa.jpg"><br>上一个让我感觉这么厉害的还是 visual studio 的内部集成的版本控制功能，但是 visual studio 实在是太大了。不过这个插件美中不足的就是查看历史实在是太丑了，所以有了下面的这个插件。</li>
+<li><strong>git history</strong> 没毛病，这个插件就是让你的 提交历史 可以很直观的展示出来。</li>
+</ul>
+<p>不过，无论怎么说，git 原生命令还是要了解的，对学习和理解 git 的工作机制会很有帮助，当然对提升逼格也有成效。so,下面的部分主要是针对于 git 命令行的一些快捷操作。</p>
+<h3 id="Mac下不可以使用的问题"><a href="#Mac下不可以使用的问题" class="headerlink" title="Mac下不可以使用的问题"></a><strong>Mac下不可以使用的问题</strong></h3><p><code>error: xcrun:error invalid actiive ... missing xcrun at ...</code></p>
+<p>出现的原因是 git 依赖这个 xcode 的这个工具，所以要更新，一般会在更新系统之后出现。<br>解决办法就是：</p>
+<pre><code>sudo xcode-select --install
+</code></pre>
+<p>等待安装完成之后就可以了。</p>
+<h2 id="git-命令行的一些骚操作"><a href="#git-命令行的一些骚操作" class="headerlink" title="git 命令行的一些骚操作"></a><strong>git 命令行的一些骚操作</strong></h2><p>下面总结一些 git 命令中可以快速提高效率和提升幸福度的操作。</p>
+<h3 id="git配置别名"><a href="#git配置别名" class="headerlink" title="git配置别名"></a><strong>git配置别名</strong></h3><p>可以直接使用命令行修改全局配置，</p>
+<pre><code>git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+git config --global alias.unstage &#39;reset HEAD&#39;
+git config --global alias.last &#39;log -1&#39;
+git config --global alias.lg &quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;
+</code></pre>
+<p>也可以通过 vim 更改配置文件来操作。</p>
+<pre><code>vi ~/.gitconfig
+source ~/.gitconfig
+</code></pre>
+<p>两者的效果是一致的，可以通过 <code>git config --list</code> 查看添加的配置是否存在。 </p>
+<p>该部分总结自 <a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375234012342f90be1fc4d81446c967bbdc19e7c03d3000">廖雪峰：git——配置别名</a>。</p>
+<h3 id="（踩坑）常用的回退（救命）操作"><a href="#（踩坑）常用的回退（救命）操作" class="headerlink" title="（踩坑）常用的回退（救命）操作"></a><strong>（踩坑）常用的回退（救命）操作</strong></h3><p>如果你已经提交到暂存区了，你可以：</p>
+<ul>
+<li>撤销上次提交<br><code>git reset --hard &#39;指定的记录&#39;</code></li>
+</ul>
+<p>如果你想放弃本地修改，你可以：</p>
+<ul>
+<li>检出本地<br><code>git checkout &#39;branch&#39;</code></li>
+</ul>
+<p>如果你想修改上一次的提交信息，你可以：</p>
+<ul>
+<li>修改最后的一次提交<br><code>git commit --amend</code></li>
+</ul>
+<p>如果你在排查问题的时候，你可以</p>
+<ul>
+<li>使用 <code>git fetch</code> 替换 <code>git pull</code>, 因为<code>git pull = git fetch + merge local</code></li>
+</ul>
+<h3 id="（踩坑）git-上传文件忽略大小写"><a href="#（踩坑）git-上传文件忽略大小写" class="headerlink" title="（踩坑）git 上传文件忽略大小写"></a><strong>（踩坑）git 上传文件忽略大小写</strong></h3><p>好的约定其实比技术本身更重要，所以尽可能统一规范大小写，从而避免修改默认的配置。</p>
+<pre><code>git config core.ignorecase false
+git config --global core.ignorecase false // 全局设置
+</code></pre>
+<h3 id="git-comment-添加规范"><a href="#git-comment-添加规范" class="headerlink" title="git comment 添加规范"></a><strong>git comment 添加规范</strong></h3><pre><code>feat：新功能（feature）
+fix：修补bug
+docs：文档（documentation）
+style： 格式（不影响代码运行的变动）
+rebuild：重构（即不是新增功能，也不是修改bug的代码变动）
+test：增加测试
+chore：构建过程或辅助工具的变动
+config: 配置
+
+example: git commit -m &quot;[feat] 新功能&quot;
+</code></pre>
+<p>总结自 <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html">阮一峰： Commit message 和 Change log 编写指南</a>。</p>
+<h3 id="git-comment-添加表情"><a href="#git-comment-添加表情" class="headerlink" title="git comment 添加表情"></a><strong>git comment 添加表情</strong></h3><p>看到别人的comment history有那么多的卡哇伊的表情，是不是很羡慕，现在自己也可以做到。只需要在comment加入<code>:apple:</code>这样的代码，测试<code>GitHub</code>和<code>Gitlab</code>是可用的</p>
+<pre><code>git commit -m &#39;:apple: i have a apple&#39;
+</code></pre>
+<p><strong>表情列表如下：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">emoji</th>
+<th align="left">emoji 代码</th>
+<th align="left">commit 说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">:art: (调色板)</td>
+<td align="left"><code>:art:</code></td>
+<td align="left">改进代码结构&#x2F;代码格式</td>
+</tr>
+<tr>
+<td align="left">:zap: (闪电)<br>:racehorse: (赛马)</td>
+<td align="left"><code>:zap:</code><br><code>:racehorse:</code></td>
+<td align="left">提升性能</td>
+</tr>
+<tr>
+<td align="left">:fire: (火焰)</td>
+<td align="left"><code>:fire:</code></td>
+<td align="left">移除代码或文件</td>
+</tr>
+<tr>
+<td align="left">:bug: (bug)</td>
+<td align="left"><code>:bug:</code></td>
+<td align="left">修复 bug</td>
+</tr>
+<tr>
+<td align="left">:ambulance: (急救车)</td>
+<td align="left"><code>:ambulance:</code></td>
+<td align="left">重要补丁</td>
+</tr>
+<tr>
+<td align="left">:sparkles: (火花)</td>
+<td align="left"><code>:sparkles:</code></td>
+<td align="left">引入新功能</td>
+</tr>
+<tr>
+<td align="left">:memo: (备忘录)</td>
+<td align="left"><code>:memo:</code></td>
+<td align="left">撰写文档</td>
+</tr>
+<tr>
+<td align="left">:rocket: (火箭)</td>
+<td align="left"><code>:rocket:</code></td>
+<td align="left">部署功能</td>
+</tr>
+<tr>
+<td align="left">:lipstick: (口红)</td>
+<td align="left"><code>:lipstick:</code></td>
+<td align="left">更新 UI 和样式文件</td>
+</tr>
+<tr>
+<td align="left">:tada: (庆祝)</td>
+<td align="left"><code>:tada:</code></td>
+<td align="left">初次提交</td>
+</tr>
+<tr>
+<td align="left">:white_check_mark: (白色复选框)</td>
+<td align="left"><code>:white_check_mark:</code></td>
+<td align="left">增加测试</td>
+</tr>
+<tr>
+<td align="left">:lock: (锁)</td>
+<td align="left"><code>:lock:</code></td>
+<td align="left">修复安全问题</td>
+</tr>
+<tr>
+<td align="left">:apple: (苹果)</td>
+<td align="left"><code>:apple:</code></td>
+<td align="left">修复 macOS 下的问题</td>
+</tr>
+<tr>
+<td align="left">:penguin: (企鹅)</td>
+<td align="left"><code>:penguin:</code></td>
+<td align="left">修复 Linux 下的问题</td>
+</tr>
+<tr>
+<td align="left">:checkered_flag: (旗帜)</td>
+<td align="left"><code>:checked_flag:</code></td>
+<td align="left">修复 Windows 下的问题</td>
+</tr>
+<tr>
+<td align="left">:bookmark: (书签)</td>
+<td align="left"><code>:bookmark:</code></td>
+<td align="left">发行&#x2F;版本标签</td>
+</tr>
+<tr>
+<td align="left">:rotating_light: (警车灯)</td>
+<td align="left"><code>:rotating_light:</code></td>
+<td align="left">移除 linter 警告</td>
+</tr>
+<tr>
+<td align="left">:construction: (施工)</td>
+<td align="left"><code>:construction:</code></td>
+<td align="left">工作进行中</td>
+</tr>
+<tr>
+<td align="left">:green_heart: (绿心)</td>
+<td align="left"><code>:green_heart:</code></td>
+<td align="left">修复 CI 构建问题</td>
+</tr>
+<tr>
+<td align="left">:arrow_down: (下降箭头)</td>
+<td align="left"><code>:arrow_down:</code></td>
+<td align="left">降级依赖</td>
+</tr>
+<tr>
+<td align="left">:arrow_up: (上升箭头)</td>
+<td align="left"><code>:arrow_up:</code></td>
+<td align="left">升级依赖</td>
+</tr>
+<tr>
+<td align="left">:construction_worker: (工人)</td>
+<td align="left"><code>:construction_worker:</code></td>
+<td align="left">添加 CI 构建系统</td>
+</tr>
+<tr>
+<td align="left">:chart_with_upwards_trend: (上升趋势图)</td>
+<td align="left"><code>:chart_with_upwards_trend:</code></td>
+<td align="left">添加分析或跟踪代码</td>
+</tr>
+<tr>
+<td align="left">:hammer: (锤子)</td>
+<td align="left"><code>:hammer:</code></td>
+<td align="left">重大重构</td>
+</tr>
+<tr>
+<td align="left">:heavy_minus_sign: (减号)</td>
+<td align="left"><code>:heavy_minus_sign:</code></td>
+<td align="left">减少一个依赖</td>
+</tr>
+<tr>
+<td align="left">:whale: (鲸鱼)</td>
+<td align="left"><code>:whale:</code></td>
+<td align="left">Docker 相关工作</td>
+</tr>
+<tr>
+<td align="left">:heavy_plus_sign: (加号)</td>
+<td align="left"><code>:heavy_plus_sign:</code></td>
+<td align="left">增加一个依赖</td>
+</tr>
+<tr>
+<td align="left">:wrench: (扳手)</td>
+<td align="left"><code>:wrench:</code></td>
+<td align="left">修改配置文件</td>
+</tr>
+<tr>
+<td align="left">:globe_with_meridians: (地球)</td>
+<td align="left"><code>:globe_with_meridians:</code></td>
+<td align="left">国际化与本地化</td>
+</tr>
+<tr>
+<td align="left">:pencil2: (铅笔)</td>
+<td align="left"><code>:pencil2:</code></td>
+<td align="left">修复 typo</td>
+</tr>
+</tbody></table>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a><strong>写在最后</strong></h2><p>骚操作那么多，肯定不止上面那些，所以本文还是会持续更新的。</p>
+<p>最后，希望你和 git 过的幸福。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2018/01/23/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2018-01-24 00:59:25
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/github/" title="github">
+                        #github
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2018/02/05/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-git-%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">关于 git 你应该知道的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">git 的使用工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vscode-%E7%9A%84git%E6%8F%92%E4%BB%B6"><span class="toc-text">vscode 的git插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mac%E4%B8%8B%E4%B8%8D%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">Mac下不可以使用的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E9%AA%9A%E6%93%8D%E4%BD%9C"><span class="toc-text">git 命令行的一些骚操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git%E9%85%8D%E7%BD%AE%E5%88%AB%E5%90%8D"><span class="toc-text">git配置别名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E8%B8%A9%E5%9D%91%EF%BC%89%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9B%9E%E9%80%80%EF%BC%88%E6%95%91%E5%91%BD%EF%BC%89%E6%93%8D%E4%BD%9C"><span class="toc-text">（踩坑）常用的回退（救命）操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E8%B8%A9%E5%9D%91%EF%BC%89git-%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%BF%BD%E7%95%A5%E5%A4%A7%E5%B0%8F%E5%86%99"><span class="toc-text">（踩坑）git 上传文件忽略大小写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-comment-%E6%B7%BB%E5%8A%A0%E8%A7%84%E8%8C%83"><span class="toc-text">git comment 添加规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#git-comment-%E6%B7%BB%E5%8A%A0%E8%A1%A8%E6%83%85"><span class="toc-text">git comment 添加表情</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-text">写在最后</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="422201870@qq.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="MichaelChengooo">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%85%B3%E4%BA%8Egit%EF%BC%9A%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E6%93%8D%E4%BD%9C + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2018%2F01%2F24%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2018/01/24/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>
