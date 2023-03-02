@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: cafe
+theme: oranges
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -80,3 +80,32 @@ deploy:
     delete: true
     verbose: true
     ignore_errors: false
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
+
+lazyload:
+  enable: true
+  onlypost: false # optional
+  loadingImg: /images/loading.gif
+  isSPA: false # optional
+
+search:
+  path: search.xml
+  field: post
+  content: true
+
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date

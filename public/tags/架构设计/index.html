@@ -1,320 +1,424 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
   <meta charset="utf-8">
-  
-  <title>Tag: 架构设计 | 程鹏飞的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欢迎来到程鹏飞的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="程鹏飞的博客">
-<meta property="og:url" content="https://michaelooo.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html">
-<meta property="og:site_name" content="程鹏飞的博客">
-<meta property="og:description" content="欢迎来到程鹏飞的博客">
-<meta property="og:locale" content="zh_ZN">
-<meta property="article:author" content="Michael Cheng">
-<meta name="twitter:card" content="summary">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="欢迎来到程鹏飞的博客" />
   
   
-    <link rel="icon" href="https://ws1.sinaimg.cn/large/86c7c947gy1g4sl65dqrtj20b40b478p.jpg">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <nav id="sub-nav">
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://michaelooo.github.io"></form></div>
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-        <a class="main-nav-link" href="/">首页</a>
-        
-        <a class="main-nav-link" href="/archives">归档</a>
-        
-        <a class="main-nav-link" href="/resume/">关于</a>
-        
-      </nav>
-    </div>
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">程鹏飞的博客</a>
-      </h1>
+  <title>
+    
+      Tag 
+       : 架构设计
       
-    </div>
-  </div>
-  <!-- <script src="https://releases.leanapp.cn/leancloud/javascript-sdk/releases/download/v3.5.0/av-min.js"></script> -->
-</header>
-
-      <div class="outer">
-        <section id="main">
+      |
+    
+     程鹏飞的博客
+  </title>
 
   
+    <link rel="apple-touch-icon" href="/images/favicon.jpeg">
+    <link rel="icon" href="/images/favicon.jpeg">
   
-    
-    
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="程鹏飞的博客" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
       
+        <img no-lazy src="/images/avatar.jpeg" alt="">
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-         <span class="archive-year-post">3 post  this year</span>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/08/01/" class="archive-article-date">
-  <time datetime="2016-08-01T10:18:51.000Z" itemprop="datePublished">08-01</time>
-</a>
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/01/">重新认识 MVC 和 三层设计模式</a>
-    </h1>
-  
-
-    </header>
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
   </div>
-</article>
-  
-  
-    </div></section>
-  
+</div>
 
-</section>
-           
-    <aside id="sidebar">
-  
-    
 
-  
-    
-  
-    
+<script src="/js/activeNav.js"></script>
 
+
+
+      <div class="flex-container">
+        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
+
+<div class="container tag-details">
+  <div class="content-title">
+    <h2>
+      <span>架构设计</span>
+    </h2>
+  </div>
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title tagcloud">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 14px; color: #00f">ES6</a> <a href="/tags/JS%E4%BA%8B%E4%BB%B6%E9%98%9F%E5%88%97/" style="font-size: 14px; color: #00f">JS事件队列</a> <a href="/tags/Linux/" style="font-size: 16.2px; color: #301afc">Linux</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #00f">Nginx</a> <a href="/tags/angular/" style="font-size: 14px; color: #00f">angular</a> <a href="/tags/css/" style="font-size: 14px; color: #00f">css</a> <a href="/tags/docker/" style="font-size: 18.4px; color: #5f34f8">docker</a> <a href="/tags/es6/" style="font-size: 14px; color: #00f">es6</a> <a href="/tags/git/" style="font-size: 14px; color: #00f">git</a> <a href="/tags/github/" style="font-size: 18.4px; color: #5f34f8">github</a> <a href="/tags/golang/" style="font-size: 14px; color: #00f">golang</a> <a href="/tags/http/" style="font-size: 16.2px; color: #301afc">http</a> <a href="/tags/http2/" style="font-size: 14px; color: #00f">http2</a> <a href="/tags/hyperappjs/" style="font-size: 14px; color: #00f">hyperappjs</a> <a href="/tags/ios-bug/" style="font-size: 14px; color: #00f">ios bug</a> <a href="/tags/iterm2/" style="font-size: 14px; color: #00f">iterm2</a> <a href="/tags/javascript/" style="font-size: 20.6px; color: #8f4ef5">javascript</a> <a href="/tags/kong/" style="font-size: 16.2px; color: #301afc">kong</a> <a href="/tags/macos/" style="font-size: 14px; color: #00f">macos</a> <a href="/tags/mac%E5%B7%A5%E5%85%B7/" style="font-size: 14px; color: #00f">mac工具</a> <a href="/tags/mac%E7%A7%BB%E6%A4%8D/" style="font-size: 14px; color: #00f">mac移植</a> <a href="/tags/nginx/" style="font-size: 14px; color: #00f">nginx</a> <a href="/tags/nodejs/" style="font-size: 25px; color: #ee82ee">nodejs</a> <a href="/tags/parcel-js/" style="font-size: 14px; color: #00f">parcel.js</a> <a href="/tags/promise/" style="font-size: 14px; color: #00f">promise</a> <a href="/tags/proxy/" style="font-size: 14px; color: #00f">proxy</a> <a href="/tags/reflect/" style="font-size: 14px; color: #00f">reflect</a> <a href="/tags/webpack/" style="font-size: 14px; color: #00f">webpack</a> <a href="/tags/win10/" style="font-size: 14px; color: #00f">win10</a> <a href="/tags/windows/" style="font-size: 16.2px; color: #301afc">windows</a> <a href="/tags/%E4%B8%BA%E9%80%BC%E6%A0%BC%E8%80%8C%E7%94%9F/" style="font-size: 14px; color: #00f">为逼格而生</a> <a href="/tags/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE/" style="font-size: 14px; color: #00f">五层协议</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 14px; color: #00f">前端</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 14px; color: #00f">命令行</a> <a href="/tags/%E5%A0%86%E6%A0%88/" style="font-size: 14px; color: #00f">堆栈</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 22.8px; color: #be68f1">学习笔记</a> <a href="/tags/%E5%B0%8F%E6%8A%80%E8%83%BD/" style="font-size: 14px; color: #00f">小技能</a> <a href="/tags/%E5%BF%85%E5%A4%87%E5%91%BD%E4%BB%A4/" style="font-size: 14px; color: #00f">必备命令</a> <a href="/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/" style="font-size: 14px; color: #00f">持续集成</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 14px; color: #00f">数据结构</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #00f">架构设计</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 14px; color: #00f">正则表达式</a> <a href="/tags/%E7%88%AC%E5%9D%91%E4%B9%8B%E8%B7%AF/" style="font-size: 14px; color: #00f">爬坑之路</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #00f">爬虫</a> <a href="/tags/%E8%A3%85%E9%80%BC%E5%BF%85%E5%A4%87/" style="font-size: 14px; color: #00f">装逼必备</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #00f">设计模式</a> <a href="/tags/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/" style="font-size: 14px; color: #00f">踩坑笔记</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" style="font-size: 14px; color: #00f">软件配置</a> <a href="/tags/%E8%BF%90%E7%BB%B4%E7%9F%A5%E8%AF%86/" style="font-size: 14px; color: #00f">运维知识</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 14px; color: #00f">面试</a>
+    <div class="post-list">
+      <div class="post-item" title="重新认识 MVC 和 三层设计模式">
+        <span class="time-m-d">2016-08-01</span>
+        <a href="/2016/08/">
+          <span>重新认识 MVC 和 三层设计模式</span>
+        </a>
+      </div>
     </div>
-  </div>
+  
+  <nav class="post-navigation">
+    
+    <span class="page-num">1 / 1</span>
+    
+  </nav>
+</div>
 
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="email" href="422201870@qq.com">
+            <i class="iconfont icon-envelope"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="wechat" href="MichaelChengooo">
+            <i class="iconfont icon-wechat"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title recent-posts">最新文章</h3>
-    <div class="widget">
-      <ul>
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 Oranges</a>
         
-          <li>
-            <a href="/2018/09/09/">如何将博客升级http2</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/27/">换新电脑不用慌-轻松搞定vscode配置</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/15/">git开发规范</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/09/">go入门踩坑及环境配置问题相关</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/18/">如何用node去搭建一个项目发布系统</a>
-          </li>
-        
-      </ul>
     </div>
-  </div>
-
   
     
-
-  
-    
-  
-    <!--微信公众号二维码-->
-
-
-  
-    <!-- 去掉浏览量统计 -->
-<!-- 
-    <div class="widget-wrap">
-    <h3 class="widget-title">浏览数目</h3>
-    <div class="widget">
-      <ul class="popularlist">
-      </ul>
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
     </div>
-  </div>
- -->
   
-</aside>
+  
+</div>
 
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-left">
-      &copy; 2014 - 2023 Michael Cheng&nbsp;|&nbsp;
-      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a>
-      <a target="_blank" href="http://www.beian.miit.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;margin-left: 10px;">
-          <img style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png">
-          <span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">粤ICP备17162335号</span>
-      </a>
-    </div>
-     <div id="footer-right">
-      联系方式&nbsp;|&nbsp;422208170@qq.com
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
     </div>
   </div>
-</footer>
- 
-<script src="/jquery/jquery.min.js"></script>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">首页</a>
-  
-    <a href="/archives" class="mobile-nav-link">归档</a>
-  
-    <a href="/resume/" class="mobile-nav-link">关于</a>
-  
-</nav>
-    <img class="back-to-top-btn" src="https://t1.picb.cc/uploads/2021/05/04/ZEnbna.png"/>
-<script>
-// Elevator script included on the page, already.
-window.onload = function() {
-  var elevator = new Elevator({
-    selector:'.back-to-top-btn',
-    element: document.querySelector('.back-to-top-btn'),
-    duration: 1000 // milliseconds
-  });
-}
-</script>
-     
-<script src="/js/is.js"></script>
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
 
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
 
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
 
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-<script src="/js/elevator.js"></script>
-
-
-<script src="/js/fundebug.1.9.0.min.js"></script>
-
-
-<!--page counter part-->
-<script>
-  function addCount (Counter) {
-    var curpage_count; 
-    url=$('.article-date').attr('href').trim();
-    title = $('.article-title').text().trim();
-    var query=new AV.Query(Counter);
-    //use url as unique idnetfication
-    query.equalTo("url",url);
-    query.find().then(function(results){
-      if(results.length>0) {
-          var counter=results[0];
-          counter.fetchWhenSave(true); //get recent result
-          counter.increment("time");
-          counter.save();
-          curpage_count = counter.attributes.time + 1;
-          $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
       } else {
-        var newcounter=new Counter();
-        newcounter.set("title",title);
-        newcounter.set("url",url);
-        newcounter.set("time",1);
-        newcounter.save(null,{
-            success: function(newcounter){
-            //alert('New object created');
-            },
-            error: function(newcounter,error){
-            alert('Failed to create');
-            }
-            });
-        curpage_count = 1;
-        $('.article-inner').append('<p style="color:#999;margin-left:20px">（本文已被访问'+curpage_count+'次）</p>');
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
       }
-    },function(error){
-        //find null is not a error
-        alert('Error:'+error.code+" "+error.message);
-    });
-  }
+    }
 
-  $(function(){
-      // fundebug INIT
-      fundebug.apikey = '311c1dc8f056512d95a8a459b5d14892078dc69e4686b5f704142485c2c04620';
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
 
-      // init
-      var APP_ID = 'P8zI4n1RVVKeFqFoDDcJXtxB-gzGzoHsz';
-      var APP_KEY = 'XygRBwRtUGj8XJLClnpGKXQQ';
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
 
-      AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-      });
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
 
-      var Counter=AV.Object.extend("Counter");
-      //only increse visit counting when intering a page
-      if ($('.article-title').length == 1)
-        addCount(Counter);
-      var query=new AV.Query(Counter);
-      query.descending("time");
-      // the sum of popular posts
-      query.limit(10); 
-      query.find()
-      .then(
-        function(results){
-          for(var i=0;i<results.length;i++)    
-            {
-                var counter=results[i];
-                title=counter.get("title");
-                url=counter.get("url");
-                time=counter.get("time");
-                // add to the popularlist widget
-                showcontent=title+" ("+time+")";
-                //notice the "" in href
-                $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
             }
-          },
-          function(error){
-            alert("Error:"+error.code+" "+error.message);
-          });
-  });
-</script>
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
 
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
   </div>
-</body>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
 </html>

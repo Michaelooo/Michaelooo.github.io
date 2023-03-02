@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>程鹏飞的博客</title>
+  <icon>https://michaelooo.github.io/icon.png</icon>
+  <subtitle>欢迎来到程鹏飞的博客</subtitle>
+  <link href="https://michaelooo.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://michaelooo.github.io/"/>
+  <updated>2023-03-02T03:13:30.783Z</updated>
+  <id>https://michaelooo.github.io/</id>
+  
+  <author>
+    <name>Michael Cheng</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何将博客升级http2</title>
+    <link href="https://michaelooo.github.io/2018/09/"/>
+    <id>https://michaelooo.github.io/2018/09/</id>
+    <published>2018-09-08T16:48:03.000Z</published>
+    <updated>2023-03-02T03:13:30.783Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;最近有在学习 http2 的相关知识，就想着顺便把自己的博客升级一下，其实升级后并不会带来很大的性能提升，不过当做学习用的个人实践也是不错的。&lt;/p&gt;
+&lt;h2 id=&quot;怎么升级-http2&quot;&gt;&lt;a href=&quot;#怎么升级-http2&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://michaelooo.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="docker" scheme="https://michaelooo.github.io/tags/docker/"/>
+    
+    <category term="nginx" scheme="https://michaelooo.github.io/tags/nginx/"/>
+    
+    <category term="http2" scheme="https://michaelooo.github.io/tags/http2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>换新电脑不用慌-轻松搞定vscode配置</title>
+    <link href="https://michaelooo.github.io/2018/08/"/>
+    <id>https://michaelooo.github.io/2018/08/</id>
+    <published>2018-08-27T10:41:10.000Z</published>
+    <updated>2023-03-01T07:59:35.677Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;换新电脑不用慌-轻松搞定-vscode-配置&quot;&gt;&lt;a href=&quot;#换新电脑不用慌-轻松搞定-vscode-配置&quot; class=&quot;headerlink&quot; title=&quot;换新电脑不用慌-轻松搞定 vscode 配置&quot;&gt;&lt;/a&gt;换新电脑不用慌-轻松搞定 vscode</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>git开发规范</title>
+    <link href="https://michaelooo.github.io/2018/08/"/>
+    <id>https://michaelooo.github.io/2018/08/</id>
+    <published>2018-08-15T11:25:48.000Z</published>
+    <updated>2023-03-01T07:59:35.671Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在团队开发中，团队协作是比埋头编程更值得去深入的东西。一套好的开发流程（规范）可以避免很多不必要的麻烦，现在大部分的公司都使用 git 来进行代码管理，这里结合个人工作中的所得以及个人使用中经常遇到的坑，做个简单的总结。&lt;/p&gt;
+&lt;p&gt;对于 git 的编程规范来说，其实</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="git" scheme="https://michaelooo.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>go入门踩坑及环境配置问题相关</title>
+    <link href="https://michaelooo.github.io/2018/08/"/>
+    <id>https://michaelooo.github.io/2018/08/</id>
+    <published>2018-08-09T11:19:43.000Z</published>
+    <updated>2023-03-01T07:59:35.672Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;go-入门踩坑及环境配置问题相关&quot;&gt;&lt;a href=&quot;#go-入门踩坑及环境配置问题相关&quot; class=&quot;headerlink&quot; title=&quot;go 入门踩坑及环境配置问题相关&quot;&gt;&lt;/a&gt;go 入门踩坑及环境配置问题相关&lt;/h1&gt;&lt;h2 id=&quot;学习网站&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="后端" scheme="https://michaelooo.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+    <category term="golang" scheme="https://michaelooo.github.io/tags/golang/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何用node去搭建一个项目发布系统</title>
+    <link href="https://michaelooo.github.io/2018/07/"/>
+    <id>https://michaelooo.github.io/2018/07/</id>
+    <published>2018-07-18T12:02:19.000Z</published>
+    <updated>2023-03-01T07:59:35.676Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;如何用-node-去搭建一个项目发布系统&quot;&gt;&lt;a href=&quot;#如何用-node-去搭建一个项目发布系统&quot; class=&quot;headerlink&quot; title=&quot;如何用 node 去搭建一个项目发布系统&quot;&gt;&lt;/a&gt;如何用 node</summary>
+        
+      
+    
+    
+    
+    <category term="后端" scheme="https://michaelooo.github.io/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+    <category term="nodejs" scheme="https://michaelooo.github.io/tags/nodejs/"/>
+    
+    <category term="kong" scheme="https://michaelooo.github.io/tags/kong/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记一次狗血的修bug经历</title>
+    <link href="https://michaelooo.github.io/2018/07/"/>
+    <id>https://michaelooo.github.io/2018/07/</id>
+    <published>2018-07-11T13:14:13.000Z</published>
+    <updated>2023-03-01T07:59:35.681Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;记一次狗血的修-bug-经历&quot;&gt;&lt;a href=&quot;#记一次狗血的修-bug-经历&quot; class=&quot;headerlink&quot; title=&quot;记一次狗血的修 bug 经历&quot;&gt;&lt;/a&gt;记一次狗血的修 bug</summary>
+        
+      
+    
+    
+    
+    <category term="杂谈" scheme="https://michaelooo.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+    <category term="ios bug" scheme="https://michaelooo.github.io/tags/ios-bug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微服务 api GateWay 工具： kong</title>
+    <link href="https://michaelooo.github.io/2018/06/"/>
+    <id>https://michaelooo.github.io/2018/06/</id>
+    <published>2018-06-28T16:08:19.000Z</published>
+    <updated>2023-03-01T07:59:35.676Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;API-Gateway-工具-kong&quot;&gt;&lt;a href=&quot;#API-Gateway-工具-kong&quot; class=&quot;headerlink&quot; title=&quot;API Gateway 工具 kong&quot;&gt;&lt;/a&gt;API Gateway 工具</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://michaelooo.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="docker" scheme="https://michaelooo.github.io/tags/docker/"/>
+    
+    <category term="kong" scheme="https://michaelooo.github.io/tags/kong/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一次有关于逼格的折腾笔记</title>
+    <link href="https://michaelooo.github.io/2018/03/"/>
+    <id>https://michaelooo.github.io/2018/03/</id>
+    <published>2018-03-22T11:14:48.000Z</published>
+    <updated>2023-03-01T07:59:35.672Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;iterm2-折腾笔记&quot;&gt;&lt;a href=&quot;#iterm2-折腾笔记&quot; class=&quot;headerlink&quot; title=&quot;iterm2 折腾笔记&quot;&gt;&lt;/a&gt;iterm2 折腾笔记&lt;/h1&gt;&lt;h2 id=&quot;以下是废话&quot;&gt;&lt;a href=&quot;#以下是废话&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Mac" scheme="https://michaelooo.github.io/categories/Mac/"/>
+    
+    
+    <category term="iterm2" scheme="https://michaelooo.github.io/tags/iterm2/"/>
+    
+    <category term="为逼格而生" scheme="https://michaelooo.github.io/tags/%E4%B8%BA%E9%80%BC%E6%A0%BC%E8%80%8C%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tcp三次握手与四次分手</title>
+    <link href="https://michaelooo.github.io/2018/02/"/>
+    <id>https://michaelooo.github.io/2018/02/</id>
+    <published>2018-02-28T14:31:18.000Z</published>
+    <updated>2023-03-01T07:59:35.673Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;理解-HTTP-协议以及-TCP-三次握手与四次分手的过程&quot;&gt;&lt;a href=&quot;#理解-HTTP-协议以及-TCP-三次握手与四次分手的过程&quot; class=&quot;headerlink&quot; title=&quot;理解 HTTP 协议以及 TCP</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="http" scheme="https://michaelooo.github.io/tags/http/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ng2体验报告</title>
+    <link href="https://michaelooo.github.io/2018/02/"/>
+    <id>https://michaelooo.github.io/2018/02/</id>
+    <published>2018-02-05T12:54:58.000Z</published>
+    <updated>2023-03-01T07:59:35.673Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;ng2-体验报告、总结&quot;&gt;&lt;a href=&quot;#ng2-体验报告、总结&quot; class=&quot;headerlink&quot; title=&quot;ng2 体验报告、总结&quot;&gt;&lt;/a&gt;&lt;strong&gt;ng2</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="angular" scheme="https://michaelooo.github.io/tags/angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于git：你应该知道的操作</title>
+    <link href="https://michaelooo.github.io/2018/01/"/>
+    <id>https://michaelooo.github.io/2018/01/</id>
+    <published>2018-01-23T16:59:25.000Z</published>
+    <updated>2023-03-01T07:59:35.674Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;http://ww1.sinaimg.cn/large/86c7c947gy1fnqmycqqxhj20xc0hi0tb.jpg&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;关于-git-你应该知道的操作&quot;&gt;&lt;a href=&quot;#关于-git-你应该知道的操作&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Github" scheme="https://michaelooo.github.io/categories/Github/"/>
+    
+    
+    <category term="github" scheme="https://michaelooo.github.io/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git 大小写问题踩坑笔记</title>
+    <link href="https://michaelooo.github.io/2018/01/"/>
+    <id>https://michaelooo.github.io/2018/01/</id>
+    <published>2018-01-23T09:11:01.000Z</published>
+    <updated>2023-03-01T07:59:35.682Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;关于-git-大小写问题的解决办法&quot;&gt;&lt;a href=&quot;#关于-git-大小写问题的解决办法&quot; class=&quot;headerlink&quot; title=&quot;关于 git 大小写问题的解决办法&quot;&gt;&lt;/a&gt;&lt;strong&gt;关于 git</summary>
+        
+      
+    
+    
+    
+    <category term="Github" scheme="https://michaelooo.github.io/categories/Github/"/>
+    
+    
+    <category term="github" scheme="https://michaelooo.github.io/tags/github/"/>
+    
+    <category term="踩坑笔记" scheme="https://michaelooo.github.io/tags/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我生病的一次经历</title>
+    <link href="https://michaelooo.github.io/2018/01/"/>
+    <id>https://michaelooo.github.io/2018/01/</id>
+    <published>2018-01-18T10:25:00.000Z</published>
+    <updated>2023-03-01T07:59:35.677Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;中午刷知乎不经意看到两个推送的问题？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/22213153&quot;&gt;年轻时得了绝症或者大病是种怎样的体验？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="日常小感" scheme="https://michaelooo.github.io/categories/%E6%97%A5%E5%B8%B8%E5%B0%8F%E6%84%9F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JS 参数校验: Joi 四问</title>
+    <link href="https://michaelooo.github.io/2018/01/"/>
+    <id>https://michaelooo.github.io/2018/01/</id>
+    <published>2018-01-11T14:51:00.000Z</published>
+    <updated>2023-03-01T07:59:35.670Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;JS-参数验证：-Joi-四问&quot;&gt;&lt;a href=&quot;#JS-参数验证：-Joi-四问&quot; class=&quot;headerlink&quot; title=&quot;**JS 参数验证： Joi 四问 **&quot;&gt;&lt;/a&gt;**JS 参数验证： Joi 四问</summary>
+        
+      
+    
+    
+    
+    <category term="nodejs" scheme="https://michaelooo.github.io/categories/nodejs/"/>
+    
+    
+    <category term="javascript" scheme="https://michaelooo.github.io/tags/javascript/"/>
+    
+    <category term="nodejs" scheme="https://michaelooo.github.io/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hyperapp.js 一个轻量级的 react 实现</title>
+    <link href="https://michaelooo.github.io/2018/01/"/>
+    <id>https://michaelooo.github.io/2018/01/</id>
+    <published>2018-01-05T14:24:00.000Z</published>
+    <updated>2023-03-01T07:59:35.672Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;hyperapp-是什么鬼？&quot;&gt;&lt;a href=&quot;#hyperapp-是什么鬼？&quot; class=&quot;headerlink&quot; title=&quot;hyperapp 是什么鬼？&quot;&gt;&lt;/a&gt;&lt;strong&gt;hyperapp</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="javascript" scheme="https://michaelooo.github.io/tags/javascript/"/>
+    
+    <category term="hyperappjs" scheme="https://michaelooo.github.io/tags/hyperappjs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS: 一个小例子引发的思考</title>
+    <link href="https://michaelooo.github.io/2018/01/"/>
+    <id>https://michaelooo.github.io/2018/01/</id>
+    <published>2018-01-03T14:57:00.000Z</published>
+    <updated>2023-03-01T07:59:35.670Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一个小例子引发的思考&quot;&gt;&lt;a href=&quot;#一个小例子引发的思考&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="javascript" scheme="https://michaelooo.github.io/tags/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ES6黑科技实践--proxy,reflect</title>
+    <link href="https://michaelooo.github.io/2017/12/"/>
+    <id>https://michaelooo.github.io/2017/12/</id>
+    <published>2017-12-19T14:36:00.000Z</published>
+    <updated>2023-03-01T07:59:35.670Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;ES6黑科技实践–proxy-reflect&quot;&gt;&lt;a href=&quot;#ES6黑科技实践–proxy-reflect&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="ES6" scheme="https://michaelooo.github.io/tags/ES6/"/>
+    
+    <category term="proxy" scheme="https://michaelooo.github.io/tags/proxy/"/>
+    
+    <category term="reflect" scheme="https://michaelooo.github.io/tags/reflect/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker实践，利用DaoCloud来部署应用</title>
+    <link href="https://michaelooo.github.io/2017/12/"/>
+    <id>https://michaelooo.github.io/2017/12/</id>
+    <published>2017-12-14T13:54:00.000Z</published>
+    <updated>2023-03-01T07:59:35.670Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Docker实践，利用DaoCloud来部署应用&quot;&gt;&lt;a href=&quot;#Docker实践，利用DaoCloud来部署应用&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://michaelooo.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="docker" scheme="https://michaelooo.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>还在用虚拟机吗，是时候用Docker了</title>
+    <link href="https://michaelooo.github.io/2017/12/"/>
+    <id>https://michaelooo.github.io/2017/12/</id>
+    <published>2017-12-13T13:54:00.000Z</published>
+    <updated>2023-03-01T07:59:35.678Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;Docker是啥？&quot;&gt;&lt;a href=&quot;#Docker是啥？&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="https://michaelooo.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="docker" scheme="https://michaelooo.github.io/tags/docker/"/>
+    
+    <category term="Linux" scheme="https://michaelooo.github.io/tags/Linux/"/>
+    
+    <category term="持续集成" scheme="https://michaelooo.github.io/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>高性能打包工具：Webpack 对比 Parcel</title>
+    <link href="https://michaelooo.github.io/2017/12/"/>
+    <id>https://michaelooo.github.io/2017/12/</id>
+    <published>2017-12-12T13:48:00.000Z</published>
+    <updated>2023-03-01T07:59:35.671Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Webpack-对比-Parcel&quot;&gt;&lt;a href=&quot;#Webpack-对比-Parcel&quot; class=&quot;headerlink&quot; title=&quot;Webpack 对比 Parcel&quot;&gt;&lt;/a&gt;Webpack 对比</summary>
+        
+      
+    
+    
+    
+    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="nodejs" scheme="https://michaelooo.github.io/tags/nodejs/"/>
+    
+    <category term="webpack" scheme="https://michaelooo.github.io/tags/webpack/"/>
+    
+    <category term="parcel.js" scheme="https://michaelooo.github.io/tags/parcel-js/"/>
+    
+  </entry>
+  
+</feed>
