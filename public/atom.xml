@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>程鹏飞的博客</title>
+  <title>Michael&#39;s Blog</title>
   <icon>https://michaelooo.github.io/icon.png</icon>
-  <subtitle>欢迎来到程鹏飞的博客</subtitle>
+  <subtitle>Welcom Michael Cheng&#39;s Blog</subtitle>
   <link href="https://michaelooo.github.io/atom.xml" rel="self"/>
   
   <link href="https://michaelooo.github.io/"/>

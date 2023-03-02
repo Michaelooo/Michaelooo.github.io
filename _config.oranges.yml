@@ -35,8 +35,8 @@ avatar:
 # 注册Google分析账号，在管理/创建媒体资源/选择网站/填写相关信息后得到跟踪Id，一般格式为UA-xxxxxxx-x
 # 如之前已有注册账号，在管理/跟踪信息/跟踪代码/找到跟踪ID，一般格式为UA-xxxxxxx-x
 gtag:
-  enable: false
-  gtagkey: UA-xxxxxxx-x
+  enable: true
+  gtagkey: G-NJRMKRW3P1
 
 # 文章评论系统
 comments:
@@ -138,10 +138,10 @@ footer:
       name: github
       icon: github
       path: https://github.com/Michaelooo/Michaelooo.github.io
-    -
-      name: email
-      icon: envelope
-      path: 422201870@qq.com
+    # -
+    #   name: email
+    #   icon: envelope
+    #   path: 422201870@qq.com
     # -
     #   name: facebook
     #   icon: facebooksquare
@@ -150,10 +150,10 @@ footer:
     #   name: twitter
     #   icon: twitter
     #   path:
-    -
-      name: wechat
-      icon: wechat
-      path: MichaelChengooo
+    # -
+    #   name: wechat
+    #   icon: wechat
+    #   path: MichaelChengooo
     # -
     #   name: weibo
     #   icon: weibo
@@ -170,7 +170,7 @@ footer:
     # 一般用来显示根据各种场景需要切换的文本，如时间年份
     # 如：{thisYear} 会被替换为今年年份
     -
-      name: Copyright © {thisYear} Oranges
+      name: Copyright © {thisYear} MichaelChengooo
       path: https://github.com/zchengsite/hexo-theme-oranges
     -
       name: Theme by Oranges | Powered by Hexo
@@ -179,7 +179,7 @@ footer:
   # 浏览量统计
   # http://busuanzi.ibruce.info/
   views:
-    enable: false
+    enable: true
     provider: '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
     item:
       -
