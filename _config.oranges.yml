@@ -27,7 +27,7 @@ favicon:
 # 用户头像与昵称
 avatar:
   author_photo: /images/avatar.jpeg
-  author_nickname: Oranges
+  author_nickname: Michael Cheng
   path: /
 
 # Google 分析
