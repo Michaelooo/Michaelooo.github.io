@@ -192,16 +192,17 @@
 <p>“Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop’s value. Prop being mutated:….”</p>
 </blockquote>
 <p>具体的异常行为表现为：接收 props 的组件不能正常渲染，页面白屏，需手动触发才能拿到 props。</p>
+<p><img src="/images/loading.gif" data-original="/../images/error-demo.png" alt="images"></p>
 <p>在排除了一些缓存、重启类似的的问题后，最后定位到:</p>
 <p>在使用了 chrome 97 + 开发模式 + vue2 + vite + ts + class component 的情况下，可稳定复现此问题。其他非 chromium 内核的浏览器或者低版本的 chrome 无此问题。</p>
 <p>附上一些使用的库版本：</p>
 <ul>
-<li>vue2 : <a href="mailto:&#x76;&#x75;&#101;&#x40;&#50;&#46;&#x36;&#46;&#49;&#52;">&#x76;&#x75;&#101;&#x40;&#50;&#46;&#x36;&#46;&#49;&#52;</a></li>
-<li>vite: <a href="mailto:&#x76;&#x69;&#x74;&#101;&#64;&#50;&#46;&#55;&#46;&#x31;&#48;">&#x76;&#x69;&#x74;&#101;&#64;&#50;&#46;&#55;&#46;&#x31;&#48;</a></li>
-<li>vuex: <a href="mailto:&#x76;&#117;&#x65;&#120;&#64;&#51;&#x2e;&#x36;&#x2e;&#x32;">&#x76;&#117;&#x65;&#120;&#64;&#51;&#x2e;&#x36;&#x2e;&#x32;</a></li>
-<li>typescript: <a href="mailto:&#x74;&#121;&#x70;&#101;&#115;&#99;&#x72;&#x69;&#x70;&#x74;&#64;&#52;&#46;&#53;&#x2e;&#x34;">&#x74;&#121;&#x70;&#101;&#115;&#99;&#x72;&#x69;&#x70;&#x74;&#64;&#52;&#46;&#53;&#x2e;&#x34;</a></li>
-<li>vue-property-decorator: <a href="mailto:&#118;&#x75;&#101;&#45;&#x70;&#114;&#111;&#112;&#101;&#114;&#x74;&#121;&#x2d;&#100;&#101;&#99;&#111;&#114;&#x61;&#116;&#111;&#x72;&#x40;&#x39;&#x2e;&#49;&#x2e;&#50;">&#118;&#x75;&#101;&#45;&#x70;&#114;&#111;&#112;&#101;&#114;&#x74;&#121;&#x2d;&#100;&#101;&#99;&#111;&#114;&#x61;&#116;&#111;&#x72;&#x40;&#x39;&#x2e;&#49;&#x2e;&#50;</a></li>
-<li>chrome: <a href="mailto:&#x63;&#104;&#114;&#x6f;&#109;&#x65;&#64;&#x39;&#55;&#x2e;&#x30;&#46;&#52;&#54;&#57;&#50;&#46;&#x37;&#x31;">&#x63;&#104;&#114;&#x6f;&#109;&#x65;&#64;&#x39;&#55;&#x2e;&#x30;&#46;&#52;&#54;&#57;&#50;&#46;&#x37;&#x31;</a></li>
+<li>vue2 : <a href="mailto:&#118;&#117;&#101;&#x40;&#x32;&#x2e;&#54;&#46;&#x31;&#52;">&#118;&#117;&#101;&#x40;&#x32;&#x2e;&#54;&#46;&#x31;&#52;</a></li>
+<li>vite: <a href="mailto:&#x76;&#x69;&#x74;&#101;&#x40;&#50;&#46;&#x37;&#46;&#x31;&#48;">&#x76;&#x69;&#x74;&#101;&#x40;&#50;&#46;&#x37;&#46;&#x31;&#48;</a></li>
+<li>vuex: <a href="mailto:&#x76;&#x75;&#101;&#x78;&#x40;&#x33;&#x2e;&#x36;&#46;&#x32;">&#x76;&#x75;&#101;&#x78;&#x40;&#x33;&#x2e;&#x36;&#46;&#x32;</a></li>
+<li>typescript: <a href="mailto:&#x74;&#x79;&#112;&#x65;&#x73;&#x63;&#x72;&#x69;&#x70;&#116;&#x40;&#x34;&#x2e;&#53;&#x2e;&#52;">&#x74;&#x79;&#112;&#x65;&#x73;&#x63;&#x72;&#x69;&#x70;&#116;&#x40;&#x34;&#x2e;&#53;&#x2e;&#52;</a></li>
+<li>vue-property-decorator: <a href="mailto:&#x76;&#x75;&#x65;&#45;&#112;&#x72;&#x6f;&#x70;&#x65;&#114;&#x74;&#x79;&#x2d;&#x64;&#101;&#x63;&#x6f;&#114;&#97;&#x74;&#111;&#114;&#64;&#x39;&#46;&#49;&#46;&#50;">&#x76;&#x75;&#x65;&#45;&#112;&#x72;&#x6f;&#x70;&#x65;&#114;&#x74;&#x79;&#x2d;&#x64;&#101;&#x63;&#x6f;&#114;&#97;&#x74;&#111;&#114;&#64;&#x39;&#46;&#49;&#46;&#50;</a></li>
+<li>chrome: <a href="mailto:&#99;&#x68;&#x72;&#x6f;&#x6d;&#101;&#64;&#x39;&#x37;&#x2e;&#x30;&#x2e;&#x34;&#54;&#57;&#50;&#46;&#55;&#49;">&#99;&#x68;&#x72;&#x6f;&#x6d;&#101;&#64;&#x39;&#x37;&#x2e;&#x30;&#x2e;&#x34;&#54;&#57;&#50;&#46;&#55;&#49;</a></li>
 </ul>
 <h2 id="三、过程"><a href="#三、过程" class="headerlink" title="三、过程"></a>三、过程</h2><p>不用读系列：以下是在排查问题时的回顾，也可为自己后续排查问题提供一些反思</p>
 <p>首先，怀疑是 node_modules 或者 vite 版本问题，删除了相关 cache 、lock 文件 问题依然存在 反思：遇到问题时的常规思路就是重启大法，只解决眼前问题，缺乏排错思维</p>
@@ -308,13 +309,16 @@ const test = new Test();
 </code></pre>
 <p>上面的这段代码，在非 chrome97 的浏览器，未初始化的属性不会触发 set 方法， 但是新版本的会触发。</p>
 <p>所以，对应到上面的问题，在过去我们使用 props 时，通常会有 <code>@Prop(&#123; type: String, default: &quot;&quot; &#125;) msg!: string;</code> 类似的写法。这种方式在旧版本里，msg 并不会触发 set 方法，vue 也并不会将其看做是一个响应式的属性。但是在新版本中，msg 触发 set 方法，vue 将其看作是一个 undefined 的变量处理了，所以在页面初次渲染，拿到 props 将永远都是 undefined, 从而产生异常行为。</p>
+<p><img src="/images/loading.gif" data-original="/../images/chrome-tsc-desc.png" alt="images"></p>
 <p>这里还有几个相关的 issue(参考链接 3，4):</p>
 <p>tsc repo: <a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-class-fields#public-fields-created-with-objectdefineproperty">https://github.com/tc39/proposal-class-fields#public-fields-created-with-objectdefineproperty</a></p>
+<p><img src="/images/loading.gif" data-original="/../images/chrome-97-tsc.png" alt="images"></p>
 <p>下面这个 bug 已经修复：</p>
 <ul>
 <li>bug： <a target="_blank" rel="noopener" href="https://bugs.chromium.org/p/v8/issues/detail?id=12421&q=%5B%5BSet%5D%5D%20type=Bug&can=2">https://bugs.chromium.org/p/v8/issues/detail?id=12421&amp;q=%5B%5BSet%5D%5D%20type%3DBug&amp;can=2</a></li>
 <li>v8 changes: <a target="_blank" rel="noopener" href="https://chromium.googlesource.com/v8/v8/+/e81ef8be9c59d2f37bb7b61183d3c2ee9d67158a">https://chromium.googlesource.com/v8/v8/+/e81ef8be9c59d2f37bb7b61183d3c2ee9d67158a</a></li>
 </ul>
+<p><img src="/images/loading.gif" data-original="/../images/bug-report.png" alt="images"></p>
 <h2 id="六、参考链接"><a href="#六、参考链接" class="headerlink" title="六、参考链接"></a>六、参考链接</h2><ul>
 <li>重现仓库</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-class-fields#public-fields-created-with-objectdefineproperty">tsc</a></li>
