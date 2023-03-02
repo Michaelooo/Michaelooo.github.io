@@ -7,12 +7,13 @@
   },
   "scripts": {
     "start": "hexo server",
-    "start:local": "hexo clean && hexo generate && http-server -p 4000 ./public ",
+    "start:local": "hexo clean && hexo generate && http-server -p 4000 ./public",
     "clean": "hexo clean",
-    "build": "hexo clean && hexo generate"
+    "build": "hexo clean && hexo generate && open http://127.0.0.1:4000"
   },
   "dependencies": {
     "hexo": "^6.3.0",
+    "hexo-admonition": "^1.1.2",
     "hexo-deployer-git": "^4.0.0",
     "hexo-deployer-rsync": "^2.0.0",
     "hexo-generator-archive": "^2.0.0",
