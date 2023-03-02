@@ -6,10 +6,10 @@
     "version": "6.3.0"
   },
   "scripts": {
-    "start": "hexo server",
+    "start": "hexo server && open http://127.0.0.1:4000",
     "start:local": "hexo clean && hexo generate && http-server -p 4000 ./public",
     "clean": "hexo clean",
-    "build": "hexo clean && hexo generate && open http://127.0.0.1:4000"
+    "build": "hexo clean && hexo generate"
   },
   "dependencies": {
     "hexo": "^6.3.0",
