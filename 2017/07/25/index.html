@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="Welcom Michael Cheng&#39;s Blog" />
+  
+  
+  <title>
+    
+      一篇文章，从windows10成功移植macOS 
+      
+      
+      |
+    
+     Michael&#39;s Blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.jpeg">
+    <link rel="icon" href="/images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJRMKRW3P1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NJRMKRW3P1');
+    </script>
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">一篇文章，从windows10成功移植macOS</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2017-07-25 19:02:00
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/mac%E7%A7%BB%E6%A4%8D/" title="mac移植">
+                    #mac移植
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/mac%E5%B7%A5%E5%85%B7/" title="mac工具">
+                    #mac工具
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>一篇文章，从windows10成功移植macOS</p>
+<p>作为习惯了Windows温暖怀抱的码畜一名，初次使用macOS，总是会有各种的不适应。记不住的快捷键，理不清的bash命令，找不到的文件夹，个个都能让人激动地拔起29米大刀。这篇文章，简单介绍作为一小白从Windows10系统成功移植macOS的过程。在几天的适应时间里，查阅了大量（一点儿）的资料，踩着前人的尸首整理出这篇文章。一方面算作是给自己一个记录，另一方面是最近略忙，无法更新博客，只能写点这些来充数。</p>
+<p>因为我是码农一名，所以对macOS的使用理解可能与大众视角不太一样，所以将就看。</p>
+<p>配置VPN</p>
+<p>首先，刚接触到macOS，我认为应该做的第一件事就是配网络，毕竟在程序界，国外的月亮的确是圆一些。关于vpn，最近国家风头正紧，前阵子，博主一直用的greenvpn已经跑路，所以防止查水表，这里就简单提一下，希望没人看到。</p>
+<p>一般在macOS上使用VPN，会推荐两个，一个是使用shadowsock客户端，然后自己去somewhere找线路，进行配置后访问，这一种略微麻烦下。因为我是小白嘛，所以我用简单的，lantern ，比起使用shadowsock，lantern使用很简单，直接下载打开就可以用。lantern默认会在打开的时候，在你的机器上跑一个服务，免费的也可以用，但是速度稳定性稍微差些，重要的是会限制流量。专业版的就不会做流量限制，而且现在两年套餐才300块左右（我用的就是这个），我不会告诉你在购买的时候填写这个验证码 YY7VYWQ 还可以额外获得是三个月的使用时间。</p>
+<p>对了，最重要的是，下载lantern别去百度搜索下载，搜到的中文官网已经下了，直接去这里下载 下载地址： <a target="_blank" rel="noopener" href="https://github.com/getlantern/lantern/releases/tag/latest%EF%BC%8C%E8%80%8C%E4%B8%94%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E6%98%AFlantern%E6%B2%A1%E6%9C%89ios%E7%89%88%E6%9C%AC%E7%9A%84%EF%BC%8C%E6%89%80%E4%BB%A5ios%E4%B8%8A%E7%9A%84lantern%E9%83%BD%E6%98%AF%E7%9B%97%E7%89%88%E3%80%82">https://github.com/getlantern/lantern/releases/tag/latest，而且需要注意的是lantern没有ios版本的，所以ios上的lantern都是盗版。</a></p>
+<p>记住快捷键</p>
+<p>首先MacBook的键位是和普通的键盘不一样的，更重要的是好多快捷键也是很有自己的freestyle，的确是相当难记（当然也不需要全部记住，只需要在工作熟悉常用的即可）。这里推荐一个软件CheatSheet，没别的，就是当你长按住command键的时候，会显示当前电脑的所有常用快捷键方式，好记性不用带小抄。下载地址点这里，CheatSheet <a target="_blank" rel="noopener" href="https://www.mediaatelier.com/CheatSheet/">https://www.mediaatelier.com/CheatSheet/</a></p>
+<p>bash命令</p>
+<p>讲道理，不看其他的，macOS上的bash命令我可以玩儿一天。这里直接看了前人的教程来配置自己的terminal。结合美观、使用高效的需求，前人给出的解决方案是iterm2+oh-my-zsh+各种配置,思路很清晰，但是安装会有一点麻烦。<br>整理一下思路大致就是， 先安装iterm2 -&gt; iterm2简单配置，配色方案 -&gt; 安装zsh，mac自带的有zsh，但是可以去更新下 -&gt; 安装oh-my-zsh插件 -&gt; 愉快玩耍</p>
+<p>iterm2的安装<br>直接去iterm2的官网下载就行了，<a target="_blank" rel="noopener" href="https://www.iterm2.com/%EF%BC%8C%E5%85%8D%E8%B4%B9%E7%9A%84%E8%BD%AF%E4%BB%B6%E3%80%82">https://www.iterm2.com/，免费的软件。</a></p>
+<p>iterm2简单配置，配色方案<br>网上有很多大神有自己的配色方案，可以 百度 ‘iterm2配色方案’，可以按照教程自己设置。当然我是小白，所以直接用现成的。iterm2有专门的主题网站，可以登录这里<a target="_blank" rel="noopener" href="http://iterm2colorschemes.com/%EF%BC%8C%E4%B8%8B%E8%BD%BD%E7%BD%91%E7%AB%99%E4%B8%8A%E7%9A%84%E5%8C%85%EF%BC%8C%E7%84%B6%E5%90%8E%E7%9F%A5%E5%B7%B1%E5%AF%BC%E5%85%A5%E5%B0%B1%E8%A1%8C%E4%BA%86%EF%BC%8C%E4%BD%A0%E8%A6%81%E9%97%AE%E6%80%8E%E4%B9%88%E5%AF%BC%E5%85%A5%EF%BC%9F%E7%9B%B4%E6%8E%A5%E7%9C%8B%E8%BF%99%E9%87%8C%EF%BC%8Citerm2%E5%AF%BC%E5%85%A5%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88http://jingyan.baidu.com/article/48a42057029f99a92425048e.html">http://iterm2colorschemes.com/，下载网站上的包，然后知己导入就行了，你要问怎么导入？直接看这里，iterm2导入配色方案http://jingyan.baidu.com/article/48a42057029f99a92425048e.html</a></p>
+<p>安装zsh<br>在安装zsh之前，可以先安装一个homebrew，<a target="_blank" rel="noopener" href="https://brew.sh/index_zh-cn.html%EF%BC%8C%E6%9C%89%E4%BA%86%E8%BF%99%E4%B8%AA%E7%8E%A9%E6%84%8F%E5%84%BF%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E4%BD%A0%E6%83%B3%E5%AE%89%E8%A3%85%E7%9A%84%E4%B8%9C%E8%A5%BF%E3%80%82%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E7%9B%B4%E6%8E%A5bash%E8%BE%93%E5%85%A5">https://brew.sh/index_zh-cn.html，有了这个玩意儿，可以一键安装你想安装的东西。安装完成后，直接bash输入</a><br>$brew install zsh<br>安装成功后，需要修改为默认的shell，先去确认一下自己zsh的安装目录<br>$ chsh -s &#x2F;bin&#x2F;zsh</p>
+<p>安装oh-my-zsh插件<br>只剩下最后一步,一行命令搞定<br>$ curl -L <a target="_blank" rel="noopener" href="https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh">https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh</a> | sh</p>
+<p>以上，就稍微有点逼格了，</p>
+<p>一些我记不住的命令：<br>顺便给自己备忘一下老是记不住的命令：<br>显示隐藏文件&#x2F;目录： $ defaults write com.apple.finder AppleShowAllFiles -bool true<br>隐藏隐藏文件&#x2F;目录： $ defaults write com.apple.finder AppleShowAllFiles -bool false </p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2017/05/24/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2017-07-25 19:02:00
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/mac%E7%A7%BB%E6%A4%8D/" title="mac移植">
+                        #mac移植
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/mac%E5%B7%A5%E5%85%B7/" title="mac工具">
+                        #mac工具
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2017/09/01/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 MichaelChengooo</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%EF%BC%8C%E4%BB%8Ewindows10%E6%88%90%E5%8A%9F%E7%A7%BB%E6%A4%8DmacOS + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2017%2F07%2F25%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2017/07/25/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

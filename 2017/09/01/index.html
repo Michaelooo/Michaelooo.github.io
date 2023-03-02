@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="Welcom Michael Cheng&#39;s Blog" />
+  
+  
+  <title>
+    
+      一篇无聊的博客--当我有了我的新电脑，我该怎样去配置？ 
+      
+      
+      |
+    
+     Michael&#39;s Blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.jpeg">
+    <link rel="icon" href="/images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJRMKRW3P1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NJRMKRW3P1');
+    </script>
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
+</head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Oranges</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">一篇无聊的博客--当我有了我的新电脑，我该怎样去配置？</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2017-09-01 18:52:00
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/macos/" title="macos">
+                    #macos
+                  </a>
+                </span>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" title="软件配置">
+                    #软件配置
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="当我有了我的新电脑，我该怎样去配置？"><a href="#当我有了我的新电脑，我该怎样去配置？" class="headerlink" title="当我有了我的新电脑，我该怎样去配置？"></a>当我有了我的新电脑，我该怎样去配置？</h1><hr>
+<blockquote>
+<p>这是一篇无聊到让你看了之后会觉得一切索然无味的博客，因为它的目的只有一个，就是帮助我记忆一些的我的个人电脑装机方案。当然，这也是一篇有一点点参考价值的博客，因为或许可以帮助你自定义配置你的电脑，创造不同于别人的freestyle，同时提升你的工作效率。因为平时的工作接触的就只有windows和macOS，所以本文的切入点也就有两个。那么，当我有了我的新电脑，我该怎样去配置的我的新电脑呢？</p>
+</blockquote>
+<blockquote>
+<p>我的职业是一为前端工程师，所以以装X为目的，提升工作效率为情怀。以下软件的配置或者优化均为个人喜好，你要是觉得不喜欢很烂，鄙人也是很无奈啊。</p>
+</blockquote>
+<h2 id="当我有了我的新Windows电脑，我该怎么去配置，优化"><a href="#当我有了我的新Windows电脑，我该怎么去配置，优化" class="headerlink" title="当我有了我的新Windows电脑，我该怎么去配置，优化"></a>当我有了我的新Windows电脑，我该怎么去配置，优化</h2><h3 id="1-系统的选择"><a href="#1-系统的选择" class="headerlink" title="1 系统的选择"></a>1 系统的选择</h3><p>一般我是不喜欢用自带的家庭版系统的，况且我是个想在电脑上跑多个系统的boy。但习惯所致，双系统不是我的选择，所以我选window10专业版或者windows10企业版。Windows10自带的<strong>hyper-v</strong>足够强大，个人感觉比VM好用多了，用来装centos刚刚好。<br>有几点需要注意下：</p>
+<ul>
+<li>win10在<strong>开启hyper服务</strong>之后，若要新建虚拟机，需要开启bios的虚拟化，在BIOS的cpu设置里面启用即可。</li>
+<li>win10有时候会遇到无法进入BIOS的情况，原因有可能是开启了win10的快速启动，所以电脑不会真正的关机。解决办法是将电脑强行断电几分钟，如果是笔记本就拆掉电源，然后按长按开机键清空BIOS的电量。这个时候再重启按命令（F2，ESC等）就可以进入BIOS设置了。</li>
+<li>hyper-v的虚拟机新建设置里面有一个一代或者二代(<a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/plan/Should-I-create-a-generation-1-or-2-virtual-machine-in-Hyper-V">WTF is 1 or 2</a>)的设置。开启了虚拟化，当然选择第二代。<br>图片<br>上图是第一代和第二代的区别。</li>
+<li>当你新建虚拟机装centos时有时会出现*** no UEFI system found**的错误，说明你的BIOS没有设置UEFI(<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/UEFI/3556240?fr=aladdin">WTF is UEFI</a>)，或者机器太老不支持。退出到第三步中的第一代就行。</li>
+</ul>
+<h3 id="2-网络环境，驱动配置"><a href="#2-网络环境，驱动配置" class="headerlink" title="2 网络环境，驱动配置"></a>2 网络环境，驱动配置</h3><ul>
+<li><strong>更新驱动，修复漏洞</strong>直接使用鲁大师。如果是组装机，顺便可以跑个分，查看电脑使用情况，看有没有被商家套路。</li>
+<li><em>翻墙</em>去GitHub下载（其他地方出现的都是假的）。安装lantern</li>
+</ul>
+<h3 id="3-作为一名coder，我该装些啥"><a href="#3-作为一名coder，我该装些啥" class="headerlink" title="3 作为一名coder，我该装些啥"></a>3 作为一名coder，我该装些啥</h3><ul>
+<li><strong>visual studio code</strong>，用来写代码</li>
+<li><strong>git for windows</strong>，用来抄代码，必要安装<a target="_blank" rel="noopener" href="https://www.sourcetreeapp.com/">sourcetree</a></li>
+<li><strong>node</strong>，node 环境必须要装</li>
+<li><strong>sublime</strong>，用来代替记事本使用</li>
+<li><strong>beyondCompare</strong>,比较代码用</li>
+<li><strong><a target="_blank" rel="noopener" href="https://babun.github.io/index.html">babun</a></strong>,替换掉原生的命令行工具，与powershell 结合使用</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cockos.com/licecap/">licecap</a></strong>,用来截Gif图，给别人演示用，很方便</li>
+<li><strong>mongodb</strong>,现在应该叫做studio3T,工作主用mongodb</li>
+<li><strong>[teamviewer(<a target="_blank" rel="noopener" href="https://www.teamviewer.com/zhCN/)]">https://www.teamviewer.com/zhCN/)]</a></strong>,远程连接，实际使用强过向日葵太多</li>
+<li>**[markman(<a target="_blank" rel="noopener" href="http://www.getmarkman.com/)]**%E7%94%A8%E6%9D%A5%E5%88%87%E5%9B%BE%E9%87%8F%E5%B0%BA%E5%AF%B8%EF%BC%8C%E5%8D%95%E8%BF%99%E4%B8%AA%E5%8A%9F%E8%83%BD%E4%BF%A9%E8%AF%B4%E6%AF%94PS%E5%AE%9E%E5%9C%A8%E5%A5%BD%E5%A4%AA%E5%A4%9A%EF%BC%8C%E4%BD%86%E6%98%AF%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85Adobe">http://www.getmarkman.com/)]**用来切图量尺寸，单这个功能俩说比PS实在好太多，但是需要安装Adobe</a> air</li>
+<li><strong><a target="_blank" rel="noopener" href="http://www.getwox.com/">Wox</a></strong>,windows下的的spotlight,安装后设置开机自启</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.irolan.com/">rolan</a></strong>,用来做桌面管理，设置开机自启</li>
+<li><strong>cccleaner</strong> 清理电脑垃圾文件和注册表</li>
+<li><strong>FileZila</strong> Ftp连接</li>
+<li><strong>有道云笔记</strong> 用来记笔记，三个终端都有的，很方便。当然印象笔记也是可以的</li>
+</ul>
+<h3 id="4-作为一名文青，我该用些啥"><a href="#4-作为一名文青，我该用些啥" class="headerlink" title="4 作为一名文青，我该用些啥"></a>4 作为一名文青，我该用些啥</h3><p>微信QQ随身装<br><br>知乎B站天天看<br><br>优化电脑鲁大师<br><br>听歌只选网易云</p>
+<h3 id="5-必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多"><a href="#5-必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多" class="headerlink" title="5 必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多"></a>5 必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多</h3><ul>
+<li><strong>Octotree</strong> 以树形菜单的方式查看github上的仓库</li>
+<li><strong>Adblock Plus</strong> 广告，不存在的</li>
+<li><strong>掘金</strong> 程序员一定要看这个，每天学习新知识</li>
+<li><strong>Infinity新标签页</strong> 替换掉丑陋的新标签页，很好用</li>
+<li><strong>Postman</strong>  不解释，测接口</li>
+<li><strong>React Developer Tools</strong> react调试工具</li>
+<li><strong>Redux DevTools</strong> react-redux调试工具</li>
+<li><strong>Vue.js devtools</strong> vue调试工具</li>
+<li><strong>Tampermonkey</strong> 插件之中的插件，超有逼格</li>
+<li><strong>Vimium</strong> 以vim的方式全键盘操控网页</li>
+<li><strong>扩展管理器</strong> 小图标太多，用这个管理</li>
+<li><strong>划词翻译</strong> 对于英文贼差的我来说，真的神器，选中单词就可翻译</li>
+<li><strong>小幺鸡</strong> 写接口文档使用，支持国产</li>
+<li><strong>Listen 1</strong> 听网易云音乐，虾米，QQ音乐的曲库</li>
+</ul>
+<hr>
+<h2 id="当我有了我的新mac，我该怎么去配置，优化"><a href="#当我有了我的新mac，我该怎么去配置，优化" class="headerlink" title="当我有了我的新mac，我该怎么去配置，优化"></a>当我有了我的新mac，我该怎么去配置，优化</h2><p>对于mac来说，学习成本相当低，基本没有一些配置什么的骚操作，收集一下自己的装机列表</p>
+<ul>
+<li><strong>item2</strong> 替代原生的terminal</li>
+<li><strong>homebrew</strong> 安装homebrew</li>
+<li><strong>oh-my-zsh</strong> 配置oh-my-zsh</li>
+<li><strong>CheatSheet</strong> 长按command，显示当前程序的所有快捷键</li>
+</ul>
+<p>以上几个，可以去<a target="_blank" rel="noopener" href="http://blog.csdn.net/u013707249/article/details/76094937">这里</a>查看</p>
+<ul>
+<li><strong>visual studio code</strong>，用来写代码</li>
+<li><strong>node</strong>，node 环境必须要装</li>
+<li><strong>sublime</strong>，用来代替记事本使用</li>
+<li><strong>beyondCompare</strong>,比较代码用</li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.cockos.com/licecap/">licecap</a></strong>,用来截Gif图，给别人演示用，很方便</li>
+<li><strong>mongodb</strong>,现在应该叫做studio3T,工作主用mongodb</li>
+<li><strong>[teamviewer(<a target="_blank" rel="noopener" href="https://www.teamviewer.com/zhCN/)]">https://www.teamviewer.com/zhCN/)]</a></strong>,远程连接，实际使用强过向日葵太多</li>
+<li><strong>[markman(<a target="_blank" rel="noopener" href="http://www.getmarkman.com/)]">http://www.getmarkman.com/)]</a></strong> 用来切图量尺寸，单这个功能俩说比PS实在好太多，但是需要安装Adobe air</li>
+<li><strong>截图工具</strong>很好用的一个截图工具，<a target="_blank" rel="noopener" href="http://jietu.qq.com/">戳我</a></li>
+<li><strong>Alfred 3</strong> 工作效率神器，另外，可以<a target="_blank" rel="noopener" href="http://www.sdifen.com/alfred3.html">破解哦</a></li>
+<li><strong>FileZila</strong> Ftp连接</li>
+<li><strong>webstorm</strong> mac上不是那么卡</li>
+<li><strong>有道云笔记</strong> 做笔记使用，三个终端都有的，很方便</li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2017/07/25/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2017-09-01 18:52:00
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/macos/" title="macos">
+                        #macos
+                      </a>
+                    </span>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" title="软件配置">
+                        #软件配置
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2017/09/02/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BD%93%E6%88%91%E6%9C%89%E4%BA%86%E6%88%91%E7%9A%84%E6%96%B0%E7%94%B5%E8%84%91%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E6%A0%B7%E5%8E%BB%E9%85%8D%E7%BD%AE%EF%BC%9F"><span class="toc-text">当我有了我的新电脑，我该怎样去配置？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E6%88%91%E6%9C%89%E4%BA%86%E6%88%91%E7%9A%84%E6%96%B0Windows%E7%94%B5%E8%84%91%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8E%BB%E9%85%8D%E7%BD%AE%EF%BC%8C%E4%BC%98%E5%8C%96"><span class="toc-text">当我有了我的新Windows电脑，我该怎么去配置，优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">1 系统的选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83%EF%BC%8C%E9%A9%B1%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">2 网络环境，驱动配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8Dcoder%EF%BC%8C%E6%88%91%E8%AF%A5%E8%A3%85%E4%BA%9B%E5%95%A5"><span class="toc-text">3 作为一名coder，我该装些啥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%9C%E4%B8%BA%E4%B8%80%E5%90%8D%E6%96%87%E9%9D%92%EF%BC%8C%E6%88%91%E8%AF%A5%E7%94%A8%E4%BA%9B%E5%95%A5"><span class="toc-text">4 作为一名文青，我该用些啥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%BF%85%E5%A4%87%E7%9A%84%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C%E5%8D%95%E7%8B%AC%E7%94%A8%E6%9D%A5%E8%AF%B4%EF%BC%8C%E6%9C%80%E5%A5%BD%E7%9A%84%E5%8A%9E%E6%B3%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%B0%B7%E6%AD%8C%E8%B4%A6%E6%88%B7%EF%BC%8C%E8%BF%99%E6%A0%B7%E4%B8%80%E5%88%87%E6%96%B9%E4%BE%BF%E8%AE%B8%E5%A4%9A"><span class="toc-text">5 必备的谷歌浏览器，单独用来说，最好的办法创建一个谷歌账户，这样一切方便许多</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E6%88%91%E6%9C%89%E4%BA%86%E6%88%91%E7%9A%84%E6%96%B0mac%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8E%BB%E9%85%8D%E7%BD%AE%EF%BC%8C%E4%BC%98%E5%8C%96"><span class="toc-text">当我有了我的新mac，我该怎么去配置，优化</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 MichaelChengooo</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E4%B8%80%E7%AF%87%E6%97%A0%E8%81%8A%E7%9A%84%E5%8D%9A%E5%AE%A2--%E5%BD%93%E6%88%91%E6%9C%89%E4%BA%86%E6%88%91%E7%9A%84%E6%96%B0%E7%94%B5%E8%84%91%EF%BC%8C%E6%88%91%E8%AF%A5%E6%80%8E%E6%A0%B7%E5%8E%BB%E9%85%8D%E7%BD%AE%EF%BC%9F + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2017%2F09%2F01%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2017/09/01/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>
