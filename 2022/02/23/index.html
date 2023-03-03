@@ -11,8 +11,8 @@
   
   <title>
     
-      Tag 
-       : 问题排查
+      Go 实践踩坑记录 
+      
       
       |
     
@@ -115,39 +115,162 @@
 
 
       <div class="flex-container">
-        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<div class="container tag-details">
-  <div class="content-title">
-    <h2>
-      <span>问题排查</span>
-    </h2>
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Go 实践踩坑记录</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2022-02-23 13:34:00
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/golang/" title="golang">
+                    #golang
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>记录FE 开发 Go 中遇到的一些问题：</p>
+<h2 id="1-context-WithValue-的-key-不允许使用-built-in-类型（go-static-check）"><a href="#1-context-WithValue-的-key-不允许使用-built-in-类型（go-static-check）" class="headerlink" title="1. context.WithValue 的 key 不允许使用 built-in 类型（go-static-check）"></a>1. context.WithValue 的 key 不允许使用 built-in 类型（go-static-check）</h2><p>解决办法：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/40891345/fix-should-not-use-basic-type-string-as-key-in-context-withvalue-golint">https://stackoverflow.com/questions/40891345/fix-should-not-use-basic-type-string-as-key-in-context-withvalue-golint</a></p>
+<h2 id="2-golang的数据类型与mysql的数据类型对应的关系"><a href="#2-golang的数据类型与mysql的数据类型对应的关系" class="headerlink" title="2. golang的数据类型与mysql的数据类型对应的关系"></a>2. golang的数据类型与mysql的数据类型对应的关系</h2><p><a target="_blank" rel="noopener" href="https://gobea.cn/blog/detail/j5ynaOod.html">https://gobea.cn/blog/detail/j5ynaOod.html</a></p>
+<h2 id="3-有关-go-的零值问题"><a href="#3-有关-go-的零值问题" class="headerlink" title="3. 有关 go 的零值问题"></a>3. 有关 go 的零值问题</h2><p><a target="_blank" rel="noopener" href="https://youwu.today/skill/backend/golang-zero-value-and-reference-and-null-value-testing/">https://youwu.today/skill/backend/golang-zero-value-and-reference-and-null-value-testing/</a></p>
+<h2 id="4-查看引用-会打开超链接"><a href="#4-查看引用-会打开超链接" class="headerlink" title="4. 查看引用 会打开超链接"></a>4. 查看引用 会打开超链接</h2><p>在用户配置中禁用</p>
+<pre class=" language-json"><code class="language-json"><span class="token property">"[go]"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">"editor.links"</span><span class="token operator">:</span> <span class="token boolean">false</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+<h2 id="5-使用-wire-声明代码遇到-no-provider-found-xxx-类似的错误"><a href="#5-使用-wire-声明代码遇到-no-provider-found-xxx-类似的错误" class="headerlink" title="5.使用 wire 声明代码遇到 no provider found xxx 类似的错误"></a>5.使用 wire 声明代码遇到 no provider found xxx 类似的错误</h2><p>因为 wire 是一个依赖注入的框架，所以你需要提前声明，遇到这类问题，可自行检查</p>
+<p>view &amp; server 使用到的一些方法是否在 wire_set 文件作声明（类似 View.NewConfigService）<br>一些 facade 接口，接口的定义和实现是否一致</p>
+<h2 id="6-Go本地调用-python服务的抛出-400-错误"><a href="#6-Go本地调用-python服务的抛出-400-错误" class="headerlink" title="6. Go本地调用 python服务的抛出 400 错误"></a>6. Go本地调用 python服务的抛出 400 错误</h2><p>在用 go 调用 python 的服务时，本地联调过程（直接访问 BE 的 IP）发现服务会走不通, 报 400 和一堆乱码错误，但是部署了测试环境却可以正常访问。目前只能是 BE 部署了测试环境再进行联调，比较影响效率</p>
+<p>解决办法： 使用 IP 访问时，应使用 HTTP 协议，非 HTTPS 协议 参考： <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/49389535/problems-with-flask-and-bad-request">https://stackoverflow.com/questions/49389535/problems-with-flask-and-bad-request</a></p>
+<h2 id="7-Goproxy-报错"><a href="#7-Goproxy-报错" class="headerlink" title="7. Goproxy 报错"></a>7. Goproxy 报错</h2><p>修改 GOProxy 地址，重新进入项目即可</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://townsyio.medium.com/how-to-configure-your-go-modules-proxy-in-vscode-fa41f29192fe">https://townsyio.medium.com/how-to-configure-your-go-modules-proxy-in-vscode-fa41f29192fe</a></p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/xTzlR5yFEDmgfNr.png" alt="go-proxy-error.png"></p>
+<h2 id="8-grpc-局限"><a href="#8-grpc-局限" class="headerlink" title="8. grpc 局限"></a>8. grpc 局限</h2><p>由于注册中心的限制，只有相同环境才能调用 grpc。由于内部系统只有两个环境 test 和 live，在两个环境下，能分别调用 test 和 live 环境下的grpc。由于没有 uat 环境，所以无法访问 uat 服务，要用 grpc 请考虑环境是否匹配。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/01/19/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2022-02-23 13:34:00
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/golang/" title="golang">
+                        #golang
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2022/04/19/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
   </div>
-  
-    <div class="post-list">
-      <div class="post-item" title="esbuid 编译问题排查">
-        <span class="time-m-d">2022-04-19</span>
-        <a href="/2022/04/19/">
-          <span>esbuid 编译问题排查</span>
-        </a>
-      </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-context-WithValue-%E7%9A%84-key-%E4%B8%8D%E5%85%81%E8%AE%B8%E4%BD%BF%E7%94%A8-built-in-%E7%B1%BB%E5%9E%8B%EF%BC%88go-static-check%EF%BC%89"><span class="toc-text">1. context.WithValue 的 key 不允许使用 built-in 类型（go-static-check）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-golang%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8Emysql%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%AF%B9%E5%BA%94%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">2. golang的数据类型与mysql的数据类型对应的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9C%89%E5%85%B3-go-%E7%9A%84%E9%9B%B6%E5%80%BC%E9%97%AE%E9%A2%98"><span class="toc-text">3. 有关 go 的零值问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9F%A5%E7%9C%8B%E5%BC%95%E7%94%A8-%E4%BC%9A%E6%89%93%E5%BC%80%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="toc-text">4. 查看引用 会打开超链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BD%BF%E7%94%A8-wire-%E5%A3%B0%E6%98%8E%E4%BB%A3%E7%A0%81%E9%81%87%E5%88%B0-no-provider-found-xxx-%E7%B1%BB%E4%BC%BC%E7%9A%84%E9%94%99%E8%AF%AF"><span class="toc-text">5.使用 wire 声明代码遇到 no provider found xxx 类似的错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Go%E6%9C%AC%E5%9C%B0%E8%B0%83%E7%94%A8-python%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%8A%9B%E5%87%BA-400-%E9%94%99%E8%AF%AF"><span class="toc-text">6. Go本地调用 python服务的抛出 400 错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Goproxy-%E6%8A%A5%E9%94%99"><span class="toc-text">7. Goproxy 报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-grpc-%E5%B1%80%E9%99%90"><span class="toc-text">8. grpc 局限</span></a></li></ol>
+      
     </div>
+  </div>
+
   
-    <div class="post-list">
-      <div class="post-item" title="chrome 97 环境下 vue2 + ts + class component 问题分析">
-        <span class="time-m-d">2022-01-19</span>
-        <a href="/2022/01/19/">
-          <span>chrome 97 环境下 vue2 + ts + class component 问题分析</span>
-        </a>
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
       </div>
-    </div>
-  
-  <nav class="post-navigation">
     
-    <span class="page-num">1 / 1</span>
-    
-  </nav>
-</div>
+  </div>
+
 
         
 <div class="footer">
@@ -421,6 +544,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Go%20%E5%AE%9E%E8%B7%B5%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95 + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2022%2F02%2F23%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2022/02/23/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>

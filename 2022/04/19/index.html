@@ -11,7 +11,7 @@
   
   <title>
     
-      大神的自我修养 co.js 的学习 
+      esbuid 编译问题排查 
       
       
       |
@@ -160,37 +160,25 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">大神的自我修养 co.js 的学习</div>
+      <div class="post-title">esbuid 编译问题排查</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2017-12-09 23:48:00
+          2022-04-19 13:37:00
         </span>
         
               <span class="post-tags">
                 <i class="iconfont icon-tags mr-10" title="Tags"></i>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/javascript/" title="javascript">
-                    #javascript
+                  <a href="/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/" title="问题排查">
+                    #问题排查
                   </a>
                 </span>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/nodejs/" title="nodejs">
-                    #nodejs
-                  </a>
-                </span>
-                
-                <span class="span--tag mr-8">
-                  <a href="/tags/promise/" title="promise">
-                    #promise
-                  </a>
-                </span>
-                
-                <span class="span--tag mr-8">
-                  <a href="/tags/es6/" title="es6">
-                    #es6
+                  <a href="/tags/vite/" title="vite">
+                    #vite
                   </a>
                 </span>
                 
@@ -198,209 +186,77 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="大神的自我修养-co-js-的学习"><a href="#大神的自我修养-co-js-的学习" class="headerlink" title="大神的自我修养 co.js 的学习"></a><strong>大神的自我修养 co.js 的学习</strong></h1><p>最近在项目过程中涉及大量异步流程处理，其中有使用各种流程控制库，大家用的最多的 <code>async</code>，号称promise性能超原生的 <code>bluebird</code>，还有tj大神的<code>co.js</code>等。可以说是相当多了，于是空暇期间来整理一下promise的学习。</p>
-<p>今天来看的就是TJ大神的非常精炼的 co.js 。</p>
-<p>具体的介绍就不多说了。要注意的一点就是，<a href="mailto:&#x63;&#111;&#64;&#x34;&#46;&#48;">&#x63;&#111;&#64;&#x34;&#46;&#48;</a>之前返回的是一个<code>trunk</code>函数，现在<a href="mailto:&#99;&#x6f;&#x40;&#52;&#46;&#x30;">&#99;&#x6f;&#x40;&#52;&#46;&#x30;</a>支持promise，现在co()会返回一个promise。<br><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fm8c112bnwj20g205aglz.jpg"></p>
-<h2 id="先看用法"><a href="#先看用法" class="headerlink" title="先看用法"></a><strong>先看用法</strong></h2><h3 id="yield支持"><a href="#yield支持" class="headerlink" title="yield支持"></a><strong>yield支持</strong></h3><p>co最方便的操作也就是yield的支持，现在支持yield的对象有：</p>
+        <h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h2><p>在使用 Esbuild 替代 Babel transform  代码时，代码可以成功编译，但是会出现一些运行时错误。出现的错误比较诡异，排查过程也遇到了一些困难，因此记录下这个过程。</p>
+<p>首先简单介绍一下 esbuild  的几个显著特点，支持将</p>
 <ul>
-<li>promises</li>
-<li>thunks (functions)</li>
-<li>array (parallel execution)</li>
-<li>objects (parallel execution)</li>
-<li>generators (delegation)</li>
-<li>generator functions (delegation)</li>
+<li>代码编译为 es6+;</li>
+<li>使用 go 编写，很快;</li>
+<li>transform + minify;</li>
 </ul>
-<p>下文在源码里有体现。</p>
-<h3 id="一个官网的小例子🌰"><a href="#一个官网的小例子🌰" class="headerlink" title="一个官网的小例子🌰"></a><strong>一个官网的小例子🌰</strong></h3><pre><code>var co = require(&#39;co&#39;);
+<h2 id="2-问题定位"><a href="#2-问题定位" class="headerlink" title="2.问题定位"></a>2.问题定位</h2><p>因为这是在代码打包之后才会遇到的错误（其实 dev 环境也可以遇到，但 dev 环境使用了 cache-loader ，三方因素较多不便于排查问题），所以我们为了方便排查问题，我们需要关闭 webpack 的代码压缩和混淆功能。</p>
+<p>关闭方法如下：</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// 在 webpack.config.js  中关闭代码压缩，同时显示 moduleId</span>
+optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+     minimize<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    moduleIds<span class="token punctuation">:</span> <span class="token string">'named'</span><span class="token punctuation">,</span>
+    chunkIds<span class="token punctuation">:</span> <span class="token string">'named'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
 
-co(function *()&#123;
-  // 执行promise
-  var result = yield Promise.resolve(true);
-&#125;).catch(onerror);
-
-co(function *()&#123;
-  // 并行执行多个promise
-  var a = Promise.resolve(1);
-  var b = Promise.resolve(2);
-  var c = Promise.resolve(3);
-  var res = yield [a, b, c];
-  console.log(res);
-  // =&gt; [1, 2, 3]
-&#125;).catch(onerror);
-
-// 错误捕捉
-co(function *()&#123;
-  try &#123;
-    yield Promise.reject(new Error(&#39;boom&#39;));
-  &#125; catch (err) &#123;
-    console.error(err.message); // &quot;boom&quot;
- &#125;
-&#125;).catch(onerror);
-
-function onerror(err) &#123;
-  console.error(err.stack);
-&#125;
-
-// 将一个generator函数转换成返回一个promise函数的方法
-var fn = co.wrap(function* (val) &#123;
-  return yield Promise.resolve(val);
-&#125;);
-
-fn(true).then(function (val) &#123;
-
-&#125;);
+<span class="token comment" spellcheck="true">// 关闭 webpack.prod.js HashedModuleIdsPlugin， 直接注释该 plugins</span>
+<span class="token comment" spellcheck="true">// new webpack.ids.HashedModuleIdsPlugin()</span>
 </code></pre>
-<h2 id="看源码"><a href="#看源码" class="headerlink" title="看源码"></a><strong>看源码</strong></h2><h3 id="wrap-函数的实现"><a href="#wrap-函数的实现" class="headerlink" title="wrap 函数的实现"></a><strong>wrap 函数的实现</strong></h3><p>大神写的代码就是十分的精炼，wrap 函数的实现也只是7行代码而已。</p>
-<p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fm8c92jch2j20cr0460sy.jpg"></p>
-<p>其实有两点需要注意的，就是：</p>
-<ol>
-<li><strong>没有写在原型链上而是作为一个私有方法是为了避免每次执行<code>co()</code>的时候生成一个新的wrap方法，这个方法显然没必要。</strong></li>
-<li><strong>关键在于返回了一个<code>co()</code>,因为<code>co()</code>会 return 一个 promise，即生成一个新的promise。同时利用 call 和 apply 改变了 this 的指向，指向 <code>co</code> 。</strong></li>
-</ol>
-<h3 id="并行多个promise"><a href="#并行多个promise" class="headerlink" title="并行多个promise"></a><strong>并行多个promise</strong></h3><p>其实 co 方法的主体不用细看，基本就是按照 es6 promise 的一种重写。这里需要注意的一点就是并行支持promise。即，当 yield 一个 object 或者 array 的时候，并行执行多个 promise。</p>
-<p>一开始当我听到并行的时候，是有点懵的，但看到源码的时候发现没有想得那么复杂，其实就是 promise 的原生方法的功劳：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">promise.all()</a>,可以往下看。。。</p>
-<p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fm8cz6i569j20h204qdgk.jpg"></p>
-<p>这里的 <code>toPromise()</code> 是在 next 方法的实现中执行的，关键的代码就两句：</p>
-<pre><code>var value = toPromise.call(ctx, ret.value);
-if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
+<p>重新编译代码启动，可以看到下面的错误：</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/u7GQC2UeqN6fr5M.png" alt="esbuild-debug-issue1.png"></p>
+<p>我们知道，webpack 在处理模块化时，是将每个模块分解为一个个的闭包函数处理的。这里的 __spreadValues 是 esbuild 在每个闭包函数中注入的运行时代码，主要是一些es新特性的 polyfill，也可以类比为 babel-runtime 的一些 helper 方法。</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/E1tUMiVkPKOljfb.png" alt="esbuild-debug-issue2.png"></p>
+<p>经过查看，闭包里确实是有这个函数注入的，但是为什么访问时确实 undefined 呢？</p>
+<p>通过查看错误的堆栈（下图），发现了一些端倪。 </p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/RjiAFYIXHJtoGfw.png" alt="esbuild-debug-issue3.png"></p>
+<p>在入口文件 main.js 中，当前文件的所有引入，webpack 都会加载对应的包，<strong>webpack__require</strong> 会查看当前依赖的模块是否在缓存中出现，同时执行模块的内部方法。</p>
+<p>查看下图中的文件依赖关系，很明显的发现，这些文件中存在着 循环引用，并且层级很深。因为在 commonjs  规范中，如果模块间存在循环引用，就只输出已经执行的部分，还未执行的部分不会输出. </p>
+<p>怎么理解呢， 比如 A 依赖 B ，B 又依赖 A， 那么真实的执行过程其实是，在 A 中检测到 B 的依赖，会先去执行 B ，然后这个时候 B 文件如果依赖了 A，会直接从 requiire.cache 中拿 A 已经执行的部分，这里 A 中暴露出去的未执行的模块变量就很可能是 undefined.  这里感兴趣的可以看下：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/11/circular-dependency.html">https://www.ruanyifeng.com/blog/2015/11/circular-dependency.html</a></p>
+<p><strong>于是猜测：在处理模块依赖时，因为存在循环引用，所以某些模块并没有真正的被加载，所以导致运行时错误</strong></p>
+<p>那么，怎么验证这个问题呢？通过对比 esbuild 和 babel 的 helper 方法的位置发现， esbuild 的 helper 方法是放在依赖文件的后面的，那么我只需要把 helper 文件放到依赖文件之前是不是就可以了。</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/S8xNObWavj9qtRX.png" alt="esbuild-debug-issue4.png"></p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/fVrGhEw56Uevpdu.png" alt="esbuild-debug-issue5.png"></p>
+<p>果不其然，错误消失了，但同时也出现了下面的报错，出现错误的原因同样是其他文件的循环依赖。</p>
+<p>我尝试在一个最简单的循环依赖 demo 中用 esbuild 去编译，在 node 的运行时会报 undefined，在浏览器的运行时同样有此报错。所以，问题基本可以定位，确实是因为系统内部过深的循环依赖。</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/M1ayLqi8ZSf9TsK.png" alt="esbuild-debug-issue6.png"></p>
+<h2 id="3-如何解决"><a href="#3-如何解决" class="headerlink" title="3.如何解决"></a>3.如何解决</h2><p>那么问题的原因知道了，该怎么解决呢？</p>
+<h3 id="3-1-解决完项目内部所有的循环依赖"><a href="#3-1-解决完项目内部所有的循环依赖" class="headerlink" title="3.1 解决完项目内部所有的循环依赖"></a>3.1 解决完项目内部所有的循环依赖</h3><p>想法很美好，实现很困难。通过使用 circular-dependency-plugin 可以检测出目前项目中的循环依赖，目前项目中有近 400 处的循环依赖。</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/ypSMa38PYdcsKD7.png" alt="esbuild-debug-issue7.png"></p>
+<p>所以改动是非常困难的。</p>
+<h3 id="3-2-为什么使用-babel-loader-为什么不会有问题？"><a href="#3-2-为什么使用-babel-loader-为什么不会有问题？" class="headerlink" title="3.2 为什么使用 babel-loader 为什么不会有问题？"></a>3.2 为什么使用 babel-loader 为什么不会有问题？</h3><p>fms 使用的 babel 预设是 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/babel-preset-vue-app">babel-preset-vue-app</a>， 通过其<a target="_blank" rel="noopener" href="https://github.com/vuejs/babel-preset-vue-app/blob/master/src/index.js">源码</a>看出目前的编译预设是 ie9， 也就是说目前fms 编译后的代码是 es5 规范的。但是 esbuild  不支持将资源编译到 es6 以下。</p>
+<p>举个简单的例子，对于下面的代码，下图分别是源代码在 esbuild  与 babel 编译后的代码对比</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'foo'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span>
 </code></pre>
-<p>然后，就是 <code>arrayToPromise</code> 和 <code>objectToPromise</code> 两个方法的实现：</p>
-<p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fm8cz6jak7j20dk0dnq49.jpg"></p>
-<p>就是这么简单……</p>
-<p><img src="/images/loading.gif" data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512702212168&di=9bc459180689c8af63056bc2c0a9ca2e&imgtype=jpg&src=http://img4.imgtn.bdimg.com/it/u=2105664939,4183524365&fm=214&gp=0.jpg"></p>
-<h3 id="庐山真面目，真正的源码"><a href="#庐山真面目，真正的源码" class="headerlink" title="庐山真面目，真正的源码"></a><strong>庐山真面目，真正的源码</strong></h3><pre><code>
-var slice = Array.prototype.slice;
-
-module.exports = co[&#39;default&#39;] = co.co = co;
-
-co.wrap = function (fn) &#123;
-  createPromise.__generatorFunction__ = fn;
-  return createPromise;
-  function createPromise() &#123;
-    return co.call(this, fn.apply(this, arguments));
-  &#125;
-&#125;;
-
-function co(gen) &#123;
-  var ctx = this;
-  var args = slice.call(arguments, 1);
-
-  return new Promise(function(resolve, reject) &#123;
-    if (typeof gen === &#39;function&#39;) gen = gen.apply(ctx, args);
-    if (!gen || typeof gen.next !== &#39;function&#39;) return resolve(gen);
-
-    onFulfilled();
-
-    function onFulfilled(res) &#123;
-      var ret;
-      try &#123;
-        ret = gen.next(res);
-      &#125; catch (e) &#123;
-        return reject(e);
-      &#125;
-      next(ret);
-      return null;
-    &#125;
-
-    function onRejected(err) &#123;
-      var ret;
-      try &#123;
-        ret = gen.throw(err);
-      &#125; catch (e) &#123;
-        return reject(e);
-      &#125;
-      next(ret);
-    &#125;
-
-    function next(ret) &#123;
-      if (ret.done) return resolve(ret.value);
-      var value = toPromise.call(ctx, ret.value);
-      if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
-      return onRejected(new TypeError(&#39;You may only yield a function, promise, generator, array, or object, &#39;
-        + &#39;but the following object was passed: &quot;&#39; + String(ret.value) + &#39;&quot;&#39;));
-    &#125;
-  &#125;);
-&#125;
-
-function toPromise(obj) &#123;
-  if (!obj) return obj;
-  if (isPromise(obj)) return obj;
-  if (isGeneratorFunction(obj) || isGenerator(obj)) return co.call(this, obj);
-  if (&#39;function&#39; == typeof obj) return thunkToPromise.call(this, obj);
-  if (Array.isArray(obj)) return arrayToPromise.call(this, obj);
-  if (isObject(obj)) return objectToPromise.call(this, obj);
-  return obj;
-&#125;
-
-function thunkToPromise(fn) &#123;
-  var ctx = this;
-  return new Promise(function (resolve, reject) &#123;
-    fn.call(ctx, function (err, res) &#123;
-      if (err) return reject(err);
-      if (arguments.length &gt; 2) res = slice.call(arguments, 1);
-      resolve(res);
-    &#125;);
-  &#125;);
-&#125;
-
-
-function arrayToPromise(obj) &#123;
-  return Promise.all(obj.map(toPromise, this));
-&#125;
-
-
-function objectToPromise(obj)&#123;
-  var results = new obj.constructor();
-  var keys = Object.keys(obj);
-  var promises = [];
-  for (var i = 0; i &lt; keys.length; i++) &#123;
-    var key = keys[i];
-    var promise = toPromise.call(this, obj[key]);
-    if (promise &amp;&amp; isPromise(promise)) defer(promise, key);
-    else results[key] = obj[key];
-  &#125;
-  return Promise.all(promises).then(function () &#123;
-    return results;
-  &#125;);
-
-  function defer(promise, key) &#123;
-    // predefine the key in the result
-    results[key] = undefined;
-    promises.push(promise.then(function (res) &#123;
-      results[key] = res;
-    &#125;));
-  &#125;
-&#125;
-
-function isPromise(obj) &#123;
-  return &#39;function&#39; == typeof obj.then;
-&#125;
-
-
-function isGenerator(obj) &#123;
-  return &#39;function&#39; == typeof obj.next &amp;&amp; &#39;function&#39; == typeof obj.throw;
-&#125;
-
- 
-function isGeneratorFunction(obj) &#123;
-  var constructor = obj.constructor;
-  if (!constructor) return false;
-  if (&#39;GeneratorFunction&#39; === constructor.name || &#39;GeneratorFunction&#39; === constructor.displayName) return true;
-  return isGenerator(constructor.prototype);
-&#125;
-
-
-function isObject(val) &#123;
-  return Object == val.constructor;
-&#125;
+<p>通过 esbuild 编译</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// ...some runtime code</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">__toCommonJs</span><span class="token punctuation">(</span>stdin_exports<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
+<p>通过 babel 编译</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> foo <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>      </p>
+<p>因此问题显而易见，在 es5 的版本中，存在变量提升，所以即使出现循环依赖，也不会出现 undefined 类似的运行时错误。</p>
+<p>当然 es5 → es6 还有非常多新的特性（<a target="_blank" rel="noopener" href="http://es6-features.org/#Constants%EF%BC%89%EF%BC%8C%E5%9B%A0%E6%AD%A4%E4%B9%9F%E5%8F%AF%E8%83%BD%E4%BC%9A%E6%9C%89%E6%9B%B4%E5%A4%9A%E6%96%B0%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82">http://es6-features.org/#Constants），因此也可能会有更多新的问题。</a></p>
+<h3 id="3-3-esbuild-可否支持到-es5"><a href="#3-3-esbuild-可否支持到-es5" class="headerlink" title="3.3 esbuild 可否支持到 es5"></a>3.3 esbuild 可否支持到 es5</h3><p>不太幸运的是， 官方的态度是不会去支持 es5。 这里有个讨论可以看下： <a target="_blank" rel="noopener" href="https://github.com/evanw/esbuild/issues/297">https://github.com/evanw/esbuild/issues/297</a></p>
+<p>社区有些方案基本还是用上了 babel 去做转化， 但是既然使用 esbuild 再用一次 babel 就有些多此一举了。</p>
+<h3 id="3-4-尝试使用-swc-loader"><a href="#3-4-尝试使用-swc-loader" class="headerlink" title="3.4 尝试使用 swc-loader"></a>3.4 尝试使用 swc-loader</h3><p>对于上面的问题，一个比较好的方案是，使用 swc-loader  替代 babel 将代码编译为 es5 版本，使用 esbuildMinifyPlugin  替代 Terser 压缩代码。</p>
+<p>但是在使用 swc-loader 时，发现其对 vue 中的 jsx  语法支持性不好。</p>
+<h2 id="4-反思"><a href="#4-反思" class="headerlink" title="4.反思"></a>4.反思</h2><p>在一系列排查后，关于使用 esbuild-loader 替换 babel-loader 还没有找到一个完美的解决方案。目前仅使用到了 esbuild 的 <code>esbuildMinifyPlugin</code> （代码压缩）。<br>新项目的历史负担较小，可以尝试使用 esbuild 。如果是内部项目，也可以尝试使用 esm ，就不必处理 <code>tree-shaking / split-chunk</code> 相关的内容了。<br>我们习惯了将代码编译更具兼容性的 es5, 所以我们常常忽视循环依赖的副作用。但是依然推荐打开 eslint 的 循环依赖检测：<code>&quot;import/no-cycle&quot;: [2, &#123; maxDepth: 2 &#125;]</code> ， 我们应该避免写出循环依赖过深的代码。<br>esbuild  包括 swc  对 css 的编译支持度都不太高，因为依然需要 <code>vue-loader/less-loader</code></p>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2017/12/08/" target="_self">
+              <a href="/2022/02/23/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -409,33 +265,21 @@ function isObject(val) &#123;
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2017-12-09 23:48:00
+              2022-04-19 13:37:00
             </span>
             
                   <span class="post-tags">
                     <i class="iconfont icon-tags mr-10" title="Tags"></i>
                     
                     <span class="span--tag mr-8">
-                      <a href="/tags/javascript/" title="javascript">
-                        #javascript
+                      <a href="/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/" title="问题排查">
+                        #问题排查
                       </a>
                     </span>
                     
                     <span class="span--tag mr-8">
-                      <a href="/tags/nodejs/" title="nodejs">
-                        #nodejs
-                      </a>
-                    </span>
-                    
-                    <span class="span--tag mr-8">
-                      <a href="/tags/promise/" title="promise">
-                        #promise
-                      </a>
-                    </span>
-                    
-                    <span class="span--tag mr-8">
-                      <a href="/tags/es6/" title="es6">
-                        #es6
+                      <a href="/tags/vite/" title="vite">
+                        #vite
                       </a>
                     </span>
                     
@@ -444,7 +288,7 @@ function isObject(val) &#123;
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2017/12/10/" target="_self">
+              <a href="/2022/07/21/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -461,7 +305,7 @@ function isObject(val) &#123;
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A7%E7%A5%9E%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB-co-js-%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-text">大神的自我修养 co.js 的学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E7%9C%8B%E7%94%A8%E6%B3%95"><span class="toc-text">先看用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#yield%E6%94%AF%E6%8C%81"><span class="toc-text">yield支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%98%E7%BD%91%E7%9A%84%E5%B0%8F%E4%BE%8B%E5%AD%90%F0%9F%8C%B0"><span class="toc-text">一个官网的小例子🌰</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%8B%E6%BA%90%E7%A0%81"><span class="toc-text">看源码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wrap-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">wrap 函数的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%E5%A4%9A%E4%B8%AApromise"><span class="toc-text">并行多个promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%90%E5%B1%B1%E7%9C%9F%E9%9D%A2%E7%9B%AE%EF%BC%8C%E7%9C%9F%E6%AD%A3%E7%9A%84%E6%BA%90%E7%A0%81"><span class="toc-text">庐山真面目，真正的源码</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%83%8C%E6%99%AF"><span class="toc-text">1.背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D"><span class="toc-text">2.问题定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3"><span class="toc-text">3.如何解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%A7%A3%E5%86%B3%E5%AE%8C%E9%A1%B9%E7%9B%AE%E5%86%85%E9%83%A8%E6%89%80%E6%9C%89%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96"><span class="toc-text">3.1 解决完项目内部所有的循环依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8-babel-loader-%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E4%BC%9A%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-text">3.2 为什么使用 babel-loader 为什么不会有问题？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-esbuild-%E5%8F%AF%E5%90%A6%E6%94%AF%E6%8C%81%E5%88%B0-es5"><span class="toc-text">3.3 esbuild 可否支持到 es5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8-swc-loader"><span class="toc-text">3.4 尝试使用 swc-loader</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%8F%8D%E6%80%9D"><span class="toc-text">4.反思</span></a></li></ol>
       
     </div>
   </div>
@@ -766,12 +610,12 @@ function isObject(val) &#123;
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%A4%A7%E7%A5%9E%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%20co.js%20%E7%9A%84%E5%AD%A6%E4%B9%A0 + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2017%2F12%2F09%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + esbuid%20%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5 + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2022%2F04%2F19%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2017/12/09/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2022/04/19/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

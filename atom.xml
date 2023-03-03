@@ -6,7 +6,7 @@
   <link href="https://michaelooo.github.io/atom.xml" rel="self"/>
   
   <link href="https://michaelooo.github.io/"/>
-  <updated>2023-03-03T05:32:18.537Z</updated>
+  <updated>2023-03-03T05:58:54.592Z</updated>
   <id>https://michaelooo.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://michaelooo.github.io/2023/01/11/"/>
     <id>https://michaelooo.github.io/2023/01/11/</id>
     <published>2023-01-11T18:46:01.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -44,7 +44,7 @@
     <link href="https://michaelooo.github.io/2023/01/09/"/>
     <id>https://michaelooo.github.io/2023/01/09/</id>
     <published>2023-01-09T15:41:54.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -68,7 +68,7 @@
     <link href="https://michaelooo.github.io/2022/07/21/"/>
     <id>https://michaelooo.github.io/2022/07/21/</id>
     <published>2022-07-21T15:58:53.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -88,11 +88,60 @@
   </entry>
   
   <entry>
+    <title>esbuid 编译问题排查</title>
+    <link href="https://michaelooo.github.io/2022/04/19/"/>
+    <id>https://michaelooo.github.io/2022/04/19/</id>
+    <published>2022-04-19T13:37:00.000Z</published>
+    <updated>2023-03-03T05:58:54.588Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-背景&quot;&gt;&lt;a href=&quot;#1-背景&quot; class=&quot;headerlink&quot; title=&quot;1.背景&quot;&gt;&lt;/a&gt;1.背景&lt;/h2&gt;&lt;p&gt;在使用 Esbuild 替代 Babel transform </summary>
+        
+      
+    
+    
+    
+    
+    <category term="问题排查" scheme="https://michaelooo.github.io/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"/>
+    
+    <category term="vite" scheme="https://michaelooo.github.io/tags/vite/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go 实践踩坑记录</title>
+    <link href="https://michaelooo.github.io/2022/02/23/"/>
+    <id>https://michaelooo.github.io/2022/02/23/</id>
+    <published>2022-02-23T13:34:00.000Z</published>
+    <updated>2023-03-03T05:58:54.588Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;记录FE 开发 Go 中遇到的一些问题：&lt;/p&gt;
+&lt;h2 id=&quot;1-context-WithValue-的-key-不允许使用-built-in-类型（go-static-check）&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="golang" scheme="https://michaelooo.github.io/tags/golang/"/>
+    
+  </entry>
+  
+  <entry>
     <title>chrome 97 环境下 vue2 + ts + class component 问题分析</title>
     <link href="https://michaelooo.github.io/2022/01/19/"/>
     <id>https://michaelooo.github.io/2022/01/19/</id>
     <published>2022-01-19T16:20:56.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.588Z</updated>
     
     
       
@@ -106,9 +155,9 @@
     
     
     
-    <category term="chrome" scheme="https://michaelooo.github.io/tags/chrome/"/>
-    
     <category term="问题排查" scheme="https://michaelooo.github.io/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"/>
+    
+    <category term="chrome" scheme="https://michaelooo.github.io/tags/chrome/"/>
     
   </entry>
   
@@ -117,7 +166,7 @@
     <link href="https://michaelooo.github.io/2022/01/11/"/>
     <id>https://michaelooo.github.io/2022/01/11/</id>
     <published>2022-01-11T16:00:56.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -140,7 +189,7 @@
     <link href="https://michaelooo.github.io/2018/09/08/"/>
     <id>https://michaelooo.github.io/2018/09/08/</id>
     <published>2018-09-08T16:48:03.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -170,7 +219,7 @@
     <link href="https://michaelooo.github.io/2018/08/27/"/>
     <id>https://michaelooo.github.io/2018/08/27/</id>
     <published>2018-08-27T10:41:10.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -193,7 +242,7 @@
     <link href="https://michaelooo.github.io/2018/08/15/"/>
     <id>https://michaelooo.github.io/2018/08/15/</id>
     <published>2018-08-15T11:25:48.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.588Z</updated>
     
     
       
@@ -219,7 +268,7 @@
     <link href="https://michaelooo.github.io/2018/08/09/"/>
     <id>https://michaelooo.github.io/2018/08/09/</id>
     <published>2018-08-09T11:19:43.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.588Z</updated>
     
     
       
@@ -244,7 +293,7 @@
     <link href="https://michaelooo.github.io/2018/07/18/"/>
     <id>https://michaelooo.github.io/2018/07/18/</id>
     <published>2018-07-18T12:02:19.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -271,7 +320,7 @@
     <link href="https://michaelooo.github.io/2018/07/11/"/>
     <id>https://michaelooo.github.io/2018/07/11/</id>
     <published>2018-07-11T13:14:13.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -296,7 +345,7 @@
     <link href="https://michaelooo.github.io/2018/06/28/"/>
     <id>https://michaelooo.github.io/2018/06/28/</id>
     <published>2018-06-28T16:08:19.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -323,7 +372,7 @@
     <link href="https://michaelooo.github.io/2018/03/22/"/>
     <id>https://michaelooo.github.io/2018/03/22/</id>
     <published>2018-03-22T11:14:48.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.588Z</updated>
     
     
       
@@ -350,7 +399,7 @@
     <link href="https://michaelooo.github.io/2018/02/28/"/>
     <id>https://michaelooo.github.io/2018/02/28/</id>
     <published>2018-02-28T14:31:18.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.588Z</updated>
     
     
       
@@ -375,7 +424,7 @@
     <link href="https://michaelooo.github.io/2018/02/05/"/>
     <id>https://michaelooo.github.io/2018/02/05/</id>
     <published>2018-02-05T12:54:58.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.588Z</updated>
     
     
       
@@ -400,7 +449,7 @@
     <link href="https://michaelooo.github.io/2018/01/23/"/>
     <id>https://michaelooo.github.io/2018/01/23/</id>
     <published>2018-01-23T16:59:25.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -426,7 +475,7 @@
     <link href="https://michaelooo.github.io/2018/01/23/"/>
     <id>https://michaelooo.github.io/2018/01/23/</id>
     <published>2018-01-23T09:11:01.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -453,7 +502,7 @@
     <link href="https://michaelooo.github.io/2018/01/18/"/>
     <id>https://michaelooo.github.io/2018/01/18/</id>
     <published>2018-01-18T10:25:00.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
+    <updated>2023-03-03T05:58:54.592Z</updated>
     
     
       
@@ -471,60 +520,6 @@
     
     <category term="日常小感" scheme="https://michaelooo.github.io/categories/%E6%97%A5%E5%B8%B8%E5%B0%8F%E6%84%9F/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>JS 参数校验: Joi 四问</title>
-    <link href="https://michaelooo.github.io/2018/01/11/"/>
-    <id>https://michaelooo.github.io/2018/01/11/</id>
-    <published>2018-01-11T14:51:00.000Z</published>
-    <updated>2023-03-03T05:32:18.533Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;JS-参数验证：-Joi-四问&quot;&gt;&lt;a href=&quot;#JS-参数验证：-Joi-四问&quot; class=&quot;headerlink&quot; title=&quot;**JS 参数验证： Joi 四问 **&quot;&gt;&lt;/a&gt;**JS 参数验证： Joi 四问</summary>
-        
-      
-    
-    
-    
-    <category term="nodejs" scheme="https://michaelooo.github.io/categories/nodejs/"/>
-    
-    
-    <category term="javascript" scheme="https://michaelooo.github.io/tags/javascript/"/>
-    
-    <category term="nodejs" scheme="https://michaelooo.github.io/tags/nodejs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hyperapp.js 一个轻量级的 react 实现</title>
-    <link href="https://michaelooo.github.io/2018/01/05/"/>
-    <id>https://michaelooo.github.io/2018/01/05/</id>
-    <published>2018-01-05T14:24:00.000Z</published>
-    <updated>2023-03-03T05:32:18.537Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;hyperapp-是什么鬼？&quot;&gt;&lt;a href=&quot;#hyperapp-是什么鬼？&quot; class=&quot;headerlink&quot; title=&quot;hyperapp 是什么鬼？&quot;&gt;&lt;/a&gt;&lt;strong&gt;hyperapp</summary>
-        
-      
-    
-    
-    
-    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-    <category term="javascript" scheme="https://michaelooo.github.io/tags/javascript/"/>
-    
-    <category term="hyperappjs" scheme="https://michaelooo.github.io/tags/hyperappjs/"/>
     
   </entry>
   
