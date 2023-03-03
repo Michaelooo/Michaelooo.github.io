@@ -71,7 +71,7 @@
     }
   </script>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-one-light.css" type="text/css"></head>
 
 
   <body>
@@ -197,18 +197,18 @@
 <li><p><strong>同步&#x2F;下载 配置</strong></p>
 <p>以上的步骤做完，就代表你的 Setting Sync 可以正常使用了，通常，你只需要 调出快捷命令窗口，然后输入 sync 就可以查看并使用 Setting Sync 的同步或者下载配置了（使用快捷键会更方便）。</p>
 <p>即使你更换了新电脑，只要你记得第三个步骤里保存的 token，同步也是非常方便的（不记得也没关系，重新生成一个就好）。你可以通过 <code>cmd + shift + P</code>  –&gt; <code>sync 高级选项</code> –&gt; <code>编辑本地扩展设置</code> ，将你的 token 粘贴在配置文件里，然后再执行同步&#x2F;下载的配置即可，具体如下：</p>
-<pre><code class="json">&#123;
-  &quot;ignoreUploadFiles&quot;: [&quot;projects.json&quot;, &quot;projects_cache_vscode.json&quot;, &quot;projects_cache_git.json&quot;, &quot;projects_cache_svn.json&quot;, &quot;gpm_projects.json&quot;, &quot;gpm-recentItems.json&quot;],
-  &quot;ignoreUploadFolders&quot;: [&quot;workspaceStorage&quot;],
-  &quot;ignoreExtensions&quot;: [],
-  &quot;replaceCodeSettings&quot;: &#123;&#125;,
-  &quot;gistDescription&quot;: &quot;Visual Studio Code Settings Sync Gist&quot;,
-  &quot;version&quot;: 300,
-  &quot;token&quot;: &quot;put token in there&quot;,
-  &quot;downloadPublicGist&quot;: true,
-  &quot;supportedFileExtensions&quot;: [&quot;json&quot;, &quot;code-snippets&quot;],
-  &quot;openTokenLink&quot;: true
-&#125;
+<pre class=" language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"ignoreUploadFiles"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"projects.json"</span><span class="token punctuation">,</span> <span class="token string">"projects_cache_vscode.json"</span><span class="token punctuation">,</span> <span class="token string">"projects_cache_git.json"</span><span class="token punctuation">,</span> <span class="token string">"projects_cache_svn.json"</span><span class="token punctuation">,</span> <span class="token string">"gpm_projects.json"</span><span class="token punctuation">,</span> <span class="token string">"gpm-recentItems.json"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"ignoreUploadFolders"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"workspaceStorage"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"ignoreExtensions"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"replaceCodeSettings"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"gistDescription"</span><span class="token operator">:</span> <span class="token string">"Visual Studio Code Settings Sync Gist"</span><span class="token punctuation">,</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token number">300</span><span class="token punctuation">,</span>
+  <span class="token property">"token"</span><span class="token operator">:</span> <span class="token string">"put token in there"</span><span class="token punctuation">,</span>
+  <span class="token property">"downloadPublicGist"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">"supportedFileExtensions"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"json"</span><span class="token punctuation">,</span> <span class="token string">"code-snippets"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"openTokenLink"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
 </code></pre>
 </li>
 <li><p><strong>新建用户配置的gist</strong></p>
@@ -245,18 +245,18 @@
 <li><p><strong>同步&#x2F;下载 配置</strong></p>
 <p>以上的步骤做完，就代表你的 Setting Sync 可以正常使用了，通常，你只需要 调出快捷命令窗口，然后输入 sync 就可以查看并使用 Setting Sync 的同步或者下载配置了（使用快捷键会更方便）。</p>
 <p>即使你更换了新电脑，只要你记得第三个步骤里保存的 token，同步也是非常方便的（不记得也没关系，重新生成一个就好）。你可以通过 <code>cmd + shift + P</code>  –&gt; <code>sync 高级选项</code> –&gt; <code>编辑本地扩展设置</code> ，将你的 token 粘贴在配置文件里，然后再执行同步&#x2F;下载的配置即可，具体如下：</p>
-<pre><code class="json">&#123;
-  &quot;ignoreUploadFiles&quot;: [&quot;projects.json&quot;, &quot;projects_cache_vscode.json&quot;, &quot;projects_cache_git.json&quot;, &quot;projects_cache_svn.json&quot;, &quot;gpm_projects.json&quot;, &quot;gpm-recentItems.json&quot;],
-  &quot;ignoreUploadFolders&quot;: [&quot;workspaceStorage&quot;],
-  &quot;ignoreExtensions&quot;: [],
-  &quot;replaceCodeSettings&quot;: &#123;&#125;,
-  &quot;gistDescription&quot;: &quot;Visual Studio Code Settings Sync Gist&quot;,
-  &quot;version&quot;: 300,
-  &quot;token&quot;: &quot;put token in there&quot;,
-  &quot;downloadPublicGist&quot;: true,
-  &quot;supportedFileExtensions&quot;: [&quot;json&quot;, &quot;code-snippets&quot;],
-  &quot;openTokenLink&quot;: true
-&#125;
+<pre class=" language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"ignoreUploadFiles"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"projects.json"</span><span class="token punctuation">,</span> <span class="token string">"projects_cache_vscode.json"</span><span class="token punctuation">,</span> <span class="token string">"projects_cache_git.json"</span><span class="token punctuation">,</span> <span class="token string">"projects_cache_svn.json"</span><span class="token punctuation">,</span> <span class="token string">"gpm_projects.json"</span><span class="token punctuation">,</span> <span class="token string">"gpm-recentItems.json"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"ignoreUploadFolders"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"workspaceStorage"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"ignoreExtensions"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"replaceCodeSettings"</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"gistDescription"</span><span class="token operator">:</span> <span class="token string">"Visual Studio Code Settings Sync Gist"</span><span class="token punctuation">,</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token number">300</span><span class="token punctuation">,</span>
+  <span class="token property">"token"</span><span class="token operator">:</span> <span class="token string">"put token in there"</span><span class="token punctuation">,</span>
+  <span class="token property">"downloadPublicGist"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token property">"supportedFileExtensions"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"json"</span><span class="token punctuation">,</span> <span class="token string">"code-snippets"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"openTokenLink"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span>
 </code></pre>
 </li>
 <li><p><strong>新建用户配置的gist</strong></p>

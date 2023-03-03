@@ -71,7 +71,7 @@
     }
   </script>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-one-light.css" type="text/css"></head>
 
 
   <body>
@@ -180,51 +180,51 @@
           
       </div>
       <div class="markdown-body">
-        <h2 id="常规使用方式"><a href="#常规使用方式" class="headerlink" title="常规使用方式"></a>常规使用方式</h2><pre><code class="sh">echo &#39;# add jira number
+        <h2 id="常规使用方式"><a href="#常规使用方式" class="headerlink" title="常规使用方式"></a>常规使用方式</h2><pre class=" language-shell"><code class="language-shell">echo '# add jira number
 # $1 and $2 defined by Git
 COMMIT_MSG_FILE=$1
 COMMIT_TYPE=$2
 
 # You can update this variable to your JIRA projects in REGEXP format.
-JIRA_PROJECT=&quot;(SPXFM|SPSERP)&quot;
+JIRA_PROJECT="(SPXFM|SPSERP)"
 
 CURRENT_BRANCH=$(git symbolic-ref --short -q HEAD)                     # Get current branch name
-JIRA_TAG=$(echo $&#123;CURRENT_BRANCH&#125; | egrep -o &quot;$&#123;JIRA_PROJECT&#125;-[0-9]+&quot;) # Parse JIRA ID from branch name
+JIRA_TAG=$(echo ${CURRENT_BRANCH} | egrep -o "${JIRA_PROJECT}-[0-9]+") # Parse JIRA ID from branch name
 
 # Write JIRA ID as the prefix of the first line of commit message.
-if [ -n &quot;$&#123;JIRA_TAG&#125;&quot; ]; then
-  if ! head -1 $&#123;COMMIT_MSG_FILE&#125; | egrep -i &quot;$&#123;JIRA_TAG&#125;&quot; &gt;/dev/null; then # Not write JIRA ID if already has.
-    sed -in-place -e &quot;1s/^/[$&#123;JIRA_TAG&#125;] /1&quot; &quot;$&#123;COMMIT_MSG_FILE&#125;&quot;
+if [ -n "${JIRA_TAG}" ]; then
+  if ! head -1 ${COMMIT_MSG_FILE} | egrep -i "${JIRA_TAG}" >/dev/null; then # Not write JIRA ID if already has.
+    sed -in-place -e "1s/^/[${JIRA_TAG}] /1" "${COMMIT_MSG_FILE}"
   fi
-fi&#39; &gt;&gt; ./.git/hooks/prepare-commit-msg
+fi' >> ./.git/hooks/prepare-commit-msg
 </code></pre>
 <p>直接复制上面的命令在项目根目录执行。将为项目中的每个 commit 自动带上 jira 号。</p>
-<p>commit 的效果如下：<br><img src="/images/loading.gif" data-original="/../images/git-hooks-jira-screenshot.png" alt="image"></p>
-<h2 id="使用-submodules-的方式"><a href="#使用-submodules-的方式" class="headerlink" title="使用 submodules 的方式"></a>使用 submodules 的方式</h2><pre><code class="sh">echo &#39;# add jira number
+<p>commit 的效果如下：<br><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/yr3x81UaKZ6vSA2.png" alt="git-hooks-jira-screenshot.png"></p>
+<h2 id="使用-submodules-的方式"><a href="#使用-submodules-的方式" class="headerlink" title="使用 submodules 的方式"></a>使用 submodules 的方式</h2><pre class=" language-sh"><code class="language-sh">echo '# add jira number
 # $1 and $2 defined by Git
 COMMIT_MSG_FILE=$1
 COMMIT_TYPE=$2
 
 # You can update this variable to your JIRA projects in REGEXP format.
-JIRA_PROJECT=&quot;(SPXFM|SPSERP)&quot;
+JIRA_PROJECT="(SPXFM|SPSERP)"
 
 CURRENT_BRANCH=$(git symbolic-ref --short -q HEAD)                     # Get current branch name
-JIRA_TAG=$(echo $&#123;CURRENT_BRANCH&#125; | egrep -o &quot;$&#123;JIRA_PROJECT&#125;-[0-9]+&quot;) # Parse JIRA ID from branch name
+JIRA_TAG=$(echo ${CURRENT_BRANCH} | egrep -o "${JIRA_PROJECT}-[0-9]+") # Parse JIRA ID from branch name
 
 # Write JIRA ID as the prefix of the first line of commit message.
-if [ -n &quot;$&#123;JIRA_TAG&#125;&quot; ]; then
-  if ! head -1 $&#123;COMMIT_MSG_FILE&#125; | egrep -i &quot;$&#123;JIRA_TAG&#125;&quot; &gt;/dev/null; then # Not write JIRA ID if already has.
-    sed -in-place -e &quot;1s/^/[$&#123;JIRA_TAG&#125;] /1&quot; &quot;$&#123;COMMIT_MSG_FILE&#125;&quot;
+if [ -n "${JIRA_TAG}" ]; then
+  if ! head -1 ${COMMIT_MSG_FILE} | egrep -i "${JIRA_TAG}" >/dev/null; then # Not write JIRA ID if already has.
+    sed -in-place -e "1s/^/[${JIRA_TAG}] /1" "${COMMIT_MSG_FILE}"
   fi
-fi&#39; &gt;&gt; ./.git/modules/line-haul/hooks/prepare-commit-msg
+fi' >> ./.git/modules/line-haul/hooks/prepare-commit-msg
 </code></pre>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>某些项目可能本身不存在 prepare-commit-msg 文件，这时使用上述命令会新增一个 prepare-commit-msg 文件，你需要修改该文件的执行权限。</p>
-<p><img src="/images/loading.gif" data-original="/../images/git-hooks-error.png" alt="image"></p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/7tNqsE3aI2bTzLk.png" alt="git-hooks-error.png"></p>
 <blockquote>
 <p>hint: The ‘.git&#x2F;hooks&#x2F;prepare-commit-msg’ hook was ignored because it’s not set as executable.<br>hint: You can disable this warning with <code>git config advice.ignoredHook false</code>.</p>
 </blockquote>
 <p>使用下面的命令修改权限</p>
-<pre><code class="bash">chmod +x ./.git/hooks/prepare-commit-msg
+<pre class=" language-bash"><code class="language-bash"><span class="token function">chmod</span> +x ./.git/hooks/prepare-commit-msg
 </code></pre>
 
       </div>

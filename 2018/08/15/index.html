@@ -71,7 +71,7 @@
     }
   </script>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-one-light.css" type="text/css"></head>
 
 
   <body>
@@ -192,23 +192,23 @@
 <p>下面是我总结的在工作常用的场景下，对 git 的一些操作。</p>
 <h2 id="开发一个新的功能时"><a href="#开发一个新的功能时" class="headerlink" title="开发一个新的功能时"></a>开发一个新的功能时</h2><p>比较好的开发规范就是，当你开发一个新的需求时，应该按照下面的流程进行开发：</p>
 <p><strong>第一步：基于 develop 新建一个人分支</strong> </p>
-<pre><code class="shell">git checkout -b &quot;new-branch&quot;
+<pre class=" language-shell"><code class="language-shell">git checkout -b "new-branch"
 </code></pre>
 <p><strong>第二步：同步个人分支至远程仓库</strong></p>
-<pre><code class="shell">git push --set-upstream origin &quot;new-branch&quot;
+<pre class=" language-shell"><code class="language-shell">git push --set-upstream origin "new-branch"
 </code></pre>
 <p>使用 <code>--set-upstream</code> 的目的是跟踪远程分支。后面执行命令时可以省掉指定源的操作，如：</p>
-<pre><code class="shell">git pull origin test =&gt; git pull 
-git push origin test =&gt; git push
+<pre class=" language-shell"><code class="language-shell">git pull origin test => git pull 
+git push origin test => git push
 </code></pre>
 <p><strong>第三步：功能开发完成后，发送 merge 请求</strong></p>
 <p><code>master</code> 分支和 <code>develop</code> 分支应该被保护，只有稳定的版本才可以允许合并操作。合并的方式因团队而异，常规的流程是找到具有<code>develop</code> 分支开发权限的成员，执行：</p>
-<pre><code class="shell">git checkout develop
-git merge &quot;new-branch&quot;
+<pre class=" language-shell"><code class="language-shell">git checkout develop
+git merge "new-branch"
 </code></pre>
 <p>如果你的团队使用 gitlab 进行管理，就可以发送一个由 <code>new-branch</code> 到 <code>develop</code> 分支的 <strong>merge request</strong> 。</p>
 <h2 id="如何写好一个-git-comment"><a href="#如何写好一个-git-comment" class="headerlink" title="如何写好一个 git comment"></a>如何写好一个 git comment</h2><p>不应当出现语义模糊或毫无意义的 comment 描述。每个团队都要有自己的 comment 规范，当然也可以直接用大家都已经接受了的</p>
-<pre><code class="shell">feat：新功能（feature）
+<pre class=" language-shell"><code class="language-shell">feat：新功能（feature）
 fix：修补bug
 docs：文档（documentation）
 style： 格式（不影响代码运行的变动）
@@ -217,16 +217,16 @@ test：增加测试
 chore：构建过程或辅助工具的变动
 config: 配置
 
-example: git commit -m &quot;[feat] 新功能&quot;
+example: git commit -m "[feat] 新功能"
 </code></pre>
 <p>以上总结自： <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html">阮一峰： Commit message 和 Change log 编写指南</a>]</p>
 <p>如果你很皮，想加个开源库那样 comment 的表情，你可以执行：</p>
-<pre><code class="shell">git commit -m &#39;:apple: i have a apple&#39;
+<pre class=" language-shell"><code class="language-shell">git commit -m ':apple: i have a apple'
 </code></pre>
 <p>苹果就出来了，更多表情代码可以点 <a target="_blank" rel="noopener" href="https://github.com/Michaelooo/just_write/blob/master/archived/%E5%85%B3%E4%BA%8Egit%2C%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E6%93%8D%E4%BD%9C.md#git-comment-%E6%B7%BB%E5%8A%A0%E8%A1%A8%E6%83%85">这里</a>。</p>
 <h2 id="做一个-hotfix-时"><a href="#做一个-hotfix-时" class="headerlink" title="做一个 hotfix 时"></a>做一个 hotfix 时</h2><p><strong>Hotfix</strong> 是为了应对已上线的产品代码出现的问题出现的紧急修复，所以和开发新功能的流程略有不同。 <strong>Hotfix</strong> 显而易见是基于 <strong>master</strong> 分支的。但实际的操作步骤和上面是一样的，这里不再赘述。</p>
 <h2 id="分支切换遇到问题时"><a href="#分支切换遇到问题时" class="headerlink" title="分支切换遇到问题时"></a>分支切换遇到问题时</h2><p>这里的问题往往是：<strong>使用 checkout 切换分支时遇到的冲突</strong>，或者是 <strong>分支切换的时候遇到尚未添加至暂存区的代码</strong>。对于这两个问题，前者往往很容易解决，解决掉冲突，重新 checkout 就好。后者的话就有些头疼，假如你的源分支已经有了自己大量的神仙逻辑代码，所以你不想使用 <code>git add</code> 将这些文件添加到暂存区，你也不想用 <code>git reset</code> 的方式去处理，这时相对比较好的方式就是使用下面的方式:</p>
-<pre><code class="shell">git stash -u	暂存，区分与 git add 的暂存
+<pre class=" language-shell"><code class="language-shell">git stash -u	暂存，区分与 git add 的暂存
 git stash list	列出暂存内容
 git stash pop 取回暂存
 </code></pre>

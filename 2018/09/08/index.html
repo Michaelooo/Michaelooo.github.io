@@ -71,7 +71,7 @@
     }
   </script>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-one-light.css" type="text/css"></head>
 
 
   <body>
@@ -197,23 +197,23 @@
 <h3 id="生成-https-证书"><a href="#生成-https-证书" class="headerlink" title="生成 https 证书"></a>生成 https 证书</h3><p>证书的话，因为只是个简单的个人网站，在安全性上也并没有太大的要求，所以证书的颁发机构采用大家都喜欢用的开源证书颁发机构 <a target="_blank" rel="noopener" href="https://letsencrypt.org/">let’s encrypt</a> 就行了， 关于这个证书的生成就使用大家都喜欢的 <a target="_blank" rel="noopener" href="https://certbot.eff.org/lets-encrypt/centos6-nginx">cerbot 生成工具</a> 就行了。推荐使用官网推荐的 cerbot-auto 脚本的方式来生成证书，你需要做的就是填写邮箱和你的域名之类的操作。</p>
 <p>这个生成的过程会有一些小坑，我在下面的 <strong>踩坑总结： 使用 cerbot-auto 生成 Let’s Encrypt 证书遇到的问题</strong> 有提及。生成之后，可以使用 <code>./certbot-auto certificates</code> 查看你生成的证书的位置。另外有一点需要注意的是，通过上面的这种方式生成的证书的有效期是 90 天，所以到时间了要记得自己去重新生成。</p>
 <h3 id="配置-nginx"><a href="#配置-nginx" class="headerlink" title="配置 nginx"></a>配置 nginx</h3><p>因为我使用的是 Nginx 服务器，所以只需要简单的配置就可以使用 https ， 配置的内容大致如下：</p>
-<pre><code class="nginx">server &#123;
-    listen 443 ssl;	
-    listen [::]:443 ssl ipv6only=on;
-    server_name www.chengpengfei.com;
-    ssl_certificate /etc/letsencrypt/live/www.chengpengfei.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/www.chengpengfei.com/privkey.pem;
-    ssl_trusted_certificate /etc/letsencrypt/live/www.chengpengfei.com/chain.pem;
-&#125;
+<pre class=" language-nginx"><code class="language-nginx"><span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token keyword">listen</span> <span class="token number">443</span> <span class="token keyword">ssl</span><span class="token punctuation">;</span>	
+    <span class="token keyword">listen</span> <span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token number">443</span> <span class="token keyword">ssl</span> ipv6only<span class="token operator">=</span>on<span class="token punctuation">;</span>
+    <span class="token keyword">server_name</span> www<span class="token punctuation">.</span>chengpengfei<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_certificate</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>www<span class="token punctuation">.</span>chengpengfei<span class="token punctuation">.</span>com<span class="token operator">/</span>fullchain<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+    <span class="token keyword">ssl_certificate_key</span> <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>www<span class="token punctuation">.</span>chengpengfei<span class="token punctuation">.</span>com<span class="token operator">/</span>privkey<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+    ssl_trusted_certificate <span class="token operator">/</span>etc<span class="token operator">/</span>letsencrypt<span class="token operator">/</span>live<span class="token operator">/</span>www<span class="token punctuation">.</span>chengpengfei<span class="token punctuation">.</span>com<span class="token operator">/</span>chain<span class="token punctuation">.</span>pem<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>一般情况下，再配置好 web 目录， 重启 Nginx 就可以了就可以看到效果了。但是因为我使用了 docker ，所以还不行，请接着往下看。</p>
 <h3 id="在-docker-中使用-Nginx"><a href="#在-docker-中使用-Nginx" class="headerlink" title="在 docker 中使用 Nginx"></a>在 docker 中使用 Nginx</h3><p>因为我是直接在 docker 中使用的 Nginx，我需要让<strong>我的证书以及我定义的 Nginx 配置</strong>对 docker 容器可见。在这里我一开始的思路有两个，第一是通过 Dockerfile 来指定 volume ，然后生成一个新的镜像，并构建容器，一种是直接使用 docker run -v 的形式去构建容器。</p>
 <p>表面上看起来第一种的方式更为优雅些，但是在我的实践中发现，第一种方式并不可行，无法挂载到指定的文件路径，查阅了相关资料发现，<strong>当你要重新构建一个docker的image时，在Dockerfile 里指定的 volume 是无效的，因为 image 应是纯净的，不包含有指定路径的。</strong> 所以最后我选择了第二种方式，具体的命令大致如下：</p>
-<pre><code class="shell">docker run -d \
+<pre class=" language-shell"><code class="language-shell">docker run -d \
 -p 80:80 \
 -p 443:443 \
 --name nginx-blog \
--v &quot;$PWD/html&quot;:/usr/share/nginx/html \
+-v "$PWD/html":/usr/share/nginx/html \
 -v /var/www/blog/:/var/www/blog/ \
 -v /var/www/my_resume/:/var/www/my_resume/ \
 -v /home/blog_nginx/:/etc/nginx/ \
@@ -223,11 +223,11 @@ nginx
 <p>容器构建成功，就可以访问网站来查看效果了。下面是我的网站更换的效果，由 <strong>不安全 变成了 并非完全安全</strong>😂</p>
 <p><img src="/images/loading.gif" data-original="https://i.imgur.com/DASIzJQ.jpg" alt="Imgur"></p>
 <h3 id="配置-http2"><a href="#配置-http2" class="headerlink" title="配置 http2"></a>配置 http2</h3><p>配置 http2 的方式更加简单，直接在 Nginx 的配置里更改就可以了（我用的是最新版的 nginx ，所以是支持 http2 的，别用太老的版本都支持的）。</p>
-<pre><code class="nginx">server &#123;
-    listen 443 http2 ssl;
-    listen [::]:443 http2 ssl ipv6only=on;
+<pre class=" language-nginx"><code class="language-nginx"><span class="token keyword">server</span> <span class="token punctuation">{</span>
+    <span class="token keyword">listen</span> <span class="token number">443</span> http2 <span class="token keyword">ssl</span><span class="token punctuation">;</span>
+    <span class="token keyword">listen</span> <span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token number">443</span> http2 <span class="token keyword">ssl</span> ipv6only<span class="token operator">=</span>on<span class="token punctuation">;</span>
     ……
-&#125;
+<span class="token punctuation">}</span>
 </code></pre>
 <p>之后重新构建一个容器即可，来看个开启了 http2 之后的效果。</p>
 <p>这个是之前的：</p>
