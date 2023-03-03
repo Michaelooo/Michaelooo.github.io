@@ -21,7 +21,7 @@ date: 2022-01-19 16:20:56
 
 具体的异常行为表现为：接收 props 的组件不能正常渲染，页面白屏，需手动触发才能拿到 props。
 
-![images](../images/error-demo.png)
+![error-demo.png](https://s2.loli.net/2023/03/03/NAGuOI1rRsWzQlV.png)
 
 在排除了一些缓存、重启类似的的问题后，最后定位到:
 
@@ -60,7 +60,7 @@ date: 2022-01-19 16:20:56
 
 如果使用了 typescript, 使用 vue-cli 生成的 tsconfig.json 其中的 target 和 module 默认是 esnext, 这种方式在 chrome 97 下存在问题。将 target 和 module 的选项修改为 非 esnext 的选项均可。
 
-```
+```json
 {
   "compilerOptions": {
     "target": "esnext",
@@ -189,16 +189,14 @@ const test = new Test();
 
 所以，对应到上面的问题，在过去我们使用 props 时，通常会有 `@Prop({ type: String, default: "" }) msg!: string;` 类似的写法。这种方式在旧版本里，msg 并不会触发 set 方法，vue 也并不会将其看做是一个响应式的属性。但是在新版本中，msg 触发 set 方法，vue 将其看作是一个 undefined 的变量处理了，所以在页面初次渲染，拿到 props 将永远都是 undefined, 从而产生异常行为。
 
-![images](../images/chrome-tsc-desc.png)
-
+![chrome-tsc-desc.png](https://s2.loli.net/2023/03/03/KROt7aUeAmgy3Gp.png)
 
 
 这里还有几个相关的 issue(参考链接 3，4):
 
 tsc repo: https://github.com/tc39/proposal-class-fields#public-fields-created-with-objectdefineproperty
 
-![images](../images/chrome-97-tsc.png)
-
+![chrome-97-tsc.png](https://s2.loli.net/2023/03/03/lcMeiZIGUFgdkQT.png)
 
 
 
@@ -207,10 +205,10 @@ tsc repo: https://github.com/tc39/proposal-class-fields#public-fields-created-wi
 - bug： https://bugs.chromium.org/p/v8/issues/detail?id=12421&q=%5B%5BSet%5D%5D%20type%3DBug&can=2
 - v8 changes: https://chromium.googlesource.com/v8/v8/+/e81ef8be9c59d2f37bb7b61183d3c2ee9d67158a
 
-![images](../images/bug-report.png)
+![bug-report.png](https://s2.loli.net/2023/03/03/nBL8a4QzDq3fuCY.png)
 
 ## 六、参考链接
 
-- 重现仓库
+- [重现仓库](https://github.com/Michaelooo/chrome-97-vue-ts-issue)
 - [tsc](https://github.com/tc39/proposal-class-fields#public-fields-created-with-objectdefineproperty)
 - [v8 bug](https://bugs.chromium.org/p/v8/issues/detail?id=12421&q=%5B%5BSet%5D%5D%20type%3DBug&can=2)

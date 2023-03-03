@@ -71,7 +71,7 @@
     }
   </script>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-one-light.css" type="text/css"></head>
 
 
   <body>
@@ -192,16 +192,17 @@
 <p>“Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop’s value. Prop being mutated:….”</p>
 </blockquote>
 <p>具体的异常行为表现为：接收 props 的组件不能正常渲染，页面白屏，需手动触发才能拿到 props。</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/NAGuOI1rRsWzQlV.png" alt="error-demo.png"></p>
 <p>在排除了一些缓存、重启类似的的问题后，最后定位到:</p>
 <p>在使用了 chrome 97 + 开发模式 + vue2 + vite + ts + class component 的情况下，可稳定复现此问题。其他非 chromium 内核的浏览器或者低版本的 chrome 无此问题。</p>
 <p>附上一些使用的库版本：</p>
 <ul>
-<li>vue2 : <a href="mailto:&#x76;&#x75;&#101;&#64;&#x32;&#46;&#54;&#46;&#x31;&#52;">&#x76;&#x75;&#101;&#64;&#x32;&#46;&#54;&#46;&#x31;&#52;</a></li>
-<li>vite: <a href="mailto:&#118;&#x69;&#116;&#x65;&#x40;&#50;&#46;&#55;&#46;&#x31;&#x30;">&#118;&#x69;&#116;&#x65;&#x40;&#50;&#46;&#55;&#46;&#x31;&#x30;</a></li>
-<li>vuex: <a href="mailto:&#x76;&#x75;&#101;&#120;&#64;&#x33;&#x2e;&#54;&#x2e;&#x32;">&#x76;&#x75;&#101;&#120;&#64;&#x33;&#x2e;&#54;&#x2e;&#x32;</a></li>
-<li>typescript: <a href="mailto:&#x74;&#x79;&#x70;&#x65;&#115;&#99;&#x72;&#x69;&#x70;&#x74;&#64;&#x34;&#46;&#53;&#x2e;&#52;">&#x74;&#x79;&#x70;&#x65;&#115;&#99;&#x72;&#x69;&#x70;&#x74;&#64;&#x34;&#46;&#53;&#x2e;&#52;</a></li>
-<li>vue-property-decorator: <a href="mailto:&#118;&#x75;&#x65;&#x2d;&#112;&#x72;&#111;&#x70;&#x65;&#x72;&#x74;&#x79;&#45;&#100;&#101;&#99;&#x6f;&#x72;&#x61;&#x74;&#111;&#114;&#x40;&#x39;&#46;&#49;&#x2e;&#50;">&#118;&#x75;&#x65;&#x2d;&#112;&#x72;&#111;&#x70;&#x65;&#x72;&#x74;&#x79;&#45;&#100;&#101;&#99;&#x6f;&#x72;&#x61;&#x74;&#111;&#114;&#x40;&#x39;&#46;&#49;&#x2e;&#50;</a></li>
-<li>chrome: <a href="mailto:&#x63;&#104;&#x72;&#111;&#x6d;&#101;&#64;&#57;&#55;&#46;&#x30;&#46;&#52;&#54;&#x39;&#50;&#46;&#55;&#x31;">&#x63;&#104;&#x72;&#111;&#x6d;&#101;&#64;&#57;&#55;&#46;&#x30;&#46;&#52;&#54;&#x39;&#50;&#46;&#55;&#x31;</a></li>
+<li>vue2 : <a href="mailto:&#x76;&#x75;&#x65;&#x40;&#x32;&#46;&#x36;&#46;&#49;&#52;">&#x76;&#x75;&#x65;&#x40;&#x32;&#46;&#x36;&#46;&#49;&#52;</a></li>
+<li>vite: <a href="mailto:&#118;&#x69;&#x74;&#101;&#x40;&#x32;&#46;&#x37;&#x2e;&#x31;&#48;">&#118;&#x69;&#x74;&#101;&#x40;&#x32;&#46;&#x37;&#x2e;&#x31;&#48;</a></li>
+<li>vuex: <a href="mailto:&#x76;&#117;&#101;&#120;&#64;&#x33;&#x2e;&#x36;&#x2e;&#x32;">&#x76;&#117;&#101;&#120;&#64;&#x33;&#x2e;&#x36;&#x2e;&#x32;</a></li>
+<li>typescript: <a href="mailto:&#x74;&#x79;&#112;&#101;&#115;&#x63;&#114;&#105;&#x70;&#x74;&#64;&#x34;&#x2e;&#53;&#46;&#x34;">&#x74;&#x79;&#112;&#101;&#115;&#x63;&#114;&#105;&#x70;&#x74;&#64;&#x34;&#x2e;&#53;&#46;&#x34;</a></li>
+<li>vue-property-decorator: <a href="mailto:&#x76;&#117;&#101;&#x2d;&#112;&#x72;&#111;&#x70;&#101;&#114;&#x74;&#121;&#x2d;&#x64;&#101;&#99;&#x6f;&#x72;&#x61;&#116;&#x6f;&#114;&#64;&#x39;&#x2e;&#x31;&#46;&#50;">&#x76;&#117;&#101;&#x2d;&#112;&#x72;&#111;&#x70;&#101;&#114;&#x74;&#121;&#x2d;&#x64;&#101;&#99;&#x6f;&#x72;&#x61;&#116;&#x6f;&#114;&#64;&#x39;&#x2e;&#x31;&#46;&#50;</a></li>
+<li>chrome: <a href="mailto:&#99;&#104;&#x72;&#x6f;&#x6d;&#x65;&#x40;&#x39;&#55;&#46;&#48;&#x2e;&#52;&#54;&#57;&#x32;&#46;&#55;&#49;">&#99;&#104;&#x72;&#x6f;&#x6d;&#x65;&#x40;&#x39;&#55;&#46;&#48;&#x2e;&#52;&#54;&#57;&#x32;&#46;&#55;&#49;</a></li>
 </ul>
 <h2 id="三、过程"><a href="#三、过程" class="headerlink" title="三、过程"></a>三、过程</h2><p>不用读系列：以下是在排查问题时的回顾，也可为自己后续排查问题提供一些反思</p>
 <p>首先，怀疑是 node_modules 或者 vite 版本问题，删除了相关 cache 、lock 文件 问题依然存在 反思：遇到问题时的常规思路就是重启大法，只解决眼前问题，缺乏排错思维</p>
@@ -212,111 +213,114 @@
 <h2 id="四、解法"><a href="#四、解法" class="headerlink" title="四、解法"></a>四、解法</h2><h3 id="解法零：-更新最新的-Chrome-版本"><a href="#解法零：-更新最新的-Chrome-版本" class="headerlink" title="解法零： 更新最新的 Chrome 版本"></a>解法零： 更新最新的 Chrome 版本</h3><p>更新：将 Chrome 更新至最新已无此问题。</p>
 <p>最新版本，对于上面出现的问题，chrome 会提示一个警告：Cannot redefine property: msg。 但是不会阻塞Js 任务</p>
 <h3 id="解法一：tsconfig-不使用-esnext"><a href="#解法一：tsconfig-不使用-esnext" class="headerlink" title="解法一：tsconfig 不使用 esnext"></a>解法一：tsconfig 不使用 esnext</h3><p>如果使用了 typescript, 使用 vue-cli 生成的 tsconfig.json 其中的 target 和 module 默认是 esnext, 这种方式在 chrome 97 下存在问题。将 target 和 module 的选项修改为 非 esnext 的选项均可。</p>
-<pre><code>&#123;
-  &quot;compilerOptions&quot;: &#123;
-    &quot;target&quot;: &quot;esnext&quot;,
-    &quot;module&quot;: &quot;esnext&quot;,
+<pre class=" language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"compilerOptions"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"target"</span><span class="token operator">:</span> <span class="token string">"esnext"</span><span class="token punctuation">,</span>
+    <span class="token property">"module"</span><span class="token operator">:</span> <span class="token string">"esnext"</span><span class="token punctuation">,</span>
     // ……
-  &#125;
-&#125;
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h3 id="解法二：修改-class-component-props-的使用方式"><a href="#解法二：修改-class-component-props-的使用方式" class="headerlink" title="解法二：修改 class component props 的使用方式"></a>解法二：修改 class component props 的使用方式</h3><p>使用 vue2 + class 组件时，我们常常有以下两种写法</p>
 <p><strong>方式1： 使用 Vue.extend继承</strong></p>
-<pre><code class="js">import &#123; Component, Prop, Vue &#125; from &quot;vue-property-decorator&quot;;
+<pre class=" language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> Prop<span class="token punctuation">,</span> Vue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue-property-decorator"</span><span class="token punctuation">;</span>
 
-const HelloWorldProps = Vue.extend(&#123;
-  props: &#123;
-    msg: String,
-    data: Object,
-    listData: Array,
-  &#125;,
-&#125;);
+<span class="token keyword">const</span> HelloWorldProps <span class="token operator">=</span> Vue<span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  props<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    msg<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+    data<span class="token punctuation">:</span> Object<span class="token punctuation">,</span>
+    listData<span class="token punctuation">:</span> Array<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 @Component
-export default class HelloWorld extends HelloWorldProps &#123;
-  created(): void &#123;
-    console.log(this.msg);
-    console.log(this.data);
-    console.log(this.listData);
-  &#125;
-&#125;
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorld</span> <span class="token keyword">extends</span> <span class="token class-name">HelloWorldProps</span> <span class="token punctuation">{</span>
+  <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>listData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>方式2： 使用 vue-property-decorator提供的 @props 能力</p>
-<pre><code class="js">import &#123; Component, Prop, Vue &#125; from &quot;vue-property-decorator&quot;;
+<pre class=" language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> Prop<span class="token punctuation">,</span> Vue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue-property-decorator"</span><span class="token punctuation">;</span>
 
-@Component(&#123;
-  props: &#123;
-    msg: String,
-    data: Object,
-    listData: Array,
-  &#125;,
-&#125;)
-export default class HelloWorld extends Vue &#123;
-  // 我们常会声明几个未初始化的变量，是为了解决 ts this 的报错问题
-  // 还有一种直接引入 @props() 装饰器的写法，和本方法内部行为一致，归为一种
-  msg!: string;
-  data!: any;
-  listData!: any;
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  props<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    msg<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+    data<span class="token punctuation">:</span> Object<span class="token punctuation">,</span>
+    listData<span class="token punctuation">:</span> Array<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorld</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 我们常会声明几个未初始化的变量，是为了解决 ts this 的报错问题</span>
+  <span class="token comment" spellcheck="true">// 还有一种直接引入 @props() 装饰器的写法，和本方法内部行为一致，归为一种</span>
+  msg<span class="token operator">!</span><span class="token punctuation">:</span> string<span class="token punctuation">;</span>
+  data<span class="token operator">!</span><span class="token punctuation">:</span> any<span class="token punctuation">;</span>
+  listData<span class="token operator">!</span><span class="token punctuation">:</span> any<span class="token punctuation">;</span>
 
-  created(): void &#123;
-    console.log(this.msg);
-    console.log(this.data);
-    console.log(this.listData);
-  &#125;
-&#125;
+  <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>listData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>使用 方式1 不会存在问题，但在使用 方式2 时，需注释掉那些未声明的变量（这会带来 ts 错误警告，可忽略），如下：</p>
-<pre><code class="js">import &#123; Component, Prop, Vue &#125; from &quot;vue-property-decorator&quot;;
+<pre class=" language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> Prop<span class="token punctuation">,</span> Vue <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vue-property-decorator"</span><span class="token punctuation">;</span>
 
-@Component(&#123;
-  props: &#123;
-    msg: String,
-    data: Object,
-    listData: Array,
-  &#125;,
-&#125;)
-export default class HelloWorld extends Vue &#123;
-  created(): void &#123;
-    console.log(this.msg);
-    console.log(this.data);
-    console.log(this.listData);
-  &#125;
-&#125;
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  props<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    msg<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+    data<span class="token punctuation">:</span> Object<span class="token punctuation">,</span>
+    listData<span class="token punctuation">:</span> Array<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorld</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+  <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>listData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h2 id="五、原因"><a href="#五、原因" class="headerlink" title="五、原因"></a>五、原因</h2><p>首先我们来看一段测试代码：</p>
-<pre><code class="js">class Base &#123;
+<pre class=" language-js"><code class="language-js"><span class="token keyword">class</span> <span class="token class-name">Base</span> <span class="token punctuation">{</span>
   
-  constructor () &#123;
-    this.init()
-  &#125;
+  constructor <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
 
-&#125;
+<span class="token punctuation">}</span>
 
-class Test extends Base &#123;
-  msg;
-  init () &#123;
-    Object.defineProperty(this, &#39;msg&#39;, &#123;
-        set (val) &#123;
-          console.log(&#39;msg set: &#39;, val);
-        &#125;,
-        configurable: true
-    &#125;)
-  &#125;
-&#125;
+<span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token keyword">extends</span> <span class="token class-name">Base</span> <span class="token punctuation">{</span>
+  msg<span class="token punctuation">;</span>
+  init <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">'msg'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        <span class="token keyword">set</span> <span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'msg set: '</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        configurable<span class="token punctuation">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-const test = new Test();
+<span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>上面的这段代码，在非 chrome97 的浏览器，未初始化的属性不会触发 set 方法， 但是新版本的会触发。</p>
 <p>所以，对应到上面的问题，在过去我们使用 props 时，通常会有 <code>@Prop(&#123; type: String, default: &quot;&quot; &#125;) msg!: string;</code> 类似的写法。这种方式在旧版本里，msg 并不会触发 set 方法，vue 也并不会将其看做是一个响应式的属性。但是在新版本中，msg 触发 set 方法，vue 将其看作是一个 undefined 的变量处理了，所以在页面初次渲染，拿到 props 将永远都是 undefined, 从而产生异常行为。</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/KROt7aUeAmgy3Gp.png" alt="chrome-tsc-desc.png"></p>
 <p>这里还有几个相关的 issue(参考链接 3，4):</p>
 <p>tsc repo: <a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-class-fields#public-fields-created-with-objectdefineproperty">https://github.com/tc39/proposal-class-fields#public-fields-created-with-objectdefineproperty</a></p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/lcMeiZIGUFgdkQT.png" alt="chrome-97-tsc.png"></p>
 <p>下面这个 bug 已经修复：</p>
 <ul>
 <li>bug： <a target="_blank" rel="noopener" href="https://bugs.chromium.org/p/v8/issues/detail?id=12421&q=%5B%5BSet%5D%5D%20type=Bug&can=2">https://bugs.chromium.org/p/v8/issues/detail?id=12421&amp;q=%5B%5BSet%5D%5D%20type%3DBug&amp;can=2</a></li>
 <li>v8 changes: <a target="_blank" rel="noopener" href="https://chromium.googlesource.com/v8/v8/+/e81ef8be9c59d2f37bb7b61183d3c2ee9d67158a">https://chromium.googlesource.com/v8/v8/+/e81ef8be9c59d2f37bb7b61183d3c2ee9d67158a</a></li>
 </ul>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/nBL8a4QzDq3fuCY.png" alt="bug-report.png"></p>
 <h2 id="六、参考链接"><a href="#六、参考链接" class="headerlink" title="六、参考链接"></a>六、参考链接</h2><ul>
-<li>重现仓库</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Michaelooo/chrome-97-vue-ts-issue">重现仓库</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-class-fields#public-fields-created-with-objectdefineproperty">tsc</a></li>
 <li><a target="_blank" rel="noopener" href="https://bugs.chromium.org/p/v8/issues/detail?id=12421&q=%5B%5BSet%5D%5D%20type=Bug&can=2">v8 bug</a></li>
 </ul>

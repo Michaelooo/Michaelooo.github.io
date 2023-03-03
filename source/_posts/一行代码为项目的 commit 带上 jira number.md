@@ -7,7 +7,7 @@ date: 2023-01-11 18:46:01
 
 ## 常规使用方式
 
-```sh
+```shell
 echo '# add jira number
 # $1 and $2 defined by Git
 COMMIT_MSG_FILE=$1
@@ -30,7 +30,7 @@ fi' >> ./.git/hooks/prepare-commit-msg
 直接复制上面的命令在项目根目录执行。将为项目中的每个 commit 自动带上 jira 号。
 
 commit 的效果如下：
-![image](../images/git-hooks-jira-screenshot.png)
+![git-hooks-jira-screenshot.png](https://s2.loli.net/2023/03/03/yr3x81UaKZ6vSA2.png)
 
 ## 使用 submodules 的方式
 
@@ -59,7 +59,8 @@ fi' >> ./.git/modules/line-haul/hooks/prepare-commit-msg
 
 某些项目可能本身不存在 prepare-commit-msg 文件，这时使用上述命令会新增一个 prepare-commit-msg 文件，你需要修改该文件的执行权限。
 
-![image](../images/git-hooks-error.png)
+![git-hooks-error.png](https://s2.loli.net/2023/03/03/7tNqsE3aI2bTzLk.png)
+
 > hint: The '.git/hooks/prepare-commit-msg' hook was ignored because it's not set as executable.
 hint: You can disable this warning with `git config advice.ignoredHook false`.
 

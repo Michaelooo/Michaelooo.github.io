@@ -6,7 +6,7 @@
   <link href="https://michaelooo.github.io/atom.xml" rel="self"/>
   
   <link href="https://michaelooo.github.io/"/>
-  <updated>2023-03-02T10:13:24.996Z</updated>
+  <updated>2023-03-03T04:04:15.919Z</updated>
   <id>https://michaelooo.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>一行代码为项目的 commit 带上 jira number</title>
+    <link href="https://michaelooo.github.io/2023/01/12/"/>
+    <id>https://michaelooo.github.io/2023/01/12/</id>
+    <published>2023-01-11T18:46:01.000Z</published>
+    <updated>2023-03-03T04:04:15.919Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;常规使用方式&quot;&gt;&lt;a href=&quot;#常规使用方式&quot; class=&quot;headerlink&quot; title=&quot;常规使用方式&quot;&gt;&lt;/a&gt;常规使用方式&lt;/h2&gt;&lt;pre class=&quot; language-shell&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    
+    <category term="git" scheme="https://michaelooo.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
     <title>git 默认 track 原生分支，git push 不打断</title>
     <link href="https://michaelooo.github.io/2023/01/09/"/>
     <id>https://michaelooo.github.io/2023/01/09/</id>
     <published>2023-01-09T15:41:54.000Z</published>
-    <updated>2023-03-02T10:13:24.996Z</updated>
+    <updated>2023-03-03T03:27:50.718Z</updated>
     
     
       
@@ -29,7 +52,7 @@
         
         
     <summary type="html">&lt;p&gt;每次 checkout 一个新分支时，git push 总会提示类似下面的提示，略微难受&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://imgur.com/Y0NbDc4&quot;</summary>
+&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2023/03/03/TCusdqBpWeb3U7l.png&quot;</summary>
         
       
     
@@ -69,7 +92,7 @@
     <link href="https://michaelooo.github.io/2022/01/20/"/>
     <id>https://michaelooo.github.io/2022/01/20/</id>
     <published>2022-01-19T16:20:56.000Z</published>
-    <updated>2023-03-02T09:31:59.977Z</updated>
+    <updated>2023-03-03T04:05:49.982Z</updated>
     
     
       
@@ -502,31 +525,6 @@
     <category term="javascript" scheme="https://michaelooo.github.io/tags/javascript/"/>
     
     <category term="hyperappjs" scheme="https://michaelooo.github.io/tags/hyperappjs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS: 一个小例子引发的思考</title>
-    <link href="https://michaelooo.github.io/2018/01/03/"/>
-    <id>https://michaelooo.github.io/2018/01/03/</id>
-    <published>2018-01-03T14:57:00.000Z</published>
-    <updated>2023-03-01T07:59:35.670Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;一个小例子引发的思考&quot;&gt;&lt;a href=&quot;#一个小例子引发的思考&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="前端" scheme="https://michaelooo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-    <category term="javascript" scheme="https://michaelooo.github.io/tags/javascript/"/>
     
   </entry>
   

@@ -37,11 +37,6 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
-highlight:
-  enable: false
-  line_number: false
-  auto_detect: false
-  tab_replace:
 
 # Category & Tag
 default_category: uncategorized
@@ -109,3 +104,19 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
+
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'one-light'
+  line_number: false    # default false
+  custom_css: ''     # optional
+
+highlight:
+  enable: false
+  auto_detect: false
+  line_number: true
+  line_threshold: 0
+  tab_replace: '  '
+  exclude_languages: 
+  wrap: true
+  hljs: false

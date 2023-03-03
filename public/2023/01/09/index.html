@@ -71,7 +71,7 @@
     }
   </script>
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
-</head>
+<link rel="stylesheet" href="/css/prism-one-light.css" type="text/css"></head>
 
 
   <body>
@@ -181,18 +181,18 @@
       </div>
       <div class="markdown-body">
         <p>每次 checkout 一个新分支时，git push 总会提示类似下面的提示，略微难受</p>
-<p><img src="/images/loading.gif" data-original="https://imgur.com/Y0NbDc4" alt="Imgur"></p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/TCusdqBpWeb3U7l.png" alt="git-track-demo.png"></p>
 <p>在大部分情况下，我们的本地分支和远程分支名应该是一致的（这也方便你管理需求），因此可以使用下面的命令设置默认 track</p>
-<pre><code class="sh">git config --global --replace-all push.default current
+<pre class=" language-sh"><code class="language-sh">git config --global --replace-all push.default current
 git config --global --replace-all push.autoSetupRemote true
 </code></pre>
 <p>更多配置看这里↓：</p>
 <p><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-config">https://git-scm.com/docs/git-config</a></p>
-<p><img src="/images/loading.gif" data-original="/images/git-push-doc.png" alt="image"></p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/TKVL8Y69tZkvM13.png" alt="git-push-doc.png"></p>
 <p>某些情况下，你需要修改你的需求分支名，在修改分支名称后，你先修改了本地分支与远程分支的映射，但 <code>git push</code> 后发现还是会映射到旧分支名。这时可以尝试直接修改本地的 cache 。</p>
 <pre><code>vi ~/.git/config
 </code></pre>
-<p><img src="/images/loading.gif" data-original="/./images/git-push-doc.png" alt="image"><br><img src="/images/loading.gif" data-original="https://imgur.com/IrXWbcr" alt="Imgur"></p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/03/ksN3B8DdGojLYvX.png" alt="git-track-config.png"></p>
 
       </div>
       
@@ -224,6 +224,11 @@ git config --global --replace-all push.autoSetupRemote true
               
           </div>
           <div class="post-foot-prev">
+            
+              <a href="/2023/01/12/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
             
           </div>
         </div>
