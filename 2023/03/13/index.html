@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-ZN" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="Michael Cheng" />
+  <meta name="description" content="Welcom Michael Cheng&#39;s Blog" />
+  
+  
+  <title>
+    
+      一次有趣的跨域问题排查 
+      
+      
+      |
+    
+     Michael&#39;s Blog
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.jpeg">
+    <link rel="icon" href="/images/favicon.jpeg">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJRMKRW3P1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-NJRMKRW3P1');
+    </script>
+  
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Michael's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-one-light.css" type="text/css"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img no-lazy src="/images/avatar.jpeg" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">Michael Cheng</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">Archives</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">About</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">一次有趣的跨域问题排查</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2023-03-13 17:06:28
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/" title="问题排查">
+                    #问题排查
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>某一天，同事向我求助：<code>我在 UAT 环境下的一个页面报错了，用户无法访问，但是我本地正常，只有 Android App 里异常，</code>基于敏锐的嗅觉，这会是一个有趣的问题，于是这个活儿，接了。</p>
+<h2 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1.问题描述"></a>1.问题描述</h2><p>首先简单介绍下网页的基础技术架构。</p>
+<blockquote>
+<p>该网页由 React + Typescript 编写的一个单页面 H5 应用，放在域名 A 下，同时使用 Axios 作为请求基础库向非同域的一个服务 B 发送了资源访问。资源请求为 Get, 是一个简单请求。</p>
+<p>该页面支持公司内部的一个 App (以下称 HomeApp) Webview 访问，同时也支持第三方浏览器访问。</p>
+<p>为了方便，服务端设置了 <code>Access-Control-Allow-Origin: *</code> ,前端开启了 <code>withCredentials: true</code>, 会在访问跨域资源的时候带上 Cookie.</p>
+</blockquote>
+<p>再来看下问题的描述：</p>
+<ul>
+<li>业务人员反馈开启了 VPN 使用HomeApp访问该页面，页面无法访问</li>
+<li>不开启 VPN 访问页面依然无法访问</li>
+<li>开启 VPN 用第三方浏览器打开页面正常</li>
+<li>跨域资源返回的响应码是 403</li>
+</ul>
+<p>经初步排查，页面无法访问是因为出现了跨域资源错误。</p>
+<h2 id="2-排查流程"><a href="#2-排查流程" class="headerlink" title="2.排查流程"></a>2.排查流程</h2><h3 id="2-1简单分析"><a href="#2-1简单分析" class="headerlink" title="2.1简单分析"></a>2.1简单分析</h3><p>首先对问题做简单的分析，因为是跨域资源访问出错，本着“大胆猜想，小心求证”的原则，首先考虑是资源请求头设置不合理，然后是网关层做了一些拦截。</p>
+<p>同时，伟人曾说过，如果你能重新问题，那么问题就已经解决了一半。所以我们首先要做的就是重现问题。</p>
+<h3 id="2-2被误导的方向"><a href="#2-2被误导的方向" class="headerlink" title="2.2被误导的方向"></a>2.2被误导的方向</h3><p>因为怀疑是后端的跨域配置设置有问题，所以一开始就朝着跨域失败的方向去了。同时因为业务提到在连接 VPN 的情况会有问题，而自己在本地开启了代理同样可以复现问题，因此下意识的认定是代理层的某些 cookie 共享失败导致无法跨域，但在要求业务关掉代理访问却依然存在问题。</p>
+<p>后来简单求证后发现并非如此，因为在公司的服务网关层有一层流量拦截，<code>allow_office_ip</code> ，该配置限制了必须是公司的办公网络才可以访问该页面。</p>
+<p>在联系公司的 SRE 同学将该配置禁用后发现，本地在第三方浏览器中访问正常，但是在 HomeApp 访问异常。</p>
+<p>因此，必须要用 debug 模式详细的走遍流程了。</p>
+<h3 id="2-3真正的问题重现"><a href="#2-3真正的问题重现" class="headerlink" title="2.3真正的问题重现"></a>2.3真正的问题重现</h3><p>对于常见 H5 应用，我们有很多种方式可以进行调试。</p>
+<ol>
+<li>使用 whistle proxy 模式进行远程调试，如注入 vConsole, 线上资源映射本地</li>
+<li>Android Webview 使用 <code>chrome://inspect</code> 模式进行有线调试</li>
+<li>iOS 使用Safari浏览器打开 H5，可以使用开发者工具进行有线调试</li>
+</ol>
+<p>因为我们的 HomeApp 使用的就是原生的 Webview，因此可以第 2 种方式进行调试。因为在第三方浏览器中表现正常，但是在 HomeApp 中表现异常，因此我们通过 <code>chrome://inspect</code> 复制出错的请求。</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/14/flsUaRBZTDo1ep2.png"></p>
+<p>HomeApp 中跨域的请求如下</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// HomeApp request</span>
+<span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">"https://test.domain.com/sp-openapi/collection/barcode/app?shipment_id=SPXMY031824121872&amp;token=91b124840148254e874d4a9476b5b8698c4122525281347bf95d7c3bf8481c40"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token string">"headers"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"accept"</span><span class="token punctuation">:</span> <span class="token string">"application/json, text/plain, */*"</span><span class="token punctuation">,</span>
+    <span class="token string">"x-csrftoken"</span><span class="token punctuation">:</span> <span class="token string">"vOxigZ9KDrP0xEu6jagcTEgEITV28AlM"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">"referrer"</span><span class="token punctuation">:</span> <span class="token string">"https://domain.com/"</span><span class="token punctuation">,</span>
+  <span class="token string">"referrerPolicy"</span><span class="token punctuation">:</span> <span class="token string">"strict-origin-when-cross-origin"</span><span class="token punctuation">,</span>
+  <span class="token string">"body"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token string">"method"</span><span class="token punctuation">:</span> <span class="token string">"GET"</span><span class="token punctuation">,</span>
+  <span class="token string">"mode"</span><span class="token punctuation">:</span> <span class="token string">"cors"</span><span class="token punctuation">,</span>
+  <span class="token string">"credentials"</span><span class="token punctuation">:</span> <span class="token string">"omit"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>看起来并没有什么问题，我们再来看一下浏览器中的请求。</p>
+<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">// Chrome request</span>
+<span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">"https://test.domain.com/sp-openapi/collection/barcode/app?shipment_id=SPXMY031824121872&amp;token=91b124840148254e874d4a9476b5b8698c4122525281347bf95d7c3bf8481c40"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token string">"headers"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"accept"</span><span class="token punctuation">:</span> <span class="token string">"application/json, text/plain, */*"</span><span class="token punctuation">,</span>
+    <span class="token string">"sec-ch-ua"</span><span class="token punctuation">:</span> <span class="token string">"\"Chromium\";v=\"110\", \"Not A(Brand\";v=\"24\", \"Google Chrome\";v=\"110\""</span><span class="token punctuation">,</span>
+    <span class="token string">"sec-ch-ua-mobile"</span><span class="token punctuation">:</span> <span class="token string">"?1"</span><span class="token punctuation">,</span>
+    <span class="token string">"sec-ch-ua-platform"</span><span class="token punctuation">:</span> <span class="token string">"\"Android\""</span><span class="token punctuation">,</span>
+    <span class="token string">"sec-fetch-dest"</span><span class="token punctuation">:</span> <span class="token string">"empty"</span><span class="token punctuation">,</span>
+    <span class="token string">"sec-fetch-mode"</span><span class="token punctuation">:</span> <span class="token string">"cors"</span><span class="token punctuation">,</span>
+    <span class="token string">"sec-fetch-site"</span><span class="token punctuation">:</span> <span class="token string">"same-site"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">"referrer"</span><span class="token punctuation">:</span> <span class="token string">"https://domain.com/"</span><span class="token punctuation">,</span>
+  <span class="token string">"referrerPolicy"</span><span class="token punctuation">:</span> <span class="token string">"strict-origin-when-cross-origin"</span><span class="token punctuation">,</span>
+  <span class="token string">"body"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+  <span class="token string">"method"</span><span class="token punctuation">:</span> <span class="token string">"GET"</span><span class="token punctuation">,</span>
+  <span class="token string">"mode"</span><span class="token punctuation">:</span> <span class="token string">"cors"</span><span class="token punctuation">,</span>
+  <span class="token string">"credentials"</span><span class="token punctuation">:</span> <span class="token string">"omit"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>然后我们做了以下尝试</p>
+<ul>
+<li><code>HomeApp request</code> 放到 Chrome 中执行，依然失败</li>
+<li><code>Chrome request</code> 放到 HomeApp 中执行，成功响应</li>
+</ul>
+<p>那么看起来就是其中部分 Header 配置的问题了，通过比较两者的差异，我们发现通过 HomeApp 访问的资源会带上一个 <code>x-csrftoken</code>， 经过数次验证也发现确实是因为这个配置导致了跨域错误。</p>
+<h3 id="2-4CSRF-TOKEN"><a href="#2-4CSRF-TOKEN" class="headerlink" title="2.4CSRF-TOKEN"></a>2.4CSRF-TOKEN</h3><h4 id="CSRF-攻击是什么"><a href="#CSRF-攻击是什么" class="headerlink" title="CSRF 攻击是什么"></a>CSRF 攻击是什么</h4><p>CSRF（Cross-site request forgery）跨站请求伪造：攻击者诱导受害者进入第三方网站，在第三方网站中，向被攻击网站发送跨站请求。利用受害者在被攻击网站已经获取的注册凭证，绕过后台的用户验证，达到冒充用户对被攻击的网站执行某项操作的目的。</p>
+<p>一个典型的CSRF攻击有着如下的流程：</p>
+<ul>
+<li>受害者登录a.com，并保留了登录凭证（Cookie）。</li>
+<li>攻击者引诱受害者访问了b.com。</li>
+<li>b.com 向 a.com 发送了一个请求：a.com&#x2F;act&#x3D;xx。浏览器会默认携带a.com的Cookie。</li>
+<li>a.com接收到请求后，对请求进行验证，并确认是受害者的凭证，误以为是受害者自己发送的请求。</li>
+<li>a.com以受害者的名义执行了act&#x3D;xx。</li>
+<li>攻击完成，攻击者在受害者不知情的情况下，冒充受害者，让a.com执行了自己定义的操作。</li>
+</ul>
+<p><strong>简而言之，如果你的服务的跨域设置配置不当，比如<code>Access-Control-Allow-Origin: *</code> ,同时前端开启了 <code>withCredentials: true</code>，那么一旦你的登录凭证被窃取，服务就是透明的了，这存在严重的安全漏洞。</strong></p>
+<p>CSRF-TOKEN 就是解决这类漏洞的一种实现方式，它的原理是：<strong>要求所有的用户请求都携带一个CSRF攻击者无法获取到的Token。服务器通过校验请求是否携带正确的Token，来把正常的请求和攻击的请求区分开，也可以防范CSRF的攻击</strong>。</p>
+<p>完整的流程应该是下面的样子：</p>
+<p><img src="/images/loading.gif" data-original="https://s2.loli.net/2023/03/14/cf3PZHu95JKTjDk.png"></p>
+<h2 id="3-问题解决"><a href="#3-问题解决" class="headerlink" title="3.问题解决"></a>3.问题解决</h2><p>那再回到我们的问题本身，前端同学使用 Axios 默认的配置, 因为开启了<code>withCredentials: true</code>, 所以也默认加上 csrf 的选项。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+  withCredentials<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token</span>
+  xsrfCookieName<span class="token punctuation">:</span> <span class="token string">'csrftoken'</span><span class="token punctuation">,</span>
+  <span class="token comment" spellcheck="true">// `xsrfHeaderName` is the name of the http header that carries the xsrf token value</span>
+  xsrfHeaderName<span class="token punctuation">:</span> <span class="token string">'X-CSRFToken'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> request <span class="token operator">=</span> <span class="token function">createRequest</span><span class="token punctuation">(</span>baseURL<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>后端同学使用是公司的内部 Golang 框架，该框架集成了 <a target="_blank" rel="noopener" href="https://github.com/gorilla/csrf">go-csrf</a> 的能力，默认是开启的，但是如果想要使用 csrf-token 的能力，需要对其进行配置。</p>
+<pre class=" language-go"><code class="language-go"><span class="token keyword">var</span> demoKey <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token function">byte</span><span class="token punctuation">(</span><span class="token string">"secrect-key"</span><span class="token punctuation">)</span>
+p <span class="token operator">:=</span> csrf<span class="token punctuation">.</span><span class="token function">Protect</span><span class="token punctuation">(</span>demoKey<span class="token punctuation">,</span>
+  csrf<span class="token punctuation">.</span><span class="token function">MaxAge</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>MaxAge<span class="token punctuation">)</span><span class="token punctuation">,</span> csrf<span class="token punctuation">.</span><span class="token function">Domain</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>Domain<span class="token punctuation">)</span><span class="token punctuation">,</span> csrf<span class="token punctuation">.</span><span class="token function">Path</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>Path<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  csrf<span class="token punctuation">.</span><span class="token function">HttpOnly</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>HttpOnly<span class="token punctuation">)</span><span class="token punctuation">,</span> csrf<span class="token punctuation">.</span><span class="token function">Secure</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>Secure<span class="token punctuation">)</span><span class="token punctuation">,</span> csrf<span class="token punctuation">.</span><span class="token function">SameSite</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>SameSite<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  csrf<span class="token punctuation">.</span><span class="token function">RequestHeader</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>RequestHeader<span class="token punctuation">)</span><span class="token punctuation">,</span> csrf<span class="token punctuation">.</span><span class="token function">FieldName</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>FieldName<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  csrf<span class="token punctuation">.</span><span class="token function">ErrorHandler</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>ErrorHandler<span class="token punctuation">)</span><span class="token punctuation">,</span> csrf<span class="token punctuation">.</span><span class="token function">CookieName</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>CookieName<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  csrf<span class="token punctuation">.</span><span class="token function">TrustedOrigins</span><span class="token punctuation">(</span>csrfConf<span class="token punctuation">.</span>TrustedOrigins<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cp<span class="token punctuation">)</span>
+p<span class="token punctuation">.</span><span class="token function">ServeHTTP</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>cp<span class="token punctuation">,</span> req<span class="token punctuation">)</span>
+</code></pre>
+<p>所以问题出现的原因是：<strong>前后端同学忽视了项目中的默认配置，对于这个 csrf-token 没有很好的约定，导致 csrf-token 校验失败。</strong></p>
+<p>想解决这个问题有两种方式。</p>
+<h3 id="3-1不使用-csrf-token-的校验"><a href="#3-1不使用-csrf-token-的校验" class="headerlink" title="3.1不使用 csrf-token 的校验"></a>3.1不使用 csrf-token 的校验</h3><p>将 Axios 的默认配置修改为不传递 csrf-token ，那么就不会触发 csrf-token 的校验。但这种方式仅为临时解决，并不能解决本身的安全问题。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+  withCredentials<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> request <span class="token operator">=</span> <span class="token function">createRequest</span><span class="token punctuation">(</span>baseURL<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="3-2开启-csrf-token-的检验，后端配合修改"><a href="#3-2开启-csrf-token-的检验，后端配合修改" class="headerlink" title="3.2开启 csrf-token 的检验，后端配合修改"></a>3.2开启 csrf-token 的检验，后端配合修改</h3><p>前后端约定好 csrf-token 的取值传递，做好 csrf-token 的一致性校验，这种方式能最大程度的修复安全漏洞，推荐使用这种方式。</p>
+<h2 id="4-思考"><a href="#4-思考" class="headerlink" title="4.思考"></a>4.思考</h2><p>这个问题出现的场景还是比较少见的，因为为了解决一个跨域问题，我们为了省事而要求后端开启<code>Access-Control-Allow-Origin: *</code>，这种方式是存在安全漏洞的，而且中间链路不透明，不利于我们的问题排查。</p>
+<p>对于常见的跨域问题，如果资源的调用在同一个业务团队，推荐使用 前端BFF代理的方式进行中转，代理的逻辑前置有益于问题的排查（因为跨域问题只发生在浏览器，所以后端同学可能比较陌生）。</p>
+<p>同时，如果必须要使用 <code>Access-Control-Allow-Origin: *</code>这种方式，也尽量在 Nginx 代理层由运维同学修改，这样灵活性也可以提升很多。</p>
+<h2 id="5-参考"><a href="#5-参考" class="headerlink" title="5.参考"></a>5.参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fulu/p/13879080.html">Sec-Fetch-*请求头，了解下?</a></li>
+<li><a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/10/11/fe-security-csrf.html">前端安全系列（二）：如何防止CSRF攻击？</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2023/01/11/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2023-03-13 17:06:28
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/" title="问题排查">
+                        #问题排查
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">1.问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">2.排查流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90"><span class="toc-text">2.1简单分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E8%A2%AB%E8%AF%AF%E5%AF%BC%E7%9A%84%E6%96%B9%E5%90%91"><span class="toc-text">2.2被误导的方向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%97%AE%E9%A2%98%E9%87%8D%E7%8E%B0"><span class="toc-text">2.3真正的问题重现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4CSRF-TOKEN"><span class="toc-text">2.4CSRF-TOKEN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CSRF-%E6%94%BB%E5%87%BB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">CSRF 攻击是什么</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-text">3.问题解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E4%B8%8D%E4%BD%BF%E7%94%A8-csrf-token-%E7%9A%84%E6%A0%A1%E9%AA%8C"><span class="toc-text">3.1不使用 csrf-token 的校验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E5%BC%80%E5%90%AF-csrf-token-%E7%9A%84%E6%A3%80%E9%AA%8C%EF%BC%8C%E5%90%8E%E7%AB%AF%E9%85%8D%E5%90%88%E4%BF%AE%E6%94%B9"><span class="toc-text">3.2开启 csrf-token 的检验，后端配合修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%80%9D%E8%80%83"><span class="toc-text">4.思考</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8F%82%E8%80%83"><span class="toc-text">5.参考</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          <a title="github" target="_blank" rel="noopener" href="https://github.com/Michaelooo/Michaelooo.github.io">
+            <i class="iconfont icon-github"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a title="rss" href="/atom.xml">
+            <i class="iconfont icon-rss"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2023 MichaelChengooo</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+    <div class="footer-views">
+      
+          本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        
+      
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        
+      
+          本站访客数<span id="busuanzi_value_site_uv"></span>人
+        
+      
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="searching...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E4%B8%80%E6%AC%A1%E6%9C%89%E8%B6%A3%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5 + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2023%2F03%2F13%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2023/03/13/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
+</html>

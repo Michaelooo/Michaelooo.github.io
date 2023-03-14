@@ -6,7 +6,7 @@
   <link href="https://michaelooo.github.io/atom.xml" rel="self"/>
   
   <link href="https://michaelooo.github.io/"/>
-  <updated>2023-03-03T05:58:54.592Z</updated>
+  <updated>2023-03-14T10:44:29.617Z</updated>
   <id>https://michaelooo.github.io/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>一次有趣的跨域问题排查</title>
+    <link href="https://michaelooo.github.io/2023/03/13/"/>
+    <id>https://michaelooo.github.io/2023/03/13/</id>
+    <published>2023-03-13T17:06:28.000Z</published>
+    <updated>2023-03-14T10:44:29.617Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;某一天，同事向我求助：&lt;code&gt;我在 UAT 环境下的一个页面报错了，用户无法访问，但是我本地正常，只有 Android App 里异常，&lt;/code&gt;基于敏锐的嗅觉，这会是一个有趣的问题，于是这个活儿，接了。&lt;/p&gt;
+&lt;h2 id=&quot;1-问题描述&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="问题排查" scheme="https://michaelooo.github.io/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>一行代码为项目的 commit 带上 jira number</title>
     <link href="https://michaelooo.github.io/2023/01/11/"/>
     <id>https://michaelooo.github.io/2023/01/11/</id>
     <published>2023-01-11T18:46:01.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -44,7 +68,7 @@
     <link href="https://michaelooo.github.io/2023/01/09/"/>
     <id>https://michaelooo.github.io/2023/01/09/</id>
     <published>2023-01-09T15:41:54.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.621Z</updated>
     
     
       
@@ -68,7 +92,7 @@
     <link href="https://michaelooo.github.io/2022/07/21/"/>
     <id>https://michaelooo.github.io/2022/07/21/</id>
     <published>2022-07-21T15:58:53.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -92,7 +116,7 @@
     <link href="https://michaelooo.github.io/2022/04/19/"/>
     <id>https://michaelooo.github.io/2022/04/19/</id>
     <published>2022-04-19T13:37:00.000Z</published>
-    <updated>2023-03-03T05:58:54.588Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -117,7 +141,7 @@
     <link href="https://michaelooo.github.io/2022/02/23/"/>
     <id>https://michaelooo.github.io/2022/02/23/</id>
     <published>2022-02-23T13:34:00.000Z</published>
-    <updated>2023-03-03T05:58:54.588Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -141,7 +165,7 @@
     <link href="https://michaelooo.github.io/2022/01/19/"/>
     <id>https://michaelooo.github.io/2022/01/19/</id>
     <published>2022-01-19T16:20:56.000Z</published>
-    <updated>2023-03-03T05:58:54.588Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -155,9 +179,9 @@
     
     
     
-    <category term="问题排查" scheme="https://michaelooo.github.io/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"/>
-    
     <category term="chrome" scheme="https://michaelooo.github.io/tags/chrome/"/>
+    
+    <category term="问题排查" scheme="https://michaelooo.github.io/tags/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"/>
     
   </entry>
   
@@ -166,7 +190,7 @@
     <link href="https://michaelooo.github.io/2022/01/11/"/>
     <id>https://michaelooo.github.io/2022/01/11/</id>
     <published>2022-01-11T16:00:56.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -189,7 +213,7 @@
     <link href="https://michaelooo.github.io/2018/09/08/"/>
     <id>https://michaelooo.github.io/2018/09/08/</id>
     <published>2018-09-08T16:48:03.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -219,7 +243,7 @@
     <link href="https://michaelooo.github.io/2018/08/27/"/>
     <id>https://michaelooo.github.io/2018/08/27/</id>
     <published>2018-08-27T10:41:10.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -242,7 +266,7 @@
     <link href="https://michaelooo.github.io/2018/08/15/"/>
     <id>https://michaelooo.github.io/2018/08/15/</id>
     <published>2018-08-15T11:25:48.000Z</published>
-    <updated>2023-03-03T05:58:54.588Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -268,7 +292,7 @@
     <link href="https://michaelooo.github.io/2018/08/09/"/>
     <id>https://michaelooo.github.io/2018/08/09/</id>
     <published>2018-08-09T11:19:43.000Z</published>
-    <updated>2023-03-03T05:58:54.588Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -293,7 +317,7 @@
     <link href="https://michaelooo.github.io/2018/07/18/"/>
     <id>https://michaelooo.github.io/2018/07/18/</id>
     <published>2018-07-18T12:02:19.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -320,7 +344,7 @@
     <link href="https://michaelooo.github.io/2018/07/11/"/>
     <id>https://michaelooo.github.io/2018/07/11/</id>
     <published>2018-07-11T13:14:13.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -345,7 +369,7 @@
     <link href="https://michaelooo.github.io/2018/06/28/"/>
     <id>https://michaelooo.github.io/2018/06/28/</id>
     <published>2018-06-28T16:08:19.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -372,7 +396,7 @@
     <link href="https://michaelooo.github.io/2018/03/22/"/>
     <id>https://michaelooo.github.io/2018/03/22/</id>
     <published>2018-03-22T11:14:48.000Z</published>
-    <updated>2023-03-03T05:58:54.588Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -399,7 +423,7 @@
     <link href="https://michaelooo.github.io/2018/02/28/"/>
     <id>https://michaelooo.github.io/2018/02/28/</id>
     <published>2018-02-28T14:31:18.000Z</published>
-    <updated>2023-03-03T05:58:54.588Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -424,7 +448,7 @@
     <link href="https://michaelooo.github.io/2018/02/05/"/>
     <id>https://michaelooo.github.io/2018/02/05/</id>
     <published>2018-02-05T12:54:58.000Z</published>
-    <updated>2023-03-03T05:58:54.588Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -449,7 +473,7 @@
     <link href="https://michaelooo.github.io/2018/01/23/"/>
     <id>https://michaelooo.github.io/2018/01/23/</id>
     <published>2018-01-23T16:59:25.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -475,7 +499,7 @@
     <link href="https://michaelooo.github.io/2018/01/23/"/>
     <id>https://michaelooo.github.io/2018/01/23/</id>
     <published>2018-01-23T09:11:01.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
+    <updated>2023-03-14T10:44:29.617Z</updated>
     
     
       
@@ -494,32 +518,6 @@
     <category term="github" scheme="https://michaelooo.github.io/tags/github/"/>
     
     <category term="踩坑笔记" scheme="https://michaelooo.github.io/tags/%E8%B8%A9%E5%9D%91%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我生病的一次经历</title>
-    <link href="https://michaelooo.github.io/2018/01/18/"/>
-    <id>https://michaelooo.github.io/2018/01/18/</id>
-    <published>2018-01-18T10:25:00.000Z</published>
-    <updated>2023-03-03T05:58:54.592Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;中午刷知乎不经意看到两个推送的问题？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/22213153&quot;&gt;年轻时得了绝症或者大病是种怎样的体验？&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="日常小感" scheme="https://michaelooo.github.io/categories/%E6%97%A5%E5%B8%B8%E5%B0%8F%E6%84%9F/"/>
-    
     
   </entry>
   
