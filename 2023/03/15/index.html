@@ -11,7 +11,7 @@
   
   <title>
     
-      大神的自我修养 co.js 的学习 
+      如何解决 zsh command not found 
       
       
       |
@@ -160,37 +160,25 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">大神的自我修养 co.js 的学习</div>
+      <div class="post-title">如何解决 zsh command not found</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2017-12-09 23:48:00
+          2023-03-15 11:14:28
         </span>
         
               <span class="post-tags">
                 <i class="iconfont icon-tags mr-10" title="Tags"></i>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/javascript/" title="javascript">
-                    #javascript
+                  <a href="/tags/zsh/" title="zsh">
+                    #zsh
                   </a>
                 </span>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/nodejs/" title="nodejs">
-                    #nodejs
-                  </a>
-                </span>
-                
-                <span class="span--tag mr-8">
-                  <a href="/tags/promise/" title="promise">
-                    #promise
-                  </a>
-                </span>
-                
-                <span class="span--tag mr-8">
-                  <a href="/tags/es6/" title="es6">
-                    #es6
+                  <a href="/tags/linux/" title="linux">
+                    #linux
                   </a>
                 </span>
                 
@@ -198,209 +186,118 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="大神的自我修养-co-js-的学习"><a href="#大神的自我修养-co-js-的学习" class="headerlink" title="大神的自我修养 co.js 的学习"></a><strong>大神的自我修养 co.js 的学习</strong></h1><p>最近在项目过程中涉及大量异步流程处理，其中有使用各种流程控制库，大家用的最多的 <code>async</code>，号称promise性能超原生的 <code>bluebird</code>，还有tj大神的<code>co.js</code>等。可以说是相当多了，于是空暇期间来整理一下promise的学习。</p>
-<p>今天来看的就是TJ大神的非常精炼的 co.js 。</p>
-<p>具体的介绍就不多说了。要注意的一点就是，<a href="mailto:&#x63;&#111;&#x40;&#52;&#x2e;&#48;">&#x63;&#111;&#x40;&#52;&#x2e;&#48;</a>之前返回的是一个<code>trunk</code>函数，现在<a href="mailto:&#99;&#x6f;&#x40;&#52;&#46;&#48;">&#99;&#x6f;&#x40;&#52;&#46;&#48;</a>支持promise，现在co()会返回一个promise。<br><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fm8c112bnwj20g205aglz.jpg"></p>
-<h2 id="先看用法"><a href="#先看用法" class="headerlink" title="先看用法"></a><strong>先看用法</strong></h2><h3 id="yield支持"><a href="#yield支持" class="headerlink" title="yield支持"></a><strong>yield支持</strong></h3><p>co最方便的操作也就是yield的支持，现在支持yield的对象有：</p>
+        <p>在日常工作中，当我们在终端输入一些命令时，有时会遇到 <code>zsh: command not found: xxx</code> 类似的错误。我们可能下意识的通过重新安装命令来解决类似的问题，但是如果重新安装也解决不了呢，那我们就需要从源头上来考虑:是什么样的机制导致命令不能正确被执行?</p>
+<h2 id="1-PATH-环境变量"><a href="#1-PATH-环境变量" class="headerlink" title="1. PATH 环境变量"></a>1. PATH 环境变量</h2><p>当我们把<code>zsh command not found: xxx</code>这句话翻译为机器可以识别的语言时应该是这样的:<strong>在操作系统可识别的命名空间里找不到一个名字叫做 <code>xxx</code> 的可执行文件</strong>。</p>
+<p>这个所谓的命名空间就是 PATH 环境变量，我们依然可以记得在大学时期学习 Java 配置 java_home jdk 时的操作，windows 和 macOS 是同样的，我们需要的就是配置一个可以访问到我们目标执行文件的 PATH 环境变量，通常来说，这里的环境变量是一个地址。</p>
+<p>我们可以通过执行下面的命令，查看当前系统的环境变量。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># exec below command in terminal</span>
+<span class="token keyword">echo</span> <span class="token variable">$PATH</span>
+</code></pre>
+<p>输出如下：</p>
+<blockquote>
+<p><em>&#x2F;Users&#x2F;pengfei.cheng&#x2F;.bun&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.gvm&#x2F;pkgsets&#x2F;system&#x2F;global&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;go&#x2F;1.17.2&#x2F;libexec&#x2F;bin:&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.gvm&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;opt&#x2F;<a href="mailto:&#x6d;&#x79;&#115;&#113;&#x6c;&#64;&#53;&#x2e;&#x37;">&#x6d;&#x79;&#115;&#113;&#x6c;&#64;&#53;&#x2e;&#x37;</a>&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;pyenv-virtualenv&#x2F;1.1.5&#x2F;shims:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.pyenv&#x2F;shims:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.pyenv&#x2F;bin:&#x2F;Applications&#x2F;Visual Studio Code.app&#x2F;Contents&#x2F;Resources&#x2F;app&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.nvm&#x2F;versions&#x2F;node&#x2F;v14.19.0&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.oh-my-zsh&#x2F;custom&#x2F;plugins&#x2F;git-open:&#x2F;Users&#x2F;pengfei.cheng&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;bin:&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;go&#x2F;bin:&#x2F;Library&#x2F;Apple&#x2F;usr&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;go&#x2F;bin</em></p>
+</blockquote>
+<p>我们需要关注的是以下几个路径：</p>
 <ul>
-<li>promises</li>
-<li>thunks (functions)</li>
-<li>array (parallel execution)</li>
-<li>objects (parallel execution)</li>
-<li>generators (delegation)</li>
-<li>generator functions (delegation)</li>
+<li><code>/bin &amp; /sbin</code>: 系统的一些内置命令集合，所有用户都可以访问</li>
+<li><code>/usr/bin</code>: 如果电脑存在多个账户，适用于所有用户使用的命令集合</li>
+<li><code>/usr/local/bin</code>: 如果电脑存在多个账户,这里存放当前登录用户安装的一些命令集合</li>
+<li><code>$CUSTOME_PATH/bin</code>: 自定义的一些命令路径，如 nvm &#x2F; python &#x2F; go 的命令集合</li>
+<li>更多参考 <a target="_blank" rel="noopener" href="https://www.wikiwand.com/en/Filesystem_Hierarchy_Standard">https://www.wikiwand.com/en/Filesystem_Hierarchy_Standard</a></li>
 </ul>
-<p>下文在源码里有体现。</p>
-<h3 id="一个官网的小例子🌰"><a href="#一个官网的小例子🌰" class="headerlink" title="一个官网的小例子🌰"></a><strong>一个官网的小例子🌰</strong></h3><pre><code>var co = require(&#39;co&#39;);
-
-co(function *()&#123;
-  // 执行promise
-  var result = yield Promise.resolve(true);
-&#125;).catch(onerror);
-
-co(function *()&#123;
-  // 并行执行多个promise
-  var a = Promise.resolve(1);
-  var b = Promise.resolve(2);
-  var c = Promise.resolve(3);
-  var res = yield [a, b, c];
-  console.log(res);
-  // =&gt; [1, 2, 3]
-&#125;).catch(onerror);
-
-// 错误捕捉
-co(function *()&#123;
-  try &#123;
-    yield Promise.reject(new Error(&#39;boom&#39;));
-  &#125; catch (err) &#123;
-    console.error(err.message); // &quot;boom&quot;
- &#125;
-&#125;).catch(onerror);
-
-function onerror(err) &#123;
-  console.error(err.stack);
-&#125;
-
-// 将一个generator函数转换成返回一个promise函数的方法
-var fn = co.wrap(function* (val) &#123;
-  return yield Promise.resolve(val);
-&#125;);
-
-fn(true).then(function (val) &#123;
-
-&#125;);
+<p>所以回过头再看 <code>zsh command not found</code> 这个问题，其实就是命令安装的过程中，一些命令独有的 bin 目录并没有被正确的设置到 PATH 环境变量（或者没有被正确识别）。</p>
+<h2 id="2-解决-zsh-command-not-found"><a href="#2-解决-zsh-command-not-found" class="headerlink" title="2. 解决 zsh command not found"></a>2. 解决 <code>zsh command not found</code></h2><h3 id="2-1-找到命令的安装路径"><a href="#2-1-找到命令的安装路径" class="headerlink" title="2.1 找到命令的安装路径"></a>2.1 找到命令的安装路径</h3><p>我们以 <code>create-react-app</code> 不能正确访问为例,首先查看当前命令的可执行文件在系统的哪个目录。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># exec below command in terminal</span>
+<span class="token function">whereis</span> create-react-app
 </code></pre>
-<h2 id="看源码"><a href="#看源码" class="headerlink" title="看源码"></a><strong>看源码</strong></h2><h3 id="wrap-函数的实现"><a href="#wrap-函数的实现" class="headerlink" title="wrap 函数的实现"></a><strong>wrap 函数的实现</strong></h3><p>大神写的代码就是十分的精炼，wrap 函数的实现也只是7行代码而已。</p>
-<p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fm8c92jch2j20cr0460sy.jpg"></p>
-<p>其实有两点需要注意的，就是：</p>
-<ol>
-<li><strong>没有写在原型链上而是作为一个私有方法是为了避免每次执行<code>co()</code>的时候生成一个新的wrap方法，这个方法显然没必要。</strong></li>
-<li><strong>关键在于返回了一个<code>co()</code>,因为<code>co()</code>会 return 一个 promise，即生成一个新的promise。同时利用 call 和 apply 改变了 this 的指向，指向 <code>co</code> 。</strong></li>
-</ol>
-<h3 id="并行多个promise"><a href="#并行多个promise" class="headerlink" title="并行多个promise"></a><strong>并行多个promise</strong></h3><p>其实 co 方法的主体不用细看，基本就是按照 es6 promise 的一种重写。这里需要注意的一点就是并行支持promise。即，当 yield 一个 object 或者 array 的时候，并行执行多个 promise。</p>
-<p>一开始当我听到并行的时候，是有点懵的，但看到源码的时候发现没有想得那么复杂，其实就是 promise 的原生方法的功劳：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">promise.all()</a>,可以往下看。。。</p>
-<p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fm8cz6i569j20h204qdgk.jpg"></p>
-<p>这里的 <code>toPromise()</code> 是在 next 方法的实现中执行的，关键的代码就两句：</p>
-<pre><code>var value = toPromise.call(ctx, ret.value);
-if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
+<p>输出如下：</p>
+<blockquote>
+<p><em>create-react-app: &#x2F;usr&#x2F;local&#x2F;bin&#x2F;create-react-app</em></p>
+</blockquote>
+<p>我们可以看到我们的 <code>create-react-app</code> 是安装在 <code>/usr/local/bin</code> 路径下的。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># exec below command in terminal</span>
+lsa /usr/local/bin <span class="token operator">|</span> <span class="token function">grep</span> create-react-app
 </code></pre>
-<p>然后，就是 <code>arrayToPromise</code> 和 <code>objectToPromise</code> 两个方法的实现：</p>
-<p><img src="/images/loading.gif" data-original="http://ww1.sinaimg.cn/large/86c7c947gy1fm8cz6jak7j20dk0dnq49.jpg"></p>
-<p>就是这么简单……</p>
-<p><img src="/images/loading.gif" data-original="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512702212168&di=9bc459180689c8af63056bc2c0a9ca2e&imgtype=jpg&src=http://img4.imgtn.bdimg.com/it/u=2105664939,4183524365&fm=214&gp=0.jpg"></p>
-<h3 id="庐山真面目，真正的源码"><a href="#庐山真面目，真正的源码" class="headerlink" title="庐山真面目，真正的源码"></a><strong>庐山真面目，真正的源码</strong></h3><pre><code>
-var slice = Array.prototype.slice;
+<p>因为我使用 yarn 全局安装了 create-react-app, 所以输出如下</p>
+<blockquote>
+<p><em>lrwxr-xr-x    1 pengfei.cheng  wheel    83B  8  4  2022 create-react-app -&gt; ..&#x2F;..&#x2F;..&#x2F;Users&#x2F;pengfei.cheng&#x2F;.config&#x2F;yarn&#x2F;global&#x2F;node_modules&#x2F;.bin&#x2F;create-react-app</em></p>
+</blockquote>
+<div class="admonition note"><p class="admonition-title">正常情况下全局安装的 `create-react-app` 是会在这个目录，如果你的 `creat-reat-app` 命令不能正确执行，`whereis` 可能无法定位到具体的路径，你可以确认`create-react-app`的安装位置后直接设置软链。
+</p></div>
 
-module.exports = co[&#39;default&#39;] = co.co = co;
-
-co.wrap = function (fn) &#123;
-  createPromise.__generatorFunction__ = fn;
-  return createPromise;
-  function createPromise() &#123;
-    return co.call(this, fn.apply(this, arguments));
-  &#125;
-&#125;;
-
-function co(gen) &#123;
-  var ctx = this;
-  var args = slice.call(arguments, 1);
-
-  return new Promise(function(resolve, reject) &#123;
-    if (typeof gen === &#39;function&#39;) gen = gen.apply(ctx, args);
-    if (!gen || typeof gen.next !== &#39;function&#39;) return resolve(gen);
-
-    onFulfilled();
-
-    function onFulfilled(res) &#123;
-      var ret;
-      try &#123;
-        ret = gen.next(res);
-      &#125; catch (e) &#123;
-        return reject(e);
-      &#125;
-      next(ret);
-      return null;
-    &#125;
-
-    function onRejected(err) &#123;
-      var ret;
-      try &#123;
-        ret = gen.throw(err);
-      &#125; catch (e) &#123;
-        return reject(e);
-      &#125;
-      next(ret);
-    &#125;
-
-    function next(ret) &#123;
-      if (ret.done) return resolve(ret.value);
-      var value = toPromise.call(ctx, ret.value);
-      if (value &amp;&amp; isPromise(value)) return value.then(onFulfilled, onRejected);
-      return onRejected(new TypeError(&#39;You may only yield a function, promise, generator, array, or object, &#39;
-        + &#39;but the following object was passed: &quot;&#39; + String(ret.value) + &#39;&quot;&#39;));
-    &#125;
-  &#125;);
-&#125;
-
-function toPromise(obj) &#123;
-  if (!obj) return obj;
-  if (isPromise(obj)) return obj;
-  if (isGeneratorFunction(obj) || isGenerator(obj)) return co.call(this, obj);
-  if (&#39;function&#39; == typeof obj) return thunkToPromise.call(this, obj);
-  if (Array.isArray(obj)) return arrayToPromise.call(this, obj);
-  if (isObject(obj)) return objectToPromise.call(this, obj);
-  return obj;
-&#125;
-
-function thunkToPromise(fn) &#123;
-  var ctx = this;
-  return new Promise(function (resolve, reject) &#123;
-    fn.call(ctx, function (err, res) &#123;
-      if (err) return reject(err);
-      if (arguments.length &gt; 2) res = slice.call(arguments, 1);
-      resolve(res);
-    &#125;);
-  &#125;);
-&#125;
-
-
-function arrayToPromise(obj) &#123;
-  return Promise.all(obj.map(toPromise, this));
-&#125;
-
-
-function objectToPromise(obj)&#123;
-  var results = new obj.constructor();
-  var keys = Object.keys(obj);
-  var promises = [];
-  for (var i = 0; i &lt; keys.length; i++) &#123;
-    var key = keys[i];
-    var promise = toPromise.call(this, obj[key]);
-    if (promise &amp;&amp; isPromise(promise)) defer(promise, key);
-    else results[key] = obj[key];
-  &#125;
-  return Promise.all(promises).then(function () &#123;
-    return results;
-  &#125;);
-
-  function defer(promise, key) &#123;
-    // predefine the key in the result
-    results[key] = undefined;
-    promises.push(promise.then(function (res) &#123;
-      results[key] = res;
-    &#125;));
-  &#125;
-&#125;
-
-function isPromise(obj) &#123;
-  return &#39;function&#39; == typeof obj.then;
-&#125;
-
-
-function isGenerator(obj) &#123;
-  return &#39;function&#39; == typeof obj.next &amp;&amp; &#39;function&#39; == typeof obj.throw;
-&#125;
-
- 
-function isGeneratorFunction(obj) &#123;
-  var constructor = obj.constructor;
-  if (!constructor) return false;
-  if (&#39;GeneratorFunction&#39; === constructor.name || &#39;GeneratorFunction&#39; === constructor.displayName) return true;
-  return isGenerator(constructor.prototype);
-&#125;
-
-
-function isObject(val) &#123;
-  return Object == val.constructor;
-&#125;
+<h3 id="2-2-方案-1：使用-ln-s-配置软链至-usr-local-bin"><a href="#2-2-方案-1：使用-ln-s-配置软链至-usr-local-bin" class="headerlink" title="2.2 方案 1：使用 ln -s 配置软链至/usr/local/bin"></a>2.2 方案 1：使用 <code>ln -s</code> 配置软链至<code>/usr/local/bin</code></h3><p>因为一般 bin 目录下的可执行文件都是通过软链的方式绑定的。所以我们可以在目标的 bin 目录下新增一条软链。</p>
+<p>因为使用 yarn 安装的 <code>create-react-app</code> 在<code>~/.config/yarn/global/node_modules/</code>下，所以我们直接配置一个软链至 <code>/usr/local/bin</code>。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">ln</span> -s ~/.config/yarn/global/node_modules/.bin/create-react-app /usr/local/bin
 </code></pre>
+<p>执行上述命令即可。</p>
+<div class="admonition note"><p class="admonition-title">这种方式软链的配置不太直观，需要你对执行文件的目录有足够的了解。
+</p></div>
+
+<h3 id="2-3-方案-2：配置-Alias-别名"><a href="#2-3-方案-2：配置-Alias-别名" class="headerlink" title="2.3 方案 2：配置 Alias 别名"></a>2.3 方案 2：配置 <code>Alias</code> 别名</h3><p>因为使用了 zsh 替代了默认的 bash, 所以我们可以直接修改 <code>~/.zshrc</code> 配置文件</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">'alias create-react-app="~/.config/yarn/global/node_modules/.bin/create-react-app"'</span> <span class="token operator">>></span> ~/.zshrc
+</code></pre>
+<p>执行上述命令会在 <code>~/.zshrc</code> 中增加一个 Alias 别名，需要手动 <code>source ~/.zshrc</code> 使配置生效。</p>
+<p>修改完成后可以使用下面的命令查看别名是否配置成功。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">alias</span> <span class="token operator">|</span> <span class="token function">grep</span> creat-react-app
+</code></pre>
+<div class="admonition note"><p class="admonition-title">这种方式需要修改配置文件，但是最简单，比较推荐。
+</p></div>
+
+<h3 id="2-4-方案-3：直接修改-PATH"><a href="#2-4-方案-3：直接修改-PATH" class="headerlink" title="2.4 方案 3：直接修改 $PATH"></a>2.4 方案 3：直接修改 <code>$PATH</code></h3><pre class=" language-bash"><code class="language-bash"><span class="token keyword">echo</span> <span class="token string">'export PATH="<span class="token variable">$PATH</span>:<span class="token variable">$HOME</span>/.config/yarn/global/node_modules/.bin"'</span> <span class="token operator">>></span> ~/.zshrc
+</code></pre>
+<p>执行上述命令，会将 <code>creat-react-app</code> 的安装 bin 目录添加到 PATH 环境变量中。</p>
+<p>因为修改了<code>~/.zshrc</code> 文件，所以需要手动 <code>source ~/.zshrc</code> 使配置生效。</p>
+<div class="admonition note"><p class="admonition-title">这种方式可能会污染 PATH 环境变量，造成非常多的冗余，一些个人化的配置不建议采用这种方式配置。
+</p></div>
+
+<h2 id="3-ZSH-amp-BASH"><a href="#3-ZSH-amp-BASH" class="headerlink" title="3. ZSH &amp; BASH"></a>3. ZSH &amp; BASH</h2><p>当然，除了常见的<code>zsh command not found</code>错误，我们也可能遇到一些 <code>bash command not found</code> 的错误。</p>
+<p>这是因为，假如我们没有使用 zsh ，默认情况下，系统采用的是 bash , bash 的配置文件一般为 <code>vi ~/.bash_profile</code>。遇到这类问题，参考 zsh 的修改方式修改即可。</p>
+<h3 id="3-1-配置文件优先级"><a href="#3-1-配置文件优先级" class="headerlink" title="3.1 配置文件优先级"></a>3.1 配置文件优先级</h3><p>假如我们同时使用了 <code>bash / zsh</code> ，我们就同时拥有了 <code>.zshrc</code> 和 <code>.bash_profile</code> 的配置文件, 除此之外还有一些系统默认的配置文件，如 <code>/etc/profile</code>, <code>/etc/bashrc</code> 。</p>
+<p>这些文件的优先级顺序遵循一个原则，个性化的配置会覆盖上一级的配置。<br><code>custom shell (.zshrc) -&gt;  default shell (.bashrc) -&gt; system(/etc/profile)</code></p>
+<h3 id="3-2-切换默认-shell"><a href="#3-2-切换默认-shell" class="headerlink" title="3.2 切换默认 shell"></a>3.2 切换默认 shell</h3><p>因为研发效率问题，不建议使用系统内置的 <code>bash</code>, 建议使用 <code>zsh</code>, 并设置默认终端为 <code>zsh</code></p>
+<pre><code>chsh -s /bin/zsh
+</code></pre>
+<h2 id="4-npm-vs-yarn-的全局安装路径"><a href="#4-npm-vs-yarn-的全局安装路径" class="headerlink" title="4. npm vs yarn 的全局安装路径"></a>4. npm vs yarn 的全局安装路径</h2><h3 id="4-1-查询全局安装的-Node-路径"><a href="#4-1-查询全局安装的-Node-路径" class="headerlink" title="4.1 查询全局安装的 Node 路径"></a>4.1 查询全局安装的 Node 路径</h3><p><strong>使用 whereis</strong></p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">whereis</span> node
+</code></pre>
+<p>输出如下：</p>
+<blockquote>
+<p><em>node: &#x2F;Users&#x2F;pengfei.cheng&#x2F;.nvm&#x2F;versions&#x2F;node&#x2F;v14.19.0&#x2F;bin&#x2F;node &#x2F;Users&#x2F;pengfei.cheng&#x2F;.nvm&#x2F;versions&#x2F;node&#x2F;v14.19.0&#x2F;share&#x2F;man&#x2F;man1&#x2F;node.1</em></p>
+</blockquote>
+<p><strong>使用 npm config 查看</strong></p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> config get prefix
+</code></pre>
+<p>输出如下：</p>
+<blockquote>
+<p><em>&#x2F;Users&#x2F;pengfei.cheng&#x2F;.nvm&#x2F;versions&#x2F;node&#x2F;v14.19.0</em></p>
+</blockquote>
+<p>我们也可以使用类似 <code>npm root -g</code> 全看全局安装的 node_modules 资源路径，一般会在同级目录的 <code>lib/</code> 目录下。</p>
+<h3 id="4-2-全局包资源目录"><a href="#4-2-全局包资源目录" class="headerlink" title="4.2 全局包资源目录"></a>4.2 全局包资源目录</h3><p>使用 npm 安装（未使用 nvm）</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> root -g
+
+<span class="token comment" spellcheck="true"># /usr/local/lib/node_modules</span>
+</code></pre>
+<p>使用 npm 安装（使用 nvm）</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token function">npm</span> root -g
+
+<span class="token comment" spellcheck="true"># ~/.nvm/versions/node/v14.19.0/lib/node_modules</span>
+</code></pre>
+<p>使用 yarn 安装</p>
+<pre class=" language-bash"><code class="language-bash">yarn global <span class="token function">dir</span>
+
+<span class="token comment" spellcheck="true"># ~/.config/yarn/global</span>
+</code></pre>
+<h2 id="5-参考"><a href="#5-参考" class="headerlink" title="5. 参考"></a>5. 参考</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.wikiwand.com/en/Filesystem_Hierarchy_Standard">Filesystem_Hierarchy_Standard</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cwp-bg/p/8257843.html">&#x2F;etc&#x2F;profile、&#x2F;etc&#x2F;bashrc、<del>&#x2F;.bash_profile、</del>&#x2F;.bashrc 文件的作用</a></li>
+</ul>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2017/12/08/" target="_self">
+              <a href="/2023/03/13/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -409,33 +306,21 @@ function isObject(val) &#123;
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2017-12-09 23:48:00
+              2023-03-15 11:14:28
             </span>
             
                   <span class="post-tags">
                     <i class="iconfont icon-tags mr-10" title="Tags"></i>
                     
                     <span class="span--tag mr-8">
-                      <a href="/tags/javascript/" title="javascript">
-                        #javascript
+                      <a href="/tags/zsh/" title="zsh">
+                        #zsh
                       </a>
                     </span>
                     
                     <span class="span--tag mr-8">
-                      <a href="/tags/nodejs/" title="nodejs">
-                        #nodejs
-                      </a>
-                    </span>
-                    
-                    <span class="span--tag mr-8">
-                      <a href="/tags/promise/" title="promise">
-                        #promise
-                      </a>
-                    </span>
-                    
-                    <span class="span--tag mr-8">
-                      <a href="/tags/es6/" title="es6">
-                        #es6
+                      <a href="/tags/linux/" title="linux">
+                        #linux
                       </a>
                     </span>
                     
@@ -443,11 +328,6 @@ function isObject(val) &#123;
               
           </div>
           <div class="post-foot-prev">
-            
-              <a href="/2017/12/10/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
             
           </div>
         </div>
@@ -461,7 +341,7 @@ function isObject(val) &#123;
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%A7%E7%A5%9E%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB-co-js-%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="toc-text">大神的自我修养 co.js 的学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E7%9C%8B%E7%94%A8%E6%B3%95"><span class="toc-text">先看用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#yield%E6%94%AF%E6%8C%81"><span class="toc-text">yield支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%98%E7%BD%91%E7%9A%84%E5%B0%8F%E4%BE%8B%E5%AD%90%F0%9F%8C%B0"><span class="toc-text">一个官网的小例子🌰</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%8B%E6%BA%90%E7%A0%81"><span class="toc-text">看源码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#wrap-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">wrap 函数的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%E5%A4%9A%E4%B8%AApromise"><span class="toc-text">并行多个promise</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%90%E5%B1%B1%E7%9C%9F%E9%9D%A2%E7%9B%AE%EF%BC%8C%E7%9C%9F%E6%AD%A3%E7%9A%84%E6%BA%90%E7%A0%81"><span class="toc-text">庐山真面目，真正的源码</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-PATH-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1. PATH 环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%A7%A3%E5%86%B3-zsh-command-not-found"><span class="toc-text">2. 解决 zsh command not found</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%89%BE%E5%88%B0%E5%91%BD%E4%BB%A4%E7%9A%84%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84"><span class="toc-text">2.1 找到命令的安装路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%96%B9%E6%A1%88-1%EF%BC%9A%E4%BD%BF%E7%94%A8-ln-s-%E9%85%8D%E7%BD%AE%E8%BD%AF%E9%93%BE%E8%87%B3-usr-local-bin"><span class="toc-text">2.2 方案 1：使用 ln -s 配置软链至&#x2F;usr&#x2F;local&#x2F;bin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%96%B9%E6%A1%88-2%EF%BC%9A%E9%85%8D%E7%BD%AE-Alias-%E5%88%AB%E5%90%8D"><span class="toc-text">2.3 方案 2：配置 Alias 别名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%96%B9%E6%A1%88-3%EF%BC%9A%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9-PATH"><span class="toc-text">2.4 方案 3：直接修改 $PATH</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-ZSH-amp-BASH"><span class="toc-text">3. ZSH &amp; BASH</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">3.1 配置文件优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%88%87%E6%8D%A2%E9%BB%98%E8%AE%A4-shell"><span class="toc-text">3.2 切换默认 shell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-npm-vs-yarn-%E7%9A%84%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84"><span class="toc-text">4. npm vs yarn 的全局安装路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%9F%A5%E8%AF%A2%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85%E7%9A%84-Node-%E8%B7%AF%E5%BE%84"><span class="toc-text">4.1 查询全局安装的 Node 路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%85%A8%E5%B1%80%E5%8C%85%E8%B5%84%E6%BA%90%E7%9B%AE%E5%BD%95"><span class="toc-text">4.2 全局包资源目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8F%82%E8%80%83"><span class="toc-text">5. 参考</span></a></li></ol>
       
     </div>
   </div>
@@ -766,12 +646,12 @@ function isObject(val) &#123;
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%A4%A7%E7%A5%9E%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E5%85%BB%20co.js%20%E7%9A%84%E5%AD%A6%E4%B9%A0 + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2017%2F12%2F09%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%20zsh%20command%20not%20found + '&url=' + https%3A%2F%2Fmichaelooo.github.io%2F2023%2F03%2F15%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2017/12/09/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://michaelooo.github.io/2023/03/15/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
