@@ -186,7 +186,7 @@
           
       </div>
       <div class="markdown-body">
-        <p>在日常工作中，当我们在终端输入一些命令时，有时会遇到 <code>zsh: command not found: xxx</code> 类似的错误。我们可能下意识的通过重新安装命令来解决类似的问题，但是如果重新安装也解决不了呢，那我们就需要从源头上来考虑:是什么样的机制导致命令不能正确被执行?</p>
+        <p>在日常工作中，当我们在终端输入命令时，有时可能会遇到类似于zsh: command not found: xxx的错误。我们通常会试图通过重新安装命令来解决这类问题，但如果重新安装仍然无法解决，我们就需要从根本上考虑问题，即探究什么机制导致命令无法正确执行。</p>
 <h2 id="1-PATH-环境变量"><a href="#1-PATH-环境变量" class="headerlink" title="1. PATH 环境变量"></a>1. PATH 环境变量</h2><p>当我们把<code>zsh command not found: xxx</code>这句话翻译为机器可以识别的语言时应该是这样的:<strong>在操作系统可识别的命名空间里找不到一个名字叫做 <code>xxx</code> 的可执行文件</strong>。</p>
 <p>这个所谓的命名空间就是 PATH 环境变量，我们依然可以记得在大学时期学习 Java 配置 java_home jdk 时的操作，windows 和 macOS 是同样的，我们需要的就是配置一个可以访问到我们目标执行文件的 PATH 环境变量，通常来说，这里的环境变量是一个地址。</p>
 <p>我们可以通过执行下面的命令，查看当前系统的环境变量。</p>
@@ -195,7 +195,7 @@
 </code></pre>
 <p>输出如下：</p>
 <blockquote>
-<p><em>&#x2F;Users&#x2F;pengfei.cheng&#x2F;.bun&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.gvm&#x2F;pkgsets&#x2F;system&#x2F;global&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;go&#x2F;1.17.2&#x2F;libexec&#x2F;bin:&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.gvm&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;opt&#x2F;<a href="mailto:&#x6d;&#x79;&#115;&#113;&#x6c;&#64;&#53;&#x2e;&#x37;">&#x6d;&#x79;&#115;&#113;&#x6c;&#64;&#53;&#x2e;&#x37;</a>&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;pyenv-virtualenv&#x2F;1.1.5&#x2F;shims:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.pyenv&#x2F;shims:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.pyenv&#x2F;bin:&#x2F;Applications&#x2F;Visual Studio Code.app&#x2F;Contents&#x2F;Resources&#x2F;app&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.nvm&#x2F;versions&#x2F;node&#x2F;v14.19.0&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.oh-my-zsh&#x2F;custom&#x2F;plugins&#x2F;git-open:&#x2F;Users&#x2F;pengfei.cheng&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;bin:&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;go&#x2F;bin:&#x2F;Library&#x2F;Apple&#x2F;usr&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;go&#x2F;bin</em></p>
+<p><em>&#x2F;Users&#x2F;pengfei.cheng&#x2F;.bun&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.gvm&#x2F;pkgsets&#x2F;system&#x2F;global&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;go&#x2F;1.17.2&#x2F;libexec&#x2F;bin:&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.gvm&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;opt&#x2F;<a href="mailto:&#x6d;&#121;&#x73;&#x71;&#108;&#64;&#x35;&#46;&#x37;">&#x6d;&#121;&#x73;&#x71;&#108;&#64;&#x35;&#46;&#x37;</a>&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;pyenv-virtualenv&#x2F;1.1.5&#x2F;shims:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.pyenv&#x2F;shims:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.pyenv&#x2F;bin:&#x2F;Applications&#x2F;Visual Studio Code.app&#x2F;Contents&#x2F;Resources&#x2F;app&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.nvm&#x2F;versions&#x2F;node&#x2F;v14.19.0&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;.oh-my-zsh&#x2F;custom&#x2F;plugins&#x2F;git-open:&#x2F;Users&#x2F;pengfei.cheng&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;bin:&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;go&#x2F;bin:&#x2F;Library&#x2F;Apple&#x2F;usr&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;Users&#x2F;pengfei.cheng&#x2F;go&#x2F;bin</em></p>
 </blockquote>
 <p>我们需要关注的是以下几个路径：</p>
 <ul>
